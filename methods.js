@@ -8,4 +8,16 @@ function prevSlide(app) {
   return app;
 }
 
-module.exports = { nextSlide, prevSlide };
+function resizeImage(app, id, width, height) {
+  for ( slide of app.slides ) {
+    for ( img of slide.objects.img ) {
+      if ( img.id == id ) {
+        img.width = width;
+        img.height = height;
+      }
+    }
+  }
+  return app;
+}
+
+module.exports = { nextSlide, prevSlide, resizeImage };

@@ -44,7 +44,7 @@ let app = {
   choosedObjectId: 1
 };
 
-console.log(app.currSlide);
-app = methods.nextSlide(app);
-console.log(app.currSlide);
+console.dir(app.slides[0].objects.img[0]);
+app = methods.resizeImage(app, 2, '150px', '100px');
+console.dir(app.slides[0].objects.img[0]);
 
