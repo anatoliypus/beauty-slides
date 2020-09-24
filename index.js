@@ -14,7 +14,10 @@ let slide1 = {
         color: '#000', 
         style: null, 
         weight: 400, 
-        decoration: null
+        decoration: null,
+        position: {
+
+        }
       }
     ],
     img: [
@@ -22,7 +25,10 @@ let slide1 = {
         id: 2,
         path: './img/imageFromSlide1.jpg',
         width: '100px',
-        height: '100px'
+        height: '100px',
+        position: {
+          
+        }
       }
     ]
   },
