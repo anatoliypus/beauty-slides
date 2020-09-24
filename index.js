@@ -36,3 +36,8 @@ let app = {
   choosedObjectId: 1
 };
 
+function nextSlide(app) {
+  app.currSlide++;
+  return app;
+}
+
