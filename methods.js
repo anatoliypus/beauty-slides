@@ -8,5 +8,4 @@ function prevSlide(app) {
   return app;
 }
 
-module.exports.nextSlide = nextSlide;
-module.exports.prevSlide = prevSlide;
+module.exports = { nextSlide, prevSlide };
