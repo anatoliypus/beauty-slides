@@ -1,4 +1,4 @@
-const { nextSlide, prevSlide } = require('./methods');
+const methods = require('./methods');
 
 let slide1 = {
   width: '800px',
@@ -39,6 +39,6 @@ let app = {
 };
 
 console.log(app.currSlide);
-app = nextSlide(app);
+app = methods.nextSlide(app);
 console.log(app.currSlide);
 
