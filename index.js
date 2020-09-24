@@ -1,3 +1,5 @@
+const { nextSlide, prevSlide } = require('./methods');
+
 let slide1 = {
   width: '800px',
   height: '600px',
@@ -29,15 +31,14 @@ let slide1 = {
 };
 
 let app = {
-  currSlide: 1,
+  currSlide: 0,
   slides: [ slide1 ],
   settings: null,
   history: null,
   choosedObjectId: 1
 };
 
-function nextSlide(app) {
-  app.currSlide++;
-  return app;
-}
+console.log(app.currSlide);
+app = nextSlide(app);
+console.log(app.currSlide);
 
