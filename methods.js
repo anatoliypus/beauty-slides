@@ -10,10 +10,10 @@ function prevSlide(app) {
 
 function resizeImage(app, id, width, height) {
   for ( slide of app.slides ) {
-    for ( img of slide.objects.img ) {
-      if ( img.id == id ) {
-        img.width = width;
-        img.height = height;
+    for ( node of slide.objects ) {
+      if ( node.id == id ) {
+        node.width = width;
+        node.height = height;
       }
     }
   }
@@ -22,9 +22,9 @@ function resizeImage(app, id, width, height) {
 
 function toggleBoldText(app, id) {
   for ( slide of app.slides ) {
-    for (textNode of slide.objects.text) {
-      if ( textNode.id == id ) {
-        textNode.weight = textNode.weight === 400 ? 700 : 400;
+    for ( node of slide.objects ) {
+      if ( node.id == id ) {
+        node.weight = node.weight === 400 ? 700 : 400;
       }
     }
   }
@@ -33,9 +33,9 @@ function toggleBoldText(app, id) {
 
 function toggleItalicText(app, id) {
   for ( slide of app.slides ) {
-    for (textNode of slide.objects.text) {
-      if ( textNode.id == id ) {
-        textNode.style = textNode.weight === 'italic' ? 'unset' : 'italic';
+    for ( node of slide.objects ) {
+      if ( node.id == id ) {
+        node.style = node.weight === 'italic' ? 'unset' : 'italic';
       }
     }
   }
@@ -44,8 +44,8 @@ function toggleItalicText(app, id) {
 
 function toggleUnderlinedText(app, id) {
   for ( slide of app.slides ) {
-    for (textNode of slide.objects.text) {
-      if ( textNode.id == id ) {
+    for ( node of slide.objects ) {
+      if ( node.id == id ) {
         textNode.decoration = textNode.decoration === 'overline' ? 'unset' : 'overline';
       }
     }
@@ -55,9 +55,9 @@ function toggleUnderlinedText(app, id) {
 
 function changeTextSize(app, id, size) {
   for ( slide of app.slides ) {
-    for (textNode of slide.objects.text) {
-      if ( textNode.id == id ) {
-        textNode.size = size;
+    for ( node of slide.objects ) {
+      if ( node.id == id ) {
+        node.size = size;
       }
     }
   }
@@ -65,15 +65,27 @@ function changeTextSize(app, id, size) {
 }
 
 function setSlideBg(app, id, imgPath) {
-  for (slide of app.slides) {
-    if (slide.id == id) slide.backgroundImage = imgPath;
+  for ( slide of app.slides ) {
+    if ( slide.id == id ) slide.backgroundImage = imgPath;
   }
   return app;
 }
 
 function setSlideColor(app, id, color) {
-  for (slide of app.slides) {
-    if (slide.id == id) slide.backgroundColor = color;
+  for ( slide of app.slides ) {
+    if ( slide.id == id ) slide.backgroundColor = color;
+  }
+  return app;
+}
+
+function moveItem(app, id, x, y) {
+  for ( slide of app.slides ) {
+    for ( node of slide.objects ) {
+      if ( node.id == id ) {
+        node.positionFromTopLeft.x = x;
+        node.positionFromTopLeft.y = y;
+      }
+    }
   }
   return app;
 }
