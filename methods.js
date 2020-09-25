@@ -53,6 +53,17 @@ function toggleUnderlinedText(app, id) {
   return app;
 }
 
+function changeTextSize(app, id, size) {
+  for ( slide of app.slides ) {
+    for (textNode of slide.objects.text) {
+      if ( textNode.id == id ) {
+        textNode.size = size;
+      }
+    }
+  }
+  return app;
+}
+
 function setSlideBg(app, id, imgPath) {
   for (slide of app.slides) {
     if (slide.id == id) slide.backgroundImage = imgPath;
@@ -75,5 +86,6 @@ module.exports = {
   toggleItalicText,
   toggleUnderlinedText, 
   setSlideBg, 
-  setSlideColor 
+  setSlideColor,
+  changeTextSize
 };
