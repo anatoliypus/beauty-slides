@@ -3,6 +3,7 @@ const methods = require('./methods');
 let slide1 = {
   width: '800px',
   height: '600px',
+  id: 0,
   position: 1,
   objects: {
     text: [
@@ -32,7 +33,7 @@ let slide1 = {
       }
     ]
   },
-  backgroundImage: './bg.jpg',
+  backgroundImage: null,
   backgroundColor: null
 };
 
@@ -41,7 +42,8 @@ let app = {
   slides: [ slide1 ],
   settings: null,
   history: null,
-  choosedObjectId: 1
+  choosedObjectId: 1,
+  nextId: 3
 };
 
 console.dir(app.slides[0].objects.img[0]);
