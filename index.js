@@ -16,8 +16,9 @@ let slide1 = {
         style: null, 
         weight: 400, 
         decoration: null,
-        position: {
-
+        positionFromTopLeft: {
+          x: 0.15,
+          y: 0.15
         }
       }
     ],
@@ -27,8 +28,9 @@ let slide1 = {
         path: './img/imageFromSlide1.jpg',
         width: '100px',
         height: '100px',
-        position: {
-          
+        positionFromTopLeft: {
+          x: 0.50,
+          y: 0.30
         }
       }
     ]
