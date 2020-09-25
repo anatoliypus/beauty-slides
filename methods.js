@@ -99,5 +99,6 @@ module.exports = {
   toggleUnderlinedText, 
   setSlideBg, 
   setSlideColor,
-  changeTextSize
+  changeTextSize,
+  moveItem
 };
