@@ -1,11 +1,8 @@
-function nextSlide(app) {
-  if ( app.slides.length - 1 > app.currSlide ) app.currSlide++;
-  return app;
-}
-
-function prevSlide(app) {
-  if ( app.currSlide > 0 ) app.currSlide--;
-  return app;
+function changeSlide(app, slidePos) {
+  return {
+    ...app,
+    currentSlide: slidePos
+  };
 }
 
 function resizeImage(app, id, width, height) {
@@ -46,7 +43,7 @@ function toggleUnderlinedText(app, id) {
   for ( slide of app.slides ) {
     for ( node of slide.objects ) {
       if ( node.id == id ) {
-        textNode.decoration = textNode.decoration === 'overline' ? 'unset' : 'overline';
+        textNode.decoration = textNode.decoration === 'underline' ? 'unset' : 'underline';
       }
     }
   }
