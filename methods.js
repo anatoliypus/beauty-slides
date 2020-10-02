@@ -1,90 +1,145 @@
 function changeSlide(app, slidePos) {
   return {
     ...app,
-    currentSlide: slidePos
+    currentSlide: slidePos,
   };
 }
 
 function resizeImage(app, id, width, height) {
-  const slide = app.slides.find(slide => slide.objects.find(obj => obj.id == id) !== undefined);
-  const newSlide = slide.objects.map(obj => {
-    if (obj.id == id) {
-      obj.width = width;
-      obj.height = height;
+  const slide = app.slides.find(
+    (slideToFind) =>
+      slideToFind.objects.find((obj) => obj.id === id) !== undefined
+  );
+
+  const newSlide = slide.objects.map((obj) => {
+    const newObj = obj;
+    if (newObj.id === id) {
+      newObj.width = width;
+      newObj.height = height;
     }
-    return obj;
+    return newObj;
   });
+
   return {
     ...app,
-    slides: app.slides.map(slide => {
-      if (slide.id == newSlide.id) return newSlide;
-      else return slide;
-    })
+    slides: app.slides.map((slideToFind) => {
+      if (slideToFind.id === newSlide.id) return newSlide;
+      return slideToFind;
+    }),
   };
 }
 
 function toggleBoldText(app, id) {
-  for ( slide of app.slides ) {
-    for ( node of slide.objects ) {
-      if ( node.id == id ) {
-        node.weight = node.weight === 400 ? 700 : 400;
-      }
+  const slide = app.slides.find(
+    (slideToFind) =>
+      slideToFind.objects.find((obj) => obj.id === id) !== undefined
+  );
+
+  const newSlide = slide.objects.map((obj) => {
+    const newObj = obj;
+    if (newObj.id === id) {
+      newObj.weight = newObj.weight === 400 ? 700 : 400;
     }
-  }
-  return app;
+    return newObj;
+  });
+
+  return {
+    ...app,
+    slides: app.slides.map((slideToFind) => {
+      if (slideToFind.id === newSlide.id) return newSlide;
+      return slideToFind;
+    }),
+  };
 }
 
 function toggleItalicText(app, id) {
-  for ( slide of app.slides ) {
-    for ( node of slide.objects ) {
-      if ( node.id == id ) {
-        node.style = node.weight === 'italic' ? 'unset' : 'italic';
-      }
+  const slide = app.slides.find(
+    (slideToFind) =>
+      slideToFind.objects.find((obj) => obj.id === id) !== undefined
+  );
+
+  const newSlide = slide.objects.map((obj) => {
+    const newObj = obj;
+    if (newObj.id === id) {
+      newObj.style = newObj.style === 'italic' ? 'unset' : 'italic';
     }
-  }
-  return app;
+    return newObj;
+  });
+
+  return {
+    ...app,
+    slides: app.slides.map((slideToFind) => {
+      if (slideToFind.id === newSlide.id) return newSlide;
+      return slideToFind;
+    }),
+  };
 }
 
 function toggleUnderlinedText(app, id) {
-  for ( slide of app.slides ) {
-    for ( node of slide.objects ) {
-      if ( node.id == id ) {
-        textNode.decoration = textNode.decoration === 'underline' ? 'unset' : 'underline';
-      }
+  const slide = app.slides.find(
+    (slideToFind) =>
+      slideToFind.objects.find((obj) => obj.id === id) !== undefined
+  );
+
+  const newSlide = slide.objects.map((obj) => {
+    const newObj = obj;
+    if (newObj.id === id) {
+      newObj.decoration =
+        newObj.decoration === 'underline' ? 'unset' : 'underline';
     }
-  }
-  return app;
+    return newObj;
+  });
+
+  return {
+    ...app,
+    slides: app.slides.map((slideToFind) => {
+      if (slideToFind.id === newSlide.id) return newSlide;
+      return slideToFind;
+    }),
+  };
 }
 
 function changeTextSize(app, id, size) {
-  for ( slide of app.slides ) {
-    for ( node of slide.objects ) {
-      if ( node.id == id ) {
-        node.size = size;
-      }
+  const slide = app.slides.find(
+    (slideToFind) =>
+      slideToFind.objects.find((obj) => obj.id === id) !== undefined
+  );
+
+  const newSlide = slide.objects.map((obj) => {
+    const newObj = obj;
+    if (newObj.id === id) {
+      newObj.size = size;
     }
-  }
-  return app;
+    return newObj;
+  });
+
+  return {
+    ...app,
+    slides: app.slides.map((slideToFind) => {
+      if (slideToFind.id === newSlide.id) return newSlide;
+      return slideToFind;
+    }),
+  };
 }
 
 function setSlideBg(app, id, imgPath) {
-  for ( slide of app.slides ) {
-    if ( slide.id == id ) slide.backgroundImage = imgPath;
+  for (slide of app.slides) {
+    if (slide.id == id) slide.backgroundImage = imgPath;
   }
   return app;
 }
 
 function setSlideColor(app, id, color) {
-  for ( slide of app.slides ) {
-    if ( slide.id == id ) slide.backgroundColor = color;
+  for (slide of app.slides) {
+    if (slide.id == id) slide.backgroundColor = color;
   }
   return app;
 }
 
 function moveItem(app, id, x, y) {
-  for ( slide of app.slides ) {
-    for ( node of slide.objects ) {
-      if ( node.id == id ) {
+  for (slide of app.slides) {
+    for (node of slide.objects) {
+      if (node.id == id) {
         node.positionFromTopLeft.x = x;
         node.positionFromTopLeft.y = y;
       }
@@ -93,14 +148,14 @@ function moveItem(app, id, x, y) {
   return app;
 }
 
-module.exports = { 
+module.exports = {
   changeSlide,
-  resizeImage, 
-  toggleBoldText, 
+  resizeImage,
+  toggleBoldText,
   toggleItalicText,
-  toggleUnderlinedText, 
-  setSlideBg, 
+  toggleUnderlinedText,
+  setSlideBg,
   setSlideColor,
   changeTextSize,
-  moveItem
+  moveItem,
 };
