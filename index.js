@@ -1,6 +1,6 @@
 const methods = require('./methods');
 
-let slide1 = {
+const slide1 = {
   width: '800px',
   height: '600px',
   id: 0,
@@ -8,18 +8,18 @@ let slide1 = {
   objects: [
     {
       type: 'text',
-      id: 1, 
-      data: 'Hello, this is slide number 1!', 
-      font: 'Open Sans', 
-      size: '15px', 
-      color: '#000', 
-      style: null, 
-      weight: 400, 
+      id: 1,
+      data: 'Hello, this is slide number 1!',
+      font: 'Open Sans',
+      size: '15px',
+      color: '#000',
+      style: null,
+      weight: 400,
       decoration: null,
       positionFromTopLeft: {
         x: 0.15,
-        y: 0.15
-      }
+        y: 0.15,
+      },
     },
     {
       type: 'img',
@@ -28,9 +28,9 @@ let slide1 = {
       width: '100px',
       height: '100px',
       positionFromTopLeft: {
-        x: 0.50,
-        y: 0.30
-      }
+        x: 0.5,
+        y: 0.3,
+      },
     },
     {
       type: 'img',
@@ -39,24 +39,23 @@ let slide1 = {
       width: '100px',
       height: '100px',
       positionFromTopLeft: {
-        x: 0.50,
-        y: 0.30
-      }
-    }
+        x: 0.5,
+        y: 0.3,
+      },
+    },
   ],
   backgroundImage: null,
-  backgroundColor: null
+  backgroundColor: null,
 };
 
-let app = {
+const app = {
   currSlide: 0,
-  slides: [ slide1 ],
+  slides: [slide1],
   settings: null,
   history: null,
-  choosedObjectId: 1
+  choosedObjectId: 1,
 };
 
 console.dir(app.slides[0]);
 methods.resizeImage(app, 2, '150px', '150px');
 console.dir(app.slides[0]);
-

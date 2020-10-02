@@ -1,12 +1,12 @@
 type Cords = {
   x: number;
   y: number;
-}
+};
 
 type SlideObject = {
   type: string;
   id: string;
-}
+};
 
 type TextObject = SlideObject & { 
   data: string;
@@ -16,14 +16,14 @@ type TextObject = SlideObject & {
   weight: number;
   decoration: null | string;
   positionTopLeft: Cords;
-}
+};
 
 type ImgObject = SlideObject & {
   path: string;
   width: string;
   height: string;
   positionTopLeft: Cords;
-}
+};
 
 type Slide = {
   width: string;
@@ -33,7 +33,7 @@ type Slide = {
   objects: Array<TextObject | ImgObject>;
   backroungImage: string | null;
   backgroundColor: string | null;
-}
+};
 
 type App = {
   currSlide: number;
@@ -41,4 +41,4 @@ type App = {
   settings: null | object;
   history: null | object;
   choosedObjectId: string;
-}
+};
