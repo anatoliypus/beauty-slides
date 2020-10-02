@@ -94,14 +94,10 @@ const slide2 = {
   backgroundColor: null,
 };
 
-let app = {
+const app = {
   currSlide: 1,
   slides: [slide1, slide2],
   settings: null,
   history: null,
   choosedObjectId: 1,
 };
-
-console.dir(app.slides[1]);
-app = methods.resizeImage(app, 7, '1px', '1px');
-console.dir(app.slides[1]);
