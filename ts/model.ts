@@ -8,7 +8,7 @@ type SlideObject = {
   id: string;
 };
 
-type TextObject = SlideObject & { 
+type TextObject = SlideObject & {
   data: string;
   font: string;
   color: string;
@@ -41,3 +41,7 @@ type App = {
   history: null | object;
   choosedObjectId: string;
 };
+
+type slideNode = TextObject | ImgObject;
+
+export { App, Slide, ImgObject, TextObject, SlideObject, Cords, slideNode };

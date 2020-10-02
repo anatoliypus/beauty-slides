@@ -101,3 +101,7 @@ let app = {
   history: null,
   choosedObjectId: 1,
 };
+
+console.dir(app.slides[1]);
+app = methods.resizeImage(app, 7, '1px', '1px');
+console.dir(app.slides[1]);
