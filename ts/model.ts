@@ -29,7 +29,6 @@ type Slide = {
   width: string;
   height: string;
   id: string;
-  position: 1;
   objects: Array<TextObject | ImgObject>;
   backroungImage: string | null;
   backgroundColor: string | null;

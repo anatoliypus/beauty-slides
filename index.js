@@ -4,7 +4,6 @@ const slide1 = {
   width: '800px',
   height: '600px',
   id: 0,
-  position: 1,
   objects: [
     {
       type: 'text',
@@ -13,9 +12,9 @@ const slide1 = {
       font: 'Open Sans',
       size: '15px',
       color: '#000',
-      style: null,
+      style: 'unset',
       weight: 400,
-      decoration: null,
+      decoration: 'unset',
       positionFromTopLeft: {
         x: 0.15,
         y: 0.15,
@@ -24,7 +23,7 @@ const slide1 = {
     {
       type: 'img',
       id: 2,
-      path: './img/imageFromSlide1.jpg',
+      path: './img/imageFromSlide1-1.jpg',
       width: '100px',
       height: '100px',
       positionFromTopLeft: {
@@ -35,7 +34,7 @@ const slide1 = {
     {
       type: 'img',
       id: 3,
-      path: './img/imageFromSlide1.jpg',
+      path: './img/imageFromSlide1-2.jpg',
       width: '100px',
       height: '100px',
       positionFromTopLeft: {
@@ -48,14 +47,57 @@ const slide1 = {
   backgroundColor: null,
 };
 
-const app = {
-  currSlide: 0,
-  slides: [slide1],
+const slide2 = {
+  width: '800px',
+  height: '600px',
+  id: 4,
+  objects: [
+    {
+      type: 'text',
+      id: 5,
+      data: 'Hello, this is slide number 2!',
+      font: 'Open Sans',
+      size: '15px',
+      color: '#000',
+      style: 'unset',
+      weight: 400,
+      decoration: 'unset',
+      positionFromTopLeft: {
+        x: 0.15,
+        y: 0.15,
+      },
+    },
+    {
+      type: 'img',
+      id: 6,
+      path: './img/imageFromSlide2-1.jpg',
+      width: '100px',
+      height: '100px',
+      positionFromTopLeft: {
+        x: 0.5,
+        y: 0.3,
+      },
+    },
+    {
+      type: 'img',
+      id: 7,
+      path: './img/imageFromSlide2-2.jpg',
+      width: '100px',
+      height: '100px',
+      positionFromTopLeft: {
+        x: 0.5,
+        y: 0.3,
+      },
+    },
+  ],
+  backgroundImage: null,
+  backgroundColor: null,
+};
+
+let app = {
+  currSlide: 1,
+  slides: [slide1, slide2],
   settings: null,
   history: null,
   choosedObjectId: 1,
 };
-
-console.dir(app.slides[0]);
-methods.resizeImage(app, 2, '150px', '150px');
-console.dir(app.slides[0]);

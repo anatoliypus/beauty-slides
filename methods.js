@@ -1,7 +1,7 @@
 function changeSlide(app, slidePos) {
   return {
     ...app,
-    currentSlide: slidePos,
+    currSlide: slidePos,
   };
 }
 
@@ -131,7 +131,7 @@ function setSlideBg(app, id, imgPath) {
     ...app,
     slides: app.slides.map((obj) => {
       if (obj.id === newSlide.id) return newSlide;
-      return slide;
+      return obj;
     }),
   };
 }
@@ -145,13 +145,10 @@ function setSlideColor(app, id, color) {
     ...app,
     slides: app.slides.map((obj) => {
       if (obj.id === newSlide.id) return newSlide;
-      return slide;
+      return obj;
     }),
   };
 }
-
-// node.positionFromTopLeft.x = x;
-// node.positionFromTopLeft.y = y;
 
 function moveItem(app, id, x, y) {
   const slide = app.slides.find(
@@ -177,7 +174,35 @@ function moveItem(app, id, x, y) {
   };
 }
 
+function deleteSlideObject(app, id) {
+  const slide = app.slides.find(
+    (slideToFind) =>
+      slideToFind.objects.find((obj) => obj.id === id) !== undefined
+  );
+  const newSlide = slide;
+  newSlide.objects = newSlide.objects.filter((obj) => obj.id !== id);
+
+  return {
+    ...app,
+    slides: app.slides.map((obj) => {
+      if (obj.id === id) return newSlide;
+      return obj;
+    }),
+  };
+}
+
+function deleteSlide(app, id) {
+  const slide = app.slides.find((slideToFind) => slideToFind.id === id);
+
+  return {
+    ...app,
+    slides: app.slides.filter((obj) => obj !== slide),
+  };
+}
+
 module.exports = {
+  deleteSlideObject,
+  deleteSlide,
   changeSlide,
   resizeImage,
   toggleBoldText,
