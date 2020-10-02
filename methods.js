@@ -6,15 +6,21 @@ function changeSlide(app, slidePos) {
 }
 
 function resizeImage(app, id, width, height) {
-  for ( slide of app.slides ) {
-    for ( node of slide.objects ) {
-      if ( node.id == id ) {
-        node.width = width;
-        node.height = height;
-      }
+  const slide = app.slides.find(slide => slide.objects.find(obj => obj.id == id) !== undefined);
+  const newSlide = slide.objects.map(obj => {
+    if (obj.id == id) {
+      obj.width = width;
+      obj.height = height;
     }
-  }
-  return app;
+    return obj;
+  });
+  return {
+    ...app,
+    slides: app.slides.map(slide => {
+      if (slide.id == newSlide.id) return newSlide;
+      else return slide;
+    })
+  };
 }
 
 function toggleBoldText(app, id) {
@@ -88,8 +94,7 @@ function moveItem(app, id, x, y) {
 }
 
 module.exports = { 
-  nextSlide, 
-  prevSlide, 
+  changeSlide,
   resizeImage, 
   toggleBoldText, 
   toggleItalicText,

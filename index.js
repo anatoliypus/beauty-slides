@@ -31,6 +31,17 @@ let slide1 = {
         x: 0.50,
         y: 0.30
       }
+    },
+    {
+      type: 'img',
+      id: 3,
+      path: './img/imageFromSlide1.jpg',
+      width: '100px',
+      height: '100px',
+      positionFromTopLeft: {
+        x: 0.50,
+        y: 0.30
+      }
     }
   ],
   backgroundImage: null,
@@ -42,11 +53,10 @@ let app = {
   slides: [ slide1 ],
   settings: null,
   history: null,
-  choosedObjectId: 1,
-  nextId: 3
+  choosedObjectId: 1
 };
 
-console.dir(app.slides[0].objects.img[0]);
-app = methods.resizeImage(app, 2, '150px', '100px');
-console.dir(app.slides[0].objects.img[0]);
+console.dir(app.slides[0]);
+methods.resizeImage(app, 2, '150px', '150px');
+console.dir(app.slides[0]);
 
