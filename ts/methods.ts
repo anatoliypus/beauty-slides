@@ -1,13 +1,18 @@
-import { App, Slide, ImgObject, TextObject, SlideObject, Cords, SlideNode } from './model.ts';
+import { App, Slide, SlideNode } from './model';
 
-function changeSlide(app: App, slidePos: number): App {
+export function changeSlide(app: App, slidePos: number): App {
   return {
     ...app,
     currSlide: slidePos,
   };
 }
 
-function resizeImage(app: App, id: number, width: string, height: string): App {
+export function resizeImage(
+  app: App,
+  id: string,
+  width: string,
+  height: string
+): App {
   const slide: Slide = app.slides.find(
     (slideToFind: Slide) =>
       slideToFind.objects.find((obj: SlideNode) => obj.id === id) !== undefined
@@ -33,16 +38,16 @@ function resizeImage(app: App, id: number, width: string, height: string): App {
   };
 }
 
-function toggleBoldText(app, id): App {
-  const slide = app.slides.find(
-    (slideToFind) =>
-      slideToFind.objects.find((obj) => obj.id === id) !== undefined
+export function toggleBoldText(app: App, id: string): App {
+  const slide: Slide = app.slides.find(
+    (slideToFind: Slide) =>
+      slideToFind.objects.find((obj: SlideNode) => obj.id === id) !== undefined
   );
 
-  const newSlide = slide;
+  const newSlide: Slide = slide;
 
-  newSlide.objects = newSlide.objects.map((obj) => {
-    const newObj = obj;
+  newSlide.objects = newSlide.objects.map((obj: SlideNode) => {
+    const newObj: SlideNode = obj;
     if (newObj.id === id) {
       newObj.weight = newObj.weight === 400 ? 700 : 400;
     }
@@ -51,23 +56,23 @@ function toggleBoldText(app, id): App {
 
   return {
     ...app,
-    slides: app.slides.map((slideToFind) => {
+    slides: app.slides.map((slideToFind: Slide) => {
       if (slideToFind.id === newSlide.id) return newSlide;
       return slideToFind;
     }),
   };
 }
 
-function toggleItalicText(app, id): App {
-  const slide = app.slides.find(
-    (slideToFind) =>
-      slideToFind.objects.find((obj) => obj.id === id) !== undefined
+export function toggleItalicText(app: App, id: string): App {
+  const slide: Slide = app.slides.find(
+    (slideToFind: Slide) =>
+      slideToFind.objects.find((obj: SlideNode) => obj.id === id) !== undefined
   );
 
-  const newSlide = slide;
+  const newSlide: Slide = slide;
 
-  newSlide.objects = newSlide.objects.map((obj) => {
-    const newObj = obj;
+  newSlide.objects = newSlide.objects.map((obj: SlideNode) => {
+    const newObj: SlideNode = obj;
     if (newObj.id === id) {
       newObj.style = newObj.style === 'italic' ? 'unset' : 'italic';
     }
@@ -76,23 +81,23 @@ function toggleItalicText(app, id): App {
 
   return {
     ...app,
-    slides: app.slides.map((slideToFind) => {
+    slides: app.slides.map((slideToFind: Slide) => {
       if (slideToFind.id === newSlide.id) return newSlide;
       return slideToFind;
     }),
   };
 }
 
-function toggleUnderlinedText(app, id): App {
-  const slide = app.slides.find(
-    (slideToFind) =>
-      slideToFind.objects.find((obj) => obj.id === id) !== undefined
+export function toggleUnderlinedText(app: App, id: string): App {
+  const slide: Slide = app.slides.find(
+    (slideToFind: Slide) =>
+      slideToFind.objects.find((obj: SlideNode) => obj.id === id) !== undefined
   );
 
-  const newSlide = slide;
+  const newSlide: Slide = slide;
 
-  newSlide.objects = newSlide.objects.map((obj) => {
-    const newObj = obj;
+  newSlide.objects = newSlide.objects.map((obj: SlideNode) => {
+    const newObj: SlideNode = obj;
     if (newObj.id === id) {
       newObj.decoration =
         newObj.decoration === 'underline' ? 'unset' : 'underline';
@@ -102,23 +107,23 @@ function toggleUnderlinedText(app, id): App {
 
   return {
     ...app,
-    slides: app.slides.map((slideToFind) => {
+    slides: app.slides.map((slideToFind: Slide) => {
       if (slideToFind.id === newSlide.id) return newSlide;
       return slideToFind;
     }),
   };
 }
 
-function changeTextSize(app, id, size): App {
-  const slide = app.slides.find(
-    (slideToFind) =>
-      slideToFind.objects.find((obj) => obj.id === id) !== undefined
+export function changeTextSize(app: App, id: string, size: string): App {
+  const slide: Slide = app.slides.find(
+    (slideToFind: Slide) =>
+      slideToFind.objects.find((obj: SlideNode) => obj.id === id) !== undefined
   );
 
-  const newSlide = slide;
+  const newSlide: Slide = slide;
 
-  newSlide.objects = newSlide.objects.map((obj) => {
-    const newObj = obj;
+  newSlide.objects = newSlide.objects.map((obj: SlideNode) => {
+    const newObj: SlideNode = obj;
     if (newObj.id === id) {
       newObj.size = size;
     }
@@ -127,105 +132,91 @@ function changeTextSize(app, id, size): App {
 
   return {
     ...app,
-    slides: app.slides.map((slideToFind) => {
+    slides: app.slides.map((slideToFind: Slide) => {
       if (slideToFind.id === newSlide.id) return newSlide;
       return slideToFind;
     }),
   };
 }
 
-function setSlideBg(app, id, imgPath): App {
-  const slide = app.slides.find((slideToFind) => slideToFind.id === id);
+export function setSlideBg(app: App, id: string, imgPath: string): App {
+  const slide: Slide = app.slides.find((slideToFind) => slideToFind.id === id);
 
-  const newSlide = slide;
+  const newSlide: Slide = slide;
   newSlide.backgroundImage = imgPath;
 
   return {
     ...app,
-    slides: app.slides.map((obj) => {
+    slides: app.slides.map((obj: Slide) => {
       if (obj.id === newSlide.id) return newSlide;
       return obj;
     }),
   };
 }
 
-function setSlideColor(app, id, color): App {
-  const slide = app.slides.find((slideToFind) => slideToFind.id === id);
+export function setSlideColor(app: App, id: string, color: string): App {
+  const slide: Slide = app.slides.find((slideToFind) => slideToFind.id === id);
 
-  const newSlide = slide;
+  const newSlide: Slide = slide;
   newSlide.backgroundColor = color;
 
   return {
     ...app,
-    slides: app.slides.map((obj) => {
+    slides: app.slides.map((obj: Slide) => {
       if (obj.id === newSlide.id) return newSlide;
       return obj;
     }),
   };
 }
 
-function moveItem(app, id, x, y): App {
-  const slide = app.slides.find(
-    (slideToFind) =>
-      slideToFind.objects.find((obj) => obj.id === id) !== undefined
+export function moveItem(app: App, id: string, x: number, y: number): App {
+  const slide: Slide = app.slides.find(
+    (slideToFind: Slide) =>
+      slideToFind.objects.find((obj: SlideNode) => obj.id === id) !== undefined
   );
 
-  const newSlide = slide;
+  const newSlide: Slide = slide;
 
-  newSlide.objects = newSlide.objects.map((obj) => {
-    const newObj = obj;
+  newSlide.objects = newSlide.objects.map((obj: SlideNode) => {
+    const newObj: SlideNode = obj;
     if (newObj.id === id) {
-      newObj.positionFromTopLeft.x = x;
-      newObj.positionFromTopLeft.y = y;
+      newObj.positionTopLeft.x = x;
+      newObj.positionTopLeft.y = y;
     }
     return newObj;
   });
 
   return {
     ...app,
-    slides: app.slides.map((slideToFind) => {
+    slides: app.slides.map((slideToFind: Slide) => {
       if (slideToFind.id === newSlide.id) return newSlide;
       return slideToFind;
     }),
   };
 }
 
-function deleteSlideObject(app, id): App {
-  const slide = app.slides.find(
-    (slideToFind) =>
-      slideToFind.objects.find((obj) => obj.id === id) !== undefined
+export function deleteSlideObject(app: App, id: string): App {
+  const slide: Slide = app.slides.find(
+    (slideToFind: Slide) =>
+      slideToFind.objects.find((obj: SlideNode) => obj.id === id) !== undefined
   );
-  const newSlide = slide;
-  newSlide.objects = newSlide.objects.filter((obj) => obj.id !== id);
+  const newSlide: Slide = slide;
+  newSlide.objects = newSlide.objects.filter((obj: SlideNode) => obj.id !== id);
 
   return {
     ...app,
-    slides: app.slides.map((obj) => {
+    slides: app.slides.map((obj: Slide) => {
       if (obj.id === id) return newSlide;
       return obj;
     }),
   };
 }
 
-function deleteSlide(app, id): App {
-  const slide = app.slides.find((slideToFind) => slideToFind.id === id);
+export function deleteSlide(app: App, id: string): App {
+  const slide = app.slides.find((slideToFind: Slide) => slideToFind.id === id);
 
   return {
     ...app,
-    slides: app.slides.filter((obj) => obj !== slide),
+    slides: app.slides.filter((obj: Slide) => obj !== slide),
   };
 }
-
-module.exports = {
-  deleteSlideObject,
-  deleteSlide,
-  changeSlide,
-  resizeImage,
-  toggleBoldText,
-  toggleItalicText,
-  toggleUnderlinedText,
-  setSlideBg,
-  setSlideColor,
-  changeTextSize,
-  moveItem,
-};

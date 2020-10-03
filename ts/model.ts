@@ -30,7 +30,7 @@ type Slide = {
   height: string;
   id: string;
   objects: Array<TextObject | ImgObject>;
-  backroungImage: string | null;
+  backgroundImage: string | null;
   backgroundColor: string | null;
 };
 
@@ -42,6 +42,6 @@ type App = {
   choosedObjectId: string;
 };
 
-type slideNode = TextObject | ImgObject;
+type SlideNode = TextObject | ImgObject;
 
-export { App, Slide, ImgObject, TextObject, SlideObject, Cords, slideNode };
+export { App, Slide, ImgObject, TextObject, SlideObject, Cords, SlideNode };
