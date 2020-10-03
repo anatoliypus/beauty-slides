@@ -3,45 +3,54 @@ type Cords = {
   y: number;
 };
 
+type NodeType = 'text' | 'img' | 'figure';
+
 type SlideObject = {
-  type: string;
+  type: NodeType;
   id: string;
+  width: string;
+  height: string;
+  positionTopLeft: Cords;
 };
 
 type TextObject = SlideObject & {
+  type: 'text';
   data: string;
-  font: string;
+  fontFamily: string;
+  fontSize: string;
   color: string;
-  style: null | string;
-  weight: number;
-  decoration: null | string;
-  positionTopLeft: Cords;
+  fontStyle: 'unset' | 'italic';
+  fontWeight: number;
+  fontDecoration: 'unset' | 'underline';
 };
 
 type ImgObject = SlideObject & {
+  type: 'img';
   path: string;
-  width: string;
-  height: string;
-  positionTopLeft: Cords;
-};
-
-type Slide = {
-  width: string;
-  height: string;
-  id: string;
-  objects: Array<TextObject | ImgObject>;
-  backgroundImage: string | null;
-  backgroundColor: string | null;
-};
-
-type App = {
-  currSlide: number;
-  slides: Array<Slide>;
-  settings: null | object;
-  history: null | object;
-  choosedObjectId: string;
 };
 
 type SlideNode = TextObject | ImgObject;
+
+type Slide = {
+  id: string;
+  objects: Array<SlideNode>;
+  background: string;
+};
+
+type SettingsObject = {
+  slideWidth: string;
+  slideHeight: string;
+};
+
+type App = {
+  currSlide: string;
+  slides: Array<Slide>;
+  settings: SettingsObject;
+  choosedObjectId: string;
+};
+
+// type history = {
+// ...
+// };
 
 export { App, Slide, ImgObject, TextObject, SlideObject, Cords, SlideNode };
