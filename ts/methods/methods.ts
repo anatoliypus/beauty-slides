@@ -1,9 +1,9 @@
-import { App, Slide, SlideNode } from './model';
+import { App, Slide, SlideNode } from '../model/model';
 
 export function changeSlide(app: App, slideId: string): App {
   return Object.freeze({
     ...app,
-    currSlide: slideId,
+    currSlideId: slideId,
   });
 }
 

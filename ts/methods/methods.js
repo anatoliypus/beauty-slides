@@ -11,9 +11,11 @@ var __assign = (this && this.__assign) || function () {
     return __assign.apply(this, arguments);
 };
 exports.__esModule = true;
-function changeSlide(app, slidePos) {
-    return __assign(__assign({}, app), { currSlide: slidePos });
+exports.deleteSlide = exports.deleteSlideObject = exports.moveItem = exports.setSlideBg = exports.changeTextSize = exports.toggleUnderlinedText = exports.toggleItalicText = exports.toggleBoldText = exports.resizeImage = exports.changeSlide = void 0;
+function changeSlide(app, slideId) {
+    return Object.freeze(__assign(__assign({}, app), { currSlideId: slideId }));
 }
+exports.changeSlide = changeSlide;
 function resizeImage(app, id, width, height) {
     var slide = app.slides.find(function (slideToFind) {
         return slideToFind.objects.find(function (obj) { return obj.id === id; }) !== undefined;
@@ -21,18 +23,19 @@ function resizeImage(app, id, width, height) {
     var newSlide = slide;
     newSlide.objects = newSlide.objects.map(function (obj) {
         var newObj = obj;
-        if (newObj.id === id) {
+        if (newObj.id === id && newObj.type === 'img') {
             newObj.width = width;
             newObj.height = height;
         }
         return newObj;
     });
-    return __assign(__assign({}, app), { slides: app.slides.map(function (slideToFind) {
+    return Object.freeze(__assign(__assign({}, app), { slides: app.slides.map(function (slideToFind) {
             if (slideToFind.id === newSlide.id)
                 return newSlide;
             return slideToFind;
-        }) });
+        }) }));
 }
+exports.resizeImage = resizeImage;
 function toggleBoldText(app, id) {
     var slide = app.slides.find(function (slideToFind) {
         return slideToFind.objects.find(function (obj) { return obj.id === id; }) !== undefined;
@@ -40,17 +43,18 @@ function toggleBoldText(app, id) {
     var newSlide = slide;
     newSlide.objects = newSlide.objects.map(function (obj) {
         var newObj = obj;
-        if (newObj.id === id) {
-            newObj.weight = newObj.weight === 400 ? 700 : 400;
+        if (newObj.id === id && newObj.type === 'text') {
+            newObj.fontWeight = newObj.fontWeight === 400 ? 700 : 400;
         }
         return newObj;
     });
-    return __assign(__assign({}, app), { slides: app.slides.map(function (slideToFind) {
+    return Object.freeze(__assign(__assign({}, app), { slides: app.slides.map(function (slideToFind) {
             if (slideToFind.id === newSlide.id)
                 return newSlide;
             return slideToFind;
-        }) });
+        }) }));
 }
+exports.toggleBoldText = toggleBoldText;
 function toggleItalicText(app, id) {
     var slide = app.slides.find(function (slideToFind) {
         return slideToFind.objects.find(function (obj) { return obj.id === id; }) !== undefined;
@@ -58,17 +62,18 @@ function toggleItalicText(app, id) {
     var newSlide = slide;
     newSlide.objects = newSlide.objects.map(function (obj) {
         var newObj = obj;
-        if (newObj.id === id) {
-            newObj.style = newObj.style === 'italic' ? 'unset' : 'italic';
+        if (newObj.id === id && newObj.type === 'text') {
+            newObj.fontStyle = newObj.fontStyle === 'italic' ? 'unset' : 'italic';
         }
         return newObj;
     });
-    return __assign(__assign({}, app), { slides: app.slides.map(function (slideToFind) {
+    return Object.freeze(__assign(__assign({}, app), { slides: app.slides.map(function (slideToFind) {
             if (slideToFind.id === newSlide.id)
                 return newSlide;
             return slideToFind;
-        }) });
+        }) }));
 }
+exports.toggleItalicText = toggleItalicText;
 function toggleUnderlinedText(app, id) {
     var slide = app.slides.find(function (slideToFind) {
         return slideToFind.objects.find(function (obj) { return obj.id === id; }) !== undefined;
@@ -76,18 +81,19 @@ function toggleUnderlinedText(app, id) {
     var newSlide = slide;
     newSlide.objects = newSlide.objects.map(function (obj) {
         var newObj = obj;
-        if (newObj.id === id) {
-            newObj.decoration =
-                newObj.decoration === 'underline' ? 'unset' : 'underline';
+        if (newObj.id === id && newObj.type === 'text') {
+            newObj.fontDecoration =
+                newObj.fontDecoration === 'underline' ? 'unset' : 'underline';
         }
         return newObj;
     });
-    return __assign(__assign({}, app), { slides: app.slides.map(function (slideToFind) {
+    return Object.freeze(__assign(__assign({}, app), { slides: app.slides.map(function (slideToFind) {
             if (slideToFind.id === newSlide.id)
                 return newSlide;
             return slideToFind;
-        }) });
+        }) }));
 }
+exports.toggleUnderlinedText = toggleUnderlinedText;
 function changeTextSize(app, id, size) {
     var slide = app.slides.find(function (slideToFind) {
         return slideToFind.objects.find(function (obj) { return obj.id === id; }) !== undefined;
@@ -95,37 +101,29 @@ function changeTextSize(app, id, size) {
     var newSlide = slide;
     newSlide.objects = newSlide.objects.map(function (obj) {
         var newObj = obj;
-        if (newObj.id === id) {
-            newObj.size = size;
+        if (newObj.id === id && newObj.type === 'text') {
+            newObj.fontSize = size;
         }
         return newObj;
     });
-    return __assign(__assign({}, app), { slides: app.slides.map(function (slideToFind) {
+    return Object.freeze(__assign(__assign({}, app), { slides: app.slides.map(function (slideToFind) {
             if (slideToFind.id === newSlide.id)
                 return newSlide;
             return slideToFind;
-        }) });
+        }) }));
 }
-function setSlideBg(app, id, imgPath) {
+exports.changeTextSize = changeTextSize;
+function setSlideBg(app, id, background) {
     var slide = app.slides.find(function (slideToFind) { return slideToFind.id === id; });
     var newSlide = slide;
-    newSlide.backgroundImage = imgPath;
-    return __assign(__assign({}, app), { slides: app.slides.map(function (obj) {
+    newSlide.background = background;
+    return Object.freeze(__assign(__assign({}, app), { slides: app.slides.map(function (obj) {
             if (obj.id === newSlide.id)
                 return newSlide;
             return obj;
-        }) });
+        }) }));
 }
-function setSlideColor(app, id, color) {
-    var slide = app.slides.find(function (slideToFind) { return slideToFind.id === id; });
-    var newSlide = slide;
-    newSlide.backgroundColor = color;
-    return __assign(__assign({}, app), { slides: app.slides.map(function (obj) {
-            if (obj.id === newSlide.id)
-                return newSlide;
-            return obj;
-        }) });
-}
+exports.setSlideBg = setSlideBg;
 function moveItem(app, id, x, y) {
     var slide = app.slides.find(function (slideToFind) {
         return slideToFind.objects.find(function (obj) { return obj.id === id; }) !== undefined;
@@ -134,43 +132,33 @@ function moveItem(app, id, x, y) {
     newSlide.objects = newSlide.objects.map(function (obj) {
         var newObj = obj;
         if (newObj.id === id) {
-            newObj.positionFromTopLeft.x = x;
-            newObj.positionFromTopLeft.y = y;
+            newObj.positionTopLeft.x = x;
+            newObj.positionTopLeft.y = y;
         }
         return newObj;
     });
-    return __assign(__assign({}, app), { slides: app.slides.map(function (slideToFind) {
+    return Object.freeze(__assign(__assign({}, app), { slides: app.slides.map(function (slideToFind) {
             if (slideToFind.id === newSlide.id)
                 return newSlide;
             return slideToFind;
-        }) });
+        }) }));
 }
+exports.moveItem = moveItem;
 function deleteSlideObject(app, id) {
     var slide = app.slides.find(function (slideToFind) {
         return slideToFind.objects.find(function (obj) { return obj.id === id; }) !== undefined;
     });
     var newSlide = slide;
     newSlide.objects = newSlide.objects.filter(function (obj) { return obj.id !== id; });
-    return __assign(__assign({}, app), { slides: app.slides.map(function (obj) {
+    return Object.freeze(__assign(__assign({}, app), { slides: app.slides.map(function (obj) {
             if (obj.id === id)
                 return newSlide;
             return obj;
-        }) });
+        }) }));
 }
+exports.deleteSlideObject = deleteSlideObject;
 function deleteSlide(app, id) {
     var slide = app.slides.find(function (slideToFind) { return slideToFind.id === id; });
-    return __assign(__assign({}, app), { slides: app.slides.filter(function (obj) { return obj !== slide; }) });
+    return Object.freeze(__assign(__assign({}, app), { slides: app.slides.filter(function (obj) { return obj !== slide; }) }));
 }
-module.exports = {
-    deleteSlideObject: deleteSlideObject,
-    deleteSlide: deleteSlide,
-    changeSlide: changeSlide,
-    resizeImage: resizeImage,
-    toggleBoldText: toggleBoldText,
-    toggleItalicText: toggleItalicText,
-    toggleUnderlinedText: toggleUnderlinedText,
-    setSlideBg: setSlideBg,
-    setSlideColor: setSlideColor,
-    changeTextSize: changeTextSize,
-    moveItem: moveItem
-};
+exports.deleteSlide = deleteSlide;
