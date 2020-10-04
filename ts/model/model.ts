@@ -43,7 +43,7 @@ type SettingsObject = {
 };
 
 type App = {
-  currSlide: string;
+  currSlideId: string;
   slides: Array<Slide>;
   settings: SettingsObject;
   choosedObjectId: string;

@@ -1,10 +1,10 @@
 import { App, Slide, SlideNode } from './model';
 
 export function changeSlide(app: App, slideId: string): App {
-  return {
+  return Object.freeze({
     ...app,
     currSlide: slideId,
-  };
+  });
 }
 
 export function resizeImage(
@@ -29,13 +29,13 @@ export function resizeImage(
     return newObj;
   });
 
-  return {
+  return Object.freeze({
     ...app,
     slides: app.slides.map((slideToFind: Slide) => {
       if (slideToFind.id === newSlide.id) return newSlide;
       return slideToFind;
     }),
-  };
+  });
 }
 
 export function toggleBoldText(app: App, id: string): App {
@@ -54,13 +54,13 @@ export function toggleBoldText(app: App, id: string): App {
     return newObj;
   });
 
-  return {
+  return Object.freeze({
     ...app,
     slides: app.slides.map((slideToFind: Slide) => {
       if (slideToFind.id === newSlide.id) return newSlide;
       return slideToFind;
     }),
-  };
+  });
 }
 
 export function toggleItalicText(app: App, id: string): App {
@@ -79,13 +79,13 @@ export function toggleItalicText(app: App, id: string): App {
     return newObj;
   });
 
-  return {
+  return Object.freeze({
     ...app,
     slides: app.slides.map((slideToFind: Slide) => {
       if (slideToFind.id === newSlide.id) return newSlide;
       return slideToFind;
     }),
-  };
+  });
 }
 
 export function toggleUnderlinedText(app: App, id: string): App {
@@ -105,13 +105,13 @@ export function toggleUnderlinedText(app: App, id: string): App {
     return newObj;
   });
 
-  return {
+  return Object.freeze({
     ...app,
     slides: app.slides.map((slideToFind: Slide) => {
       if (slideToFind.id === newSlide.id) return newSlide;
       return slideToFind;
     }),
-  };
+  });
 }
 
 export function changeTextSize(app: App, id: string, size: string): App {
@@ -130,13 +130,13 @@ export function changeTextSize(app: App, id: string, size: string): App {
     return newObj;
   });
 
-  return {
+  return Object.freeze({
     ...app,
     slides: app.slides.map((slideToFind: Slide) => {
       if (slideToFind.id === newSlide.id) return newSlide;
       return slideToFind;
     }),
-  };
+  });
 }
 
 export function setSlideBg(app: App, id: string, background: string): App {
@@ -145,13 +145,13 @@ export function setSlideBg(app: App, id: string, background: string): App {
   const newSlide: Slide = slide;
   newSlide.background = background;
 
-  return {
+  return Object.freeze({
     ...app,
     slides: app.slides.map((obj: Slide) => {
       if (obj.id === newSlide.id) return newSlide;
       return obj;
     }),
-  };
+  });
 }
 
 export function moveItem(app: App, id: string, x: number, y: number): App {
@@ -171,13 +171,13 @@ export function moveItem(app: App, id: string, x: number, y: number): App {
     return newObj;
   });
 
-  return {
+  return Object.freeze({
     ...app,
     slides: app.slides.map((slideToFind: Slide) => {
       if (slideToFind.id === newSlide.id) return newSlide;
       return slideToFind;
     }),
-  };
+  });
 }
 
 export function deleteSlideObject(app: App, id: string): App {
@@ -188,20 +188,20 @@ export function deleteSlideObject(app: App, id: string): App {
   const newSlide: Slide = slide;
   newSlide.objects = newSlide.objects.filter((obj: SlideNode) => obj.id !== id);
 
-  return {
+  return Object.freeze({
     ...app,
     slides: app.slides.map((obj: Slide) => {
       if (obj.id === id) return newSlide;
       return obj;
     }),
-  };
+  });
 }
 
 export function deleteSlide(app: App, id: string): App {
   const slide = app.slides.find((slideToFind: Slide) => slideToFind.id === id);
 
-  return {
+  return Object.freeze({
     ...app,
     slides: app.slides.filter((obj: Slide) => obj !== slide),
-  };
+  });
 }
