@@ -31,10 +31,10 @@ type ImgObject = SlideObject & {
 
 type SlideNode = TextObject | ImgObject;
 
-type Slide = {
+type SlideType = {
   id: string;
   objects: Array<SlideNode>;
-  background: string;
+  background: string | null;
 };
 
 type SettingsObject = {
@@ -42,15 +42,24 @@ type SettingsObject = {
   slideHeight: string;
 };
 
-type App = {
-  currSlideId: string;
-  slides: Array<Slide>;
+type AppType = {
+  currSlideId: string | null;
+  slides: Array<SlideType>;
   settings: SettingsObject;
-  choosedObjectId: string;
+  choosedObjectId: string | null;
 };
 
 // type history = {
 // ...
 // };
 
-export { App, Slide, ImgObject, TextObject, SlideObject, Cords, SlideNode };
+export {
+  AppType,
+  SlideType,
+  ImgObject,
+  TextObject,
+  SlideObject,
+  Cords,
+  SlideNode,
+  SettingsObject,
+};
