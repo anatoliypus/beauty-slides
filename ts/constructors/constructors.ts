@@ -38,4 +38,11 @@ export function Text(width: string, height: string, cords: Cords) {
   this.width = width;
   this.height = height;
   this.positionTopLeft = cords;
+  this.fontStyle = 'unset';
+  this.fontDecoration = 'unset';
+  this.fontFamily = 'Open Sans';
+  this.fontSize = '15px';
+  this.color = '#000';
+  this.data = '';
+  this.fontWeight = 400;
 }
