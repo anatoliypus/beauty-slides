@@ -8,15 +8,8 @@ body, html, #root, #app {
   padding: 0;
 }
 
-.container {
-  width: 75%;
-  height: 100%;
-  margin: auto;
-  display: flex;
-}
-
 .working-area {
   display: flex;
   flex-direction: row;
-  height: 92%;
+  height: 87%;
 }
