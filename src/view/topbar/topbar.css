@@ -2,4 +2,12 @@
   width: 100%;
   border-bottom: 1px solid rgb(219, 219, 219);
   height: 8%;
+  box-sizing: border-box;
+  padding: 0 50px;
+  display: flex;
+  align-items: center;
+}
+
+#topbar h1 {
+  font-size: 23px;
 }

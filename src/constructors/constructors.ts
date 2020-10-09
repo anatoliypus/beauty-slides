@@ -18,6 +18,7 @@ export function createSettings(slideWidth: string, slideHeight: string): Setting
 export function createApp(settings: SettingsObject): AppType {
   const slide: SlideType = createSlide();
   return {
+    name: 'Название презентации',
     slides: [slide],
     currSlideId: slide.id,
     settings: settings,

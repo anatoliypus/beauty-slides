@@ -1,10 +1,14 @@
 import React from 'react';
 import './topbar.css';
 
-export default function Topbar() {
+interface TopbarProps {
+  presentationName: string;
+}
+
+export default function Topbar(props: TopbarProps) {
   return (
-    <div id="topbar">
-      
+    <div id='topbar'>
+      <h1>{props.presentationName}</h1>
     </div>
   );
 }
