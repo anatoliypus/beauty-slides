@@ -13,7 +13,7 @@ export function resizeImage(
   width: string,
   height: string
 ): AppType {
-  const slide: SlideType = { ...app }.slides.find(
+  const slide: any = { ...app }.slides.find(
     (slideToFind: SlideType) =>
       slideToFind.objects.find((obj: SlideNode) => obj.id === id) !== undefined
   );
@@ -39,7 +39,7 @@ export function resizeImage(
 }
 
 export function toggleBoldText(app: AppType, id: string): AppType {
-  const slide: SlideType = { ...app }.slides.find(
+  const slide: any = { ...app }.slides.find(
     (slideToFind: SlideType) =>
       slideToFind.objects.find((obj: SlideNode) => obj.id === id) !== undefined
   );
@@ -64,7 +64,7 @@ export function toggleBoldText(app: AppType, id: string): AppType {
 }
 
 export function toggleItalicText(app: AppType, id: string): AppType {
-  const slide: SlideType = { ...app }.slides.find(
+  const slide: any = { ...app }.slides.find(
     (slideToFind: SlideType) =>
       slideToFind.objects.find((obj: SlideNode) => obj.id === id) !== undefined
   );
@@ -89,7 +89,7 @@ export function toggleItalicText(app: AppType, id: string): AppType {
 }
 
 export function toggleUnderlinedText(app: AppType, id: string): AppType {
-  const slide: SlideType = { ...app }.slides.find(
+  const slide: any = { ...app }.slides.find(
     (slideToFind: SlideType) =>
       slideToFind.objects.find((obj: SlideNode) => obj.id === id) !== undefined
   );
@@ -119,7 +119,7 @@ export function changeTextSize(
   id: string,
   size: string
 ): AppType {
-  const slide: SlideType = { ...app }.slides.find(
+  const slide: any = { ...app }.slides.find(
     (slideToFind: SlideType) =>
       slideToFind.objects.find((obj: SlideNode) => obj.id === id) !== undefined
   );
@@ -148,7 +148,7 @@ export function setSlideBg(
   id: string,
   background: string
 ): AppType {
-  const slide: SlideType = { ...app }.slides.find(
+  const slide: any = { ...app }.slides.find(
     (slideToFind) => slideToFind.id === id
   );
 
@@ -170,7 +170,7 @@ export function moveItem(
   x: number,
   y: number
 ): AppType {
-  const slide: SlideType = { ...app }.slides.find(
+  const slide: any = { ...app }.slides.find(
     (slideToFind: SlideType) =>
       slideToFind.objects.find((obj: SlideNode) => obj.id === id) !== undefined
   );
@@ -196,7 +196,7 @@ export function moveItem(
 }
 
 export function deleteSlideObject(app: AppType, id: string): AppType {
-  const slide: SlideType = { ...app }.slides.find(
+  const slide: any = { ...app }.slides.find(
     (slideToFind: SlideType) =>
       slideToFind.objects.find((obj: SlideNode) => obj.id === id) !== undefined
   );

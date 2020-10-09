@@ -1,48 +1,59 @@
-import { SettingsObject, Cords } from '../model/model';
+import { SettingsObject, Cords, SlideType, AppType, ImgObject, TextObject } from '../model/model';
 
-export function Slide() {
-  this.id = Date.now().toString();
-  this.objects = [];
-  this.background = null;
+export function createSlide(): SlideType {
+  return { 
+    id: Date.now().toString(),
+    objects: [],
+    background: null,
+  }
 }
 
-export function Settings(slideWidth: string, slideHeight: string) {
-  this.slideWidth = slideWidth;
-  this.slideHeight = slideHeight;
+export function createSettings(slideWidth: string, slideHeight: string): SettingsObject {
+  return {
+    slideWidth: slideWidth,
+    slideHeight: slideHeight,
+  }
 }
 
-export function App(settings: SettingsObject) {
-  this.slides = [new Slide()];
-  this.currSlideId = this.slides[0].id;
-  this.settings = settings;
-  this.choosedObjectId = null;
+export function createApp(settings: SettingsObject): AppType {
+  const slide: SlideType = createSlide();
+  return {
+    slides: [slide],
+    currSlideId: slide.id,
+    settings: settings,
+    choosedObjectId: null,
+  }
 }
 
-export function Image(
+export function createImage(
   path: string,
   width: string,
   height: string,
   cords: Cords
 ) {
-  this.id = Date.now().toString();
-  this.type = 'img';
-  this.path = path;
-  this.width = width;
-  this.height = height;
-  this.positionTopLeft = cords;
+  return {
+    id: Date.now().toString(),
+    type: 'img',
+    path: path,
+    width: width,
+    height: height,
+    positionTopLeft: cords,
+  }
 }
 
-export function Text(width: string, height: string, cords: Cords) {
-  this.id = Date.now().toString();
-  this.type = 'text';
-  this.width = width;
-  this.height = height;
-  this.positionTopLeft = cords;
-  this.fontStyle = 'unset';
-  this.fontDecoration = 'unset';
-  this.fontFamily = 'Open Sans';
-  this.fontSize = '15px';
-  this.color = '#000';
-  this.data = '';
-  this.fontWeight = 400;
+export function createText(width: string, height: string, cords: Cords) {
+  return {
+    id: Date.now().toString(),
+    type: 'text',
+    width: width,
+    height: height,
+    positionTopLeft: cords,
+    fontStyle: 'unset',
+    fontDecoration: 'unset',
+    fontFamily: 'Open Sans',
+    fontSize: '15px',
+    color: '#000',
+    data: '',
+    fontWeight: 400,
+  }
 }

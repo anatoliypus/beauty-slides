@@ -5,6 +5,7 @@ function Slide() {
     this.id = Date.now().toString();
     this.objects = [];
     this.background = null;
+    console.dir(this);
 }
 exports.Slide = Slide;
 function Settings(slideWidth, slideHeight) {
@@ -34,5 +35,13 @@ function Text(width, height, cords) {
     this.width = width;
     this.height = height;
     this.positionTopLeft = cords;
+    this.fontStyle = 'unset';
+    this.fontDecoration = 'unset';
+    this.fontFamily = 'Open Sans';
+    this.fontSize = '15px';
+    this.color = '#000';
+    this.data = '';
+    this.fontWeight = 400;
 }
 exports.Text = Text;
+console.dir(new Slide());

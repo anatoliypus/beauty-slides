@@ -1,11 +1,11 @@
-type Cords = {
+export type Cords = {
   x: number;
   y: number;
 };
 
-type NodeType = 'text' | 'img' | 'figure';
+export type NodeType = 'text' | 'img' | 'figure';
 
-type SlideObject = {
+export type SlideObject = {
   type: NodeType;
   id: string;
   width: string;
@@ -13,7 +13,7 @@ type SlideObject = {
   positionTopLeft: Cords;
 };
 
-type TextObject = SlideObject & {
+export type TextObject = SlideObject & {
   type: 'text';
   data: string;
   fontFamily: string;
@@ -24,25 +24,25 @@ type TextObject = SlideObject & {
   fontDecoration: 'unset' | 'underline';
 };
 
-type ImgObject = SlideObject & {
+export type ImgObject = SlideObject & {
   type: 'img';
   path: string;
 };
 
-type SlideNode = TextObject | ImgObject;
+export type SlideNode = TextObject | ImgObject;
 
-type SlideType = {
+export type SlideType = {
   id: string;
   objects: Array<SlideNode>;
   background: string | null;
 };
 
-type SettingsObject = {
+export type SettingsObject = {
   slideWidth: string;
   slideHeight: string;
 };
 
-type AppType = {
+export type AppType = {
   currSlideId: string | null;
   slides: Array<SlideType>;
   settings: SettingsObject;
@@ -52,14 +52,3 @@ type AppType = {
 // type history = {
 // ...
 // };
-
-export {
-  AppType,
-  SlideType,
-  ImgObject,
-  TextObject,
-  SlideObject,
-  Cords,
-  SlideNode,
-  SettingsObject,
-};
