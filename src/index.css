@@ -14,3 +14,7 @@ body, html, #root, #app {
   flex-direction: row;
   height: 87%;
 }
+
+button:focus, button:active {
+  outline: none;
+}
