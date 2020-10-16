@@ -6,7 +6,7 @@ import * as serviceWorker from './serviceWorker';
 import { createApp, createSettings } from './constructors/constructors';
 
 const settings = createSettings('800px', '600px');
-const app = createApp(settings);
+export const app = createApp(settings);
 
 ReactDOM.render(
   <React.StrictMode>

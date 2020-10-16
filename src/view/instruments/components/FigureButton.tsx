@@ -3,12 +3,12 @@ import './figureButton.css';
 
 interface ButtonProps {
   imgUrl: string;
-  func: Function;
+  onClick: () => void;
 }
 
 export default function Button(props: ButtonProps) {
   return (
-    <div className="instruments-button">
+    <div onClick={props.onClick} className="instruments-button">
       <img src={props.imgUrl} />
     </div>
   )

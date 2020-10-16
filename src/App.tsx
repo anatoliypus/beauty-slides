@@ -16,7 +16,7 @@ export default function App(props: AppProps) {
       <Topbar presentationName={ props.app.name } />
       <Instruments />
       <div className='working-area'>
-        <SlideCarousel slides={ props.app.slides } />
+        <SlideCarousel currSlideId={props.app.currSlideId} slides={ props.app.slides } />
         <SlideViewport slide={ props.app.slides.find(slide => slide.id === props.app.currSlideId)} slideWidth={props.app.settings.slideWidth} slideHeight={props.app.settings.slideHeight} />
       </div>
       <Footer />

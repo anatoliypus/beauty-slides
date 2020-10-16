@@ -9,23 +9,33 @@ import TextIcon from './img/text.svg';
 import PlusIcon from './img/plus.svg';
 import UndoIcon from './img/undo.svg';
 import RedoIcon from './img/redo.svg';
-// import App from '../../App';
-// import ReactDOM from 'react-dom';
-// import { addSlide } from '../../methods/methods';
+import App from '../../App';
+import ReactDOM from 'react-dom';
+import { addSlide } from '../../methods/methods';
+import { app } from '../../index';
+
+function addSlideRender() {
+  ReactDOM.render(
+    <React.StrictMode>
+      <App app={addSlide(app)} />
+    </React.StrictMode>,
+    document.getElementById('root')
+  );
+}
 
 export default function Instruments() {
   return (
     <div id='instruments'>
-      <Button func={() => {}} imgUrl={ PlusIcon } />
+      <Button onClick={addSlideRender} imgUrl={ PlusIcon } />
       <ContextButton heading='Файл' />
       <ContextButton heading='Слайд' />
       <ContextButton heading='Правка' />
-      <Button func={() => {}} imgUrl={ RectIcon } />
-      <Button func={() => {}} imgUrl={ TriangIcon } />
-      <Button func={() => {}} imgUrl={ CircleIcon } />
-      <Button func={() => {}} imgUrl={ TextIcon } />
-      <Button func={() => {}} imgUrl={ UndoIcon } />
-      <Button func={() => {}} imgUrl={ RedoIcon } />
+      <Button onClick={() => {}} imgUrl={ RectIcon } />
+      <Button onClick={() => {}} imgUrl={ TriangIcon } />
+      <Button onClick={() => {}} imgUrl={ CircleIcon } />
+      <Button onClick={() => {}} imgUrl={ TextIcon } />
+      <Button onClick={() => {}} imgUrl={ UndoIcon } />
+      <Button onClick={() => {}} imgUrl={ RedoIcon } />
     </div>
   )
 }
