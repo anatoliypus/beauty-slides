@@ -1,8 +1,9 @@
 import React from 'react';
-import Topbar from './view/topbar/Topbar';
-import SlideCarousel from './view/slideCarousel/SlideCarousel';
-import SlideViewport from './view/slideViewport/SlideViewport';
-import Instruments from './view/instruments/Instruments';
+import Topbar from './view/Topbar/Topbar';
+import SlideCarousel from './view/SlideCarousel/SlideCarousel';
+import SlideViewport from './view/SlideViewport/SlideViewport';
+import Instruments from './view/Instruments/Instruments';
+import Footer from './view/Footer/Footer';
 import { createApp, createSettings } from './constructors/constructors';
 
 const settings = createSettings('800px', '600px');
@@ -17,6 +18,7 @@ export default function App() {
         <SlideCarousel slides={ app.slides } />
         <SlideViewport slide={app.slides.find(slide => slide.id === app.currSlideId)} slideWidth={app.settings.slideWidth} slideHeight={app.settings.slideHeight} />
       </div>
+      <Footer />
     </div>
   );
 }

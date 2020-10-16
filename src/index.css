@@ -12,7 +12,7 @@ body, html, #root, #app {
 .working-area {
   display: flex;
   flex-direction: row;
-  height: 87%;
+  height: 83%;
 }
 
 button:focus, button:active {

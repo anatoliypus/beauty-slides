@@ -26,7 +26,7 @@ export function resizeImage(
 
   const newSlide = replaceNode(slide, newImg);
   
-  return replaceSlide(app, newSlide);
+  return Object.freeze(replaceSlide(app, newSlide));
 }
 
 export function toggleBoldText(app: AppType, id: string): AppType {
@@ -41,7 +41,7 @@ export function toggleBoldText(app: AppType, id: string): AppType {
 
   const newSlide = replaceNode(slide, newText);
   
-  return replaceSlide(app, newSlide);
+  return Object.freeze(replaceSlide(app, newSlide));
 }
 
 export function toggleItalicText(app: AppType, id: string): AppType {
@@ -56,7 +56,7 @@ export function toggleItalicText(app: AppType, id: string): AppType {
 
   const newSlide = replaceNode(slide, newText);
   
-  return replaceSlide(app, newSlide);
+  return Object.freeze(replaceSlide(app, newSlide));
 }
 
 export function toggleUnderlinedText(app: AppType, id: string): AppType {
@@ -71,7 +71,7 @@ export function toggleUnderlinedText(app: AppType, id: string): AppType {
 
   const newSlide = replaceNode(slide, newText);
   
-  return replaceSlide(app, newSlide);
+  return Object.freeze(replaceSlide(app, newSlide));
 }
 
 export function changeTextSize(
@@ -90,7 +90,7 @@ export function changeTextSize(
 
   const newSlide = replaceNode(slide, newText);
   
-  return replaceSlide(app, newSlide);
+  return Object.freeze(replaceSlide(app, newSlide));
 }
 
 export function setSlideBg(
@@ -104,7 +104,7 @@ export function setSlideBg(
   const newSlide: SlideType = slide;
   newSlide.background = background;
 
-  return replaceSlide(app, newSlide);
+  return Object.freeze(replaceSlide(app, newSlide));
 }
 
 export function moveItem(
@@ -124,7 +124,7 @@ export function moveItem(
   item.positionTopLeft.x = x;
   item.positionTopLeft.y = y;
 
-  return replaceSlide(app, newSlide);
+  return Object.freeze(replaceSlide(app, newSlide));
 }
 
 export function deleteSlideObject(app: AppType, id: string): AppType {
@@ -134,7 +134,7 @@ export function deleteSlideObject(app: AppType, id: string): AppType {
   const newSlide: SlideType = slide;
   newSlide.objects = newSlide.objects.filter((obj: SlideNode) => obj.id !== id);
 
-  return replaceSlide(app, newSlide);
+  return Object.freeze(replaceSlide(app, newSlide));
 }
 
 export function deleteSlide(app: AppType, id: string): AppType {
