@@ -1,0 +1,17 @@
+.instruments-button {
+  height: 75%;
+  width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 10px;
+}
+
+.instruments-button img {
+  height: 75%;
+  width: 100%;
+}
+
+.instruments-button:first-child {
+  margin-right: 30px;
+}

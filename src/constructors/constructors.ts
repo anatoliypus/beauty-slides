@@ -1,8 +1,12 @@
 import { SettingsObject, Cords, SlideType, AppType, ImgObject, TextObject } from '../model/model';
 
+function createId(): string {
+  return Date.now().toString();
+}
+
 export function createSlide(): SlideType {
   return { 
-    id: Date.now().toString(),
+    id: createId(),
     objects: [],
     background: null,
   }
@@ -33,7 +37,7 @@ export function createImage(
   cords: Cords
 ): ImgObject {
   return {
-    id: Date.now().toString(),
+    id: createId(),
     type: 'img',
     path: path,
     width: width,
@@ -44,7 +48,7 @@ export function createImage(
 
 export function createText(width: string, height: string, cords: Cords): TextObject {
   return {
-    id: Date.now().toString(),
+    id: createId(),
     type: 'text',
     width: width,
     height: height,

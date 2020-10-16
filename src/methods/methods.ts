@@ -1,6 +1,7 @@
 import { AppType, SlideType, SlideNode, ImgObject, TextObject } from '../model/model';
 import { getCurrentSlide, getSlideNode, replaceNode, replaceSlide } from './secondaryMethods';
- 
+import { createSlide } from '../constructors/constructors';
+
 export function changeSlide(app: AppType, slideId: string): AppType {
   return Object.freeze({
     ...app,
@@ -145,4 +146,13 @@ export function deleteSlide(app: AppType, id: string): AppType {
     ...app,
     slides: app.slides.filter((obj: SlideType) => obj !== slide),
   });
+}
+
+export function addSlide(app: AppType) {
+  const slides = app.slides;
+  slides.push(createSlide());
+  return {
+    ...app,
+    ...slides
+  }
 }

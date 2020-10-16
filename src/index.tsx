@@ -3,10 +3,14 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import { createApp, createSettings } from './constructors/constructors';
+
+const settings = createSettings('800px', '600px');
+const app = createApp(settings);
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <App app={app} />
   </React.StrictMode>,
   document.getElementById('root')
 );

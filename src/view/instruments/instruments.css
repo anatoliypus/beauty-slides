@@ -7,11 +7,3 @@
   box-sizing: border-box;
   padding: 0 3%;
 }
-
-#divisor {
-  height: 70%;
-  border: 0;
-  background-color: #afafaf;
-  width: 1px;
-  margin-left: 10px;
-}
