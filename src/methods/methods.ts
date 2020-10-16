@@ -1,5 +1,6 @@
-import { AppType, SlideType, SlideNode } from '../model/model';
-
+import { AppType, SlideType, SlideNode, ImgObject, TextObject } from '../model/model';
+import { getCurrentSlide, getSlideNode, replaceNode, replaceSlide } from './secondaryMethods';
+ 
 export function changeSlide(app: AppType, slideId: string): AppType {
   return Object.freeze({
     ...app,
@@ -13,105 +14,64 @@ export function resizeImage(
   width: string,
   height: string
 ): AppType {
-  const slide: any = { ...app }.slides.find(
-    (slideToFind: SlideType) =>
-      slideToFind.objects.find((obj: SlideNode) => obj.id === id) !== undefined
-  );
+  const slide: SlideType | undefined = getCurrentSlide(app);
+  if (! slide) return app;
 
-  const newSlide: SlideType = slide;
+  const img: SlideNode | undefined = getSlideNode(slide, id);
+  if (! img || img.type !== 'img') return app;
 
-  newSlide.objects = newSlide.objects.map((obj: SlideNode) => {
-    const newObj: SlideNode = obj;
-    if (newObj.id === id && newObj.type === 'img') {
-      newObj.width = width;
-      newObj.height = height;
-    }
-    return newObj;
-  });
+  const newImg: ImgObject = img;
+  newImg.width = width;
+  newImg.height = height;
 
-  return Object.freeze({
-    ...app,
-    slides: app.slides.map((slideToFind: SlideType) => {
-      if (slideToFind.id === newSlide.id) return newSlide;
-      return slideToFind;
-    }),
-  });
+  const newSlide = replaceNode(slide, newImg);
+  
+  return replaceSlide(app, newSlide);
 }
 
 export function toggleBoldText(app: AppType, id: string): AppType {
-  const slide: any = { ...app }.slides.find(
-    (slideToFind: SlideType) =>
-      slideToFind.objects.find((obj: SlideNode) => obj.id === id) !== undefined
-  );
+  const slide: SlideType | undefined = getCurrentSlide(app);
+  if (! slide) return app;
 
-  const newSlide: SlideType = slide;
+  const text: SlideNode | undefined = getSlideNode(slide, id);
+  if (! text || text.type !== 'text') return app;
 
-  newSlide.objects = newSlide.objects.map((obj: SlideNode) => {
-    const newObj: SlideNode = obj;
-    if (newObj.id === id && newObj.type === 'text') {
-      newObj.fontWeight = newObj.fontWeight === 400 ? 700 : 400;
-    }
-    return newObj;
-  });
+  const newText: TextObject = text;
+  newText.fontWeight = newText.fontWeight === 400 ? 700 : 400;
 
-  return Object.freeze({
-    ...app,
-    slides: app.slides.map((slideToFind: SlideType) => {
-      if (slideToFind.id === newSlide.id) return newSlide;
-      return slideToFind;
-    }),
-  });
+  const newSlide = replaceNode(slide, newText);
+  
+  return replaceSlide(app, newSlide);
 }
 
 export function toggleItalicText(app: AppType, id: string): AppType {
-  const slide: any = { ...app }.slides.find(
-    (slideToFind: SlideType) =>
-      slideToFind.objects.find((obj: SlideNode) => obj.id === id) !== undefined
-  );
+  const slide: SlideType | undefined = getCurrentSlide(app);
+  if (! slide) return app;
 
-  const newSlide: SlideType = slide;
+  const text: SlideNode | undefined = getSlideNode(slide, id);
+  if (! text || text.type !== 'text') return app;
 
-  newSlide.objects = newSlide.objects.map((obj: SlideNode) => {
-    const newObj: SlideNode = obj;
-    if (newObj.id === id && newObj.type === 'text') {
-      newObj.fontStyle = newObj.fontStyle === 'italic' ? 'unset' : 'italic';
-    }
-    return newObj;
-  });
+  const newText: TextObject = text;
+  newText.fontStyle = newText.fontStyle === 'italic' ? 'unset' : 'italic';
 
-  return Object.freeze({
-    ...app,
-    slides: app.slides.map((slideToFind: SlideType) => {
-      if (slideToFind.id === newSlide.id) return newSlide;
-      return slideToFind;
-    }),
-  });
+  const newSlide = replaceNode(slide, newText);
+  
+  return replaceSlide(app, newSlide);
 }
 
 export function toggleUnderlinedText(app: AppType, id: string): AppType {
-  const slide: any = { ...app }.slides.find(
-    (slideToFind: SlideType) =>
-      slideToFind.objects.find((obj: SlideNode) => obj.id === id) !== undefined
-  );
+  const slide: SlideType | undefined = getCurrentSlide(app);
+  if (! slide) return app;
 
-  const newSlide: SlideType = slide;
+  const text: SlideNode | undefined = getSlideNode(slide, id);
+  if (! text || text.type !== 'text') return app;
 
-  newSlide.objects = newSlide.objects.map((obj: SlideNode) => {
-    const newObj: SlideNode = obj;
-    if (newObj.id === id && newObj.type === 'text') {
-      newObj.fontDecoration =
-        newObj.fontDecoration === 'underline' ? 'unset' : 'underline';
-    }
-    return newObj;
-  });
+  const newText: TextObject = text;
+  newText.fontDecoration = newText.fontDecoration === 'underline' ? 'unset' : 'underline';
 
-  return Object.freeze({
-    ...app,
-    slides: app.slides.map((slideToFind: SlideType) => {
-      if (slideToFind.id === newSlide.id) return newSlide;
-      return slideToFind;
-    }),
-  });
+  const newSlide = replaceNode(slide, newText);
+  
+  return replaceSlide(app, newSlide);
 }
 
 export function changeTextSize(
@@ -119,28 +79,18 @@ export function changeTextSize(
   id: string,
   size: string
 ): AppType {
-  const slide: any = { ...app }.slides.find(
-    (slideToFind: SlideType) =>
-      slideToFind.objects.find((obj: SlideNode) => obj.id === id) !== undefined
-  );
+  const slide: SlideType | undefined = getCurrentSlide(app);
+  if (! slide) return app;
 
-  const newSlide: SlideType = slide;
+  const text: SlideNode | undefined = getSlideNode(slide, id);
+  if (! text || text.type !== 'text') return app;
 
-  newSlide.objects = newSlide.objects.map((obj: SlideNode) => {
-    const newObj: SlideNode = obj;
-    if (newObj.id === id && newObj.type === 'text') {
-      newObj.fontSize = size;
-    }
-    return newObj;
-  });
+  const newText: TextObject = text;
+  newText.fontSize = size;
 
-  return Object.freeze({
-    ...app,
-    slides: app.slides.map((slideToFind: SlideType) => {
-      if (slideToFind.id === newSlide.id) return newSlide;
-      return slideToFind;
-    }),
-  });
+  const newSlide = replaceNode(slide, newText);
+  
+  return replaceSlide(app, newSlide);
 }
 
 export function setSlideBg(
@@ -148,20 +98,13 @@ export function setSlideBg(
   id: string,
   background: string
 ): AppType {
-  const slide: any = { ...app }.slides.find(
-    (slideToFind) => slideToFind.id === id
-  );
+  const slide: SlideType | undefined = getCurrentSlide(app);
+  if (! slide) return app;
 
   const newSlide: SlideType = slide;
   newSlide.background = background;
 
-  return Object.freeze({
-    ...app,
-    slides: app.slides.map((obj: SlideType) => {
-      if (obj.id === newSlide.id) return newSlide;
-      return obj;
-    }),
-  });
+  return replaceSlide(app, newSlide);
 }
 
 export function moveItem(
@@ -170,52 +113,33 @@ export function moveItem(
   x: number,
   y: number
 ): AppType {
-  const slide: any = { ...app }.slides.find(
-    (slideToFind: SlideType) =>
-      slideToFind.objects.find((obj: SlideNode) => obj.id === id) !== undefined
-  );
+  const slide: SlideType | undefined = getCurrentSlide(app);
+  if (! slide) return app;
 
   const newSlide: SlideType = slide;
 
-  newSlide.objects = newSlide.objects.map((obj: SlideNode) => {
-    const newObj: SlideNode = obj;
-    if (newObj.id === id) {
-      newObj.positionTopLeft.x = x;
-      newObj.positionTopLeft.y = y;
-    }
-    return newObj;
-  });
+  const item: SlideNode | undefined = getSlideNode(slide, id);
+  if (! item) return app;
 
-  return Object.freeze({
-    ...app,
-    slides: app.slides.map((slideToFind: SlideType) => {
-      if (slideToFind.id === newSlide.id) return newSlide;
-      return slideToFind;
-    }),
-  });
+  item.positionTopLeft.x = x;
+  item.positionTopLeft.y = y;
+
+  return replaceSlide(app, newSlide);
 }
 
 export function deleteSlideObject(app: AppType, id: string): AppType {
-  const slide: any = { ...app }.slides.find(
-    (slideToFind: SlideType) =>
-      slideToFind.objects.find((obj: SlideNode) => obj.id === id) !== undefined
-  );
+  const slide: SlideType | undefined = getCurrentSlide(app);
+  if (! slide) return app;
+
   const newSlide: SlideType = slide;
   newSlide.objects = newSlide.objects.filter((obj: SlideNode) => obj.id !== id);
 
-  return Object.freeze({
-    ...app,
-    slides: app.slides.map((obj: SlideType) => {
-      if (obj.id === id) return newSlide;
-      return obj;
-    }),
-  });
+  return replaceSlide(app, newSlide);
 }
 
 export function deleteSlide(app: AppType, id: string): AppType {
-  const slide = { ...app }.slides.find(
-    (slideToFind: SlideType) => slideToFind.id === id
-  );
+  const slide: SlideType | undefined = getCurrentSlide(app);
+  if (! slide) return app;
 
   return Object.freeze({
     ...app,

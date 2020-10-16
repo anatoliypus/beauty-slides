@@ -31,7 +31,7 @@ export function createImage(
   width: string,
   height: string,
   cords: Cords
-) {
+): ImgObject {
   return {
     id: Date.now().toString(),
     type: 'img',
@@ -42,7 +42,7 @@ export function createImage(
   }
 }
 
-export function createText(width: string, height: string, cords: Cords) {
+export function createText(width: string, height: string, cords: Cords): TextObject {
   return {
     id: Date.now().toString(),
     type: 'text',

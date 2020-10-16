@@ -1,5 +1,5 @@
 import React from 'react';
-import './topbar.css';
+import './Topbar.css';
 
 interface TopbarProps {
   presentationName: string;

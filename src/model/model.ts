@@ -44,7 +44,7 @@ export type SettingsObject = {
 
 export type AppType = {
   name: string;
-  currSlideId: string | null;
+  currSlideId: string;
   slides: Array<SlideType>;
   settings: SettingsObject;
   choosedObjectId: string | null;
