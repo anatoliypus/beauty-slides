@@ -1,6 +1,6 @@
 import { SettingsObject, Cords, SlideType, AppType, ImgObject, TextObject } from '../model/model';
 
-function createId(): string {
+export function createId(): string {
   return Date.now().toString();
 }
 
