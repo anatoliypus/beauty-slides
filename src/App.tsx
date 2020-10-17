@@ -17,7 +17,8 @@ export default function App(props: AppProps) {
       <Instruments />
       <div className='working-area'>
         <SlideCarousel currSlideId={props.app.currSlideId} slides={ props.app.slides } />
-        <SlideViewport slide={ props.app.slides.find(slide => slide.id === props.app.currSlideId)} slideWidth={props.app.settings.slideWidth} slideHeight={props.app.settings.slideHeight} />
+        {/* вынести */}
+        <SlideViewport slide={ props.app.slides.find(slide => slide.id === props.app.currSlideId) } slideWidth={props.app.settings.slideWidth} slideHeight={props.app.settings.slideHeight} />
       </div>
       <Footer />
     </div>

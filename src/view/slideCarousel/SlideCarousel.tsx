@@ -11,9 +11,9 @@ export default function SlideCarousel(props: SlideCarouselProps) {
   return (
     <div id='slide-carousel'>
       {props.slides.map((slide, index) =>
-        <div className='slide-carousel-item'>
+        <div className='slide-carousel-item' key={slide.id}>
           <p>{index + 1}.</p>
-          <div className={props.currSlideId === slide.id ? 'slide-miniature active-miniature' : 'slide-miniature' } key={slide.id}></div>
+          <div className={props.currSlideId === slide.id ? 'slide-miniature active-miniature' : 'slide-miniature' }></div>
         </div>
       )}
     </div>

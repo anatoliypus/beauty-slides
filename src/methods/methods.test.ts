@@ -1,5 +1,5 @@
 import * as methods from './methods';
-import { AppType } from '../model/model';
+import { AppType, TextObject } from '../model/model';
 import * as constructors from '../constructors/constructors';
 import { cloneApp } from './secondaryMethods';
 import { createVoidZero } from 'typescript';
@@ -37,11 +37,14 @@ describe('changing size of image test', () => {
 
 describe('changing text weight', () => {
   let app: AppType = constructors.createApp(constructors.createSettings('800px', '600px'));
-  app.slides[0].objects.push(constructors.createText('100px', '100px', {x: 12, y: 20}));
+  const text = constructors.createText('100px', '100px', {x: 12, y: 20});
+  app.slides[0].objects.push(text);
+
   let myMock = constructors.createId();
   test('changing weight', () => {
     let changedApp: AppType = cloneApp(app);
-    changedApp.slides[0].objects[0].fontWeight = 700;
+    (changedApp.slides[0].objects[0] as TextObject).fontWeight = 700;
+    const obj = changedApp.slides[0].objects[0];
 
     const result = methods.toggleBoldText(app, myMock);
     expect(result).toEqual(changedApp);
@@ -132,7 +135,7 @@ describe('deleting slide object test', () => {
 
   test('deleting slide object', () => {
     let changedApp: AppType = cloneApp(app);
-    changedApp.slides[0].objects[0] = undefined;
+    delete changedApp.slides[0].objects[0];
     
     const result = methods.deleteSlideObject(app, myMock);
     expect(result).toEqual(changedApp);
@@ -145,7 +148,7 @@ describe('deleting slide  test', () => {
 
   test('deleting slide', () => {
     let changedApp: AppType = cloneApp(app);
-    changedApp.slides[0] = undefined;
+    delete changedApp.slides[0];
     
     const result = methods.deleteSlide(app, myMock);
     expect(result).toEqual(changedApp);

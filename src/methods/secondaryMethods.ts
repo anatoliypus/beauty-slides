@@ -1,7 +1,7 @@
 import { AppType, SlideType, SlideNode, ImgObject } from '../model/model';
 
 export function getCurrentSlide(app: AppType): SlideType | undefined {
-  const slide: SlideType | undefined = cloneApp(app).slides.find(slide => slide.id === app.currSlideId);
+  const slide: SlideType | undefined = {...app}.slides.find(slide => slide.id === app.currSlideId);
   if (! slide) return undefined;
   return slide;
 }
