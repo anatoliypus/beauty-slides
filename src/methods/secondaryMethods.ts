@@ -1,4 +1,4 @@
-import { AppType, SlideType, SlideNode, ImgObject } from '../model/model';
+import { AppType, SlideType, SlideNode } from '../model/model';
 
 export function getCurrentSlide(app: AppType): SlideType | undefined {
   const slide: SlideType | undefined = {...app}.slides.find(slide => slide.id === app.currSlideId);

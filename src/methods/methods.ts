@@ -1,12 +1,13 @@
 import { AppType, SlideType, SlideNode, ImgObject, TextObject } from '../model/model';
 import { getCurrentSlide, getSlideNode, replaceNode, replaceSlide } from './secondaryMethods';
-import { createSlide } from '../constructors/constructors';
+import { createSlide, createImage, createText } from '../constructors/constructors';
+// import deepFreeze from 'deep-freeze';
 
 export function changeSlide(app: AppType, slideId: string): AppType {
-  return Object.freeze({
+  return {
     ...app,
     currSlideId: slideId,
-  });
+  };
 }
 
 export function resizeImage(
@@ -21,13 +22,15 @@ export function resizeImage(
   const img: SlideNode | undefined = getSlideNode(slide, id);
   if (! img || img.type !== 'img') return app;
 
-  const newImg: ImgObject = img;
-  newImg.width = width;
-  newImg.height = height;
+  const newImg: ImgObject = {
+    ...img,
+    width: width,
+    height: height
+  };
 
   const newSlide = replaceNode(slide, newImg);
   
-  return Object.freeze(replaceSlide(app, newSlide));
+  return replaceSlide(app, newSlide);
 }
 
 export function toggleBoldText(app: AppType, id: string): AppType {
@@ -37,12 +40,14 @@ export function toggleBoldText(app: AppType, id: string): AppType {
   const text: SlideNode | undefined = getSlideNode(slide, id);
   if (! text || text.type !== 'text') return app;
 
-  const newText: TextObject = text;
-  newText.fontWeight = newText.fontWeight === 400 ? 700 : 400;
+  const newText: TextObject = {
+    ...text,
+    fontWeight: text.fontWeight === 400 ? 700 : 400
+  };
 
   const newSlide = replaceNode(slide, newText);
   
-  return Object.freeze(replaceSlide(app, newSlide));
+  return replaceSlide(app, newSlide);
 }
 
 export function toggleItalicText(app: AppType, id: string): AppType {
@@ -52,12 +57,14 @@ export function toggleItalicText(app: AppType, id: string): AppType {
   const text: SlideNode | undefined = getSlideNode(slide, id);
   if (! text || text.type !== 'text') return app;
 
-  const newText: TextObject = text;
-  newText.fontStyle = newText.fontStyle === 'italic' ? 'unset' : 'italic';
+  const newText: TextObject = {
+    ...text,
+    fontStyle: text.fontStyle === 'italic' ? 'unset' : 'italic'
+  };
 
   const newSlide = replaceNode(slide, newText);
   
-  return Object.freeze(replaceSlide(app, newSlide));
+  return replaceSlide(app, newSlide);
 }
 
 export function toggleUnderlinedText(app: AppType, id: string): AppType {
@@ -67,12 +74,14 @@ export function toggleUnderlinedText(app: AppType, id: string): AppType {
   const text: SlideNode | undefined = getSlideNode(slide, id);
   if (! text || text.type !== 'text') return app;
 
-  const newText: TextObject = text;
-  newText.fontDecoration = newText.fontDecoration === 'underline' ? 'unset' : 'underline';
+  const newText: TextObject = {
+    ...text,
+    fontDecoration: text.fontDecoration === 'underline' ? 'unset' : 'underline'
+  };
 
   const newSlide = replaceNode(slide, newText);
   
-  return Object.freeze(replaceSlide(app, newSlide));
+  return replaceSlide(app, newSlide);
 }
 
 export function changeTextSize(
@@ -86,12 +95,14 @@ export function changeTextSize(
   const text: SlideNode | undefined = getSlideNode(slide, id);
   if (! text || text.type !== 'text') return app;
 
-  const newText: TextObject = text;
-  newText.fontSize = size;
+  const newText: TextObject = {
+    ...text,
+    fontSize: size
+  };
 
   const newSlide = replaceNode(slide, newText);
   
-  return Object.freeze(replaceSlide(app, newSlide));
+  return replaceSlide(app, newSlide);
 }
 
 export function setSlideBg(
@@ -102,10 +113,12 @@ export function setSlideBg(
   const slide: SlideType | undefined = getCurrentSlide(app);
   if (! slide) return app;
 
-  const newSlide: SlideType = slide;
-  newSlide.background = background;
+  const newSlide: SlideType = {
+    ...slide,
+    background: background
+  };
 
-  return Object.freeze(replaceSlide(app, newSlide));
+  return replaceSlide(app, newSlide);
 }
 
 export function moveItem(
@@ -117,42 +130,85 @@ export function moveItem(
   const slide: SlideType | undefined = getCurrentSlide(app);
   if (! slide) return app;
 
-  const newSlide: SlideType = slide;
-
   const item: SlideNode | undefined = getSlideNode(slide, id);
   if (! item) return app;
 
-  item.positionTopLeft.x = x;
-  item.positionTopLeft.y = y;
+  const newItem = {
+    ...item,
+    positionTopLeft: {
+      x: x,
+      y: y
+    }
+  }
 
-  return Object.freeze(replaceSlide(app, newSlide));
+  const newSlide = replaceNode(slide, newItem);
+
+  return replaceSlide(app, newSlide);
 }
 
 export function deleteSlideObject(app: AppType, id: string): AppType {
   const slide: SlideType | undefined = getCurrentSlide(app);
   if (! slide) return app;
 
-  const newSlide: SlideType = slide;
-  newSlide.objects = newSlide.objects.filter((obj: SlideNode) => obj.id !== id);
+  const newSlide: SlideType = {
+    ...slide,
+    objects: slide.objects.filter((obj: SlideNode) => obj.id !== id)
+  };
 
-  return Object.freeze(replaceSlide(app, newSlide));
+  return {
+    ...replaceSlide(app, newSlide),
+    choosedObjectId: null
+  };
 }
 
 export function deleteSlide(app: AppType, id: string): AppType {
   const slide: SlideType | undefined = getCurrentSlide(app);
   if (! slide) return app;
+  const newSlideList = { ...app }.slides.filter((obj: SlideType) => obj !== slide);
 
-  return Object.freeze({
-    ...app,
-    slides: app.slides.filter((obj: SlideType) => obj !== slide),
-  });
+  return {
+     ...app,
+     currSlideId: newSlideList === [] ? null : newSlideList[0].id,
+     slides: newSlideList
+  };
 }
 
-export function addSlide(app: AppType) {
-  const slides = app.slides;
+export function addSlide(app: AppType): AppType {
+  const slides = { ...app }.slides;
   slides.push(createSlide());
+
   return {
     ...app,
     ...slides
   }
+}
+
+export function addImage(app: AppType, path: string): AppType {
+  const slide: SlideType | undefined = getCurrentSlide(app);
+  if (! slide) return app;
+
+  const newObjects = slide.objects;
+  newObjects.push(createImage(path))
+
+  const newSlide = {
+    ...slide, 
+    objects: newObjects
+  }
+
+  return replaceSlide(app, newSlide);
+}
+
+export function addText(app: AppType): AppType {
+  const slide: SlideType | undefined = getCurrentSlide(app);
+  if (! slide) return app;
+
+  const newObjects = slide.objects;
+  newObjects.push(createText());
+
+  const newSlide = {
+    ...slide, 
+    objects: newObjects
+  }
+
+  return replaceSlide(app, newSlide);
 }

@@ -1,55 +1,53 @@
 export type Cords = {
-  x: number;
-  y: number;
+  readonly x: number;
+  readonly y: number;
 };
 
 export type NodeType = 'text' | 'img' | 'figure';
 
 export type SlideObject = {
-  type: NodeType;
-  id: string;
-  width: string;
-  height: string;
-  positionTopLeft: Cords;
+  readonly type: NodeType;
+  readonly id: string;
+  readonly width: string;
+  readonly height: string;
+  readonly positionTopLeft: Cords;
 };
 
 export type TextObject = SlideObject & {
-  type: 'text';
-  data: string;
-  fontFamily: string;
-  fontSize: string;
-  color: string;
-  fontStyle: 'unset' | 'italic';
-  fontWeight: number;
-  fontDecoration: 'unset' | 'underline';
+  readonly type: 'text';
+  readonly data: string;
+  readonly fontFamily: string;
+  readonly fontSize: string;
+  readonly color: string;
+  readonly fontStyle: 'unset' | 'italic';
+  readonly fontWeight: number;
+  readonly fontDecoration: 'unset' | 'underline';
 };
 
 export type ImgObject = SlideObject & {
-  type: 'img';
-  path: string;
+  readonly type: 'img';
+  readonly path: string;
 };
 
 export type SlideNode = TextObject | ImgObject;
 
+export type ObjectsList = Array<SlideNode>;
+
 export type SlideType = {
-  id: string;
-  objects: Array<SlideNode>;
-  background: string | null;
+  readonly id: string;
+  readonly objects: ObjectsList;
+  readonly background: string | null;
 };
 
 export type SettingsObject = {
-  slideWidth: string;
-  slideHeight: string;
+  readonly slideWidth: string;
+  readonly slideHeight: string;
 };
 
 export type AppType = {
-  name: string;
-  currSlideId: string;
-  slides: Array<SlideType>;
-  settings: SettingsObject;
-  choosedObjectId: string | null;
+  readonly name: string;
+  readonly currSlideId: string | null;
+  readonly slides: Array<SlideType>;
+  readonly settings: SettingsObject;
+  readonly choosedObjectId: string | null;
 };
-
-// type history = {
-// ...
-// };
