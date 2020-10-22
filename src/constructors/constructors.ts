@@ -1,27 +1,27 @@
 import { SettingsObject, SlideType, AppType, ImgObject, TextObject, ObjectsList } from '../model/model';
 // import deepFreeze from 'deep-freeze';
 
-export function createId(): string {
+function createId(): string {
   return Date.now().toString();
 }
 
-export function createSlide(): SlideType {
+function createSlide(): SlideType {
   let objectsArr: ObjectsList = [];
   return { 
-    id: createId(),
+    id: constructors.createId(),
     objects: objectsArr,
     background: null,
   }
 }
 
-export function createSettings(slideWidth: string, slideHeight: string): SettingsObject {
+function createSettings(slideWidth: string, slideHeight: string): SettingsObject {
   return {
     slideWidth: slideWidth,
     slideHeight: slideHeight,
   }
 }
 
-export function createApp(settings: SettingsObject): AppType {
+function createApp(settings: SettingsObject): AppType {
   const slide: SlideType = createSlide();
   return {
     name: 'Название презентации',
@@ -32,9 +32,9 @@ export function createApp(settings: SettingsObject): AppType {
   }
 }
 
-export function createImage(path: string): ImgObject {
+function createImage(path: string): ImgObject {
   return {
-    id: createId(),
+    id: constructors.createId(),
     type: 'img',
     path: path,
     width: '150px',
@@ -43,9 +43,9 @@ export function createImage(path: string): ImgObject {
   }
 }
 
-export function createText(): TextObject {
+function createText(): TextObject {
   return {
-    id: createId(),
+    id: constructors.createId(),
     type: 'text',
     width: '100px',
     height: '50px',
@@ -59,3 +59,14 @@ export function createText(): TextObject {
     fontWeight: 400,
   }
 }
+
+const constructors = {
+  createId,
+  createSlide,
+  createSettings,
+  createApp,
+  createImage,
+  createText
+}
+
+export default constructors

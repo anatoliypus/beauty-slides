@@ -4,7 +4,7 @@ import { SlideType } from '../../model/model';
 
 interface SlideCarouselProps {
   slides: Array<SlideType>;
-  currSlideId: string;
+  currSlideId: string | null;
 }
 
 export default function SlideCarousel(props: SlideCarouselProps) {

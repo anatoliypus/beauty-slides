@@ -1,6 +1,6 @@
 import * as methods from './methods';
 import { AppType, TextObject } from '../model/model';
-import * as constructors from '../constructors/constructors';
+import constructors from '../constructors/constructors';
 
 describe('changing slide test', () => {
   let app: AppType = constructors.createApp(constructors.createSettings('800px', '600px'));
@@ -37,21 +37,35 @@ describe('changing text weight', () => {
     expect(result.slides[0].objects[0].type).toEqual('text');
     expect((result.slides[0].objects[0] as TextObject).fontWeight).toEqual(700);
   });
+
+  test('changing weight two times, so should be equal to initial', () => {
+    const result1 = methods.toggleBoldText(app, app.slides[0].objects[0].id);
+    const result2 = methods.toggleBoldText(result1, app.slides[0].objects[0].id);
+
+    expect(result2.slides[0].objects[0].type).toEqual('text');
+    expect((result2.slides[0].objects[0] as TextObject).fontWeight).toEqual(400);
+  })
 });
 
-// describe('changing text italic style', () => {
-//   let app: AppType = constructors.createApp(constructors.createSettings('800px', '600px'));
-//   app.slides[0].objects.push(constructors.createText('100px', '100px', {x: 20, y: 20}));
-//   let myMock = constructors.createId();
+describe('changing text italic style', () => {
+  let app: AppType = constructors.createApp(constructors.createSettings('800px', '600px'));
+  app = methods.addText(app);
 
-//   test('changing italic style', () => {
-//     let changedApp: AppType = cloneApp(app);
-//     (changedApp.slides[0].objects[0] as TextObject).fontStyle = 'italic';
+  test('changing italic style', () => {
+    const result = methods.toggleItalicText(app, app.slides[0].objects[0].id);
 
-//     const result = methods.toggleBoldText(app, myMock);
-//     expect(result).toEqual(changedApp);
-//   });
-// });
+    expect(result.slides[0].objects[0].type).toEqual('text');
+    expect((result.slides[0].objects[0] as TextObject).fontStyle).toEqual('italic');
+  });
+
+  test('changing style two times, so should be equal to initial', () => {
+    const result1 = methods.toggleItalicText(app, app.slides[0].objects[0].id);
+    const result2 = methods.toggleItalicText(result1, app.slides[0].objects[0].id);
+
+    expect(result2.slides[0].objects[0].type).toEqual('text');
+    expect((result2.slides[0].objects[0] as TextObject).fontStyle).toEqual('unset');
+  })
+});
 
 // describe('changing underline style of text', () => {
 //   let app: AppType = constructors.createApp(constructors.createSettings('800px', '600px'));

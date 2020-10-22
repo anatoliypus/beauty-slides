@@ -3,10 +3,10 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import { createApp, createSettings } from './constructors/constructors';
+import constructors from './constructors/constructors';
 
-const settings = createSettings('800px', '600px');
-export const app = createApp(settings);
+const settings = constructors.createSettings('800px', '600px');
+export const app = constructors.createApp(settings);
 
 ReactDOM.render(
   <React.StrictMode>
