@@ -107,7 +107,6 @@ export function changeTextSize(
 
 export function setSlideBg(
   app: AppType,
-  id: string,
   background: string
 ): AppType {
   const slide: SlideType | undefined = getCurrentSlide(app);
@@ -161,14 +160,14 @@ export function deleteSlideObject(app: AppType, id: string): AppType {
   };
 }
 
-export function deleteSlide(app: AppType, id: string): AppType {
+export function deleteSlide(app: AppType): AppType {
   const slide: SlideType | undefined = getCurrentSlide(app);
   if (! slide) return app;
   const newSlideList = { ...app }.slides.filter((obj: SlideType) => obj !== slide);
 
   return {
      ...app,
-     currSlideId: newSlideList === [] ? null : newSlideList[0].id,
+     currSlideId: newSlideList.length === 0 ? null : newSlideList[0].id,
      slides: newSlideList
   };
 }
