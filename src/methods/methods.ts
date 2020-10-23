@@ -1,4 +1,4 @@
-import { AppType, SlideType, SlideNode, ImgObject, TextObject } from '../model/model';
+import { AppType, SlideType, SlideNode, ImgObject, TextObject, FigureType } from '../model/model';
 import { getCurrentSlide, getSlideNode, replaceNode, replaceSlide } from './secondaryMethods';
 import constructors from '../constructors/constructors';
 // import deepFreeze from 'deep-freeze';
@@ -188,7 +188,22 @@ export function addImage(app: AppType, path: string): AppType {
   if (! slide) return app;
 
   const newObjects = slide.objects;
-  newObjects.push(constructors.createImage(path))
+  newObjects.push(constructors.createImage(path));
+
+  const newSlide = {
+    ...slide, 
+    objects: newObjects
+  }
+
+  return replaceSlide(app, newSlide);
+}
+
+export function addFigure(app: AppType, type: FigureType): AppType {
+  const slide: SlideType | undefined = getCurrentSlide(app);
+  if (! slide) return app;
+
+  const newObjects = slide.objects;
+  newObjects.push(constructors.createFigure(type));
 
   const newSlide = {
     ...slide, 

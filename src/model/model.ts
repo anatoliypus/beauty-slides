@@ -29,7 +29,14 @@ export type ImgObject = SlideObject & {
   readonly path: string;
 };
 
-export type SlideNode = TextObject | ImgObject;
+export type FigureType = 'circle' | 'rectangle' | 'triangle';
+
+export type FigureObject = SlideObject & {
+  readonly type: 'figure';
+  readonly figure: FigureType;
+}
+
+export type SlideNode = TextObject | ImgObject | FigureObject;
 
 export type ObjectsList = Array<SlideNode>;
 

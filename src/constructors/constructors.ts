@@ -1,8 +1,8 @@
-import { SettingsObject, SlideType, AppType, ImgObject, TextObject, ObjectsList } from '../model/model';
+import { SettingsObject, SlideType, AppType, ImgObject, TextObject, ObjectsList, FigureType, FigureObject } from '../model/model';
 // import deepFreeze from 'deep-freeze';
 
 function createId(): string {
-  return Date.now().toString();
+  return String(Math.floor((Number(Date.now()) * Math.random())));
 }
 
 function createSlide(): SlideType {
@@ -43,6 +43,17 @@ function createImage(path: string): ImgObject {
   }
 }
 
+function createFigure(type: FigureType): FigureObject {
+  return {
+    id: constructors.createId(),
+    type: 'figure',
+    figure: type,
+    width: '150px',
+    height: '150px',
+    positionTopLeft: {x: 20, y: 20}
+  }
+}
+
 function createText(): TextObject {
   return {
     id: constructors.createId(),
@@ -66,7 +77,8 @@ const constructors = {
   createSettings,
   createApp,
   createImage,
-  createText
+  createText,
+  createFigure
 }
 
 export default constructors

@@ -4,9 +4,13 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import constructors from './constructors/constructors';
+import { addText, moveItem, addFigure } from './methods/methods';
 
 const settings = constructors.createSettings('800px', '600px');
-export const app = constructors.createApp(settings);
+export let app = constructors.createApp(settings);
+app = addText(app);
+app = addFigure(app, 'triangle');
+app = moveItem(app, app.slides[0].objects[0].id, 500, 500);
 
 ReactDOM.render(
   <React.StrictMode>
