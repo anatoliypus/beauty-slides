@@ -1,7 +1,7 @@
 import React from 'react';
 import './slideCarousel.css';
 import { SlideType } from '../../model/model';
-import { getObjects } from '../SlideViewport/SlideViewport';
+import getObjects from '../SlideViewport/getObjects';
 
 interface SlideCarouselProps {
     slides: Array<SlideType>;
