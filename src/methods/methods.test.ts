@@ -194,7 +194,7 @@ describe('moving item', () => {
     });
 });
 
-describe('deleting and creating', () => {
+describe('deleting slides and objects', () => {
     let app: AppType = constructors.createApp(
         constructors.createSettings('800px', '600px')
     );
@@ -213,9 +213,18 @@ describe('deleting and creating', () => {
 
         expect(result.slides[0]).toBeUndefined();
     });
+});
+
+constructors.createId = jest.fn().mockReturnValue('1');
+
+describe('adding objects', () => {
+    let app: AppType = constructors.createApp(
+        constructors.createSettings('800px', '600px')
+    );
+    
     test('adding slide', () => {
         const result = methods.addSlide(app);
-
-        expect(result.slides[0]).toBe(result.slides[0]);
+    
+        expect(result.slides[1]).toEqual(constructors.createSlide());
     });
-});
+})

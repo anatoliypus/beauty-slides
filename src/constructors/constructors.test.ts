@@ -1,4 +1,3 @@
-import { create } from 'domain';
 import constructors from './constructors';
 
 constructors.createId = jest.fn().mockReturnValue('1');
