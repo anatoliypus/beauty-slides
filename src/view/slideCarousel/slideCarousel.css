@@ -15,6 +15,7 @@
   height: 100%;
   border: 1px solid #afafaf;
   border-radius: 10px;
+  position: relative;
 }
 
 .slide-carousel-item {

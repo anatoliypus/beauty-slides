@@ -64,7 +64,7 @@ function createText(): TextObject {
     fontStyle: 'unset',
     fontDecoration: 'unset',
     fontFamily: 'Open Sans',
-    fontSize: '15px',
+    fontSize: '30px',
     color: '#000',
     data: 'Введите текст',
     fontWeight: 400,
