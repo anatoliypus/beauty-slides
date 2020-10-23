@@ -11,18 +11,18 @@ describe('changing slide test', () => {
   });
 });
 
-describe('changing size of image test', () => {
+describe('changing size of node test', () => {
   let app: AppType = constructors.createApp(constructors.createSettings('800px', '600px'));
   app = methods.addImage(app, '1.jpg');
 
   test('changing size', () => {
-    const result = methods.resizeImage(app, app.slides[0].objects[0].id, '200px', '200px');
+    const result = methods.resizeNode(app, app.slides[0].objects[0].id, '200px', '200px');
     expect(result.slides[0].objects[0].width).toEqual('200px');
     expect(result.slides[0].objects[0].height).toEqual('200px');
   });
 
   test('changing size of unexisting object', () => {
-    const result = methods.resizeImage(app, '1', '200px', '200px');
+    const result = methods.resizeNode(app, '1', '200px', '200px');
     expect(result).toEqual(app);
   });
 });

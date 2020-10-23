@@ -10,7 +10,7 @@ export function changeSlide(app: AppType, slideId: string): AppType {
   };
 }
 
-export function resizeImage(
+export function resizeNode(
   app: AppType,
   id: string,
   width: string,
