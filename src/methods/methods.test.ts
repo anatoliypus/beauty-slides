@@ -1,5 +1,5 @@
 import * as methods from './methods';
-import { AppType, TextObject } from '../model/model';
+import { AppType, SlideObject, TextObject } from '../model/model';
 import constructors from '../constructors/constructors';
 
 describe('changing slide test', () => {
@@ -67,104 +67,92 @@ describe('changing text italic style', () => {
   })
 });
 
-// describe('changing underline style of text', () => {
-//   let app: AppType = constructors.createApp(constructors.createSettings('800px', '600px'));
-//   app.slides[0].objects.push(constructors.createText('100px', '100px', {x: 20, y: 20}));
-//   let myMock = constructors.createId();
+describe('changing underline style of text', () => {
+  let app: AppType = constructors.createApp(constructors.createSettings('800px', '600px'));
+  app = methods.addText(app);
 
-//   test('changing underline style', () => {
-//     let changedApp: AppType = cloneApp(app);
-//     (changedApp.slides[0].objects[0] as TextObject).fontDecoration = 'underline';
+  test('changing underline style', () => {
+    const result = methods.toggleUnderlinedText(app, app.slides[0].objects[0].id);
 
-//     const result = methods.toggleUnderlinedText(app, myMock);
-//     expect(result).toEqual(changedApp);
-//   });
-// });
+    expect(result.slides[0].objects[0].type).toEqual('text');
+    expect((result.slides[0].objects[0] as TextObject).fontDecoration).toEqual('underline');
+   })
+   
+  test('changing underline style two times, so should be equal to initial', () => {
+    const result1 = methods.toggleItalicText(app, app.slides[0].objects[0].id);
+    const result2 = methods.toggleItalicText(result1, app.slides[0].objects[0].id);
 
+    expect(result2.slides[0].objects[0].type).toEqual('text');
+    expect((result2.slides[0].objects[0] as TextObject).fontDecoration).toEqual('unset');
+  })
+ });
 
-// describe('changing size of text test', () => {
-//   let app: AppType = constructors.createApp(constructors.createSettings('800px', '600px'));
-//   app.slides[0].objects.push(constructors.createText('100px', '100px', {x: 20, y: 20}));
+describe('changing size of text test', () => {
+  let app: AppType = constructors.createApp(constructors.createSettings('800px', '600px'));
+  app = methods.addText(app);
 
-//   test('changing size', () => {
-//     let changedApp: AppType = cloneApp(app);
-//     changedApp.slides[0].objects[0].width = '150px';
-//     changedApp.slides[0].objects[0].height = '150px';
+   test('changing size', () => {
 
-//     const result = methods.changeTextSize(app, app.slides[0].objects[0].id, '150px');
-//     expect(result).toEqual(changedApp);
-//   });
+     const result = methods.changeTextSize(app, app.slides[0].objects[0].id, '150px');
+     expect(result.slides[0].objects[0].type).toEqual('text');
+     expect((result.slides[0].objects[0] as TextObject).fontSize).toEqual('150');
+   });
 
-//   test('changing size of unexisting object', () => {
-//     const result = methods.changeTextSize(app, '1', '150px');
-//     expect(result).toEqual(app);
-//   });
-// });
+   test('changing size of unexisting object', () => {
+     const result = methods.changeTextSize(app, '1', '150px');
+     expect(result).toEqual(app);
+   });
+ });
 
-// describe('changing slide bg test', () => {
-//   let app: AppType = constructors.createApp(constructors.createSettings('800px', '600px'));
-//   app.slides.push(constructors.createSlide());
-//   let myMock = constructors.createId();
+ describe('changing slide bg test', () => {
+  let app: AppType = constructors.createApp(constructors.createSettings('800px', '600px'));
+  app = methods.addSlide(app);
 
-//   test('changing slide bg', () => {
-//     let changedApp: AppType = cloneApp(app);
-//     changedApp.slides[0].background = 'pepega.jpg'
+   test('changing slide bg', () => {
     
-//     const result = methods.setSlideBg(app, myMock, 'pepega.jpg');
-//     expect(result).toEqual(changedApp);
-//   });
-// });
-
-// describe('moving item', () => {
-//   let app: AppType = constructors.createApp(constructors.createSettings('800px', '600px'));
-//   app.slides[0].objects.push(constructors.createImage('img.jpg', '100px', '100px', {x: 10, y: 10}));
-//   let myMock = constructors.createId();
-
-//   test('moving item', () => {
-//     let changedApp: AppType = cloneApp(app);
-//     changedApp.slides[0].objects[0].positionTopLeft.x = 12;
-//     changedApp.slides[0].objects[0].positionTopLeft.y = 12;
+     const result = methods.setSlideBg(app, app.slides[0].id, 'pepega.jpg');
+     expect(result.slides[0].background).toEqual('pepega.jpg');
+   });
+   test('changing bg of unexisting slide', () => {
     
-//     const result = methods.moveItem(app, myMock, 12, 12);
-//     expect(result).toEqual(changedApp);
-//   });
-// });
+    const result = methods.setSlideBg(app, '1', 'pepega.jpg');
+    expect(result.slides[0].background).toEqual(null);
+  });
+ });
 
-// describe('deleting slide object test', () => {
-//   let app: AppType = constructors.createApp(constructors.createSettings('800px', '600px'));
-//   app.slides[0].objects.push(constructors.createImage('img.jpg', '100px', '100px', {x: 10, y: 10}));
-//   let myMock = constructors.createId();
+ describe('moving item', () => {
+  let app: AppType = constructors.createApp(constructors.createSettings('800px', '600px'));
+  app = methods.addImage(app, 'pepega.jpg');
 
-//   test('deleting slide object', () => {
-//     let changedApp: AppType = cloneApp(app);
-//     delete changedApp.slides[0].objects[0];
+   test('moving item', () => {
+
+    const result = methods.moveItem(app, app.slides[0].objects[0].id, 12, 12);
+     expect(result.slides[0].objects[0].type).toEqual('image');
+     expect((result.slides[0].objects[0] as TextObject).positionTopLeft).toEqual({x: 12, y: 12});
+   });
+ });
+
+describe('deleting and creating', () => {
+   let app: AppType = constructors.createApp(constructors.createSettings('800px', '600px'));
+   app = methods.addText(app);
+
+   test('deleting slide object', () => {
     
-//     const result = methods.deleteSlideObject(app, myMock);
-//     expect(result).toEqual(changedApp);
-//   });
-// });
+     const result = methods.deleteSlideObject(app, app.slides[0].objects[0].id);
 
-// describe('deleting slide  test', () => {
-//   let app: AppType = constructors.createApp(constructors.createSettings('800px', '600px'));
-//   let myMock = constructors.createId();
-
-//   test('deleting slide', () => {
-//     let changedApp: AppType = cloneApp(app);
-//     delete changedApp.slides[0];
+     expect(result.slides[0].objects[0]).toEqual(undefined);
+   });
+   test('deleting slide', () => {
     
-//     const result = methods.deleteSlide(app, myMock);
-//     expect(result).toEqual(changedApp);
-//   });
-// });
+     const result = methods.deleteSlide(app, app.slides[0].id);
 
-// describe('deleting slide  test', () => {
-//   let app: AppType = constructors.createApp(constructors.createSettings('800px', '600px'));
-
-//   test('deleting slide', () => {
-//     let changedApp: AppType = cloneApp(app);
-//     changedApp.slides.push(constructors.createSlide());
+     expect(result.slides[0]).toEqual(undefined);
+  });
+   test('adding slide', () => {
     
-//     const result = methods.addSlide(app);
-//     expect(result).toEqual(changedApp);
-//   });
-// });
+     const result = methods.addSlide(app);
+
+     expect(result.slides[0]).toEqual(result.slides[0]);
+  });
+ });
+
