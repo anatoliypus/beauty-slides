@@ -102,6 +102,16 @@ export default function SlideViewport(props: SlideViewportProps) {
                             </svg>
                         );
                     }
+                    if (node.type === 'img') {
+                        let styleForImg = {
+                            ...style,
+                            width: node.width,
+                            height: node.height
+                        }
+                        return (
+                            <img style={styleForImg} key={node.id} src={node.path}></img>
+                        );
+                    }
                 })}
             </div>
         </div>
