@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import constructors from './constructors/constructors';
-import { addText, moveItem, addFigure, addImage } from './methods/methods';
+import { addText, moveItem, addFigure, addImage, setSlideBg } from './methods/methods';
 
 const settings = constructors.createSettings('800px', '600px');
 export let app = constructors.createApp(settings);
@@ -13,6 +13,7 @@ app = moveItem(app, app.slides[0].objects[0].id, 500, 500);
 app = addFigure(app, 'triangle');
 app = moveItem(app, app.slides[0].objects[1].id, 300, 300);
 app = addImage(app, '/background-1.jpg');
+app = setSlideBg(app, app.slides[0].id, '#ccc');
 
 ReactDOM.render(
     <React.StrictMode>

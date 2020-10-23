@@ -9,23 +9,30 @@ interface SlideViewportProps {
 }
 
 export default function SlideViewport(props: SlideViewportProps) {
+    let slideStyles = {
+        width: props.slideWidth,
+        height: props.slideHeight,
+    } as React.CSSProperties;
     if (!props.slide)
         return (
             <div id="slide-viewport">
                 <div
                     id="slide"
-                    style={{
-                        width: props.slideWidth,
-                        height: props.slideHeight,
-                    }}
+                    style={slideStyles}
                 ></div>
             </div>
         );
+    if (props.slide.background) {
+        slideStyles = {
+            ...slideStyles,
+            background: props.slide.background.indexOf('.') === -1 ? props.slide.background : 'url(' + props.slide.background + ')'
+        } as React.CSSProperties;
+    }
     return (
         <div id="slide-viewport">
             <div
                 id="slide"
-                style={{ width: props.slideWidth, height: props.slideHeight }}
+                style={slideStyles}
             >
                 {props.slide.objects.map((node) => {
                     const style = {
