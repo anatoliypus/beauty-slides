@@ -116,7 +116,7 @@ describe('changing size of text test', () => {
    test('changing bg of unexisting slide', () => {
     
     const result = methods.setSlideBg(app, '1', 'pepega.jpg');
-    expect(result.slides[0].background).toEqual(null);
+    expect(result.slides[0].background).toBeNull();
   });
  });
 
@@ -140,13 +140,13 @@ describe('deleting and creating', () => {
     
      const result = methods.deleteSlideObject(app, app.slides[0].objects[0].id);
 
-     expect(result.slides[0].objects[0]).toEqual(undefined);
+     expect(result.slides[0].objects[0]).toBeUndefined();
    });
    test('deleting slide', () => {
     
      const result = methods.deleteSlide(app, app.slides[0].id);
 
-     expect(result.slides[0]).toEqual(undefined);
+     expect(result.slides[0]).toBeUndefined();
   });
    test('adding slide', () => {
     
