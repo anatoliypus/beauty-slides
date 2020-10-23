@@ -44,7 +44,7 @@ test('text creating test', () => {
     expect(text.data).toBe('Введите текст');
     expect(text.fontDecoration).toBe('unset');
     expect(text.fontFamily).toBe('Open Sans');
-    expect(text.fontSize).toBe('15px');
+    expect(text.fontSize).toBe('30px');
     expect(text.color).toBe('#000');
     expect(text.fontStyle).toBe('unset');
     expect(text.height).toBe('50px');

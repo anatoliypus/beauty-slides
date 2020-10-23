@@ -227,4 +227,10 @@ describe('adding objects', () => {
     
         expect(result.slides[1]).toEqual(constructors.createSlide());
     });
+
+    test('adding image', () => {
+        const result = methods.addImage(app, '1.jpg');
+
+        expect(result.slides[0].objects[0]).toEqual(constructors.createImage('1.jpg'));
+    });
 })
