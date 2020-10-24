@@ -13,7 +13,7 @@ app = moveItem(app, app.slides[0].objects[0].id, 500, 500);
 app = addFigure(app, 'triangle');
 app = moveItem(app, app.slides[0].objects[1].id, 300, 300);
 app = addImage(app, '/background-1.jpg');
-app = setSlideBg(app, '#ccc');
+app = setSlideBg(app, 'deepskyblue');
 
 ReactDOM.render(
     <React.StrictMode>

@@ -212,6 +212,7 @@ describe('deleting slides and objects', () => {
         const result = methods.deleteSlide(app);
 
         expect(result.slides[0]).toBeUndefined();
+        expect(result.currSlideId).toBeNull();
     });
 });
 
@@ -222,9 +223,12 @@ describe('adding objects', () => {
         let app: AppType = constructors.createApp(
             constructors.createSettings('800px', '600px')
         );
-        const result = methods.addSlide(app);
+        
+        let result = methods.deleteSlide(app);
+        result = methods.addSlide(app);
     
-        expect(result.slides[1]).toEqual(constructors.createSlide());
+        expect(result.slides[0]).toEqual(constructors.createSlide());
+        expect(result.currSlideId).toBe(result.slides[0].id);
     });
 
     test('adding image', () => {
@@ -242,7 +246,6 @@ describe('adding objects', () => {
         );
         const result = methods.addText(app);
 
-        console.dir(result.slides[0].objects)
         expect(result.slides[0].objects[0]).toEqual(constructors.createText()); 
     });
 

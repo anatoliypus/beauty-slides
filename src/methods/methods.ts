@@ -178,7 +178,8 @@ export function addSlide(app: AppType): AppType {
 
   return {
     ...app,
-    ...slides
+    slides: slides,
+    currSlideId: app.currSlideId === null ? slides[0].id : app.currSlideId
   }
 }
 
