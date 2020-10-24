@@ -218,19 +218,58 @@ describe('deleting slides and objects', () => {
 constructors.createId = jest.fn().mockReturnValue('1');
 
 describe('adding objects', () => {
-    let app: AppType = constructors.createApp(
-        constructors.createSettings('800px', '600px')
-    );
-    
     test('adding slide', () => {
+        let app: AppType = constructors.createApp(
+            constructors.createSettings('800px', '600px')
+        );
         const result = methods.addSlide(app);
     
         expect(result.slides[1]).toEqual(constructors.createSlide());
     });
 
     test('adding image', () => {
+        let app: AppType = constructors.createApp(
+            constructors.createSettings('800px', '600px')
+        );
         const result = methods.addImage(app, '1.jpg');
 
         expect(result.slides[0].objects[0]).toEqual(constructors.createImage('1.jpg'));
+    });
+
+    test('adding text', () => {
+        let app: AppType = constructors.createApp(
+            constructors.createSettings('800px', '600px')
+        );
+        const result = methods.addText(app);
+
+        console.dir(result.slides[0].objects)
+        expect(result.slides[0].objects[0]).toEqual(constructors.createText()); 
+    });
+
+    test('adding figure - circle', () => {
+        let app: AppType = constructors.createApp(
+            constructors.createSettings('800px', '600px')
+        );
+        const result = methods.addFigure(app, 'circle');
+
+        expect(result.slides[0].objects[0]).toEqual(constructors.createFigure('circle'));
+    });
+
+    test('adding figure - rectangle', () => {
+        let app: AppType = constructors.createApp(
+            constructors.createSettings('800px', '600px')
+        );
+        const result = methods.addFigure(app, 'rectangle');
+
+        expect(result.slides[0].objects[0]).toEqual(constructors.createFigure('rectangle'));
+    });
+
+    test('adding figure - triangle', () => {
+        let app: AppType = constructors.createApp(
+            constructors.createSettings('800px', '600px')
+        );
+        const result = methods.addFigure(app, 'triangle');
+
+        expect(result.slides[0].objects[0]).toEqual(constructors.createFigure('triangle'));
     });
 })
