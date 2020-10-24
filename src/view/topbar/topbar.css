@@ -1,4 +1,4 @@
-#topbar {
+.topbar {
   width: 100%;
   border-bottom: 1px solid #afafaf;
   height: 8%;
@@ -10,14 +10,34 @@
   background-size: 30%;
 }
 
-#topbar h1 {
+.topbar_background_1 {
+    background-image: url('./backgrounds/background-1.jpg');
+}
+
+.topbar_background_2 {
+    background-image: url('./backgrounds/background-2.jpg');
+}
+
+.topbar_background_3 {
+    background-image: url('./backgrounds/background-3.jpg');
+}
+
+.topbar_background_4 {
+    background-image: url('./backgrounds/background-4.jpg');
+}
+
+.topbar_background_5 {
+    background-image: url('./backgrounds/background-5.jpg');
+}
+
+.topbar h1 {
   font-size: 30px;
   color: #fff;
   font-weight: 400;
   background-color: #f193c2;
 }
 
-#export-btn {
+.export-btn {
   width: 120px;
   height: 40px;
   border: 0;
@@ -29,8 +49,9 @@
   transition: 0.2s;
 }
 
-#export-btn:hover {
+.export-btn:hover {
   background-color: #3a829e;
   transition: 0.2s;
   margin-bottom: 5px;
 }
+

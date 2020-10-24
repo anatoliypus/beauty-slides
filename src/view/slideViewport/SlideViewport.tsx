@@ -4,7 +4,7 @@ import { SlideType } from '../../model/model';
 import getObjects from './getObjects';
 
 interface SlideViewportProps {
-    slide: SlideType | undefined;
+    slide: SlideType;
     slideWidth: string;
     slideHeight: string;
 }
@@ -13,27 +13,19 @@ export default function SlideViewport(props: SlideViewportProps) {
     let slideStyles = {
         width: props.slideWidth,
         height: props.slideHeight,
-    } as React.CSSProperties;
-    if (!props.slide)
-        return (
-            <div id="slide-viewport">
-                <div
-                    id="slide"
-                    style={slideStyles}
-                ></div>
-            </div>
-        );
+    }
+    let slideStyles2;
     if (props.slide.background) {
-        slideStyles = {
-            ...slideStyles,
-            background: props.slide.background.indexOf('.') === -1 ? props.slide.background : 'url(' + props.slide.background + ')'
-        } as React.CSSProperties;
+        slideStyles2 = {
+        ...slideStyles,
+        background: props.slide.background.indexOf('.') === -1 ? props.slide.background : 'url(' + props.slide.background + ')'
+        }   
     }
     return (
         <div id="slide-viewport">
             <div
                 id="slide"
-                style={slideStyles}
+                style={slideStyles2 ? slideStyles2 : slideStyles}
             >
                 {getObjects(props.slide, 1, 1)}
             </div>

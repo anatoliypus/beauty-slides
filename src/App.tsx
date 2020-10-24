@@ -7,20 +7,31 @@ import Footer from './view/Footer/Footer';
 import { AppType } from './model/model';
 
 interface AppProps {
-  app: AppType;
+    app: AppType;
 }
 
 export default function App(props: AppProps) {
-  return (
-    <div id="app">
-      <Topbar presentationName={ props.app.name } />
-      <Instruments />
-      <div className='working-area'>
-        <SlideCarousel currSlideId={props.app.currSlideId} slides={ props.app.slides } />
-        {/* вынести */}
-        <SlideViewport slide={ props.app.slides.find(slide => slide.id === props.app.currSlideId) } slideWidth={props.app.settings.slideWidth} slideHeight={props.app.settings.slideHeight} />
-      </div>
-      <Footer />
-    </div>
-  );
+    const slide = props.app.slides.find(
+        (slide) => slide.id === props.app.currSlideId
+    );
+    if (! slide) throw new Error('Initial slide fail');
+
+    return (
+        <div id="app">
+            <Topbar presentationName={props.app.name} />
+            <Instruments />
+            <div className="working-area">
+                <SlideCarousel
+                    currSlideId={props.app.currSlideId}
+                    slides={props.app.slides}
+                />
+                <SlideViewport
+                    slide={slide}
+                    slideWidth={props.app.settings.slideWidth}
+                    slideHeight={props.app.settings.slideHeight}
+                />
+            </div>
+            <Footer />
+        </div>
+    );
 }

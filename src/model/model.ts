@@ -1,39 +1,39 @@
 export type Cords = {
-  readonly x: number;
-  readonly y: number;
+   x: number;
+   y: number;
 };
 
 export type NodeType = 'text' | 'img' | 'figure';
 
 export type SlideObject = {
-  readonly type: NodeType;
-  readonly id: string;
-  readonly width: string;
-  readonly height: string;
-  readonly positionTopLeft: Cords;
+   type: NodeType;
+   id: string;
+   width: string;
+   height: string;
+   positionTopLeft: Cords;
 };
 
 export type TextObject = SlideObject & {
-  readonly type: 'text';
-  readonly data: string;
-  readonly fontFamily: string;
-  readonly fontSize: string;
-  readonly color: string;
-  readonly fontStyle: 'unset' | 'italic';
-  readonly fontWeight: number;
-  readonly fontDecoration: 'unset' | 'underline';
+   type: 'text';
+   data: string;
+   fontFamily: string;
+   fontSize: string;
+   color: string;
+   fontStyle: 'unset' | 'italic';
+   fontWeight: number;
+   fontDecoration: 'unset' | 'underline';
 };
 
 export type ImgObject = SlideObject & {
-  readonly type: 'img';
-  readonly path: string;
+   type: 'img';
+   path: string;
 };
 
 export type FigureType = 'circle' | 'rectangle' | 'triangle';
 
 export type FigureObject = SlideObject & {
-  readonly type: 'figure';
-  readonly figure: FigureType;
+   type: 'figure';
+   figure: FigureType;
 }
 
 export type SlideNode = TextObject | ImgObject | FigureObject;
@@ -41,20 +41,20 @@ export type SlideNode = TextObject | ImgObject | FigureObject;
 export type ObjectsList = Array<SlideNode>;
 
 export type SlideType = {
-  readonly id: string;
-  readonly objects: ObjectsList;
-  readonly background: string | null;
+   id: string;
+   objects: ObjectsList;
+   background: string | null;
 };
 
 export type SettingsObject = {
-  readonly slideWidth: string;
-  readonly slideHeight: string;
+   slideWidth: string;
+   slideHeight: string;
 };
 
 export type AppType = {
-  readonly name: string;
-  readonly currSlideId: string | null;
-  readonly slides: Array<SlideType>;
-  readonly settings: SettingsObject;
-  readonly choosedObjectId: string | null;
+   name: string;
+   currSlideId: string | null;
+   slides: Array<SlideType>;
+   settings: SettingsObject;
+   choosedObjectId: string | null;
 };

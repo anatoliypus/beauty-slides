@@ -17,13 +17,13 @@ export default function getObjects(slide: SlideType, kWidth: number, kHeight: nu
                 fontWeight: node.fontWeight
             }
             return (
-                <h1
+                <p
                     key={node.id}
                     className="text-node"
                     style={style}
                 >
                     {node.data}
-                </h1>
+                </p>
             );
         }
 
@@ -93,5 +93,6 @@ export default function getObjects(slide: SlideType, kWidth: number, kHeight: nu
                 <img style={styleForImg} key={node.id} src={node.path}></img>
             );
         }
+        throw new Error('Unexpected type');
     })
 }
