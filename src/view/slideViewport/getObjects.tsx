@@ -1,12 +1,21 @@
 import React from 'react';
 import { SlideType } from '../../model/model';
+import Text from './objects/Text';
+import Circle from './objects/Circle';
+import Rectangle from './objects/Rectangle';
+import Triangle from './objects/Triangle';
+import Img from './objects/Img';
 
-export default function getObjects(slide: SlideType, kWidth: number, kHeight: number) {
+export default function getObjects(
+    slide: SlideType,
+    kWidth: number,
+    kHeight: number
+) {
     return slide.objects.map((node) => {
         let style = {
             position: 'absolute',
-            top: (node.positionTopLeft.y) / kWidth + 'px',
-            left: (node.positionTopLeft.x) / kHeight + 'px',
+            top: node.positionTopLeft.y / kWidth + 'px',
+            left: node.positionTopLeft.x / kHeight + 'px',
         } as React.CSSProperties;
 
         if (node.type === 'text') {
@@ -14,85 +23,50 @@ export default function getObjects(slide: SlideType, kWidth: number, kHeight: nu
                 ...style,
                 fontSize: parseInt(node.fontSize) / kWidth + 'px',
                 fontStyle: node.fontStyle,
-                fontWeight: node.fontWeight
-            }
-            return (
-                <p
-                    key={node.id}
-                    className="text-node"
-                    style={style}
-                >
-                    {node.data}
-                </p>
-            );
+                fontWeight: node.fontWeight,
+            };
+            return Text({ id: node.id, style: style, data: node.data });
         }
 
         if (node.type === 'figure' && node.figure === 'circle') {
-            return (
-                <svg
-                    style={style}
-                    key={node.id}
-                    width={(parseInt(node.width) + 5) / kWidth}
-                    height={(parseInt(node.height) + 5) / kHeight}
-                >
-                    <circle
-                        cx={(parseInt(node.width) + 2.5) / (2 * kWidth)}
-                        cy={(parseInt(node.height) + 2.5) / (2 * kHeight)}
-                        stroke="black"
-                        r={parseInt(node.width) / (2 * kWidth)}
-                        fill="transparent"
-                    ></circle>
-                </svg>
-            );
+            return Circle({
+                id: node.id,
+                style: style,
+                width: node.width,
+                height: node.height,
+                kWidth: kWidth,
+                kHeight: kHeight,
+            });
         }
 
         if (node.type === 'figure' && node.figure === 'rectangle') {
-            return (
-                <svg
-                    style={style}
-                    key={node.id}
-                    width={(parseInt(node.width) + 5) / kWidth}
-                    height={(parseInt(node.height) + 5) / kHeight}
-                >
-                    <rect
-                        x="1"
-                        y="1"
-                        width={parseInt(node.width) / kWidth}
-                        height={parseInt(node.height) / kHeight}
-                        stroke="black"
-                        fill="transparent"
-                    ></rect>
-                </svg>
-            );
+            return Rectangle({
+                id: node.id,
+                style: style,
+                width: node.width,
+                height: node.height,
+                kWidth: kWidth,
+                kHeight: kHeight,
+            });
         }
         if (node.type === 'figure' && node.figure === 'triangle') {
-            return (
-                <svg
-                    style={style}
-                    key={node.id}
-                    width={(parseInt(node.width) + 5) / kWidth}
-                    height={(parseInt(node.height) + 5) / kHeight}
-                >
-                    <polygon
-                        points={parseInt(node.width) / (2 * kWidth) + ',0 0,' + parseInt(node.height) / kHeight + ' ' + parseInt(node.width) / kWidth + ',' + parseInt(node.height) / kHeight}
-                        width={parseInt(node.width) / kWidth}
-                        height={parseInt(node.height) / kHeight}
-                        stroke="black"
-                        fill="transparent"
-                    ></polygon>
-                </svg>
-            );
+            return Triangle({
+                id: node.id,
+                style: style,
+                width: node.width,
+                height: node.height,
+                kWidth: kWidth,
+                kHeight: kHeight,
+            });
         }
         if (node.type === 'img') {
             let styleForImg = {
                 ...style,
                 width: parseInt(node.width) / kWidth + 'px',
-                height: parseInt(node.height) / kHeight + 'px'
-            }
-            return (
-                <img style={styleForImg} key={node.id} src={node.path}></img>
-            );
+                height: parseInt(node.height) / kHeight + 'px',
+            };
+            return Img({ id: node.id, path: node.path, style: styleForImg });
         }
         throw new Error('Unexpected type');
-    })
+    });
 }
