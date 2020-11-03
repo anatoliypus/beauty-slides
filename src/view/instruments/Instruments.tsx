@@ -1,5 +1,5 @@
 import React from 'react';
-import './instruments.css';
+import styles from './Instruments.module.css';
 import ContextButton from './components/ContextButton';
 import Button from './components/FigureButton';
 import RectIcon from './img/rectangle.svg';
@@ -25,7 +25,7 @@ function addSlideRender() {
 
 export default function Instruments() {
   return (
-    <div id='instruments'>
+    <div className={styles.instruments}>
       <Button onClick={addSlideRender} imgUrl={ PlusIcon } />
       <ContextButton heading='Файл' />
       <ContextButton heading='Слайд' />

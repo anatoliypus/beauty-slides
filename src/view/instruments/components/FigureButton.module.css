@@ -1,4 +1,4 @@
-.instruments-button {
+.instrumentsButton {
   height: 75%;
   width: 40px;
   display: flex;
@@ -8,11 +8,11 @@
   cursor: pointer;
 }
 
-.instruments-button img {
+.instrumentsButton__img {
   height: 100%;
   width: 100%;
 }
 
-.instruments-button:first-child {
+.instrumentsButton:first-child {
   margin-right: 30px;
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import './contextButton.css';
+import styles from './ContextButton.module.css';
 
 interface ComponentButtonProps {
   heading: string;
@@ -7,7 +7,7 @@ interface ComponentButtonProps {
 
 export default function ContextButton(props: ComponentButtonProps) {
   return (
-    <div className="context-btn">
+    <div className={styles.contextBtn}>
       <p>{props.heading}</p>
     </div>
   )

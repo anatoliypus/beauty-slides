@@ -1,4 +1,4 @@
-#slide-viewport {
+.slideViewport {
     width: 80%;
     height: 100%;
     display: flex;
@@ -7,7 +7,7 @@
     overflow: scroll;
 }
 
-#slide {
+.slide {
     border-radius: 5px;
     border: 1px solid #afafaf;
     position: relative;

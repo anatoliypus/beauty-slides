@@ -1,4 +1,4 @@
-body, html, #root, #app {
+body, html, .app {
   width: 100%;
   height: 100%;
   overflow: hidden;
@@ -10,7 +10,7 @@ body, html, #root, #app {
   font-family: 'Piazzolla';
 }
 
-.working-area {
+.workingArea {
   display: flex;
   flex-direction: row;
   height: 83%;

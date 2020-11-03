@@ -1,4 +1,4 @@
-#slide-carousel {
+.slideCarousel {
   width: 20%;
   height: 100%;
   border-right: 1px solid #afafaf;
@@ -10,7 +10,7 @@
   overflow-y: scroll;
 }
 
-.slide-miniature {
+.slideMiniature {
   width: calc(100% - 30px);
   height: 100%;
   border: 1px solid #afafaf;
@@ -18,7 +18,7 @@
   position: relative;
 }
 
-.slide-carousel-item {
+.slideCarouselItem {
   width: 80%;
   height: 200px;
   display: flex;
@@ -30,6 +30,6 @@
   margin-top: 50px;
 }
 
-.active-miniature {
+.activeMiniature {
   border: 2px solid #fcacac;
 }

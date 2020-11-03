@@ -1,5 +1,5 @@
 import React from 'react';
-import './Topbar.css';
+import styles from './Topbar.module.css';
 
 interface TopbarProps {
     presentationName: string;
@@ -15,9 +15,9 @@ export default function Topbar(props: TopbarProps) {
     const bgClassName = 'topbar_background_' + randNum;
 
     return (
-        <div className={'topbar' + ' ' + bgClassName}>
+        <div className={`${styles.topbar} ${styles[bgClassName]}`}>
             <h1>{props.presentationName}</h1>
-            <button className="export-btn">Экспорт</button>
+            <button className={styles.exportBtn}>Экспорт</button>
         </div>
     );
 }

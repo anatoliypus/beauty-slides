@@ -1,5 +1,5 @@
 import React from 'react';
-import './figureButton.css';
+import styles from './FigureButton.module.css';
 
 interface ButtonProps {
   imgUrl: string;
@@ -8,8 +8,8 @@ interface ButtonProps {
 
 export default function Button(props: ButtonProps) {
   return (
-    <div onClick={props.onClick} className="instruments-button">
-      <img src={props.imgUrl} />
+    <div onClick={props.onClick} className={styles.instrumentsButton}>
+      <img className={styles.instrumentsButton__img} src={props.imgUrl} />
     </div>
   )
 }

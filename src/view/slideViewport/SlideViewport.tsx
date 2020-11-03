@@ -1,5 +1,5 @@
 import React from 'react';
-import './slideViewport.css';
+import styles from './SlideViewport.module.css';
 import { SlideType } from '../../model/model';
 import getObjects from './getObjects';
 
@@ -22,9 +22,9 @@ export default function SlideViewport(props: SlideViewportProps) {
         }   
     }
     return (
-        <div id="slide-viewport">
+        <div className={styles.slideViewport}>
             <div
-                id="slide"
+                className={styles.slide}
                 style={slideStyles2 ? slideStyles2 : slideStyles}
             >
                 {getObjects(props.slide, 1, 1)}

@@ -5,6 +5,7 @@ import SlideViewport from './view/SlideViewport/SlideViewport';
 import Instruments from './view/Instruments/Instruments';
 import Footer from './view/Footer/Footer';
 import { AppType } from './model/model';
+import styles from './App.module.css';
 
 interface AppProps {
     app: AppType;
@@ -17,10 +18,10 @@ export default function App(props: AppProps) {
     if (! slide) throw new Error('Initial slide fail');
 
     return (
-        <div id="app">
+        <div className={styles.app}>
             <Topbar presentationName={props.app.name} />
             <Instruments />
-            <div className="working-area">
+            <div className={styles.workingArea}>
                 <SlideCarousel
                     currSlideId={props.app.currSlideId}
                     slides={props.app.slides}

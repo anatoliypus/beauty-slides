@@ -1,4 +1,4 @@
-.context-btn {
+.contextBtn {
   height: 75%;
   width: auto;
   background-color: #f3f3f3;
@@ -13,7 +13,7 @@
   align-items: center;
 }
 
-.context-btn:hover {
+.contextBtn:hover {
   transition: 0.3s;
   background-color: #e7e7e7;
 }

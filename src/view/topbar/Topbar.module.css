@@ -39,7 +39,7 @@
   border-radius: 5px;
 }
 
-.export-btn {
+.exportBtn {
   width: 120px;
   height: 40px;
   border: 0;
@@ -51,7 +51,7 @@
   transition: 0.2s;
 }
 
-.export-btn:hover {
+.exportBtn:hover {
   background-color: #3a829e;
   transition: 0.2s;
   margin-bottom: 5px;
