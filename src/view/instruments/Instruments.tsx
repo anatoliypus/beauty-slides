@@ -12,21 +12,16 @@ import RedoIcon from './img/redo.svg';
 import App from '../../App';
 import ReactDOM from 'react-dom';
 import { addSlide } from '../../methods/methods';
-import { app } from '../../index';
+import { dispatch } from '../../dispatcher';
 
-function addSlideRender() {
-  ReactDOM.render(
-    <React.StrictMode>
-      <App app={addSlide(app)} />
-    </React.StrictMode>,
-    document.getElementById('root')
-  );
+function addSlideButtonClick(): void {
+    dispatch(addSlide)
 }
 
 export default function Instruments() {
   return (
     <div className={styles.instruments}>
-      <Button onClick={addSlideRender} imgUrl={ PlusIcon } />
+      <Button onClick={addSlideButtonClick} imgUrl={ PlusIcon } />
       <ContextButton heading='Файл' />
       <ContextButton heading='Слайд' />
       <ContextButton heading='Правка' />
