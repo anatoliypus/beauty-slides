@@ -9,9 +9,9 @@ import { addText, moveItem, addFigure, addImage, setSlideBg } from './methods/me
 const settings = constructors.createSettings('800px', '600px');
 export let app = constructors.createApp(settings);
 app = addText(app);
-app = moveItem(app, app.slides[0].objects[0].id, 400, 400);
+app = moveItem(app, {id: app.slides[0].objects[0].id, x: 400, y: 400});
 app = addFigure(app, 'circle');
-app = moveItem(app, app.slides[0].objects[1].id, 300, 300);
+app = moveItem(app, {id: app.slides[0].objects[1].id, x: 300, y: 300});
 app = addImage(app, '/background-1.jpg');
 app = setSlideBg(app, 'deepskyblue');
 
