@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './SlideCarousel.module.css';
 import { SlideType } from '../../model/model';
-import getObjects from '../SlideViewport/getObjects';
+import Miniature from './Miniature';
 
 interface SlideCarouselProps {
     slides: Array<SlideType>;
@@ -13,24 +13,26 @@ export default function SlideCarousel(props: SlideCarouselProps) {
         <div className={styles.slideCarousel}>
             {props.slides.map((slide, index) => {
                 let miniatureStyles = {};
-                if (slide.background) miniatureStyles = {
-                    background: slide.background.indexOf('.') === -1 ? slide.background : 'url(' + slide.background + ')'
-                }
+                if (slide.background)
+                    miniatureStyles = {
+                        background:
+                            slide.background.indexOf('.') === -1
+                                ? slide.background
+                                : 'url(' + slide.background + ')',
+                    };
+                const miniatureClassName =
+                    props.currSlideId === slide.id
+                        ? `${styles.slideMiniature} ${styles.activeMiniature}`
+                        : styles.slideMiniature;
                 return (
-                <div className={styles.slideCarouselItem} key={slide.id}>
-                    <p>{index + 1}.</p>
-                    <div
-                        style={miniatureStyles}
-                        className={
-                            props.currSlideId === slide.id
-                                ? `${styles.slideMiniature} ${styles.activeMiniature}`
-                                : styles.slideMiniature
-                        }
-                    >
-                        {getObjects(slide, 4, 4)}
-                    </div>
-                </div>
-            )})}
+                    <Miniature
+                        index={index + 1}
+                        inlineStyle={miniatureStyles}
+                        miniatureClassName={miniatureClassName}
+                        slide={slide}
+                    />
+                );
+            })}
         </div>
     );
 }

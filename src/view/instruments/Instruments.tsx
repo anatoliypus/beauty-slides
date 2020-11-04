@@ -9,19 +9,25 @@ import TextIcon from './img/text.svg';
 import PlusIcon from './img/plus.svg';
 import UndoIcon from './img/undo.svg';
 import RedoIcon from './img/redo.svg';
-import App from '../../App';
-import ReactDOM from 'react-dom';
 import { addSlide } from '../../methods/methods';
-import { dispatch } from '../../dispatcher';
+import { dispatch, undo, redo } from '../../dispatcher';
 
-function addSlideButtonClick(): void {
+function addSlideButtonOnClick(): void {
     dispatch(addSlide)
+}
+
+function undoButtonOnClick(): void {
+    undo()
+}
+
+function redoButtonOnClick(): void {
+    redo()
 }
 
 export default function Instruments() {
   return (
     <div className={styles.instruments}>
-      <Button onClick={addSlideButtonClick} imgUrl={ PlusIcon } />
+      <Button onClick={addSlideButtonOnClick} imgUrl={ PlusIcon } />
       <ContextButton heading='Файл' />
       <ContextButton heading='Слайд' />
       <ContextButton heading='Правка' />
@@ -29,8 +35,8 @@ export default function Instruments() {
       <Button onClick={() => {}} imgUrl={ TriangIcon } />
       <Button onClick={() => {}} imgUrl={ CircleIcon } />
       <Button onClick={() => {}} imgUrl={ TextIcon } />
-      <Button onClick={() => {}} imgUrl={ UndoIcon } />
-      <Button onClick={() => {}} imgUrl={ RedoIcon } />
+      <Button onClick={undoButtonOnClick} imgUrl={ UndoIcon } />
+      <Button onClick={redoButtonOnClick} imgUrl={ RedoIcon } />
     </div>
   )
 }

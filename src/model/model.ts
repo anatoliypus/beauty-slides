@@ -58,3 +58,5 @@ export type AppType = {
    settings: SettingsObject;
    choosedObjectId: string | null;
 };
+
+export type History = Array<AppType>;
