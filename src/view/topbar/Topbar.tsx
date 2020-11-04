@@ -19,6 +19,7 @@ export default function Topbar(props: TopbarProps) {
 
     useEffect(() => {
         if (input.current) {
+            input.current.value = props.presentationName;
             input.current.addEventListener('change', () => {
                 if (input.current) {
                     if (input.current.value === '') dispatch(changePresentationName, 'Название презентации');
@@ -33,7 +34,6 @@ export default function Topbar(props: TopbarProps) {
             <input
                 ref={input}
                 className={styles.topbar__input}
-                placeholder={props.presentationName}
             />
             <button className={styles.exportBtn}>Экспорт</button>
         </div>
