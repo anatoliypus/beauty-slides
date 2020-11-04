@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Topbar from './view/Topbar/Topbar';
 import SlideCarousel from './view/SlideCarousel/SlideCarousel';
 import SlideViewport from './view/SlideViewport/SlideViewport';
@@ -12,6 +12,9 @@ interface AppProps {
 }
 
 export default function App(props: AppProps) {
+    useEffect(() => {
+        document.title = props.app.name;
+    });
     const slide = props.app.slides.find(
         (slide) => slide.id === props.app.currSlideId
     );

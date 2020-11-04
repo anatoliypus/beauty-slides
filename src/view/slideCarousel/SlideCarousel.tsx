@@ -26,6 +26,7 @@ export default function SlideCarousel(props: SlideCarouselProps) {
                         : styles.slideMiniature;
                 return (
                     <Miniature
+                        key={slide.id}
                         index={index + 1}
                         inlineStyle={miniatureStyles}
                         miniatureClassName={miniatureClassName}
