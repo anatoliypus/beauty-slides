@@ -248,3 +248,10 @@ export function addText(app: AppType): AppType {
 
     return replaceSlide(app, newSlide);
 }
+
+export function changePresentationName(app: AppType, name: string): AppType {
+    return {
+        ...app,
+        name: name
+    }
+}

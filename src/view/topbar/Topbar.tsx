@@ -16,7 +16,7 @@ export default function Topbar(props: TopbarProps) {
 
     return (
         <div className={`${styles.topbar} ${styles[bgClassName]}`}>
-            <h1>{props.presentationName}</h1>
+            <input className={styles.topbar__input} placeholder={props.presentationName} />
             <button className={styles.exportBtn}>Экспорт</button>
         </div>
     );

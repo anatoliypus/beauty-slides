@@ -30,13 +30,21 @@
     background-image: url('./backgrounds/background-5.jpg');
 }
 
-.topbar h1 {
-  font-size: 30px;
-  color: #fff;
-  font-weight: 400;
+.topbar__input {
   background-color: #ffa4f3;
   padding: 5px 10px;
   border-radius: 5px;
+  border: 0;
+}
+
+.topbar__input:active, .topbar__input:focus {
+    outline: none
+}
+
+.topbar__input::placeholder, .topbar__input {
+    font-size: 30px;
+    color: #fff;
+    font-weight: 400;
 }
 
 .exportBtn {
