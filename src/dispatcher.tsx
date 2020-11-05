@@ -18,6 +18,12 @@ function dispatch(fn: Function, payload: object | string | null = null): void {
 function init(state: AppType): void {
     globalState = state;
     renderApp(state);
+    window.addEventListener('keydown', (e) => {
+        if (e.key === 'z' && (e.metaKey || e.ctrlKey)) {
+            if (e.shiftKey) redo();
+            else undo();
+        }
+    })
 }
 
 function undo(): void {
