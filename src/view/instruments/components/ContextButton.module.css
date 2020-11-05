@@ -11,9 +11,18 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  border: 0;
 }
 
 .contextBtn:hover {
   transition: 0.3s;
   background-color: #e7e7e7;
+}
+
+.menu_showed {
+    display: block;
+}
+
+.menu_hidden {
+    display: none;
 }

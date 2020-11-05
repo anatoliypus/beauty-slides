@@ -68,7 +68,7 @@ export default function Topbar(props: TopbarProps) {
     return (
         <div className={`${styles.topbar} ${styles[bgClassName]}`}>
             <input ref={input} className={styles.topbar__input} />
-            <button className={styles.exportBtn}>Экспорт</button>
+            <button className={styles.exportBtn}>Экспорт PDF</button>
         </div>
     );
 }

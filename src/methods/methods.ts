@@ -17,7 +17,6 @@ import constructors from '../constructors/constructors';
 
 export function changeSlide(app: AppType, slideId: string): AppType {
     if (app.currSlideId === slideId) return app;
-    console.log(app.currSlideId, slideId);
     return {
         ...app,
         currSlideId: slideId,

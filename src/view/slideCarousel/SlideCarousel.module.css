@@ -21,13 +21,11 @@
 
 .slideCarouselItem {
   width: 80%;
-  height: 200px;
+  height: 150px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  box-sizing: border-box;
-  padding-bottom: 50px;
-  border-bottom: 2px solid #afafaf;
+  padding-bottom: 25px;
   margin-top: 50px;
 }
 

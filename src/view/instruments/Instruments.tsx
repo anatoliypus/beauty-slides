@@ -24,13 +24,35 @@ function redoButtonOnClick(): void {
     redo()
 }
 
+const fileBtnContextMenuItems = [
+    {
+        heading: 'Импорт',
+        callback: () => alert()
+    },
+    {
+        heading: 'Сохранить локально',
+        callback: () => alert()
+    }
+]
+
+const slideBtnContextMenuItems = [
+    {
+        heading: 'Залить цветом',
+        callback: () => alert()
+    },
+    {
+        heading: 'Пост. фоновое изобр.',
+        callback: () => alert()
+    }
+]
+
 export default function Instruments() {
   return (
     <div className={styles.instruments}>
       <Button onClick={addSlideButtonOnClick} imgUrl={ PlusIcon } />
-      <ContextButton heading='Файл' />
-      <ContextButton heading='Слайд' />
-      <ContextButton heading='Правка' />
+      <ContextButton heading='Файл' contextMenuItems={fileBtnContextMenuItems} />
+      <ContextButton heading='Слайд' contextMenuItems={slideBtnContextMenuItems} />
+      <ContextButton heading='Правка' contextMenuItems={[]} />
       <Button onClick={() => {}} imgUrl={ RectIcon } />
       <Button onClick={() => {}} imgUrl={ TriangIcon } />
       <Button onClick={() => {}} imgUrl={ CircleIcon } />
