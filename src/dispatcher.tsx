@@ -9,10 +9,13 @@ const undoStack: History = [];
 const redoStack: History = [];
 
 function dispatch(fn: Function, payload: object | string | null = null): void {
-    if (globalState) undoStack.push(cloneApp(globalState));
-    globalState = fn(globalState, payload);
-    if (globalState != null) renderApp(globalState);
-    else throw new Error('Trying to dispatch with empty state of app!');
+    const newState = fn(globalState, payload);
+    if (newState != globalState) {
+        if (globalState) undoStack.push(cloneApp(globalState));
+        globalState = fn(globalState, payload);
+        if (newState != null) renderApp(newState);
+        else throw new Error('Trying to dispatch with empty state of app!');
+    }
 }
 
 function init(state: AppType): void {
@@ -23,24 +26,24 @@ function init(state: AppType): void {
             if (e.shiftKey) redo();
             else undo();
         }
-    })
+    });
 }
 
 function undo(): void {
     if (undoStack.length && globalState) {
-        redoStack.push(cloneApp(globalState))
+        redoStack.push(cloneApp(globalState));
         globalState = undoStack[undoStack.length - 1];
         undoStack.splice(undoStack.length - 1);
-        renderApp(globalState)
+        renderApp(globalState);
     }
 }
 
 function redo(): void {
     if (redoStack.length && globalState) {
-        undoStack.push(cloneApp(globalState))
+        undoStack.push(cloneApp(globalState));
         globalState = redoStack[redoStack.length - 1];
         redoStack.splice(redoStack.length - 1);
-        renderApp(globalState)
+        renderApp(globalState);
     }
 }
 
@@ -53,4 +56,4 @@ function renderApp(state: AppType): void {
     );
 }
 
-export { init, dispatch, undo, redo }
+export { init, dispatch, undo, redo };

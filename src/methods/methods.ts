@@ -16,6 +16,8 @@ import constructors from '../constructors/constructors';
 // import deepFreeze from 'deep-freeze';
 
 export function changeSlide(app: AppType, slideId: string): AppType {
+    if (app.currSlideId === slideId) return app;
+    console.log(app.currSlideId, slideId);
     return {
         ...app,
         currSlideId: slideId,
