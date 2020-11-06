@@ -10,7 +10,7 @@ import PlusIcon from './img/plus.svg';
 import UndoIcon from './img/undo.svg';
 import RedoIcon from './img/redo.svg';
 import { addSlide } from '../../methods/methods';
-import { dispatch, undo, redo } from '../../dispatcher';
+import { dispatch, undo, redo, exportAppLocally } from '../../dispatcher';
 
 function addSlideButtonOnClick(): void {
     dispatch(addSlide)
@@ -24,6 +24,10 @@ function redoButtonOnClick(): void {
     redo()
 }
 
+function exportBtnOnClick(): void {
+    exportAppLocally()
+}
+
 const fileBtnContextMenuItems = [
     {
         heading: 'Импорт',
@@ -31,7 +35,7 @@ const fileBtnContextMenuItems = [
     },
     {
         heading: 'Сохранить локально',
-        callback: () => alert()
+        callback: exportBtnOnClick
     }
 ]
 

@@ -3,6 +3,7 @@ import { AppType, History } from './model/model';
 import ReactDOM from 'react-dom';
 import App from './App';
 import { cloneApp } from './methods/secondaryMethods';
+import { exportApp } from './methods/methods';
 
 let globalState: AppType | null = null;
 const undoStack: History = [];
@@ -53,4 +54,8 @@ function renderApp(state: AppType): void {
     );
 }
 
-export { init, dispatch, undo, redo }
+function exportAppLocally(): void {
+    if (globalState) exportApp(globalState);
+}
+
+export { init, dispatch, undo, redo, exportAppLocally }
