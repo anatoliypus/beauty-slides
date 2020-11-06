@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import styles from './Topbar.module.css';
-import { dispatch } from '../../dispatcher';
+import { dispatch, exportPDFApp } from '../../dispatcher';
 import { changePresentationName } from '../../methods/methods';
 
 interface TopbarProps {
@@ -68,7 +68,7 @@ export default function Topbar(props: TopbarProps) {
     return (
         <div className={`${styles.topbar} ${styles[bgClassName]}`}>
             <input ref={input} className={styles.topbar__input} />
-            <button className={styles.exportBtn}>Экспорт PDF</button>
+            <button className={styles.exportBtn} onClick={exportPDFApp}>Экспорт PDF</button>
         </div>
     );
 }

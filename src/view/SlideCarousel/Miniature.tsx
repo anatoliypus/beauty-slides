@@ -15,7 +15,6 @@ interface MiniatureProps {
  
 export default function Miniature(props: MiniatureProps) {
     function miniatureOnClick() {
-        console.log(1);
         dispatch(changeSlide, props.slide.id)
     }
     return (

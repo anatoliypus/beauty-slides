@@ -15,6 +15,7 @@ import {
 } from './secondaryMethods';
 import constructors from '../constructors/constructors';
 import { init } from '../dispatcher';
+import getObjects from '../view/SlideViewport/getObjects';
 
 // import deepFreeze from 'deep-freeze';
 
@@ -320,7 +321,7 @@ function getBase64(image: ImgObject): Promise<string> {
     });
 }
 
-export async function importApp() {
+export function importApp() {
     let input = document.createElement('input');
     input.style.display = 'none';
     input.type = 'file';
@@ -336,4 +337,8 @@ export async function importApp() {
     }
     document.body.append(input);
     input.click();
+}
+
+export function exportPDF(app: AppType) {
+    console.log(app);
 }

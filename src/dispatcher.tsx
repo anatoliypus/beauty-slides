@@ -3,7 +3,7 @@ import { AppType, History } from './model/model';
 import ReactDOM from 'react-dom';
 import App from './App';
 import { cloneApp } from './methods/secondaryMethods';
-import { exportApp } from './methods/methods';
+import { exportApp, exportPDF } from './methods/methods';
 
 let globalState: AppType | null = null;
 const undoStack: History = [];
@@ -56,6 +56,10 @@ function renderApp(state: AppType): void {
 
 function exportAppLocally(): void {
     if (globalState) exportApp(globalState);
+}
+
+export function exportPDFApp() {
+    if (globalState) exportPDF(globalState);
 }
 
 export { init, dispatch, undo, redo, exportAppLocally }
