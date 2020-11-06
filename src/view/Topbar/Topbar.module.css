@@ -1,0 +1,69 @@
+.topbar {
+  width: 100%;
+  border-bottom: 1px solid #afafaf;
+  height: 8%;
+  box-sizing: border-box;
+  padding: 0 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-size: 30%;
+  transition: 0.1s;
+}
+
+.topbar_background_1 {
+    background-image: url('./backgrounds/background-1.jpg');
+}
+
+.topbar_background_2 {
+    background-image: url('./backgrounds/background-2.jpg');
+}
+
+.topbar_background_3 {
+    background-image: url('./backgrounds/background-3.jpg');
+}
+
+.topbar_background_4 {
+    background-image: url('./backgrounds/background-4.jpg');
+}
+
+.topbar_background_5 {
+    background-image: url('./backgrounds/background-5.jpg');
+}
+
+.topbar__input {
+  background-color: #ffa4f3;
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: 0;
+}
+
+.topbar__input:active, .topbar__input:focus {
+    outline: none
+}
+
+.topbar__input::placeholder, .topbar__input {
+    font-size: 30px;
+    color: #fff;
+    font-weight: 400;
+}
+
+.exportBtn {
+  width: auto;
+  padding: 0 15px;
+  height: 40px;
+  border: 0;
+  background-color: #127197;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 700;
+  transition: 0.2s;
+}
+
+.exportBtn:hover {
+  background-color: #3a829e;
+  transition: 0.2s;
+  margin-bottom: 5px;
+}
+
