@@ -9,33 +9,21 @@ import TextIcon from './img/text.svg';
 import PlusIcon from './img/plus.svg';
 import UndoIcon from './img/undo.svg';
 import RedoIcon from './img/redo.svg';
-import { addSlide } from '../../methods/methods';
+import { addSlide, importApp } from '../../methods/methods';
 import { dispatch, undo, redo, exportAppLocally } from '../../dispatcher';
 
 function addSlideButtonOnClick(): void {
     dispatch(addSlide)
 }
 
-function undoButtonOnClick(): void {
-    undo()
-}
-
-function redoButtonOnClick(): void {
-    redo()
-}
-
-function exportBtnOnClick(): void {
-    exportAppLocally()
-}
-
 const fileBtnContextMenuItems = [
     {
         heading: 'Импорт',
-        callback: () => alert()
+        callback: importApp
     },
     {
         heading: 'Сохранить локально',
-        callback: exportBtnOnClick
+        callback: exportAppLocally
     }
 ]
 
@@ -61,8 +49,8 @@ export default function Instruments() {
       <Button onClick={() => {}} imgUrl={ TriangIcon } />
       <Button onClick={() => {}} imgUrl={ CircleIcon } />
       <Button onClick={() => {}} imgUrl={ TextIcon } />
-      <Button onClick={undoButtonOnClick} imgUrl={ UndoIcon } />
-      <Button onClick={redoButtonOnClick} imgUrl={ RedoIcon } />
+      <Button onClick={undo} imgUrl={ UndoIcon } />
+      <Button onClick={redo} imgUrl={ RedoIcon } />
     </div>
   )
 }

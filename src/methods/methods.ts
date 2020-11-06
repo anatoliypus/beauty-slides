@@ -14,7 +14,7 @@ import {
     cloneApp,
 } from './secondaryMethods';
 import constructors from '../constructors/constructors';
-import imageToBase64 from 'image-to-base64';
+import { init } from '../dispatcher';
 
 // import deepFreeze from 'deep-freeze';
 
@@ -268,7 +268,7 @@ export async function exportApp(app: AppType) {
 
     expApp.slides.forEach((slide, index) => {
         slide.objects.forEach((slideNode) => {
-            if (slideNode.type === 'img') {
+            if (slideNode.type === 'img' && slideNode.path.indexOf('.') !== -1) {
                 imgArr.push({ img: slideNode, slideId: index });
             }
         });
@@ -318,4 +318,22 @@ function getBase64(image: ImgObject): Promise<string> {
             resolve(uri);
         };
     });
+}
+
+export async function importApp() {
+    let input = document.createElement('input');
+    input.style.display = 'none';
+    input.type = 'file';
+    input.onchange = () => {
+        if (input.files) {
+            const file = input.files[0];
+            const reader = new FileReader();
+            reader.onload = () => {
+                if (typeof reader.result === 'string') init(JSON.parse(reader.result));
+            }
+            reader.readAsText(file);
+        }
+    }
+    document.body.append(input);
+    input.click();
 }
