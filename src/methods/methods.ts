@@ -16,7 +16,6 @@ import {
 import constructors from '../constructors/constructors';
 import { init } from '../dispatcher';
 import getObjects from '../view/SlideViewport/getObjects';
-
 // import deepFreeze from 'deep-freeze';
 
 export function changeSlide(app: AppType, slideId: string): AppType {

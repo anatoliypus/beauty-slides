@@ -9,7 +9,7 @@ import TextIcon from './img/text.svg';
 import PlusIcon from './img/plus.svg';
 import UndoIcon from './img/undo.svg';
 import RedoIcon from './img/redo.svg';
-import { addSlide, importApp, addFigure } from '../../methods/methods';
+import { addSlide, importApp, addFigure, addText } from '../../methods/methods';
 import { dispatch, undo, redo, exportAppLocally } from '../../dispatcher';
 
 function addSlideButtonOnClick(): void {
@@ -38,8 +38,20 @@ const slideBtnContextMenuItems = [
     }
 ]
 
-function addRectButtonClick() {
+function addRectangleToSlide(){
     dispatch(addFigure, 'rectangle');
+}
+
+function addTriangleToSlide(){
+    dispatch(addFigure, 'triangle');
+}
+
+function addCircleToSlide(){
+    dispatch(addFigure, 'circle');
+}
+
+function addTextToSlide(){
+    dispatch(addText);
 }
 
 export default function Instruments() {
@@ -49,10 +61,10 @@ export default function Instruments() {
       <ContextButton heading='Файл' contextMenuItems={fileBtnContextMenuItems} />
       <ContextButton heading='Слайд' contextMenuItems={slideBtnContextMenuItems} />
       <ContextButton heading='Правка' contextMenuItems={[]} />
-      <Button onClick={addRectButtonClick} imgUrl={ RectIcon } />
-      <Button onClick={() => {}} imgUrl={ TriangIcon } />
-      <Button onClick={() => {}} imgUrl={ CircleIcon } />
-      <Button onClick={() => {}} imgUrl={ TextIcon } />
+      <Button onClick={addRectangleToSlide} imgUrl={ RectIcon } />
+      <Button onClick={addTriangleToSlide} imgUrl={ TriangIcon } />
+      <Button onClick={addCircleToSlide} imgUrl={ CircleIcon } />
+      <Button onClick={addTextToSlide} imgUrl={ TextIcon } />
       <Button onClick={undo} imgUrl={ UndoIcon } />
       <Button onClick={redo} imgUrl={ RedoIcon } />
     </div>
