@@ -5,6 +5,8 @@ import ContextMenu, { MenuItem } from './ContextMenu';
 interface ComponentButtonProps {
     heading: string;
     contextMenuItems: Array<MenuItem>;
+    menuShown: boolean;
+    onclick: () => void;
 }
 
 export default function ContextButton(props: ComponentButtonProps) {
@@ -47,10 +49,10 @@ export default function ContextButton(props: ComponentButtonProps) {
 
     return (
         <>
-            <button ref={btn} className={styles.contextBtn}>
+            <button ref={btn} className={styles.contextBtn} onClick={props.onclick}>
                 <p>{props.heading}</p>
             </button>
-            <ContextMenu data={props.contextMenuItems} x={menuX} y={menuY} class={menuVisibility ? styles.menu_showed : styles.menu_hidden}/>
+            <ContextMenu shown={props.menuShown} data={props.contextMenuItems} x={menuX} y={menuY} />
         </>
     );
 }

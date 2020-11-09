@@ -18,7 +18,7 @@ export default function App(props: AppProps) {
     const slide = props.app.slides.find(
         (slide) => slide.id === props.app.currSlideId
     );
-    if (! slide) throw new Error('Initial slide fail');
+    if (!slide) throw new Error('Initial slide fail');
 
     return (
         <div className={styles.app}>

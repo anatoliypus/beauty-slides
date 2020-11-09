@@ -1,3 +1,7 @@
+:root {
+    --myFirstCSSVar: 50%;
+}
+
 body, html, .app {
   width: 100%;
   height: 100%;

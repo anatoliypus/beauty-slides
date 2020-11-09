@@ -12,3 +12,11 @@
     height: 30px;
     cursor: pointer;
 }
+
+.menu_showed {
+    display: block;
+}
+
+.menu_hidden {
+    display: none;
+}

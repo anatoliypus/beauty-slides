@@ -10,15 +10,23 @@ interface ContextMenuProps {
     data: Array<MenuItem>;
     x: string;
     y: string;
-    class: string;
+    shown: boolean;
 }
 
 export default function ContextMenu(props: ContextMenuProps) {
+    const visibilityClass = props.shown ? styles.menu_showed : styles.menu_hidden;
     return (
-        <div className={`${styles.menu} ${props.class}`} style={{top: props.y, left: props.x}}>
+        <div
+            className={`${styles.menu} ${visibilityClass}`}
+            style={{ top: props.y, left: props.x }}
+        >
             {props.data.map((item, index) => {
                 return (
-                    <div key={index} className={styles.menu__item} onClick={item.callback}>
+                    <div
+                        key={index}
+                        className={styles.menu__item}
+                        onClick={item.callback}
+                    >
                         <p>{item.heading}</p>
                     </div>
                 );

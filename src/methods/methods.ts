@@ -273,12 +273,14 @@ export async function exportApp(app: AppType) {
             }
         });
     });
-
-    for (let imgObj of imgArr)
-        await new Promise(async (resolve) => {
+    
+    const promises = imgArr.map((imgObj) => {
+        return new Promise(async (resolve) => {
             imgObj.img.path = await getBase64(imgObj.img);
             resolve();
-        });
+    })});
+
+    await Promise.all(promises);
 
     for (let imgObj of imgArr) {
         let newSlide = expApp.slides[imgObj.slideId];
