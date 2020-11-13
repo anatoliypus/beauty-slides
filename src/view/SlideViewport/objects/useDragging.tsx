@@ -14,11 +14,15 @@ export default function useDragging(el: any, x: number, y: number, kWidth: numbe
         _changeElementCords(data);
     };
 
+    React.useEffect(() => {
+        changeElementCords({x: x, y: y})
+    }, [x, y]);
+
     let initialCursorX: number;
     let initialCursorY: number;
 
     React.useLayoutEffect(() => {
-        if (el.current && (kWidth === 1 || kHeight === 1)) {
+        if (el.current) {
             el.current.style.top = elementCords.y / kHeight + 'px';
             el.current.style.left = elementCords.x / kWidth + 'px';
         }
@@ -42,6 +46,7 @@ export default function useDragging(el: any, x: number, y: number, kWidth: numbe
         };
         const elOnMouseDown = (e: MouseEvent) => {
             if (el.current) {
+                e.preventDefault();
                 initialCursorX = e.pageX;
                 initialCursorY = e.pageY;
                 window.addEventListener('mouseup', elOnMouseUp, { once: true });

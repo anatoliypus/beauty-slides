@@ -1,4 +1,5 @@
 import React from 'react';
+import useDragging from './useDragging';
 
 interface TriangProps {
     id: string;
@@ -7,12 +8,19 @@ interface TriangProps {
     height: string;
     kWidth: number;
     kHeight: number;
+    x: number;
+    y: number;
+    choosed: boolean;
     onclick: (e: React.MouseEvent<SVGSVGElement, MouseEvent>) => void;
 }
 
 export default function Triangle(props: TriangProps) {
+    const el = React.useRef<SVGSVGElement>(null);
+    useDragging(el, props.x, props.y, props.kWidth, props.kHeight, props.id, props.choosed);
+
     return (
         <svg
+            ref={el}
             style={props.style}
             key={props.id}
             width={(parseInt(props.width) + 5) / props.kWidth}

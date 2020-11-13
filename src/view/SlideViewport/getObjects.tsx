@@ -39,6 +39,11 @@ export default function getObjects(
                     id={node.id}
                     style={style}
                     data={node.data}
+                    kWidth={kWidth}
+                    kHeight={kHeight}
+                    x={node.positionTopLeft.x}
+                    y={node.positionTopLeft.y}
+                    choosed={node.id === selectedId}
                     onclick={(e: React.MouseEvent<HTMLElement>) => {
                         e.preventDefault();
                         dispatch(changeSelectedObject, node.id);
@@ -80,6 +85,9 @@ export default function getObjects(
                     height={node.height}
                     kWidth={kWidth}
                     kHeight={kHeight}
+                    x={node.positionTopLeft.x}
+                    y={node.positionTopLeft.y}
+                    choosed={node.id === selectedId}
                     onclick={(
                         e: React.MouseEvent<SVGSVGElement, MouseEvent>
                     ) => {
@@ -99,6 +107,9 @@ export default function getObjects(
                     height={node.height}
                     kWidth={kWidth}
                     kHeight={kHeight}
+                    x={node.positionTopLeft.x}
+                    y={node.positionTopLeft.y}
+                    choosed={node.id === selectedId}
                     onclick={(
                         e: React.MouseEvent<SVGSVGElement, MouseEvent>
                     ) => {
@@ -119,6 +130,11 @@ export default function getObjects(
                     key={index}
                     id={node.id}
                     path={node.path}
+                    kWidth={kWidth}
+                    kHeight={kHeight}
+                    x={node.positionTopLeft.x}
+                    y={node.positionTopLeft.y}
+                    choosed={node.id === selectedId}
                     style={styleForImg}
                     onclick={(e: React.MouseEvent<HTMLElement>) => {
                         e.preventDefault();

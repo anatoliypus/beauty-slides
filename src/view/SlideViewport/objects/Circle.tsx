@@ -1,6 +1,4 @@
 import React from 'react';
-import { dispatch } from '../../../dispatcher';
-import { moveItem } from '../../../methods/methods';
 import useDragging from './useDragging';
 
 interface CircleProps {
