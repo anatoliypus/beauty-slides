@@ -42,10 +42,11 @@ export default function ContextButton(props: ComponentButtonProps) {
 
     useEffect(() => {
         setMenuCords();
-    }, [
-        document.documentElement.clientHeight,
-        document.documentElement.clientWidth,
-    ]);
+        window.addEventListener('resize', setMenuCords);
+        return () => {
+            window.removeEventListener('resize', setMenuCords);
+        }
+    });
 
     return (
         <>

@@ -28,7 +28,7 @@ function createApp(settings: SettingsObject): AppType {
     slides: [slide],
     currSlideId: slide.id,
     settings: settings,
-    choosedObjectId: null,
+    choosedObjectId: '',
   }
 }
 

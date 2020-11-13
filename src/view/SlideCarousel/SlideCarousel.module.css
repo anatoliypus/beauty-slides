@@ -11,12 +11,12 @@
 }
 
 .slideMiniature {
-  width: calc(100% - 30px);
-  height: 100%;
+  width: calc(100% - 30px + 2px);
+  height: calc(100% + 2px);
   border: 2px solid #afafaf;
   border-radius: 10px;
   position: relative;
-  box-sizing: border-box;
+  /* box-sizing: border-box; */
 }
 
 .slideCarouselItem {

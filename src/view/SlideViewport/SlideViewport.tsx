@@ -2,11 +2,15 @@ import React from 'react';
 import styles from './SlideViewport.module.css';
 import { SlideType } from '../../model/model';
 import getObjects from './getObjects';
+import { dispatch } from '../../dispatcher';
+import { changeSelectedObject } from '../../methods/methods';
+
 
 interface SlideViewportProps {
     slide: SlideType;
     slideWidth: string;
     slideHeight: string;
+    selectedId: string;
 }
 
 export default function SlideViewport(props: SlideViewportProps) {
@@ -26,8 +30,13 @@ export default function SlideViewport(props: SlideViewportProps) {
             <div
                 className={styles.slide}
                 style={slideStyles2 ? slideStyles2 : slideStyles}
+                onClick={(event: React.MouseEvent<HTMLElement>) => {
+                    if (! event.isDefaultPrevented()) {
+                        dispatch(changeSelectedObject, '');
+                    }
+                }}
             >
-                {getObjects(props.slide, 1, 1)}
+                {getObjects(props.slide, 1, 1, props.selectedId)}
             </div>
         </div>
     );

@@ -9,26 +9,7 @@
   justify-content: space-between;
   background-size: 30%;
   transition: 0.1s;
-}
-
-.topbar_background_1 {
-    background-image: url('./backgrounds/background-1.jpg');
-}
-
-.topbar_background_2 {
-    background-image: url('./backgrounds/background-2.jpg');
-}
-
-.topbar_background_3 {
-    background-image: url('./backgrounds/background-3.jpg');
-}
-
-.topbar_background_4 {
-    background-image: url('./backgrounds/background-4.jpg');
-}
-
-.topbar_background_5 {
-    background-image: url('./backgrounds/background-5.jpg');
+  background-image: url('./background.jpg');
 }
 
 .topbar__input {

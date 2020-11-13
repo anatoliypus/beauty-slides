@@ -56,7 +56,7 @@ export type AppType = {
    currSlideId: string | null;
    slides: Array<SlideType>;
    settings: SettingsObject;
-   choosedObjectId: string | null;
+   choosedObjectId: string;
 };
 
 export type History = Array<AppType>;

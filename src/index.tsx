@@ -1,15 +1,16 @@
 import * as serviceWorker from './serviceWorker';
 import constructors from './constructors/constructors';
 import { init } from './dispatcher';
+import { setSlideBg, addText, moveItem, addFigure, addImage } from './methods/methods';
 
 const settings = constructors.createSettings('800px', '600px');
 let app = constructors.createApp(settings);
-// app = addText(app);
-// app = moveItem(app, {id: app.slides[0].objects[0].id, x: 400, y: 400});
-// app = addFigure(app, 'circle');
-// app = moveItem(app, {id: app.slides[0].objects[1].id, x: 300, y: 300});
-// app = addImage(app, '/background-1.jpg');
-// app = setSlideBg(app, 'deepskyblue');
+app = addText(app);
+app = moveItem(app, {id: app.slides[0].objects[0].id, x: 400, y: 500});
+app = addFigure(app, 'circle');
+app = moveItem(app, {id: app.slides[0].objects[1].id, x: 30, y: 400});
+app = addImage(app, '/background-1.jpg');
+app = setSlideBg(app, 'deepskyblue');
 
 init(app);
 

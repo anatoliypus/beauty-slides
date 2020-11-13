@@ -22,7 +22,7 @@ test('app creating test', () => {
 
     expect(app.name).toBe('Название презентации');
     expect(app.currSlideId).toBe(app.slides[0].id);
-    expect(app.choosedObjectId).toBeNull();
+    expect(app.choosedObjectId).toBe('');
     expect(app.slides[0]).toEqual(constructors.createSlide());
     expect(app.settings).toEqual(settings);
 });

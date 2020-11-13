@@ -9,7 +9,11 @@
 
 .slide {
     border-radius: 5px;
-    border: 1px solid #afafaf;
+    border: 1px solid #adadad;
     position: relative;
     transition: 0.1s;
+}
+
+.choosedObject {
+    border: 2px solid red;
 }

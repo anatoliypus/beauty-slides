@@ -46,6 +46,7 @@ function redo(): void {
 }
 
 function renderApp(state: AppType): void {
+    // console.log('rendered', globalState);
     ReactDOM.render(
         <React.StrictMode>
             <App app={state} />
@@ -55,6 +56,7 @@ function renderApp(state: AppType): void {
 }
 
 function exportAppLocally(): void {
+    console.log(globalState);
     if (globalState) exportApp(globalState);
 }
 

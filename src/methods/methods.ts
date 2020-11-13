@@ -26,6 +26,14 @@ export function changeSlide(app: AppType, slideId: string): AppType {
     };
 }
 
+export function changeSelectedObject(app: AppType, objId: string): AppType {
+    if (app.choosedObjectId === objId) return app;
+    return {
+        ...app,
+        choosedObjectId: objId,
+    };
+}
+
 interface resizeNodePayload {
     id: string;
     width: string;
@@ -176,7 +184,7 @@ export function deleteSlideObject(app: AppType, id: string): AppType {
 
     return {
         ...replaceSlide(app, newSlide),
-        choosedObjectId: null,
+        choosedObjectId: '',
     };
 }
 

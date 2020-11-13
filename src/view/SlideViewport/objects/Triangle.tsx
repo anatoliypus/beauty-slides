@@ -7,6 +7,7 @@ interface TriangProps {
     height: string;
     kWidth: number;
     kHeight: number;
+    onclick: (e: React.MouseEvent<SVGSVGElement, MouseEvent>) => void;
 }
 
 export default function Triangle(props: TriangProps) {
@@ -16,6 +17,9 @@ export default function Triangle(props: TriangProps) {
             key={props.id}
             width={(parseInt(props.width) + 5) / props.kWidth}
             height={(parseInt(props.height) + 5) / props.kHeight}
+            onClick={(e: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
+                props.onclick(e);
+            }}
         >
             <polygon
                 points={
