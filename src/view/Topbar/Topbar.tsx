@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import styles from './Topbar.module.css';
 import { dispatch, exportPDFApp } from '../../dispatcher';
 import { changePresentationName } from '../../methods/methods';
@@ -8,10 +8,10 @@ interface TopbarProps {
 }
 
 export default function Topbar(props: TopbarProps) {
-    const input = useRef<HTMLInputElement>(null);
-    const button = useRef<HTMLButtonElement>(null);
+    const input = React.useRef<HTMLInputElement>(null);
+    const button = React.useRef<HTMLButtonElement>(null);
 
-    useEffect(() => {
+    React.useEffect(() => {
         const processName = (name: string): string => {
             if (name.length > 20) {
                 let splittedName = name.split('');

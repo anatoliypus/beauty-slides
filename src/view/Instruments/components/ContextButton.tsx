@@ -36,7 +36,7 @@ export default function ContextButton(props: ComponentButtonProps) {
         }
 
         return () => {
-            if (btn.current) btn.current.removeEventListener('hover', showMenu);
+            if (btn.current) btn.current.removeEventListener('click', showMenu);
         };
     });
 

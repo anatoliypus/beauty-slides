@@ -1,0 +1,11 @@
+.input::placeholder {
+    color: #000;
+}
+
+.input:focus, .input:active {
+    outline: none;
+}
+
+.input {
+    background-color: transparent;
+}

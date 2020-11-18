@@ -15,8 +15,9 @@ import {
 } from './secondaryMethods';
 import constructors from '../constructors/constructors';
 import { init } from '../dispatcher';
-import getObjects from '../view/SlideViewport/getObjects';
-// import deepFreeze from 'deep-freeze';
+import { jsPDF } from 'jspdf';
+import { font } from './fonts/Piazzola';
+import Circle from '../view/SlideViewport/objects/Circle';
 
 export function changeSlide(app: AppType, slideId: string): AppType {
     if (app.currSlideId === slideId) return app;
@@ -128,6 +129,28 @@ export function changeTextSize(
     const newText: TextObject = {
         ...text,
         fontSize: payload.size,
+    };
+
+    const newSlide = replaceNode(slide, newText);
+
+    return replaceSlide(app, newSlide);
+}
+
+interface changeTextPayload {
+    id: string;
+    textData: string;
+}
+
+export function changeText(app: AppType, payload: changeTextPayload): AppType {
+    const slide: SlideType | undefined = getCurrentSlide(app);
+    if (!slide) return app;
+
+    const text: SlideNode | undefined = getSlideNode(slide, payload.id);
+    if (!text || text.type !== 'text') return app;
+
+    const newText: TextObject = {
+        ...text,
+        data: payload.textData,
     };
 
     const newSlide = replaceNode(slide, newText);
@@ -276,17 +299,21 @@ export async function exportApp(app: AppType) {
 
     expApp.slides.forEach((slide, index) => {
         slide.objects.forEach((slideNode) => {
-            if (slideNode.type === 'img' && slideNode.path.indexOf('.') !== -1) {
+            if (
+                slideNode.type === 'img' &&
+                slideNode.path.indexOf('.') !== -1
+            ) {
                 imgArr.push({ img: slideNode, slideId: index });
             }
         });
     });
-    
+
     const promises = imgArr.map((imgObj) => {
         return new Promise(async (resolve) => {
             imgObj.img.path = await getBase64(imgObj.img);
             resolve();
-    })});
+        });
+    });
 
     await Promise.all(promises);
 
@@ -339,15 +366,104 @@ export function importApp() {
             const file = input.files[0];
             const reader = new FileReader();
             reader.onload = () => {
-                if (typeof reader.result === 'string') init(JSON.parse(reader.result));
-            }
+                if (typeof reader.result === 'string')
+                    init(JSON.parse(reader.result));
+            };
             reader.readAsText(file);
         }
-    }
+    };
     document.body.append(input);
     input.click();
 }
 
-export function exportPDF(app: AppType) {
-    console.log(app);
+export async function exportPDF(app: AppType) {
+    const pageSize = [
+        parseInt(app.settings.slideWidth),
+        parseInt(app.settings.slideHeight),
+    ];
+    const doc = new jsPDF({
+        unit: 'pt',
+        orientation: 'l',
+        format: pageSize,
+    });
+    doc.addFileToVFS('Piazzolla.ttf', font);
+    doc.addFont('Piazzolla.ttf', '1', 'normal');
+    await setDocObjects(doc, app);
+    doc.save('test.pdf');
+}
+
+async function setDocObjects(doc: jsPDF, app: AppType) {
+    return new Promise(async (resolve) => {
+        let firstSlide = true;
+        for (let i = 0; i < app.slides.length; i++) {
+            if (!firstSlide) doc.addPage();
+            else firstSlide = false;
+            await setSlideObjects(doc, app.slides[i]);
+        }
+        resolve();
+    })
+}
+
+function setSlideObjects(doc: jsPDF, slide: SlideType) {
+    return new Promise(async (resolve) => {
+        const promises = slide.objects.map(async (node) => {
+            const promise = await setObject(doc, node);
+            return promise;
+        });
+        await Promise.all(promises);
+        resolve();
+    })
+}
+
+function setObject(doc: jsPDF, node: SlideNode) {
+    return new Promise(async(resolve) => {
+        if (node.type === 'text') {
+            doc.setFontSize(parseInt(node.fontSize));
+            doc.setFont('1', 'normal');
+            doc.text(node.data, node.positionTopLeft.x, node.positionTopLeft.y);
+        }
+        if (node.type === 'img') {
+            let base64 = node.path;
+            if (node.path.indexOf('.') !== -1) {
+                base64 = await getBase64(node);
+            }
+            doc.addImage(
+                base64,
+                'PNG',
+                node.positionTopLeft.x,
+                node.positionTopLeft.y,
+                parseInt(node.width),
+                parseInt(node.height)
+            );
+        }
+        if (node.type === 'figure' && node.figure === 'circle') {
+            doc.circle(
+                node.positionTopLeft.x + parseInt(node.width) / 2,
+                node.positionTopLeft.y + parseInt(node.width) / 2,
+                parseInt(node.width) / 2,
+                'S'
+            );
+        }
+        if (node.type === 'figure' && node.figure === 'rectangle') {
+            doc.rect(
+                node.positionTopLeft.x,
+                node.positionTopLeft.y,
+                parseInt(node.width),
+                parseInt(node.height),
+                'S'
+            );
+        }
+        if (node.type === 'figure' && node.figure === 'triangle') {
+            doc.triangle(
+                node.positionTopLeft.x + parseInt(node.width) / 2,
+                node.positionTopLeft.y,
+                node.positionTopLeft.x,
+                node.positionTopLeft.y + parseInt(node.height),
+                node.positionTopLeft.x + parseInt(node.width),
+                node.positionTopLeft.y + parseInt(node.height),
+                'S'
+            );
+        }
+        resolve();
+    });
 }

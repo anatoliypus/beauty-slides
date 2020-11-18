@@ -1,0 +1,59 @@
+.shadow {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.753);
+    z-index: 2;
+    top: 0;
+    left: 0;
+}
+
+.palette {
+    width: 500px;
+    height: 300px;
+    position: absolute;
+    z-index: 3;
+    background-color: #fff;
+    top: calc(50% - 150px);
+    left: calc(50% - 250px);
+    box-sizing: border-box;
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.palette__heading {
+    color: #000;
+    font-size: 23px;
+    font-weight: 400;
+}
+
+.palette__colorBlocksList {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.shadow_hidden, .palette_hidden {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.1s linear;
+}
+
+.shadow_visible, .palette_visible {
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 0.1s linear;
+}
+
+.palette__closeIcon {
+    position: relative;
+    top: 15px;
+    left: calc(100% - 35px);
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}

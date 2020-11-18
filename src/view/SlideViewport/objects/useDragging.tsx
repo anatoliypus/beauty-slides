@@ -30,11 +30,16 @@ export default function useDragging(el: any, x: number, y: number, kWidth: numbe
 
     React.useEffect(() => {
         const elOnMouseMove = (e: MouseEvent) => {
-            if (el.current)
-                changeElementCords({
-                    x: elementCords.x + e.pageX - initialCursorX,
-                    y: elementCords.y + e.pageY - initialCursorY,
-                });
+            if (el.current) {
+                const newX = elementCords.x + e.pageX - initialCursorX;
+                const newY = elementCords.y + e.pageY - initialCursorY;
+                if (newX > -100 && newY > -100 && newX < 800 && newY < 600) {
+                    changeElementCords({
+                        x: newX,
+                        y: newY,
+                    });
+                }
+            }
         };
         const elOnMouseUp = (e: MouseEvent) => {
             dispatch(moveItem, {
@@ -62,4 +67,6 @@ export default function useDragging(el: any, x: number, y: number, kWidth: numbe
                 el.current.removeEventListener('mousedown', elOnMouseDown);
         };
     });
+
+    return elementCords;
 }

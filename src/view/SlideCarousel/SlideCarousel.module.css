@@ -31,4 +31,5 @@
 
 .activeMiniature {
   border: 2px solid #fcacac;
+  overflow: hidden;
 }
