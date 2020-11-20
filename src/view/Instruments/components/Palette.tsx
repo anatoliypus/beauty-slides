@@ -19,51 +19,9 @@ export default function Palette(props: PaletteProps) {
                 }}/>
                 <p className={styles.palette__heading}>Цвет фона слайда</p>
                 <div className={styles.palette__colorBlocksList}>
-                    <ColorBlock changeVisibility={props.changeVisibility} color='green' />
-                    <ColorBlock changeVisibility={props.changeVisibility} color='yellow' />
-                    <ColorBlock changeVisibility={props.changeVisibility} color='blue' />
-                    <ColorBlock changeVisibility={props.changeVisibility} color='red' />
-                    <ColorBlock changeVisibility={props.changeVisibility} color='purple' />
-                    <ColorBlock changeVisibility={props.changeVisibility} color='brown' />
-                    <ColorBlock changeVisibility={props.changeVisibility} color='orange' />
-                    <ColorBlock changeVisibility={props.changeVisibility} color='pink' />
-                    <ColorBlock changeVisibility={props.changeVisibility} color='green' />
-                    <ColorBlock changeVisibility={props.changeVisibility} color='red' />
-                    <ColorBlock changeVisibility={props.changeVisibility} color='yellow' />
-                    <ColorBlock changeVisibility={props.changeVisibility} color='blue' />
-                    <ColorBlock changeVisibility={props.changeVisibility} color='purple' />
-                    <ColorBlock changeVisibility={props.changeVisibility} color='brown' />
-                    <ColorBlock changeVisibility={props.changeVisibility} color='orange' />
-                    <ColorBlock changeVisibility={props.changeVisibility} color='pink' />
-                    <ColorBlock changeVisibility={props.changeVisibility} color='green' />
-                    <ColorBlock changeVisibility={props.changeVisibility} color='red' />
-                    <ColorBlock changeVisibility={props.changeVisibility} color='yellow' />
-                    <ColorBlock changeVisibility={props.changeVisibility} color='blue' />
-                    <ColorBlock changeVisibility={props.changeVisibility} color='purple' />
-                    <ColorBlock changeVisibility={props.changeVisibility} color='brown' />
-                    <ColorBlock changeVisibility={props.changeVisibility} color='orange' />
-                    <ColorBlock changeVisibility={props.changeVisibility} color='pink' />
-                    <ColorBlock changeVisibility={props.changeVisibility} color='orange' />
-                    <ColorBlock changeVisibility={props.changeVisibility} color='pink' />
-                    <ColorBlock changeVisibility={props.changeVisibility} color='green' />
-                    <ColorBlock changeVisibility={props.changeVisibility} color='red' />
-                    <ColorBlock changeVisibility={props.changeVisibility} color='yellow' />
-                    <ColorBlock changeVisibility={props.changeVisibility} color='blue' />
-                    <ColorBlock changeVisibility={props.changeVisibility} color='purple' />
-                    <ColorBlock changeVisibility={props.changeVisibility} color='brown' />
-                    <ColorBlock changeVisibility={props.changeVisibility} color='orange' />
-                    <ColorBlock changeVisibility={props.changeVisibility} color='pink' />
-                    <ColorBlock changeVisibility={props.changeVisibility} color='orange' />
-                    <ColorBlock changeVisibility={props.changeVisibility} color='pink' />
-                    <ColorBlock changeVisibility={props.changeVisibility} color='green' />
-                    <ColorBlock changeVisibility={props.changeVisibility} color='red' />
-                    <ColorBlock changeVisibility={props.changeVisibility} color='yellow' />
-                    <ColorBlock changeVisibility={props.changeVisibility} color='blue' />
-                    <ColorBlock changeVisibility={props.changeVisibility} color='purple' />
-                    <ColorBlock changeVisibility={props.changeVisibility} color='brown' />
-                    <ColorBlock changeVisibility={props.changeVisibility} color='orange' />
-                    <ColorBlock changeVisibility={props.changeVisibility} color='pink' />
-                    <ColorBlock changeVisibility={props.changeVisibility} color='orange' />
+                    <ColorBlock changeVisibility={props.changeVisibility} color='#3f9263' />
+                    <ColorBlock changeVisibility={props.changeVisibility} color='#dbeb33' />
+                    <ColorBlock changeVisibility={props.changeVisibility} color='#3386eb' />
                 </div>
             </div>
         </>

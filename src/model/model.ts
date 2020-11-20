@@ -34,6 +34,8 @@ export type FigureType = 'circle' | 'rectangle' | 'triangle';
 export type FigureObject = SlideObject & {
    type: 'figure';
    figure: FigureType;
+   strokeColor: string;
+   background: null | string;
 }
 
 export type SlideNode = TextObject | ImgObject | FigureObject;

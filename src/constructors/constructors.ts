@@ -50,7 +50,9 @@ function createFigure(type: FigureType): FigureObject {
     figure: type,
     width: '150px',
     height: '150px',
-    positionTopLeft: {x: 20, y: 20}
+    positionTopLeft: {x: 20, y: 20},
+    strokeColor: '#000',
+    background: null
   }
 }
 

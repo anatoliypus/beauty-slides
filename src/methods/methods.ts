@@ -5,6 +5,7 @@ import {
     ImgObject,
     TextObject,
     FigureType,
+    SettingsObject
 } from '../model/model';
 import {
     getCurrentSlide,
@@ -17,7 +18,7 @@ import constructors from '../constructors/constructors';
 import { init } from '../dispatcher';
 import { jsPDF } from 'jspdf';
 import { font } from './fonts/Piazzola';
-import Circle from '../view/SlideViewport/objects/Circle';
+import hexRgb from 'hex-rgb';
 
 export function changeSlide(app: AppType, slideId: string): AppType {
     if (app.currSlideId === slideId) return app;
@@ -398,14 +399,22 @@ async function setDocObjects(doc: jsPDF, app: AppType) {
         for (let i = 0; i < app.slides.length; i++) {
             if (!firstSlide) doc.addPage();
             else firstSlide = false;
-            await setSlideObjects(doc, app.slides[i]);
+            await setSlideObjects(doc, app.slides[i], app.settings);
         }
         resolve();
     })
 }
 
-function setSlideObjects(doc: jsPDF, slide: SlideType) {
+function setSlideObjects(doc: jsPDF, slide: SlideType, settings: SettingsObject) {
     return new Promise(async (resolve) => {
+        if (slide.background) {
+            if (slide.background.indexOf('#') !== -1) {
+                const rgb = hexRgb(slide.background);
+                console.log(rgb);
+                doc.setFillColor(Number(rgb.red), Number(rgb.green), Number(rgb.blue));
+                doc.rect(0, 0, parseInt(settings.slideWidth), parseInt(settings.slideHeight), 'F');
+            }
+        }
         const promises = slide.objects.map(async (node) => {
             const promise = await setObject(doc, node);
             return promise;
@@ -436,12 +445,22 @@ function setObject(doc: jsPDF, node: SlideNode) {
                 parseInt(node.height)
             );
         }
+        let style: string = 'S';
+        if (node.type === 'figure') {
+            const rgb = hexRgb(node.strokeColor);
+            doc.setDrawColor(Number(rgb.red), Number(rgb.green), Number(rgb.blue));
+            if (node.background) {
+                const rgb = hexRgb(node.background);
+                doc.setFillColor(Number(rgb.red), Number(rgb.green), Number(rgb.blue));
+                style = 'FD';
+            }
+        }
         if (node.type === 'figure' && node.figure === 'circle') {
             doc.circle(
                 node.positionTopLeft.x + parseInt(node.width) / 2,
                 node.positionTopLeft.y + parseInt(node.width) / 2,
                 parseInt(node.width) / 2,
-                'S'
+                style
             );
         }
         if (node.type === 'figure' && node.figure === 'rectangle') {
@@ -450,7 +469,7 @@ function setObject(doc: jsPDF, node: SlideNode) {
                 node.positionTopLeft.y,
                 parseInt(node.width),
                 parseInt(node.height),
-                'S'
+                style
             );
         }
         if (node.type === 'figure' && node.figure === 'triangle') {
@@ -461,7 +480,7 @@ function setObject(doc: jsPDF, node: SlideNode) {
                 node.positionTopLeft.y + parseInt(node.height),
                 node.positionTopLeft.x + parseInt(node.width),
                 node.positionTopLeft.y + parseInt(node.height),
-                'S'
+                style
             );
         }
         resolve();
