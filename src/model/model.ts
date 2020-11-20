@@ -36,6 +36,7 @@ export type FigureObject = SlideObject & {
    figure: FigureType;
    strokeColor: string;
    background: null | string;
+   strokeWidth: number;
 }
 
 export type SlideNode = TextObject | ImgObject | FigureObject;
