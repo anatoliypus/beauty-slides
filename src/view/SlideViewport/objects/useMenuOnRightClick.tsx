@@ -2,17 +2,15 @@ import React from 'react';
 
 export default function useMenuOnRightClick(el: any) {
     const elOnClick = (e: MouseEvent) => {
-        if (e.which === 3) {
-            alert(1);
-        }
+        alert(1);
     }
     React.useEffect(() => {
         if (el.current) {
-            el.current.addEventListener('click', elOnClick);
+            el.current.addEventListener('dblclick', elOnClick);
         }
         return () => {
             if (el.current) {
-                el.removeEventListener('click', elOnClick);
+                el.current.removeEventListener('dblclick', elOnClick);
             }
         }
     })
