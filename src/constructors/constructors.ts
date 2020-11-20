@@ -52,7 +52,8 @@ function createFigure(type: FigureType): FigureObject {
     height: '150px',
     positionTopLeft: {x: 20, y: 20},
     strokeColor: '#000',
-    background: null
+    background: null,
+    strokeWidth: 2
   }
 }
 

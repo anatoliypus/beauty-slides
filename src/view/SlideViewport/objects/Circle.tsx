@@ -1,5 +1,6 @@
 import React from 'react';
 import useDragging from './useDragging';
+import useMenuOnRightClick from './useMenuOnRightClick';
 
 interface CircleProps {
     id: string;
@@ -18,6 +19,7 @@ export default function Circle(props: CircleProps) {
 
     const el = React.useRef<SVGSVGElement>(null);
     useDragging(el, props.x, props.y, props.kWidth, props.kHeight, props.id, props.choosed);
+    useMenuOnRightClick(el);
 
     return (
         <svg
