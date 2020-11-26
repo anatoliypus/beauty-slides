@@ -1,5 +1,5 @@
 import React from 'react';
-import useDragging from './useDragging';
+import useDragging from './useScaleResize';
 
 interface RectProps {
     id: string;
@@ -16,7 +16,7 @@ interface RectProps {
 
 export default function Rectangle(props: RectProps) {
     const el = React.useRef<SVGSVGElement>(null);
-    useDragging(el, props.x, props.y, props.kWidth, props.kHeight, props.id, props.choosed);
+    // useDragging(el, props.x, props.y, props.kWidth, props.kHeight, props.id, props.choosed);
 
     return (
         <svg

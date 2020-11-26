@@ -1,5 +1,5 @@
 import React from 'react';
-import useDragging from './useDragging';
+import useDragging from './useScaleResize';
 
 interface TriangProps {
     id: string;
@@ -16,7 +16,7 @@ interface TriangProps {
 
 export default function Triangle(props: TriangProps) {
     const el = React.useRef<SVGSVGElement>(null);
-    useDragging(el, props.x, props.y, props.kWidth, props.kHeight, props.id, props.choosed);
+    // useDragging(el, props.x, props.y, props.kWidth, props.kHeight, props.id, props.choosed);
 
     return (
         <svg

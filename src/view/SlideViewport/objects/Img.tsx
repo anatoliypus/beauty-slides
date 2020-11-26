@@ -1,5 +1,5 @@
 import React from 'react';
-import useDragging from './useDragging';
+import useDragging from './useScaleResize';
 
 interface ImgProps {
     id: string;
@@ -15,7 +15,7 @@ interface ImgProps {
 
 export default function Img(props: ImgProps) {
     const el = React.useRef<HTMLImageElement>(null);
-    useDragging(el, props.x, props.y, props.kWidth, props.kHeight, props.id, props.choosed);
+    // useDragging(el, props.x, props.y, props.kWidth, props.kHeight, props.id, props.choosed);
 
     return (
         <img ref={el} style={props.style} key={props.id} src={props.path} onClick={(e: React.MouseEvent<HTMLElement>) => {

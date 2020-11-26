@@ -5,7 +5,7 @@ import {
     ImgObject,
     TextObject,
     FigureType,
-    SettingsObject
+    SettingsObject,
 } from '../model/model';
 import {
     getCurrentSlide,
@@ -46,16 +46,17 @@ export function resizeNode(app: AppType, payload: resizeNodePayload): AppType {
     const slide: SlideType | undefined = getCurrentSlide(app);
     if (!slide) return app;
 
-    const img: SlideNode | undefined = getSlideNode(slide, payload.id);
-    if (!img || img.type !== 'img') return app;
+    const node: SlideNode | undefined = getSlideNode(slide, payload.id);
 
-    const newImg: ImgObject = {
-        ...img,
+    if (!node) return app;
+
+    const newNode: SlideNode = {
+        ...node,
         width: payload.width,
         height: payload.height,
     };
 
-    const newSlide = replaceNode(slide, newImg);
+    const newSlide = replaceNode(slide, newNode);
 
     return replaceSlide(app, newSlide);
 }
@@ -394,38 +395,46 @@ export async function exportPDF(app: AppType) {
 }
 
 async function setDocObjects(doc: jsPDF, app: AppType) {
-    return new Promise(async (resolve) => {
-        let firstSlide = true;
-        for (let i = 0; i < app.slides.length; i++) {
-            if (!firstSlide) doc.addPage();
-            else firstSlide = false;
-            await setSlideObjects(doc, app.slides[i], app.settings);
-        }
-        resolve();
-    })
+    let firstSlide = true;
+    for (let i = 0; i < app.slides.length; i++) {
+        if (!firstSlide) doc.addPage();
+        else firstSlide = false;
+        await setSlideObjects(doc, app.slides[i], app.settings);
+    }
 }
 
-function setSlideObjects(doc: jsPDF, slide: SlideType, settings: SettingsObject) {
-    return new Promise(async (resolve) => {
-        if (slide.background) {
-            if (slide.background.indexOf('#') !== -1) {
-                const rgb = hexRgb(slide.background);
-                console.log(rgb);
-                doc.setFillColor(Number(rgb.red), Number(rgb.green), Number(rgb.blue));
-                doc.rect(0, 0, parseInt(settings.slideWidth), parseInt(settings.slideHeight), 'F');
-            }
+async function setSlideObjects(
+    doc: jsPDF,
+    slide: SlideType,
+    settings: SettingsObject
+) {
+    if (slide.background) {
+        if (slide.background.indexOf('#') !== -1) {
+            const rgb = hexRgb(slide.background);
+            console.log(rgb);
+            doc.setFillColor(
+                Number(rgb.red),
+                Number(rgb.green),
+                Number(rgb.blue)
+            );
+            doc.rect(
+                0,
+                0,
+                parseInt(settings.slideWidth),
+                parseInt(settings.slideHeight),
+                'F'
+            );
         }
-        const promises = slide.objects.map(async (node) => {
-            const promise = await setObject(doc, node);
-            return promise;
-        });
-        await Promise.all(promises);
-        resolve();
-    })
+    }
+    const promises = slide.objects.map(async (node) => {
+        const promise = await setObject(doc, node);
+        return promise;
+    });
+    await Promise.all(promises);
 }
 
 function setObject(doc: jsPDF, node: SlideNode) {
-    return new Promise(async(resolve) => {
+    return new Promise(async (resolve) => {
         if (node.type === 'text') {
             doc.setFontSize(parseInt(node.fontSize));
             doc.setFont('1', 'normal');
@@ -448,10 +457,18 @@ function setObject(doc: jsPDF, node: SlideNode) {
         let style: string = 'S';
         if (node.type === 'figure') {
             const rgb = hexRgb(node.strokeColor);
-            doc.setDrawColor(Number(rgb.red), Number(rgb.green), Number(rgb.blue));
+            doc.setDrawColor(
+                Number(rgb.red),
+                Number(rgb.green),
+                Number(rgb.blue)
+            );
             if (node.background) {
                 const rgb = hexRgb(node.background);
-                doc.setFillColor(Number(rgb.red), Number(rgb.green), Number(rgb.blue));
+                doc.setFillColor(
+                    Number(rgb.red),
+                    Number(rgb.green),
+                    Number(rgb.blue)
+                );
                 style = 'FD';
             }
         }
