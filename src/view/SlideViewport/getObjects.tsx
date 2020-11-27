@@ -29,6 +29,9 @@ export default function getObjects(
         if (node.type === 'text') {
             style = {
                 ...style,
+                top: 'unset',
+                left: 'unset',
+                position: 'unset',
                 fontSize: parseInt(node.fontSize) / kHeight + 'px',
                 fontStyle: node.fontStyle,
                 fontWeight: node.fontWeight,
@@ -41,6 +44,8 @@ export default function getObjects(
                     data={node.data}
                     kWidth={kWidth}
                     kHeight={kHeight}
+                    width={node.width}
+                    height={node.height}
                     x={node.positionTopLeft.x}
                     y={node.positionTopLeft.y}
                     choosed={node.id === selectedId}
@@ -120,10 +125,13 @@ export default function getObjects(
             );
         }
         if (node.type === 'img') {
-            let styleForImg = {
+            style = {
                 ...style,
-                width: parseInt(node.width) / kWidth + 'px',
-                height: parseInt(node.height) / kHeight + 'px',
+                top: 'unset',
+                left: 'unset',
+                position: 'unset',
+                width: '100%',
+                height: '100%'
             };
             return (
                 <Img
@@ -132,10 +140,12 @@ export default function getObjects(
                     path={node.path}
                     kWidth={kWidth}
                     kHeight={kHeight}
+                    width={node.width}
+                    height={node.height}
                     x={node.positionTopLeft.x}
                     y={node.positionTopLeft.y}
                     choosed={node.id === selectedId}
-                    style={styleForImg}
+                    style={style}
                     onclick={(e: React.MouseEvent<HTMLElement>) => {
                         e.preventDefault();
                         dispatch(changeSelectedObject, node.id);

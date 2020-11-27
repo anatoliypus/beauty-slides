@@ -1,0 +1,12 @@
+.resizeIcon {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: -11px;
+    left: calc(100% + 2px);
+    cursor: nwse-resize;
+}
+
+.objectBlock {
+    position: relative;
+}
