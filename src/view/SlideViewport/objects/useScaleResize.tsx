@@ -1,7 +1,6 @@
 import React from 'react';
 import { dispatch } from '../../../dispatcher';
-import { moveItem } from '../../../methods/methods';
-import { resizeNode } from '../../../methods/methods';
+import { resizeNode, changeSelectedObject, moveItem } from '../../../methods/methods';
 
 interface UseDraggingProps {
     obj: any;
@@ -47,18 +46,20 @@ export default function useScaleResize(props: UseDraggingProps) {
     // setting dynamic cords and sizes
 
     React.useLayoutEffect(() => {
-        if (props.obj.current && props.kWidth === 1 && props.kHeight === 1) {
-            props.obj.current.style.width = elSize.width;
-            props.obj.current.style.height = elSize.height;
+        if (props.obj.current) {
+            props.obj.current.style.width = parseInt(elSize.width) / props.kWidth + 'px';
+            props.obj.current.style.height = parseInt(elSize.height) / props.kHeight + 'px';
         }
     });
 
     React.useLayoutEffect(() => {
-        if (props.obj.current && props.kWidth === 1 && props.kHeight === 1) {
+        if (props.obj.current) {
             props.obj.current.style.top = elementCords.y / props.kHeight + 'px';
             props.obj.current.style.left = elementCords.x / props.kWidth + 'px';
         }
     });
+
+    // setting props for miniatures
 
     React.useEffect(() => {
         changeElSize({
@@ -66,6 +67,13 @@ export default function useScaleResize(props: UseDraggingProps) {
             height: props.height
         })
     }, [props.width, props.height]);
+
+    React.useEffect(() => {
+        changeElementCords({
+            x: props.x,
+            y: props.y
+        })
+    }, [props.x, props.y]);
 
     // setting resize listener
 
@@ -173,5 +181,8 @@ export default function useScaleResize(props: UseDraggingProps) {
         };
     });
 
-    return mySizeStateRef;
+    return {
+        sizeRef: mySizeStateRef,
+        cordsRef: myCordsStateRef
+    }
 }

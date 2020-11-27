@@ -30,9 +30,18 @@ export function changeSlide(app: AppType, slideId: string): AppType {
 
 export function changeSelectedObject(app: AppType, objId: string): AppType {
     if (app.choosedObjectId === objId) return app;
+    const slide = getCurrentSlide(app);
+    if (! slide) return app;
+    const node = getSlideNode(slide, objId);
+    if (! node || objId === '') return {
+        ...app,
+        choosedObjectId: objId,
+        choosedObjectType: null
+    }
     return {
         ...app,
         choosedObjectId: objId,
+        choosedObjectType: node.type
     };
 }
 

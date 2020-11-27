@@ -7,9 +7,9 @@ const settings = constructors.createSettings('800px', '600px');
 let app = constructors.createApp(settings);
 // app = addText(app);
 // app = moveItem(app, {id: app.slides[0].objects[0].id, x: 400, y: 500});
-app = addFigure(app, 'circle');
+app = addFigure(app, 'rectangle');
 app = moveItem(app, {id: app.slides[0].objects[0].id, x: 30, y: 400});
-// app = addImage(app, '/background-1.jpg');
+app = addImage(app, '/background-1.jpg');
 // app = setSlideBg(app, '/background-1.jpg');
 
 init(app);

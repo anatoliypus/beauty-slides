@@ -19,7 +19,7 @@ export default function Circle(props: CircleProps) {
     const el = React.useRef<HTMLDivElement>(null);
     const resizeIconRef = React.useRef<SVGSVGElement>(null);
 
-    const sizeRef = useScaleResize({
+    const refs = useScaleResize({
         obj: el,
         resizeIcon: resizeIconRef,
         x: props.x,
@@ -32,6 +32,8 @@ export default function Circle(props: CircleProps) {
         height: props.height,
         squareResize: true
     });
+
+    const sizeRef = refs.sizeRef;
 
     return (
         <div ref={el} className={styles.objectBlock} style={props.style}>

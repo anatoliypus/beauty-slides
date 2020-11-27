@@ -23,7 +23,7 @@ export default function App(props: AppProps) {
     return (
         <div className={styles.app}>
             <Topbar presentationName={props.app.name} />
-            <Instruments />
+            <Instruments app={props.app} />
             <div className={styles.workingArea}>
                 <SlideCarousel
                     currSlideId={props.app.currSlideId}

@@ -1,5 +1,6 @@
 import React from 'react';
-import useDragging from './useScaleResize';
+import useScaleResize from './useScaleResize';
+import styles from './Object.module.css';
 
 interface TriangProps {
     id: string;
@@ -15,35 +16,68 @@ interface TriangProps {
 }
 
 export default function Triangle(props: TriangProps) {
-    const el = React.useRef<SVGSVGElement>(null);
-    // useDragging(el, props.x, props.y, props.kWidth, props.kHeight, props.id, props.choosed);
+    const el = React.useRef<HTMLDivElement>(null);
+    const resizeIconRef = React.useRef<SVGSVGElement>(null);
+
+    const refs = useScaleResize({
+        obj: el,
+        resizeIcon: resizeIconRef,
+        x: props.x,
+        y: props.y,
+        kWidth: props.kWidth,
+        kHeight: props.kHeight,
+        id: props.id,
+        choosed: props.choosed,
+        width: props.width,
+        height: props.height,
+        squareResize: false
+    });
+
+    const sizeRef = refs.sizeRef;
 
     return (
-        <svg
-            ref={el}
-            style={props.style}
-            key={props.id}
-            width={(parseInt(props.width) + 5) / props.kWidth}
-            height={(parseInt(props.height) + 5) / props.kHeight}
-            onClick={(e: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
-                props.onclick(e);
-            }}
-        >
-            <polygon
-                points={
-                    parseInt(props.width) / (2 * props.kWidth) +
-                    ',0 0,' +
-                    parseInt(props.height) / props.kHeight +
-                    ' ' +
-                    parseInt(props.width) / props.kWidth +
-                    ',' +
-                    parseInt(props.height) / props.kHeight
+        <div ref={el} className={styles.objectBlock} style={props.style}>
+            <svg
+                ref={resizeIconRef}
+                className={styles.resizeIcon}
+                width={11}
+                height={11}
+                style={
+                    props.choosed ? { display: 'block' } : { display: 'none' }
                 }
-                width={parseInt(props.width) / props.kWidth}
-                height={parseInt(props.height) / props.kHeight}
+            >
+                <circle
+                    cx={5.5}
+                    cy={5.5}
+                    stroke="#878787"
+                    r={5}
+                    fill="#878787"
+                ></circle>
+            </svg>
+            <svg
+                key={props.id}
+                width={(parseInt(sizeRef.current.width) + 5) / props.kWidth}
+                height={(parseInt(sizeRef.current.height) + 5) / props.kHeight}
+                onClick={(e: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
+                    props.onclick(e);
+                }}
+            >
+                <polygon
+                points={
+                    parseInt(sizeRef.current.width) / (2 * props.kWidth) +
+                    ',0 0,' +
+                    parseInt(sizeRef.current.height) / props.kHeight +
+                    ' ' +
+                    parseInt(sizeRef.current.width) / props.kWidth +
+                    ',' +
+                    parseInt(sizeRef.current.height) / props.kHeight
+                }
+                width={parseInt(sizeRef.current.width) / props.kWidth}
+                height={parseInt(sizeRef.current.height) / props.kHeight}
                 stroke="black"
                 fill="transparent"
             ></polygon>
-        </svg>
+            </svg>
+        </div>
     );
 }

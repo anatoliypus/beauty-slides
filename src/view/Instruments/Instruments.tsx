@@ -20,8 +20,14 @@ import {
     addCircleToSlide,
     addTextToSlide,
 } from './contextsButtonDeclaration';
+import { AppType } from '../../model/model';
+import ObjectsMenu from './components/ObjectsMenu';
 
-export default function Instruments() {
+interface InstrumentsProps {
+    app: AppType;
+}
+
+export default function Instruments(props: InstrumentsProps) {
     const defaultState: any = {};
     contextBtns.forEach((item) => {
         defaultState[item.heading] = false;
@@ -30,12 +36,9 @@ export default function Instruments() {
         defaultState
     );
     const [isPaletteVisible, changePaletteVisibility] = React.useState(false);
-    React.useEffect(() => {
-        
-    });
+
     return (
         <>
-
             <div className={styles.instruments}>
                 <ImgButton onClick={addSlideButtonOnClick} imgUrl={PlusIcon} />
                 {contextBtns.map((item, index) => {
@@ -48,24 +51,34 @@ export default function Instruments() {
                             onclick={() => {
                                 const newState = { ...contextMenuState };
                                 for (let key in newState)
-                                    if (key !== item.heading) newState[key] = false;
-                                newState[item.heading] = !newState[item.heading];
+                                    if (key !== item.heading)
+                                        newState[key] = false;
+                                newState[item.heading] = !newState[
+                                    item.heading
+                                ];
                                 changeContextMenuState(newState);
                             }}
                         />
                     );
                 })}
-                <TextButton heading='Залить слайд цветом' onClick={() => {
-                    changePaletteVisibility(true);
-                }}/>
+                <TextButton
+                    heading="Залить слайд цветом"
+                    onClick={() => {
+                        changePaletteVisibility(true);
+                    }}
+                />
                 <ImgButton onClick={addRectangleToSlide} imgUrl={RectIcon} />
                 <ImgButton onClick={addTriangleToSlide} imgUrl={TriangIcon} />
                 <ImgButton onClick={addCircleToSlide} imgUrl={CircleIcon} />
                 <ImgButton onClick={addTextToSlide} imgUrl={TextIcon} />
                 <ImgButton onClick={undo} imgUrl={UndoIcon} />
                 <ImgButton onClick={redo} imgUrl={RedoIcon} />
+                <ObjectsMenu app={props.app} />
             </div>
-            <Palette visibility={isPaletteVisible} changeVisibility={changePaletteVisibility}/>
+            <Palette
+                visibility={isPaletteVisible}
+                changeVisibility={changePaletteVisibility}
+            />
         </>
     );
 }
