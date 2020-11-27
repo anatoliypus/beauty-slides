@@ -5,7 +5,8 @@ import {
     ImgObject,
     TextObject,
     FigureType,
-    SettingsObject,
+    FigureObject,
+    SettingsObject
 } from '../model/model';
 import {
     getCurrentSlide,
@@ -43,6 +44,64 @@ export function changeSelectedObject(app: AppType, objId: string): AppType {
         choosedObjectId: objId,
         choosedObjectType: node.type
     };
+}
+
+interface figurePayload {
+    id: string;
+    strokeWidth: number;
+    background: string;
+    strokeColor: string;
+}
+
+export function strokeResize(app: AppType, payload: figurePayload, newWidth: number): AppType {
+    const slide: SlideType | undefined = getCurrentSlide(app);
+    if (!slide) return app;
+
+    const figure: SlideNode | undefined = getSlideNode(slide, payload.id);
+    if (!figure|| figure.type !== 'figure') return app;
+
+    const newfigure: FigureObject = {
+        ...figure,
+        strokeWidth: newWidth,
+    };
+
+    const newSlide = replaceNode(slide, newfigure);
+
+    return replaceSlide(app, newSlide);
+}
+
+export function strokeColorSet(app: AppType, payload: figurePayload, newColor: string): AppType {
+    const slide: SlideType | undefined = getCurrentSlide(app);
+    if (!slide) return app;
+
+    const figure: SlideNode | undefined = getSlideNode(slide, payload.id);
+    if (!figure|| figure.type !== 'figure') return app;
+
+    const newfigure: FigureObject = {
+        ...figure,
+        strokeColor: newColor,
+    };
+
+    const newSlide = replaceNode(slide, newfigure);
+
+    return replaceSlide(app, newSlide);
+}
+
+export function figureBackgroundSet(app: AppType, payload: figurePayload, newColor: string): AppType {
+    const slide: SlideType | undefined = getCurrentSlide(app);
+    if (!slide) return app;
+
+    const figure: SlideNode | undefined = getSlideNode(slide, payload.id);
+    if (!figure|| figure.type !== 'figure') return app;
+
+    const newfigure: FigureObject = {
+        ...figure,
+        background: newColor,
+    };
+
+    const newSlide = replaceNode(slide, newfigure);
+
+    return replaceSlide(app, newSlide);
 }
 
 interface resizeNodePayload {
