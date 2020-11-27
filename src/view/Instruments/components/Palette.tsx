@@ -6,6 +6,7 @@ import ColorBlock from './ColorBlock';
 interface PaletteProps {
     visibility: boolean;
     changeVisibility: React.Dispatch<React.SetStateAction<boolean>>;
+    type: 'slide' | 'textColor' | 'strokeColor' | 'figureBG';
 }
 
 export default function Palette(props: PaletteProps) {
@@ -17,11 +18,11 @@ export default function Palette(props: PaletteProps) {
                 <img className={styles.palette__closeIcon} src={closeIcon} alt="close" onClick={function() {
                     props.changeVisibility(false);
                 }}/>
-                <p className={styles.palette__heading}>Цвет фона слайда</p>
+                <p className={styles.palette__heading}>Выбери цвет!</p>
                 <div className={styles.palette__colorBlocksList}>
-                    <ColorBlock changeVisibility={props.changeVisibility} color='#3f9263' />
-                    <ColorBlock changeVisibility={props.changeVisibility} color='#dbeb33' />
-                    <ColorBlock changeVisibility={props.changeVisibility} color='#3386eb' />
+                    <ColorBlock type={props.type} changeVisibility={props.changeVisibility} color='#3f9263' />
+                    <ColorBlock type={props.type} changeVisibility={props.changeVisibility} color='#dbeb33' />
+                    <ColorBlock type={props.type} changeVisibility={props.changeVisibility} color='#3386eb' />
                 </div>
             </div>
         </>

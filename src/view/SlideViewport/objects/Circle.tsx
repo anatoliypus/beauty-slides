@@ -3,6 +3,7 @@ import useScaleResize from './useScaleResize';
 import styles from './Object.module.css';
 
 interface CircleProps {
+    strokeWidth: number;
     id: string;
     style: React.CSSProperties;
     width: string;
@@ -55,6 +56,7 @@ export default function Circle(props: CircleProps) {
                 }}
             >
                 <circle
+                    strokeWidth={props.strokeWidth}
                     cx={(parseInt(sizeRef.current.width) + 2.5) / (2 * props.kHeight)}
                     cy={(parseInt(sizeRef.current.height) + 2.5) / (2 * props.kHeight)}
                     stroke="black"

@@ -3,6 +3,7 @@ import useScaleResize from './useScaleResize';
 import styles from './Object.module.css';
 
 interface RectProps {
+    strokeWidth: number;
     id: string;
     style: React.CSSProperties;
     width: string;
@@ -63,6 +64,7 @@ export default function Rectangle(props: RectProps) {
                 }}
             >
                 <rect
+                    strokeWidth={props.strokeWidth}
                     width={parseInt(sizeRef.current.width) / props.kWidth}
                     height={parseInt(sizeRef.current.height) / props.kHeight}
                     x="1"

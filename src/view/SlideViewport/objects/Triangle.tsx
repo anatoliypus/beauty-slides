@@ -3,6 +3,7 @@ import useScaleResize from './useScaleResize';
 import styles from './Object.module.css';
 
 interface TriangProps {
+    strokeWidth: number;
     id: string;
     style: React.CSSProperties;
     width: string;
@@ -75,6 +76,7 @@ export default function Triangle(props: TriangProps) {
                 width={parseInt(sizeRef.current.width) / props.kWidth}
                 height={parseInt(sizeRef.current.height) / props.kHeight}
                 stroke="black"
+                strokeWidth={props.strokeWidth}
                 fill="transparent"
             ></polygon>
             </svg>

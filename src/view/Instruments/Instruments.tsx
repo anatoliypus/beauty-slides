@@ -78,6 +78,7 @@ export default function Instruments(props: InstrumentsProps) {
             <Palette
                 visibility={isPaletteVisible}
                 changeVisibility={changePaletteVisibility}
+                type={'slide'}
             />
         </>
     );

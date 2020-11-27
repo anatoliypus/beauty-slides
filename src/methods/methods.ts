@@ -53,11 +53,11 @@ interface figurePayload {
     strokeColor: string;
 }
 
-export function strokeResize(app: AppType, payload: figurePayload, newWidth: number): AppType {
+export function strokeResize(app: AppType, newWidth: number): AppType {
     const slide: SlideType | undefined = getCurrentSlide(app);
     if (!slide) return app;
 
-    const figure: SlideNode | undefined = getSlideNode(slide, payload.id);
+    const figure: SlideNode | undefined = getSlideNode(slide, app.choosedObjectId);
     if (!figure|| figure.type !== 'figure') return app;
 
     const newfigure: FigureObject = {
@@ -181,24 +181,39 @@ export function toggleUnderlinedText(app: AppType, id: string): AppType {
     return replaceSlide(app, newSlide);
 }
 
-interface changeTextSizePayload {
-    id: string;
-    size: string;
-}
-
 export function changeTextSize(
     app: AppType,
-    payload: changeTextSizePayload
+    size: string
 ): AppType {
     const slide: SlideType | undefined = getCurrentSlide(app);
     if (!slide) return app;
 
-    const text: SlideNode | undefined = getSlideNode(slide, payload.id);
+    const text: SlideNode | undefined = getSlideNode(slide, app.choosedObjectId);
     if (!text || text.type !== 'text') return app;
 
     const newText: TextObject = {
         ...text,
-        fontSize: payload.size,
+        fontSize: size,
+    };
+
+    const newSlide = replaceNode(slide, newText);
+
+    return replaceSlide(app, newSlide);
+}
+
+
+export function changeTextColor(
+    app: AppType,
+    color: string
+): AppType {
+    const slide: SlideType | undefined = getCurrentSlide(app);
+    if (!slide) return app;
+
+    const text: SlideNode | undefined = getSlideNode(slide, app.choosedObjectId);
+    if (!text || text.type !== 'text') return app;
+    const newText: TextObject = {
+        ...text,
+        color: color,
     };
 
     const newSlide = replaceNode(slide, newText);

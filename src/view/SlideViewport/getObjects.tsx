@@ -35,6 +35,7 @@ export default function getObjects(
                 fontSize: parseInt(node.fontSize) / kHeight + 'px',
                 fontStyle: node.fontStyle,
                 fontWeight: node.fontWeight,
+                color: node.color
             };
             return (
                 <Text
@@ -60,6 +61,7 @@ export default function getObjects(
         if (node.type === 'figure' && node.figure === 'circle') {
             return (
                 <Circle
+                    strokeWidth={node.strokeWidth}
                     key={index}
                     id={node.id}
                     style={style}
@@ -83,6 +85,7 @@ export default function getObjects(
         if (node.type === 'figure' && node.figure === 'rectangle') {
             return (
                 <Rectangle
+                    strokeWidth={node.strokeWidth}
                     key={index}
                     id={node.id}
                     style={style}
@@ -105,6 +108,7 @@ export default function getObjects(
         if (node.type === 'figure' && node.figure === 'triangle') {
             return (
                 <Triangle
+                    strokeWidth={node.strokeWidth}
                     key={index}
                     id={node.id}
                     style={style}

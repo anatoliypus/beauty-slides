@@ -54,7 +54,7 @@ function createFigure(type: FigureType): FigureObject {
     positionTopLeft: {x: 20, y: 20},
     strokeColor: '#000',
     background: null,
-    strokeWidth: 2
+    strokeWidth: 1
   }
 }
 
@@ -62,13 +62,13 @@ function createText(): TextObject {
   return {
     id: constructors.createId(),
     type: 'text',
-    width: '100px',
+    width: '300px',
     height: '50px',
     positionTopLeft: {x: 20, y: 20},
     fontStyle: 'unset',
     fontDecoration: 'unset',
     fontFamily: 'Open Sans',
-    fontSize: '30px',
+    fontSize: '35px',
     color: '#000',
     data: 'Введите текст',
     fontWeight: 400,

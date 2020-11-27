@@ -1,0 +1,31 @@
+.changeBtn {
+    width: auto;
+    height: auto;
+    padding: 5px;
+    background-color: transparent;
+    border: 1px solid #000;
+    border-radius: 5px;
+}
+
+.objectsMenu {
+    margin-left: 40px;
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.objectsMenuNode {
+    margin-right: 30px;
+}
+
+.icon {
+    width: 25px;
+    height: 25px;
+    margin-right: 10px;
+}
+
+.label {
+    font-size: 15px;
+    color: #000;
+    margin-right: 10px;
+}

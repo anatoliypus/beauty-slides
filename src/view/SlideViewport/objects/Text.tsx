@@ -74,6 +74,7 @@ export default function Text(props: TextProps) {
         if (el.current) {
             el.current.addEventListener('click', firstClick);
             el.current.addEventListener('dblclick', secondClick);
+            el.current.value = data;
         }
 
         return () => {
@@ -106,7 +107,7 @@ export default function Text(props: TextProps) {
                     fill="#878787"
                 ></circle>
             </svg>
-            <input ref={el} className={textStyles.input} placeholder={props.data} key={props.id} style={props.style} onClick={(e: React.MouseEvent<HTMLElement>) => {
+            <input ref={el} className={textStyles.input} key={props.id} style={props.style} onClick={(e: React.MouseEvent<HTMLElement>) => {
             props.onclick(e);
         }} />
         </div>
