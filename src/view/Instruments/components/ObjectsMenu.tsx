@@ -42,7 +42,8 @@ export default function ObjectsMenu(props: FigureMenuProps) {
         }
     }
 
-    const [isPaletteVisible, changePaletteVisibility] = React.useState(false);
+    const [isTextColorPaletteVisible, changeTextColorPaletteVisibility] = React.useState(false);
+    const [isFigureBgPaletteVisible, changeFigureBgPaletteVisibility] = React.useState(false);
 
     const changeFontSize = React.useRef<HTMLSelectElement>(null);
     const changeStrokeWidth = React.useRef<HTMLSelectElement>(null);
@@ -100,16 +101,30 @@ export default function ObjectsMenu(props: FigureMenuProps) {
                     style={textStyle}
                     className={`${styles.changeBtn} ${styles.objectsMenuNode}`}
                     onClick={() => {
-                        changePaletteVisibility(true);
+                        changeTextColorPaletteVisibility(true);
                     }}
                 >
                     Цвет текста
                 </button>
+                <button
+                    style={figureStyle}
+                    className={`${styles.changeBtn} ${styles.objectsMenuNode}`}
+                    onClick={() => {
+                        changeFigureBgPaletteVisibility(true);
+                    }}
+                >
+                    Заливка фигуры цветом
+                </button>
             </div>
             <Palette
-                visibility={isPaletteVisible}
-                changeVisibility={changePaletteVisibility}
+                visibility={isTextColorPaletteVisible}
+                changeVisibility={changeTextColorPaletteVisibility}
                 type={'textColor'}
+            />
+            <Palette
+                visibility={isFigureBgPaletteVisible}
+                changeVisibility={changeFigureBgPaletteVisibility}
+                type={'figureBG'}
             />
         </>
     );

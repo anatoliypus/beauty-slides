@@ -10,6 +10,7 @@ interface CircleProps {
     height: string;
     kWidth: number;
     kHeight: number;
+    bgColor: string | null;
     x: number;
     y: number;
     choosed: boolean;
@@ -56,12 +57,12 @@ export default function Circle(props: CircleProps) {
                 }}
             >
                 <circle
-                    strokeWidth={props.strokeWidth}
+                    strokeWidth={props.strokeWidth / props.kWidth}
                     cx={(parseInt(sizeRef.current.width) + 2.5) / (2 * props.kHeight)}
                     cy={(parseInt(sizeRef.current.height) + 2.5) / (2 * props.kHeight)}
                     stroke="black"
                     r={parseInt(sizeRef.current.width) / (2 * props.kHeight)}
-                    fill="transparent"
+                    fill={props.bgColor ? props.bgColor : "transparent"}
                 ></circle>
             </svg>
         </div>

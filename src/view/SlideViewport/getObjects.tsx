@@ -65,6 +65,7 @@ export default function getObjects(
                     key={index}
                     id={node.id}
                     style={style}
+                    bgColor={node.background}
                     width={node.width}
                     height={node.height}
                     kWidth={kWidth}
@@ -89,6 +90,7 @@ export default function getObjects(
                     key={index}
                     id={node.id}
                     style={style}
+                    bgColor={node.background}
                     width={node.width}
                     height={node.height}
                     kWidth={kWidth}
@@ -116,6 +118,7 @@ export default function getObjects(
                     height={node.height}
                     kWidth={kWidth}
                     kHeight={kHeight}
+                    bgColor={node.background}
                     x={node.positionTopLeft.x}
                     y={node.positionTopLeft.y}
                     choosed={node.id === selectedId}

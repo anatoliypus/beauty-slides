@@ -10,6 +10,7 @@ interface RectProps {
     height: string;
     kWidth: number;
     kHeight: number;
+    bgColor: string | null;
     x: number;
     y: number;
     choosed: boolean;
@@ -64,13 +65,13 @@ export default function Rectangle(props: RectProps) {
                 }}
             >
                 <rect
-                    strokeWidth={props.strokeWidth}
+                    strokeWidth={props.strokeWidth / props.kWidth}
                     width={parseInt(sizeRef.current.width) / props.kWidth}
                     height={parseInt(sizeRef.current.height) / props.kHeight}
                     x="1"
                     y="1"
                     stroke="black"
-                    fill="transparent"
+                    fill={props.bgColor ? props.bgColor : "transparent"}
                 ></rect>
             </svg>
         </div>

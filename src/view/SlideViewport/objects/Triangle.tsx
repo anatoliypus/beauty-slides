@@ -10,6 +10,7 @@ interface TriangProps {
     height: string;
     kWidth: number;
     kHeight: number;
+    bgColor: string | null;
     x: number;
     y: number;
     choosed: boolean;
@@ -76,8 +77,8 @@ export default function Triangle(props: TriangProps) {
                 width={parseInt(sizeRef.current.width) / props.kWidth}
                 height={parseInt(sizeRef.current.height) / props.kHeight}
                 stroke="black"
-                strokeWidth={props.strokeWidth}
-                fill="transparent"
+                strokeWidth={props.strokeWidth / props.kWidth}
+                fill={props.bgColor ? props.bgColor : "transparent"}
             ></polygon>
             </svg>
         </div>
