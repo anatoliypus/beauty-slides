@@ -41,7 +41,7 @@ export default function Circle(props: CircleProps) {
     const height = (parseInt(sizeRef.current.height) + props.strokeWidth * 2) / props.kHeight;
 
     return (
-        <div ref={el} className={styles.objectBlock} style={props.style}>
+        <div ref={el} className={styles.paddedObjectBlock} style={props.style}>
             <svg ref={resizeIconRef} className={styles.resizeIcon} width={11} height={11} style={props.choosed ? {display: 'block'} : {display: 'none'}}>
                 <circle
                     cx={5.5}

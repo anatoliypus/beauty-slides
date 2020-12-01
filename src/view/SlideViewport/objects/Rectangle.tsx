@@ -40,7 +40,7 @@ export default function Rectangle(props: RectProps) {
     const width = (parseInt(sizeRef.current.width) + props.strokeWidth * 2) / props.kWidth;
     const height = (parseInt(sizeRef.current.height) + props.strokeWidth * 2) / props.kHeight;
     return (
-        <div ref={el} className={styles.objectBlock} style={props.style}>
+        <div ref={el} className={styles.paddedObjectBlock} style={props.style}>
             <svg
                 ref={resizeIconRef}
                 className={styles.resizeIcon}

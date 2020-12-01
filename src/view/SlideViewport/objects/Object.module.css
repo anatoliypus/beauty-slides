@@ -7,8 +7,12 @@
     cursor: nwse-resize;
 }
 
-.objectBlock {
+.paddedObjectBlock {
     position: absolute;
     padding: 15px;
     margin: -15px;
+}
+
+.objectBlock {
+    position: absolute;
 }
