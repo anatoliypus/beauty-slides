@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './ColorBlock.module.css';
 import { dispatch } from '../../../dispatcher';
-import { setSlideBg, changeTextColor, figureBackgroundSet } from '../../../methods/methods';
+import { setSlideBg, changeTextColor, figureBackgroundSet, strokeColorSet } from '../../../methods/methods';
 
 interface ColorBlockProps {
     color: string;
@@ -18,6 +18,8 @@ export default function ColorBlock(props: ColorBlockProps) {
                 dispatch(changeTextColor, props.color)
             } else if (props.type === 'figureBG') {
                 dispatch(figureBackgroundSet, props.color)
+            } else if (props.type === 'strokeColor') {
+                dispatch(strokeColorSet, props.color)
             }
             props.changeVisibility(false);
 

@@ -9,7 +9,7 @@ let globalState: AppType | null = null;
 const undoStack: History = [];
 const redoStack: History = [];
 
-function dispatch(fn: Function, payload: object | string | null = null): void {
+function dispatch(fn: Function, payload: object | string | null | number = null): void {
     if (globalState) undoStack.push(cloneApp(globalState));
     globalState = fn(globalState, payload);
     if (globalState != null) renderApp(globalState);

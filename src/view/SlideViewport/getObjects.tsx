@@ -15,6 +15,12 @@ export default function getObjects(
     selectedId: string | null
 ) {
     return slide.objects.map((node, index) => {
+        const elOnClick = (e: React.MouseEvent<HTMLElement | SVGSVGElement>) => {
+            e.preventDefault();
+            if (kWidth === 1 && kHeight === 1) {
+                dispatch(changeSelectedObject, node.id);
+            }
+        }
         let style = {
             position: 'absolute',
             top: node.positionTopLeft.y / kHeight + 'px',
@@ -50,10 +56,7 @@ export default function getObjects(
                     x={node.positionTopLeft.x}
                     y={node.positionTopLeft.y}
                     choosed={node.id === selectedId}
-                    onclick={(e: React.MouseEvent<HTMLElement>) => {
-                        e.preventDefault();
-                        dispatch(changeSelectedObject, node.id);
-                    }}
+                    onclick={elOnClick}
                 />
             );
         }
@@ -61,6 +64,7 @@ export default function getObjects(
         if (node.type === 'figure' && node.figure === 'circle') {
             return (
                 <Circle
+                    strokeColor={node.strokeColor}
                     strokeWidth={node.strokeWidth}
                     key={index}
                     id={node.id}
@@ -73,12 +77,7 @@ export default function getObjects(
                     x={node.positionTopLeft.x}
                     y={node.positionTopLeft.y}
                     choosed={node.id === selectedId}
-                    onclick={(
-                        e: React.MouseEvent<SVGSVGElement, MouseEvent>
-                    ) => {
-                        e.preventDefault();
-                        dispatch(changeSelectedObject, node.id);
-                    }}
+                    onclick={elOnClick}
                 />
             );
         }
@@ -95,15 +94,11 @@ export default function getObjects(
                     height={node.height}
                     kWidth={kWidth}
                     kHeight={kHeight}
+                    strokeColor={node.strokeColor}
                     x={node.positionTopLeft.x}
                     y={node.positionTopLeft.y}
                     choosed={node.id === selectedId}
-                    onclick={(
-                        e: React.MouseEvent<SVGSVGElement, MouseEvent>
-                    ) => {
-                        e.preventDefault();
-                        dispatch(changeSelectedObject, node.id);
-                    }}
+                    onclick={elOnClick}
                 />
             );
         }
@@ -111,6 +106,7 @@ export default function getObjects(
             return (
                 <Triangle
                     strokeWidth={node.strokeWidth}
+                    strokeColor={node.strokeColor}
                     key={index}
                     id={node.id}
                     style={style}
@@ -122,12 +118,7 @@ export default function getObjects(
                     x={node.positionTopLeft.x}
                     y={node.positionTopLeft.y}
                     choosed={node.id === selectedId}
-                    onclick={(
-                        e: React.MouseEvent<SVGSVGElement, MouseEvent>
-                    ) => {
-                        e.preventDefault();
-                        dispatch(changeSelectedObject, node.id);
-                    }}
+                    onclick={elOnClick}
                 />
             );
         }
@@ -153,10 +144,7 @@ export default function getObjects(
                     y={node.positionTopLeft.y}
                     choosed={node.id === selectedId}
                     style={style}
-                    onclick={(e: React.MouseEvent<HTMLElement>) => {
-                        e.preventDefault();
-                        dispatch(changeSelectedObject, node.id);
-                    }}
+                    onclick={elOnClick}
                 />
             );
         }

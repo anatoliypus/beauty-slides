@@ -70,11 +70,11 @@ export function strokeResize(app: AppType, newWidth: number): AppType {
     return replaceSlide(app, newSlide);
 }
 
-export function strokeColorSet(app: AppType, payload: figurePayload, newColor: string): AppType {
+export function strokeColorSet(app: AppType, newColor: string): AppType {
     const slide: SlideType | undefined = getCurrentSlide(app);
     if (!slide) return app;
 
-    const figure: SlideNode | undefined = getSlideNode(slide, payload.id);
+    const figure: SlideNode | undefined = getSlideNode(slide, app.choosedObjectId);
     if (!figure|| figure.type !== 'figure') return app;
 
     const newfigure: FigureObject = {

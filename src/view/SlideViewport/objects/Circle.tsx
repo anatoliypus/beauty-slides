@@ -11,6 +11,7 @@ interface CircleProps {
     kWidth: number;
     kHeight: number;
     bgColor: string | null;
+    strokeColor: string;
     x: number;
     y: number;
     choosed: boolean;
@@ -32,10 +33,12 @@ export default function Circle(props: CircleProps) {
         choosed: props.choosed,
         width: props.width,
         height: props.height,
-        squareResize: true
+        squareResize: true,
     });
 
     const sizeRef = refs.sizeRef;
+    const width = (parseInt(sizeRef.current.width) + props.strokeWidth * 2) / props.kWidth;
+    const height = (parseInt(sizeRef.current.height) + props.strokeWidth * 2) / props.kHeight;
 
     return (
         <div ref={el} className={styles.objectBlock} style={props.style}>
@@ -50,17 +53,17 @@ export default function Circle(props: CircleProps) {
             </svg>
             <svg
                 key={props.id}
-                width={(parseInt(sizeRef.current.width) + 5) / props.kHeight}
-                height={(parseInt(sizeRef.current.height) + 5) / props.kHeight}
+                width={width}
+                height={height}
                 onClick={(e: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
                     props.onclick(e);
                 }}
             >
                 <circle
                     strokeWidth={props.strokeWidth / props.kWidth}
-                    cx={(parseInt(sizeRef.current.width) + 2.5) / (2 * props.kHeight)}
-                    cy={(parseInt(sizeRef.current.height) + 2.5) / (2 * props.kHeight)}
-                    stroke="black"
+                    cx={(parseInt(sizeRef.current.width) + props.strokeWidth) / (2 * props.kHeight)}
+                    cy={(parseInt(sizeRef.current.height) + props.strokeWidth) / (2 * props.kHeight)}
+                    stroke={props.strokeColor}
                     r={parseInt(sizeRef.current.width) / (2 * props.kHeight)}
                     fill={props.bgColor ? props.bgColor : "transparent"}
                 ></circle>

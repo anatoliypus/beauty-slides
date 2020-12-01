@@ -8,5 +8,7 @@
 }
 
 .objectBlock {
-    position: relative;
+    position: absolute;
+    padding: 15px;
+    margin: -15px;
 }

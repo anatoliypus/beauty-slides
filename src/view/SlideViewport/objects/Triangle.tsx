@@ -10,6 +10,7 @@ interface TriangProps {
     height: string;
     kWidth: number;
     kHeight: number;
+    strokeColor: string;
     bgColor: string | null;
     x: number;
     y: number;
@@ -32,10 +33,12 @@ export default function Triangle(props: TriangProps) {
         choosed: props.choosed,
         width: props.width,
         height: props.height,
-        squareResize: false
+        squareResize: false,
     });
 
     const sizeRef = refs.sizeRef;
+    const width = (parseInt(sizeRef.current.width) + props.strokeWidth * 2) / props.kWidth;
+    const height = (parseInt(sizeRef.current.height) + props.strokeWidth * 2) / props.kHeight;
 
     return (
         <div ref={el} className={styles.objectBlock} style={props.style}>
@@ -57,26 +60,27 @@ export default function Triangle(props: TriangProps) {
                 ></circle>
             </svg>
             <svg
+                style={{overflow: 'visible'}}
                 key={props.id}
-                width={(parseInt(sizeRef.current.width) + 5) / props.kWidth}
-                height={(parseInt(sizeRef.current.height) + 5) / props.kHeight}
+                width={width}
+                height={height}
                 onClick={(e: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
                     props.onclick(e);
                 }}
             >
                 <polygon
                 points={
-                    parseInt(sizeRef.current.width) / (2 * props.kWidth) +
+                    parseInt(sizeRef.current.width + props.strokeWidth) / (2 * props.kWidth) +
                     ',0 0,' +
-                    parseInt(sizeRef.current.height) / props.kHeight +
+                    parseInt(sizeRef.current.height + props.strokeWidth) / props.kHeight +
                     ' ' +
-                    parseInt(sizeRef.current.width) / props.kWidth +
+                    parseInt(sizeRef.current.width + props.strokeWidth) / props.kWidth +
                     ',' +
-                    parseInt(sizeRef.current.height) / props.kHeight
+                    parseInt(sizeRef.current.height + props.strokeWidth) / props.kHeight
                 }
                 width={parseInt(sizeRef.current.width) / props.kWidth}
                 height={parseInt(sizeRef.current.height) / props.kHeight}
-                stroke="black"
+                stroke={props.strokeColor}
                 strokeWidth={props.strokeWidth / props.kWidth}
                 fill={props.bgColor ? props.bgColor : "transparent"}
             ></polygon>

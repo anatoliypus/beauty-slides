@@ -109,7 +109,11 @@ export default function useScaleResize(props: UseDraggingProps) {
                 x: myCordsStateRef.current.x,
                 y: myCordsStateRef.current.y,
             });
+            setTimeout(() => {
+                dispatch(changeSelectedObject, props.id);
+            });
         };
+        
         const elOnMouseDown = (e: MouseEvent) => {
             if (props.resizeIcon.current) {
                 e.preventDefault();

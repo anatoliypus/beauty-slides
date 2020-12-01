@@ -11,6 +11,7 @@ interface RectProps {
     kWidth: number;
     kHeight: number;
     bgColor: string | null;
+    strokeColor: string;
     x: number;
     y: number;
     choosed: boolean;
@@ -32,11 +33,12 @@ export default function Rectangle(props: RectProps) {
         choosed: props.choosed,
         width: props.width,
         height: props.height,
-        squareResize: false
+        squareResize: false,
     });
 
     const sizeRef = refs.sizeRef;
-
+    const width = (parseInt(sizeRef.current.width) + props.strokeWidth * 2) / props.kWidth;
+    const height = (parseInt(sizeRef.current.height) + props.strokeWidth * 2) / props.kHeight;
     return (
         <div ref={el} className={styles.objectBlock} style={props.style}>
             <svg
@@ -58,8 +60,8 @@ export default function Rectangle(props: RectProps) {
             </svg>
             <svg
                 key={props.id}
-                width={(parseInt(sizeRef.current.width) + 5) / props.kWidth}
-                height={(parseInt(sizeRef.current.height) + 5) / props.kHeight}
+                width={width}
+                height={height}
                 onClick={(e: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
                     props.onclick(e);
                 }}
@@ -68,9 +70,9 @@ export default function Rectangle(props: RectProps) {
                     strokeWidth={props.strokeWidth / props.kWidth}
                     width={parseInt(sizeRef.current.width) / props.kWidth}
                     height={parseInt(sizeRef.current.height) / props.kHeight}
-                    x="1"
-                    y="1"
-                    stroke="black"
+                    x={props.strokeWidth / 2}
+                    stroke={props.strokeColor}
+                    y={props.strokeWidth / 2}
                     fill={props.bgColor ? props.bgColor : "transparent"}
                 ></rect>
             </svg>
