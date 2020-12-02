@@ -1,5 +1,5 @@
 import { dispatch, exportAppLocally } from '../../dispatcher';
-import { addSlide, importApp, addFigure, addText } from '../../methods/methods';
+import { addSlide, importApp, addFigure, addText, deleteSlide } from '../../methods/methods';
 
 export function addSlideButtonOnClick(): void {
     dispatch(addSlide);
@@ -16,6 +16,15 @@ const fileBtnContextMenuItems = [
     },
 ];
 
+const editBtnContextMenuItems = [
+    {
+        heading: 'Удалить слайд',
+        callback: () => {
+            dispatch(deleteSlide)
+        }
+    }
+]
+
 export const contextBtns = [
     {
         heading: 'Файл',
@@ -23,7 +32,7 @@ export const contextBtns = [
     },
     {
         heading: 'Правка',
-        menu: [],
+        menu: editBtnContextMenuItems,
     },
 ];
 

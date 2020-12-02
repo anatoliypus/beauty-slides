@@ -21,7 +21,8 @@ import {
     addTextToSlide,
 } from './contextsButtonDeclaration';
 import { AppType } from '../../model/model';
-import ObjectsMenu from './components/ObjectsMenu';
+import TextMenu from './components/TextMenu';
+import FigureMenu from './components/FigureMenu';
 
 interface InstrumentsProps {
     app: AppType;
@@ -36,6 +37,11 @@ export default function Instruments(props: InstrumentsProps) {
         defaultState
     );
     const [isPaletteVisible, changePaletteVisibility] = React.useState(false);
+
+    let menu;
+    if (props.app.choosedObjectType === 'figure') menu = <FigureMenu app={props.app} />
+    else if (props.app.choosedObjectType === 'text') menu = <TextMenu app={props.app} />
+    else menu = null;
 
     return (
         <>
@@ -73,7 +79,7 @@ export default function Instruments(props: InstrumentsProps) {
                 <ImgButton onClick={addTextToSlide} imgUrl={TextIcon} />
                 <ImgButton onClick={undo} imgUrl={UndoIcon} />
                 <ImgButton onClick={redo} imgUrl={RedoIcon} />
-                <ObjectsMenu app={props.app} />
+                {menu}
             </div>
             <Palette
                 visibility={isPaletteVisible}

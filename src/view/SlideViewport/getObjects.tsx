@@ -43,6 +43,7 @@ export default function getObjects(
                 fontSize: parseInt(node.fontSize) / kHeight + 'px',
                 fontStyle: node.fontStyle,
                 fontWeight: node.fontWeight,
+                textDecoration: node.fontDecoration,
                 color: node.color,
             };
             return (
