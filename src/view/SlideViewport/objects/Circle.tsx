@@ -1,19 +1,13 @@
 import React from 'react';
-import useScaleResize from './useScaleResize';
+import useDragResize from './useDragResize';
+import { FigureObject } from '../../../model/model';
 import styles from './Object.module.css';
 
 interface CircleProps {
-    strokeWidth: number;
-    id: string;
+    node: FigureObject;
     style: React.CSSProperties;
-    width: string;
-    height: string;
     kWidth: number;
     kHeight: number;
-    bgColor: string | null;
-    strokeColor: string;
-    x: number;
-    y: number;
     choosed: boolean;
     onclick: (e: React.MouseEvent<SVGSVGElement, MouseEvent>) => void;
 }
@@ -22,23 +16,23 @@ export default function Circle(props: CircleProps) {
     const el = React.useRef<HTMLDivElement>(null);
     const resizeIconRef = React.useRef<SVGSVGElement>(null);
 
-    const refs = useScaleResize({
+    const refs = useDragResize({
         obj: el,
         resizeIcon: resizeIconRef,
-        x: props.x,
-        y: props.y,
+        x: props.node.positionTopLeft.x,
+        y: props.node.positionTopLeft.y,
         kWidth: props.kWidth,
         kHeight: props.kHeight,
-        id: props.id,
+        id: props.node.id,
         choosed: props.choosed,
-        width: props.width,
-        height: props.height,
+        width: props.node.width,
+        height: props.node.height,
         squareResize: true,
     });
 
     const sizeRef = refs.sizeRef;
-    const width = (parseInt(sizeRef.current.width) + props.strokeWidth * 2) / props.kWidth;
-    const height = (parseInt(sizeRef.current.height) + props.strokeWidth * 2) / props.kHeight;
+    const width = (parseInt(sizeRef.current.width) + props.node.strokeWidth * 2) / props.kWidth;
+    const height = (parseInt(sizeRef.current.height) + props.node.strokeWidth * 2) / props.kHeight;
 
     return (
         <div ref={el} className={styles.paddedObjectBlock} style={props.style}>
@@ -52,7 +46,8 @@ export default function Circle(props: CircleProps) {
                 ></circle>
             </svg>
             <svg
-                key={props.id}
+                style={{overflow: 'visible'}}
+                key={props.node.id}
                 width={width}
                 height={height}
                 onClick={(e: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
@@ -60,12 +55,12 @@ export default function Circle(props: CircleProps) {
                 }}
             >
                 <circle
-                    strokeWidth={props.strokeWidth / props.kWidth}
-                    cx={(parseInt(sizeRef.current.width) + props.strokeWidth) / (2 * props.kHeight)}
-                    cy={(parseInt(sizeRef.current.height) + props.strokeWidth) / (2 * props.kHeight)}
-                    stroke={props.strokeColor}
+                    strokeWidth={props.node.strokeWidth / props.kWidth}
+                    cx={(parseInt(sizeRef.current.width) + props.node.strokeWidth) / (2 * props.kHeight)}
+                    cy={(parseInt(sizeRef.current.height) + props.node.strokeWidth) / (2 * props.kHeight)}
+                    stroke={props.node.strokeColor}
                     r={parseInt(sizeRef.current.width) / (2 * props.kHeight)}
-                    fill={props.bgColor ? props.bgColor : "transparent"}
+                    fill={props.node.background ? props.node.background : "transparent"}
                 ></circle>
             </svg>
         </div>

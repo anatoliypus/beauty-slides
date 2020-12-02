@@ -23,15 +23,18 @@ export default function Miniature(props: MiniatureProps) {
         if (miniatureRef.current) {
             const miniatureWidth = miniatureRef.current.getBoundingClientRect().width;
             const miniatureHeight = miniatureRef.current.getBoundingClientRect().height;
-            const kWidth = miniatureWidth / 802;
-            const kHeight = miniatureHeight / 602;
+            const kWidth = miniatureWidth / 1032;
+            const kHeight = miniatureHeight / 632;
             changeProportions({kWidth: 1 / kWidth, kHeight: 1 / kHeight});
         }
     }
 
     React.useEffect(() => {
         setProportions();
-        window.addEventListener('resize', setProportions)
+        window.addEventListener('resize', setProportions);
+        return () => {
+            window.removeEventListener('resize', setProportions);
+        }
     }, []);
 
     function miniatureOnClick() {

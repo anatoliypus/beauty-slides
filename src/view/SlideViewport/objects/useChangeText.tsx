@@ -23,7 +23,7 @@ export default function useChangeText(props: useChangeTextProps) {
 
     React.useEffect(() => {
         const change = () => {
-            if (props.el.current) dispatch(changeText, {id: props.id, textData: props.el.current.value});
+            if (props.el.current) dispatch(changeText, props.el.current.value);
         };
         const secondClick = () => {
             if (props.el.current && stateRef.current) {
@@ -48,7 +48,7 @@ export default function useChangeText(props: useChangeTextProps) {
         return () => {
             if (props.el.current) {
                 props.el.current.removeEventListener('click', firstClick);
-                props.el.current.removeEventListener('click', secondClick);
+                props.el.current.removeEventListener('dblclick', secondClick);
             }
         }
     });

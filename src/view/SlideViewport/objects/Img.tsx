@@ -1,17 +1,13 @@
 import React from 'react';
-import useScaleResize from './useScaleResize';
+import useDragResize from './useDragResize';
 import styles from './Object.module.css';
+import { ImgObject } from '../../../model/model';
 
 interface ImgProps {
-    id: string;
+    node: ImgObject;
     style: React.CSSProperties;
-    path: string;
     kWidth: number;
     kHeight: number;
-    width: string;
-    height: string;
-    x: number;
-    y: number;
     choosed: boolean;
     onclick: (e: React.MouseEvent<HTMLElement>) => void;
 }
@@ -20,17 +16,17 @@ export default function Img(props: ImgProps) {
     const el = React.useRef<HTMLDivElement>(null);
     const resizeIconRef = React.useRef<SVGSVGElement>(null);
 
-    const refs = useScaleResize({
+    const refs = useDragResize({
         obj: el,
         resizeIcon: resizeIconRef,
-        x: props.x,
-        y: props.y,
+        x: props.node.positionTopLeft.x,
+        y: props.node.positionTopLeft.y,
         kWidth: props.kWidth,
         kHeight: props.kHeight,
-        id: props.id,
+        id: props.node.id,
         choosed: props.choosed,
-        width: props.width,
-        height: props.height,
+        width: props.node.width,
+        height: props.node.height,
         squareResize: false,
     });
 
@@ -61,8 +57,8 @@ export default function Img(props: ImgProps) {
             </svg>
             <img
                 style={props.style}
-                key={props.id}
-                src={props.path}
+                key={props.node.id}
+                src={props.node.path}
                 onClick={(e: React.MouseEvent<HTMLElement>) => {
                     props.onclick(e);
                 }}

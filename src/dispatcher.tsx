@@ -12,8 +12,10 @@ const redoStack: History = [];
 function dispatch(fn: Function, payload: object | string | null | number = null): void {
     if (globalState) undoStack.push(cloneApp(globalState));
     globalState = fn(globalState, payload);
-    if (globalState != null) renderApp(globalState);
-    else throw new Error('Trying to dispatch with empty state of app!');
+    if (globalState != null) {
+        renderApp(globalState);
+        window.localStorage.setItem('app', JSON.stringify(globalState));
+    } else throw new Error('Trying to dispatch with empty state of app!');
 }
 
 function init(state: AppType): void {

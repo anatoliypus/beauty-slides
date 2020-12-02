@@ -15,12 +15,14 @@ export default function getObjects(
     selectedId: string | null
 ) {
     return slide.objects.map((node, index) => {
-        const elOnClick = (e: React.MouseEvent<HTMLElement | SVGSVGElement>) => {
+        const elOnClick = (
+            e: React.MouseEvent<HTMLElement | SVGSVGElement>
+        ) => {
             e.preventDefault();
             if (kWidth === 1 && kHeight === 1) {
                 dispatch(changeSelectedObject, node.id);
             }
-        }
+        };
         let style = {
             position: 'absolute',
             top: node.positionTopLeft.y / kHeight + 'px',
@@ -41,20 +43,15 @@ export default function getObjects(
                 fontSize: parseInt(node.fontSize) / kHeight + 'px',
                 fontStyle: node.fontStyle,
                 fontWeight: node.fontWeight,
-                color: node.color
+                color: node.color,
             };
             return (
                 <Text
                     key={index}
-                    id={node.id}
+                    node={node}
                     style={style}
-                    data={node.data}
                     kWidth={kWidth}
                     kHeight={kHeight}
-                    width={node.width}
-                    height={node.height}
-                    x={node.positionTopLeft.x}
-                    y={node.positionTopLeft.y}
                     choosed={node.id === selectedId}
                     onclick={elOnClick}
                 />
@@ -64,20 +61,13 @@ export default function getObjects(
         if (node.type === 'figure' && node.figure === 'circle') {
             return (
                 <Circle
-                    strokeColor={node.strokeColor}
-                    strokeWidth={node.strokeWidth}
-                    key={index}
-                    id={node.id}
+                    node={node}
                     style={style}
-                    bgColor={node.background}
-                    width={node.width}
-                    height={node.height}
                     kWidth={kWidth}
                     kHeight={kHeight}
-                    x={node.positionTopLeft.x}
-                    y={node.positionTopLeft.y}
-                    choosed={node.id === selectedId}
                     onclick={elOnClick}
+                    choosed={node.id === selectedId}
+                    key={index}
                 />
             );
         }
@@ -85,40 +75,26 @@ export default function getObjects(
         if (node.type === 'figure' && node.figure === 'rectangle') {
             return (
                 <Rectangle
-                    strokeWidth={node.strokeWidth}
-                    key={index}
-                    id={node.id}
+                    node={node}
                     style={style}
-                    bgColor={node.background}
-                    width={node.width}
-                    height={node.height}
                     kWidth={kWidth}
                     kHeight={kHeight}
-                    strokeColor={node.strokeColor}
-                    x={node.positionTopLeft.x}
-                    y={node.positionTopLeft.y}
-                    choosed={node.id === selectedId}
                     onclick={elOnClick}
+                    choosed={node.id === selectedId}
+                    key={index}
                 />
             );
         }
         if (node.type === 'figure' && node.figure === 'triangle') {
             return (
                 <Triangle
-                    strokeWidth={node.strokeWidth}
-                    strokeColor={node.strokeColor}
-                    key={index}
-                    id={node.id}
+                    node={node}
                     style={style}
-                    width={node.width}
-                    height={node.height}
                     kWidth={kWidth}
                     kHeight={kHeight}
-                    bgColor={node.background}
-                    x={node.positionTopLeft.x}
-                    y={node.positionTopLeft.y}
-                    choosed={node.id === selectedId}
                     onclick={elOnClick}
+                    choosed={node.id === selectedId}
+                    key={index}
                 />
             );
         }
@@ -129,19 +105,14 @@ export default function getObjects(
                 left: 'unset',
                 position: 'unset',
                 width: '100%',
-                height: '100%'
+                height: '100%',
             };
             return (
                 <Img
                     key={index}
-                    id={node.id}
-                    path={node.path}
+                    node={node}
                     kWidth={kWidth}
                     kHeight={kHeight}
-                    width={node.width}
-                    height={node.height}
-                    x={node.positionTopLeft.x}
-                    y={node.positionTopLeft.y}
                     choosed={node.id === selectedId}
                     style={style}
                     onclick={elOnClick}

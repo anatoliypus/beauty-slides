@@ -16,7 +16,7 @@ interface UseDraggingProps {
     squareResize: boolean;
 }
 
-export default function useScaleResize(props: UseDraggingProps) {
+export default function useDragResize(props: UseDraggingProps) {
     // setting states
 
     const [elementCords, _changeElementCords] = React.useState({
@@ -100,12 +100,10 @@ export default function useScaleResize(props: UseDraggingProps) {
         const elOnMouseUp = (e: MouseEvent) => {
             window.removeEventListener('mousemove', elOnMouseMove);
             dispatch(resizeNode, {
-                id: props.id,
                 width: mySizeStateRef.current.width,
                 height: mySizeStateRef.current.height
             });
             dispatch(moveItem, {
-                id: props.id,
                 x: myCordsStateRef.current.x,
                 y: myCordsStateRef.current.y,
             });
@@ -142,7 +140,7 @@ export default function useScaleResize(props: UseDraggingProps) {
             if (props.obj.current) {
                 const newX = elementCords.x + e.pageX - initialCursorX;
                 const newY = elementCords.y + e.pageY - initialCursorY;
-                if (newX > -100 && newY > -100 && newX < 800 && newY < 600) {
+                if (newX > -100 && newY > -100 && newX < 1000 && newY < 600) {
                     changeElementCords({
                         x: newX,
                         y: newY,
@@ -158,7 +156,6 @@ export default function useScaleResize(props: UseDraggingProps) {
         const elOnMouseUp = (e: MouseEvent) => {
             window.removeEventListener('mousemove', elOnMouseMove);
             dispatch(moveItem, {
-                id: props.id,
                 x: myCordsStateRef.current.x,
                 y: myCordsStateRef.current.y,
             });

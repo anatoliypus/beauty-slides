@@ -1,19 +1,13 @@
 import React from 'react';
-import useScaleResize from './useScaleResize';
+import useDragResize from './useDragResize';
 import styles from './Object.module.css';
+import { FigureObject } from '../../../model/model';
 
 interface TriangProps {
-    strokeWidth: number;
-    id: string;
+    node: FigureObject;
     style: React.CSSProperties;
-    width: string;
-    height: string;
     kWidth: number;
     kHeight: number;
-    strokeColor: string;
-    bgColor: string | null;
-    x: number;
-    y: number;
     choosed: boolean;
     onclick: (e: React.MouseEvent<SVGSVGElement, MouseEvent>) => void;
 }
@@ -22,23 +16,23 @@ export default function Triangle(props: TriangProps) {
     const el = React.useRef<HTMLDivElement>(null);
     const resizeIconRef = React.useRef<SVGSVGElement>(null);
 
-    const refs = useScaleResize({
+    const refs = useDragResize({
         obj: el,
         resizeIcon: resizeIconRef,
-        x: props.x,
-        y: props.y,
+        x: props.node.positionTopLeft.x,
+        y: props.node.positionTopLeft.y,
         kWidth: props.kWidth,
         kHeight: props.kHeight,
-        id: props.id,
+        id: props.node.id,
         choosed: props.choosed,
-        width: props.width,
-        height: props.height,
+        width: props.node.width,
+        height: props.node.height,
         squareResize: false,
     });
 
     const sizeRef = refs.sizeRef;
-    const width = (parseInt(sizeRef.current.width) + props.strokeWidth * 2) / props.kWidth;
-    const height = (parseInt(sizeRef.current.height) + props.strokeWidth * 2) / props.kHeight;
+    const width = (parseInt(sizeRef.current.width) + props.node.strokeWidth * 2) / props.kWidth;
+    const height = (parseInt(sizeRef.current.height) + props.node.strokeWidth * 2) / props.kHeight;
 
     return (
         <div ref={el} className={styles.paddedObjectBlock} style={props.style}>
@@ -61,7 +55,7 @@ export default function Triangle(props: TriangProps) {
             </svg>
             <svg
                 style={{overflow: 'visible'}}
-                key={props.id}
+                key={props.node.id}
                 width={width}
                 height={height}
                 onClick={(e: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
@@ -70,19 +64,19 @@ export default function Triangle(props: TriangProps) {
             >
                 <polygon
                 points={
-                    parseInt(sizeRef.current.width + props.strokeWidth) / (2 * props.kWidth) +
+                    parseInt(sizeRef.current.width + props.node.strokeWidth) / (2 * props.kWidth) +
                     ',0 0,' +
-                    parseInt(sizeRef.current.height + props.strokeWidth) / props.kHeight +
+                    parseInt(sizeRef.current.height + props.node.strokeWidth) / props.kHeight +
                     ' ' +
-                    parseInt(sizeRef.current.width + props.strokeWidth) / props.kWidth +
+                    parseInt(sizeRef.current.width + props.node.strokeWidth) / props.kWidth +
                     ',' +
-                    parseInt(sizeRef.current.height + props.strokeWidth) / props.kHeight
+                    parseInt(sizeRef.current.height + props.node.strokeWidth) / props.kHeight
                 }
                 width={parseInt(sizeRef.current.width) / props.kWidth}
                 height={parseInt(sizeRef.current.height) / props.kHeight}
-                stroke={props.strokeColor}
-                strokeWidth={props.strokeWidth / props.kWidth}
-                fill={props.bgColor ? props.bgColor : "transparent"}
+                stroke={props.node.strokeColor}
+                strokeWidth={props.node.strokeWidth / props.kWidth}
+                fill={props.node.background ? props.node.background : "transparent"}
             ></polygon>
             </svg>
         </div>

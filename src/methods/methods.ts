@@ -46,13 +46,6 @@ export function changeSelectedObject(app: AppType, objId: string): AppType {
     };
 }
 
-interface figurePayload {
-    id: string;
-    strokeWidth: number;
-    background: string;
-    strokeColor: string;
-}
-
 export function strokeResize(app: AppType, newWidth: number): AppType {
     const slide: SlideType | undefined = getCurrentSlide(app);
     if (!slide) return app;
@@ -105,7 +98,6 @@ export function figureBackgroundSet(app: AppType, newColor: string): AppType {
 }
 
 interface resizeNodePayload {
-    id: string;
     width: string;
     height: string;
 }
@@ -114,7 +106,7 @@ export function resizeNode(app: AppType, payload: resizeNodePayload): AppType {
     const slide: SlideType | undefined = getCurrentSlide(app);
     if (!slide) return app;
 
-    const node: SlideNode | undefined = getSlideNode(slide, payload.id);
+    const node: SlideNode | undefined = getSlideNode(slide, app.choosedObjectId);
 
     if (!node) return app;
 
@@ -129,11 +121,11 @@ export function resizeNode(app: AppType, payload: resizeNodePayload): AppType {
     return replaceSlide(app, newSlide);
 }
 
-export function toggleBoldText(app: AppType, id: string): AppType {
+export function toggleBoldText(app: AppType): AppType {
     const slide: SlideType | undefined = getCurrentSlide(app);
     if (!slide) return app;
 
-    const text: SlideNode | undefined = getSlideNode(slide, id);
+    const text: SlideNode | undefined = getSlideNode(slide, app.choosedObjectId);
     if (!text || text.type !== 'text') return app;
 
     const newText: TextObject = {
@@ -146,11 +138,11 @@ export function toggleBoldText(app: AppType, id: string): AppType {
     return replaceSlide(app, newSlide);
 }
 
-export function toggleItalicText(app: AppType, id: string): AppType {
+export function toggleItalicText(app: AppType): AppType {
     const slide: SlideType | undefined = getCurrentSlide(app);
     if (!slide) return app;
 
-    const text: SlideNode | undefined = getSlideNode(slide, id);
+    const text: SlideNode | undefined = getSlideNode(slide, app.choosedObjectId);
     if (!text || text.type !== 'text') return app;
 
     const newText: TextObject = {
@@ -163,11 +155,11 @@ export function toggleItalicText(app: AppType, id: string): AppType {
     return replaceSlide(app, newSlide);
 }
 
-export function toggleUnderlinedText(app: AppType, id: string): AppType {
+export function toggleUnderlinedText(app: AppType): AppType {
     const slide: SlideType | undefined = getCurrentSlide(app);
     if (!slide) return app;
 
-    const text: SlideNode | undefined = getSlideNode(slide, id);
+    const text: SlideNode | undefined = getSlideNode(slide, app.choosedObjectId);
     if (!text || text.type !== 'text') return app;
 
     const newText: TextObject = {
@@ -221,21 +213,16 @@ export function changeTextColor(
     return replaceSlide(app, newSlide);
 }
 
-interface changeTextPayload {
-    id: string;
-    textData: string;
-}
-
-export function changeText(app: AppType, payload: changeTextPayload): AppType {
+export function changeText(app: AppType, textData: string): AppType {
     const slide: SlideType | undefined = getCurrentSlide(app);
     if (!slide) return app;
 
-    const text: SlideNode | undefined = getSlideNode(slide, payload.id);
+    const text: SlideNode | undefined = getSlideNode(slide, app.choosedObjectId);
     if (!text || text.type !== 'text') return app;
 
     const newText: TextObject = {
         ...text,
-        data: payload.textData,
+        data: textData,
     };
 
     const newSlide = replaceNode(slide, newText);
@@ -256,7 +243,6 @@ export function setSlideBg(app: AppType, background: string): AppType {
 }
 
 interface moveItemPayload {
-    id: string;
     x: number;
     y: number;
 }
@@ -265,7 +251,7 @@ export function moveItem(app: AppType, payload: moveItemPayload): AppType {
     const slide: SlideType | undefined = getCurrentSlide(app);
     if (!slide) return app;
 
-    const item: SlideNode | undefined = getSlideNode(slide, payload.id);
+    const item: SlideNode | undefined = getSlideNode(slide, app.choosedObjectId);
     if (!item) return app;
 
     const newItem = {
@@ -281,13 +267,13 @@ export function moveItem(app: AppType, payload: moveItemPayload): AppType {
     return replaceSlide(app, newSlide);
 }
 
-export function deleteSlideObject(app: AppType, id: string): AppType {
+export function deleteSlideObject(app: AppType): AppType {
     const slide: SlideType | undefined = getCurrentSlide(app);
     if (!slide) return app;
 
     const newSlide: SlideType = {
         ...slide,
-        objects: slide.objects.filter((obj: SlideNode) => obj.id !== id),
+        objects: slide.objects.filter((obj: SlideNode) => obj.id !== app.choosedObjectId),
     };
 
     return {
