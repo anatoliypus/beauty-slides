@@ -29,7 +29,7 @@ export type ImgObject = SlideObject & {
    path: string;
 };
 
-export type FigureType = 'circle' | 'rectangle' | 'triangle';
+export type FigureType = 'circle' | 'rectangle' | 'triangle'| 'line';
 
 export type FigureObject = SlideObject & {
    type: 'figure';

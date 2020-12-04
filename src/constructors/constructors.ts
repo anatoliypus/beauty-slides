@@ -1,4 +1,5 @@
 import { SettingsObject, SlideType, AppType, ImgObject, TextObject, ObjectsList, FigureType, FigureObject } from '../model/model';
+import FigureMenu from '../view/Instruments/components/FigureMenu';
 // import deepFreeze from 'deep-freeze';
 
 function createId(): string {
@@ -45,7 +46,7 @@ function createImage(path: string): ImgObject {
 }
 
 function createFigure(type: FigureType): FigureObject {
-  return {
+  return{
     id: constructors.createId(),
     type: 'figure',
     figure: type,

@@ -55,6 +55,10 @@ export function addCircleToSlide() {
     dispatch(addFigure, 'circle');
 }
 
+export function addLineToSlide() {
+    dispatch(addFigure, 'line');
+}
+
 export function addTextToSlide() {
     dispatch(addText);
 }

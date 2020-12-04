@@ -11,6 +11,7 @@ import PlusIcon from './img/plus.svg';
 import UndoIcon from './img/undo.svg';
 import RedoIcon from './img/redo.svg';
 import ImageIcon from './img/image.svg';
+import LineIcon from './img/line.svg';
 import Palette from './components/Palette';
 import { undo, redo } from '../../dispatcher';
 import {
@@ -20,6 +21,7 @@ import {
     addTriangleToSlide,
     addCircleToSlide,
     addTextToSlide,
+    addLineToSlide,
 } from './contextsButtonDeclaration';
 import { AppType } from '../../model/model';
 import TextMenu from './components/TextMenu';
@@ -86,6 +88,7 @@ export default function Instruments(props: InstrumentsProps) {
                 <ImgButton onClick={addTriangleToSlide} imgUrl={TriangIcon} />
                 <ImgButton onClick={addCircleToSlide} imgUrl={CircleIcon} />
                 <ImgButton onClick={addTextToSlide} imgUrl={TextIcon} />
+                <ImgButton onClick={addLineToSlide} imgUrl={LineIcon} />
                 <ImgButton onClick={undo} imgUrl={UndoIcon} />
                 <ImgButton onClick={redo} imgUrl={RedoIcon} />
                 <ImgButton onClick={putImage} imgUrl={ImageIcon} />
