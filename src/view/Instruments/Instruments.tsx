@@ -10,6 +10,7 @@ import TextIcon from './img/text.svg';
 import PlusIcon from './img/plus.svg';
 import UndoIcon from './img/undo.svg';
 import RedoIcon from './img/redo.svg';
+import ImageIcon from './img/image.svg';
 import Palette from './components/Palette';
 import { undo, redo } from '../../dispatcher';
 import {
@@ -23,9 +24,17 @@ import {
 import { AppType } from '../../model/model';
 import TextMenu from './components/TextMenu';
 import FigureMenu from './components/FigureMenu';
+import DeleteObject from './components/DeleteObject';
+import { addImage, getImageBase64FromDialog } from '../../methods/methods';
+import { dispatch } from '../../dispatcher';
 
 interface InstrumentsProps {
     app: AppType;
+}
+
+async function putImage() {
+    const base64 = await getImageBase64FromDialog();
+    dispatch(addImage, base64);
 }
 
 export default function Instruments(props: InstrumentsProps) {
@@ -79,7 +88,9 @@ export default function Instruments(props: InstrumentsProps) {
                 <ImgButton onClick={addTextToSlide} imgUrl={TextIcon} />
                 <ImgButton onClick={undo} imgUrl={UndoIcon} />
                 <ImgButton onClick={redo} imgUrl={RedoIcon} />
+                <ImgButton onClick={putImage} imgUrl={ImageIcon} />
                 {menu}
+                {props.app.choosedObjectId !== '' && <DeleteObject app={props.app} />}
             </div>
             <Palette
                 visibility={isPaletteVisible}

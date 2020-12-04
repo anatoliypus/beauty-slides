@@ -24,14 +24,13 @@ interface TextMenuProps {
 }
 
 export default function TextMenu(props: TextMenuProps) {
-    const changeFontSize = React.useRef<HTMLSelectElement>(null);
     const slide = getCurrentSlide(props.app);
 
     let node;
     if (slide) {
         node = getSlideNode(slide, props.app.choosedObjectId);
     } else throw new Error();
-
+    
     let fontSize;
     if (node && node.type === 'text') {
         fontSize = (node as TextObject).fontSize;

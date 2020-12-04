@@ -16,9 +16,10 @@ export default function SlideCarousel(props: SlideCarouselProps) {
                 if (slide.background)
                     miniatureStyles = {
                         background:
-                            slide.background.indexOf('.') === -1
+                            slide.background.indexOf('base64') === -1
                                 ? slide.background
                                 : 'url(' + slide.background + ')',
+                        backgroundSize: 'cover'
                     };
                 const miniatureClassName =
                     props.currSlideId === slide.id

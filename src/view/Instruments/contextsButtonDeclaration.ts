@@ -1,5 +1,5 @@
 import { dispatch, exportAppLocally } from '../../dispatcher';
-import { addSlide, importApp, addFigure, addText, deleteSlide } from '../../methods/methods';
+import { addSlide, importApp, addFigure, addText, deleteSlide, getImageBase64FromDialog, setSlideBg } from '../../methods/methods';
 
 export function addSlideButtonOnClick(): void {
     dispatch(addSlide);
@@ -22,7 +22,14 @@ const editBtnContextMenuItems = [
         callback: () => {
             dispatch(deleteSlide)
         }
-    }
+    },
+    {
+        heading: 'Поставить фоновую картинку',
+        callback: async () => {
+            let base64 = await getImageBase64FromDialog();
+            dispatch(setSlideBg, base64);
+        }
+    },
 ]
 
 export const contextBtns = [

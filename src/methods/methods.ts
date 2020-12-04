@@ -6,7 +6,7 @@ import {
     TextObject,
     FigureType,
     FigureObject,
-    SettingsObject
+    SettingsObject,
 } from '../model/model';
 import {
     getCurrentSlide,
@@ -32,17 +32,18 @@ export function changeSlide(app: AppType, slideId: string): AppType {
 export function changeSelectedObject(app: AppType, objId: string): AppType {
     if (app.choosedObjectId === objId) return app;
     const slide = getCurrentSlide(app);
-    if (! slide) return app;
+    if (!slide) return app;
     const node = getSlideNode(slide, objId);
-    if (! node || objId === '') return {
-        ...app,
-        choosedObjectId: objId,
-        choosedObjectType: null
-    }
+    if (!node || objId === '')
+        return {
+            ...app,
+            choosedObjectId: objId,
+            choosedObjectType: null,
+        };
     return {
         ...app,
         choosedObjectId: objId,
-        choosedObjectType: node.type
+        choosedObjectType: node.type,
     };
 }
 
@@ -50,8 +51,11 @@ export function strokeResize(app: AppType, newWidth: number): AppType {
     const slide: SlideType | undefined = getCurrentSlide(app);
     if (!slide) return app;
 
-    const figure: SlideNode | undefined = getSlideNode(slide, app.choosedObjectId);
-    if (!figure|| figure.type !== 'figure') return app;
+    const figure: SlideNode | undefined = getSlideNode(
+        slide,
+        app.choosedObjectId
+    );
+    if (!figure || figure.type !== 'figure') return app;
 
     const newfigure: FigureObject = {
         ...figure,
@@ -67,8 +71,11 @@ export function strokeColorSet(app: AppType, newColor: string): AppType {
     const slide: SlideType | undefined = getCurrentSlide(app);
     if (!slide) return app;
 
-    const figure: SlideNode | undefined = getSlideNode(slide, app.choosedObjectId);
-    if (!figure|| figure.type !== 'figure') return app;
+    const figure: SlideNode | undefined = getSlideNode(
+        slide,
+        app.choosedObjectId
+    );
+    if (!figure || figure.type !== 'figure') return app;
 
     const newfigure: FigureObject = {
         ...figure,
@@ -84,8 +91,11 @@ export function figureBackgroundSet(app: AppType, newColor: string): AppType {
     const slide: SlideType | undefined = getCurrentSlide(app);
     if (!slide) return app;
 
-    const figure: SlideNode | undefined = getSlideNode(slide, app.choosedObjectId);
-    if (!figure|| figure.type !== 'figure') return app;
+    const figure: SlideNode | undefined = getSlideNode(
+        slide,
+        app.choosedObjectId
+    );
+    if (!figure || figure.type !== 'figure') return app;
 
     const newfigure: FigureObject = {
         ...figure,
@@ -106,7 +116,10 @@ export function resizeNode(app: AppType, payload: resizeNodePayload): AppType {
     const slide: SlideType | undefined = getCurrentSlide(app);
     if (!slide) return app;
 
-    const node: SlideNode | undefined = getSlideNode(slide, app.choosedObjectId);
+    const node: SlideNode | undefined = getSlideNode(
+        slide,
+        app.choosedObjectId
+    );
 
     if (!node) return app;
 
@@ -125,7 +138,10 @@ export function toggleBoldText(app: AppType): AppType {
     const slide: SlideType | undefined = getCurrentSlide(app);
     if (!slide) return app;
 
-    const text: SlideNode | undefined = getSlideNode(slide, app.choosedObjectId);
+    const text: SlideNode | undefined = getSlideNode(
+        slide,
+        app.choosedObjectId
+    );
     if (!text || text.type !== 'text') return app;
 
     const newText: TextObject = {
@@ -142,7 +158,10 @@ export function toggleItalicText(app: AppType): AppType {
     const slide: SlideType | undefined = getCurrentSlide(app);
     if (!slide) return app;
 
-    const text: SlideNode | undefined = getSlideNode(slide, app.choosedObjectId);
+    const text: SlideNode | undefined = getSlideNode(
+        slide,
+        app.choosedObjectId
+    );
     if (!text || text.type !== 'text') return app;
 
     const newText: TextObject = {
@@ -159,7 +178,10 @@ export function toggleUnderlinedText(app: AppType): AppType {
     const slide: SlideType | undefined = getCurrentSlide(app);
     if (!slide) return app;
 
-    const text: SlideNode | undefined = getSlideNode(slide, app.choosedObjectId);
+    const text: SlideNode | undefined = getSlideNode(
+        slide,
+        app.choosedObjectId
+    );
     if (!text || text.type !== 'text') return app;
 
     const newText: TextObject = {
@@ -173,14 +195,14 @@ export function toggleUnderlinedText(app: AppType): AppType {
     return replaceSlide(app, newSlide);
 }
 
-export function changeTextSize(
-    app: AppType,
-    size: string
-): AppType {
+export function changeTextSize(app: AppType, size: string): AppType {
     const slide: SlideType | undefined = getCurrentSlide(app);
     if (!slide) return app;
 
-    const text: SlideNode | undefined = getSlideNode(slide, app.choosedObjectId);
+    const text: SlideNode | undefined = getSlideNode(
+        slide,
+        app.choosedObjectId
+    );
     if (!text || text.type !== 'text') return app;
 
     const newText: TextObject = {
@@ -193,15 +215,14 @@ export function changeTextSize(
     return replaceSlide(app, newSlide);
 }
 
-
-export function changeTextColor(
-    app: AppType,
-    color: string
-): AppType {
+export function changeTextColor(app: AppType, color: string): AppType {
     const slide: SlideType | undefined = getCurrentSlide(app);
     if (!slide) return app;
 
-    const text: SlideNode | undefined = getSlideNode(slide, app.choosedObjectId);
+    const text: SlideNode | undefined = getSlideNode(
+        slide,
+        app.choosedObjectId
+    );
     if (!text || text.type !== 'text') return app;
     const newText: TextObject = {
         ...text,
@@ -217,7 +238,10 @@ export function changeText(app: AppType, textData: string): AppType {
     const slide: SlideType | undefined = getCurrentSlide(app);
     if (!slide) return app;
 
-    const text: SlideNode | undefined = getSlideNode(slide, app.choosedObjectId);
+    const text: SlideNode | undefined = getSlideNode(
+        slide,
+        app.choosedObjectId
+    );
     if (!text || text.type !== 'text') return app;
 
     const newText: TextObject = {
@@ -251,7 +275,10 @@ export function moveItem(app: AppType, payload: moveItemPayload): AppType {
     const slide: SlideType | undefined = getCurrentSlide(app);
     if (!slide) return app;
 
-    const item: SlideNode | undefined = getSlideNode(slide, app.choosedObjectId);
+    const item: SlideNode | undefined = getSlideNode(
+        slide,
+        app.choosedObjectId
+    );
     if (!item) return app;
 
     const newItem = {
@@ -273,12 +300,15 @@ export function deleteSlideObject(app: AppType): AppType {
 
     const newSlide: SlideType = {
         ...slide,
-        objects: slide.objects.filter((obj: SlideNode) => obj.id !== app.choosedObjectId),
+        objects: slide.objects.filter(
+            (obj: SlideNode) => obj.id !== app.choosedObjectId
+        ),
     };
 
     return {
         ...replaceSlide(app, newSlide),
         choosedObjectId: '',
+        choosedObjectType: null
     };
 }
 
@@ -480,7 +510,6 @@ async function setSlideObjects(
     if (slide.background) {
         if (slide.background.indexOf('#') !== -1) {
             const rgb = hexRgb(slide.background);
-            console.log(rgb);
             doc.setFillColor(
                 Number(rgb.red),
                 Number(rgb.green),
@@ -570,5 +599,26 @@ function setObject(doc: jsPDF, node: SlideNode) {
             );
         }
         resolve();
+    });
+}
+
+export function getImageBase64FromDialog(): Promise<String> {
+    return new Promise((resolve) => {
+        let input = document.createElement('input');
+        input.style.display = 'none';
+        input.type = 'file';
+        input.onchange = () => {
+            if (input.files) {
+                const file = input.files[0];
+                const reader = new FileReader();
+                reader.onload = () => {
+                    if (typeof reader.result === 'string')
+                        resolve(reader.result);
+                };
+                reader.readAsDataURL(file);
+            }
+        };
+        document.body.append(input);
+        input.click();
     });
 }
