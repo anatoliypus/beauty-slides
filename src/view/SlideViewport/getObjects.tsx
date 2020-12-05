@@ -5,6 +5,7 @@ import Circle from './objects/Circle';
 import Rectangle from './objects/Rectangle';
 import Triangle from './objects/Triangle';
 import Img from './objects/Img';
+import Line from './objects/Line';
 import { dispatch } from '../../dispatcher';
 import { changeSelectedObject } from '../../methods/methods';
 
@@ -89,6 +90,19 @@ export default function getObjects(
         if (node.type === 'figure' && node.figure === 'triangle') {
             return (
                 <Triangle
+                    node={node}
+                    style={style}
+                    kWidth={kWidth}
+                    kHeight={kHeight}
+                    onclick={elOnClick}
+                    choosed={node.id === selectedId}
+                    key={index}
+                />
+            );
+        }
+        if (node.type === 'figure' && node.figure === 'line') {
+            return (
+                <Line
                     node={node}
                     style={style}
                     kWidth={kWidth}
