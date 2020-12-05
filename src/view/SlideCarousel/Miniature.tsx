@@ -4,6 +4,7 @@ import { SlideType } from '../../model/model';
 import getObjects from '../SlideViewport/getObjects';
 import { dispatch } from '../../dispatcher';
 import { changeSlide } from '../../methods/methods';
+import useChangeSlideOrderProps from './useChangeSlideOrder';
 
 interface MiniatureProps {
     index: number;
@@ -16,6 +17,8 @@ interface MiniatureProps {
 export default function Miniature(props: MiniatureProps) {
 
     const miniatureRef = React.useRef<HTMLDivElement>(null);
+    const slideCarouselItemRef = React.useRef(null);
+    useChangeSlideOrderProps({ref: slideCarouselItemRef, id: props.slide.id});
 
     const [proportions, changeProportions] = React.useState({kWidth: 1, kHeight: 1});
 
@@ -41,7 +44,7 @@ export default function Miniature(props: MiniatureProps) {
         dispatch(changeSlide, props.slide.id)
     }
     return (
-        <div onClick={miniatureOnClick} className={styles.slideCarouselItem} key={props.slide.id}>
+        <div ref={slideCarouselItemRef} onClick={miniatureOnClick} className={styles.slideCarouselItem} key={props.slide.id}>
             <p>{props.index}.</p>
             <div
                 ref={miniatureRef}
