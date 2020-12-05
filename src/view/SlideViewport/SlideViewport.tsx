@@ -28,7 +28,6 @@ export default function SlideViewport(props: SlideViewportProps) {
             backgroundSize: 'cover',
         };
     }
-    if (slideStyles2) console.log(slideStyles2.background);
     return (
         <div className={styles.slideViewport}>
             <div

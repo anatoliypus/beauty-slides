@@ -622,3 +622,38 @@ export function getImageBase64FromDialog(): Promise<String> {
         input.click();
     });
 }
+
+interface changeSlideOrderPayload {
+    offset: number;
+    slideId: string;
+}
+
+export function changeSlideOrder(app: AppType, payload: changeSlideOrderPayload) {
+    const slideToMoveIndex = app.slides.findIndex(slide => slide.id === payload.slideId);
+    let newSlides: Array<SlideType> = [];
+    if (payload.offset > 0) {
+        app.slides.forEach((slide, index) => {
+            if (index < slideToMoveIndex) {
+                newSlides[index] = slide;
+            }
+            if (index === slideToMoveIndex) {
+                newSlides[index + payload.offset] = slide;
+            }
+
+            if (index >= slideToMoveIndex && index <= slideToMoveIndex + payload.offset && index !== slideToMoveIndex) {
+                newSlides[index - 1] = slide;
+            }
+
+            if (index > slideToMoveIndex + payload.offset) {
+                newSlides[index] = slide;
+            }
+        });
+    } else if (payload.offset < 0) {
+        
+    }
+    
+    return {
+        ...app,
+        slides: newSlides.length > 0 ? newSlides: app.slides
+    };
+}
