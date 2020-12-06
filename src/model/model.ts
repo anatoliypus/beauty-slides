@@ -20,8 +20,9 @@ export type TextObject = SlideObject & {
    fontSize: string;
    color: string;
    fontStyle: 'unset' | 'italic';
-   fontWeight: number;
+   fontWeight: 700 | 400;
    fontDecoration: 'unset' | 'underline';
+   alignment: 'center' | 'right' | 'left';
 };
 
 export type ImgObject = SlideObject & {

@@ -6,6 +6,9 @@ import Instruments from './view/Instruments/Instruments';
 import Footer from './view/Footer/Footer';
 import { AppType } from './model/model';
 import styles from './App.module.css';
+import { dispatch } from './dispatcher';
+import constructors from './constructors/constructors';
+import { addSlide } from './methods/methods';
 
 interface AppProps {
     app: AppType;
@@ -15,10 +18,11 @@ export default function App(props: AppProps) {
     useEffect(() => {
         document.title = props.app.name;
     });
-    const slide = props.app.slides.find(
+    let slide = props.app.slides.find(
         (slide) => slide.id === props.app.currSlideId
     );
-    if (!slide) throw new Error('Initial slide fail');
+    if (! slide) throw new Error();
+    
 
     return (
         <div className={styles.app}>

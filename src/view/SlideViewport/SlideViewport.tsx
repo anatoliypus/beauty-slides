@@ -19,14 +19,18 @@ export default function SlideViewport(props: SlideViewportProps) {
     };
     let slideStyles2;
     if (props.slide.background) {
-        slideStyles2 = {
-            ...slideStyles,
-            background:
-                props.slide.background.indexOf('base64') === -1
-                    ? props.slide.background
-                    : 'url(' + props.slide.background + ')',
-            backgroundSize: 'cover',
-        };
+        if (props.slide.background.indexOf('base64') === -1) {
+            slideStyles2 = {
+                ...slideStyles,
+                backgroundColor: props.slide.background
+            };
+        } else {
+            slideStyles2 = {
+                ...slideStyles,
+                backgroundImage: 'url(' + props.slide.background + ')',
+                backgroundSize: 'cover'
+            };
+        }
     }
     return (
         <div className={styles.slideViewport}>

@@ -87,11 +87,11 @@ export default function Instruments(props: InstrumentsProps) {
                 <ImgButton onClick={addRectangleToSlide} imgUrl={RectIcon} />
                 <ImgButton onClick={addTriangleToSlide} imgUrl={TriangIcon} />
                 <ImgButton onClick={addCircleToSlide} imgUrl={CircleIcon} />
+                <ImgButton onClick={putImage} imgUrl={ImageIcon} />
                 <ImgButton onClick={addTextToSlide} imgUrl={TextIcon} />
                 <ImgButton onClick={addLineToSlide} imgUrl={LineIcon} />
                 <ImgButton onClick={undo} imgUrl={UndoIcon} />
                 <ImgButton onClick={redo} imgUrl={RedoIcon} />
-                <ImgButton onClick={putImage} imgUrl={ImageIcon} />
                 {menu}
                 {props.app.choosedObjectId !== '' && <DeleteObject app={props.app} />}
             </div>

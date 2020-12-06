@@ -10,11 +10,11 @@
 
 .palette {
     width: 500px;
-    height: 300px;
+    height: 350px;
     position: absolute;
     z-index: 3;
     background-color: #fff;
-    top: calc(50% - 150px);
+    top: calc(50% - 175px);
     left: calc(50% - 250px);
     box-sizing: border-box;
     padding-top: 20px;

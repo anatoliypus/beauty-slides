@@ -3,8 +3,8 @@ import { dispatch } from '../../../dispatcher';
 import { resizeNode, changeSelectedObject, moveItem } from '../../../methods/methods';
 
 interface UseDraggingProps {
-    obj: any;
-    resizeIcon: any;
+    obj: React.RefObject<HTMLElement>;
+    resizeIcon: React.RefObject<SVGSVGElement>;
     x: number;
     y: number;
     kWidth: number;
@@ -82,18 +82,20 @@ export default function useDragResize(props: UseDraggingProps) {
         let initialCursorY: number;
         const elOnMouseMove = (e: MouseEvent) => {
             if (props.resizeIcon.current) {
-                const newWidth = parseInt(elSize.width) + e.pageX - initialCursorX + 'px';
-                const newHeight = parseInt(elSize.height) - e.pageY + initialCursorY + 'px';
+                const newWidth = parseInt(elSize.width) + e.pageX - initialCursorX;
+                const newHeight = parseInt(elSize.height) - e.pageY + initialCursorY;
                 const offset = - e.pageY + initialCursorY;
-                changeElSize({
-                    width: newWidth,
-                    height: props.squareResize ? newWidth : newHeight,
-                });
-                if (!props.squareResize) {
-                    changeElementCords({
-                        x: elementCords.x,
-                        y: elementCords.y - offset
-                    })
+                if (newWidth > 20 && newHeight > 20) {
+                    changeElSize({
+                        width: newWidth + 'px',
+                        height: props.squareResize ? newWidth + 'px' : newHeight + 'px',
+                    });
+                    if (!props.squareResize) {
+                        changeElementCords({
+                            x: elementCords.x,
+                            y: elementCords.y - offset
+                        })
+                    }
                 }
             }
         };

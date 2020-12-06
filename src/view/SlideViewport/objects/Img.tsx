@@ -62,6 +62,7 @@ export default function Img(props: ImgProps) {
                 onClick={(e: React.MouseEvent<HTMLElement>) => {
                     props.onclick(e);
                 }}
+                alt=''
             ></img>
         </div>
     );

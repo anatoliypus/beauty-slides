@@ -65,22 +65,6 @@ export default function Palette(props: PaletteProps) {
                     <ColorBlock type={props.type} changeVisibility={props.changeVisibility} color='#FFFFE0' />
                     <ColorBlock type={props.type} changeVisibility={props.changeVisibility} color='#FFFFF0' />
                     <ColorBlock type={props.type} changeVisibility={props.changeVisibility} color='#FFFFFF' />
-                    <ColorBlock type={props.type} changeVisibility={props.changeVisibility} color='#3386eb' />
-                    <ColorBlock type={props.type} changeVisibility={props.changeVisibility} color='#3386eb' />
-                    <ColorBlock type={props.type} changeVisibility={props.changeVisibility} color='#3386eb' />
-                    <ColorBlock type={props.type} changeVisibility={props.changeVisibility} color='#3386eb' />
-                    <ColorBlock type={props.type} changeVisibility={props.changeVisibility} color='#3386eb' />
-                    <ColorBlock type={props.type} changeVisibility={props.changeVisibility} color='#3386eb' />
-                    <ColorBlock type={props.type} changeVisibility={props.changeVisibility} color='#3386eb' />
-                    <ColorBlock type={props.type} changeVisibility={props.changeVisibility} color='#3386eb' />
-                    <ColorBlock type={props.type} changeVisibility={props.changeVisibility} color='#3386eb' />
-                    <ColorBlock type={props.type} changeVisibility={props.changeVisibility} color='#3386eb' />
-                    <ColorBlock type={props.type} changeVisibility={props.changeVisibility} color='#3386eb' />
-                    <ColorBlock type={props.type} changeVisibility={props.changeVisibility} color='#3386eb' />
-                    <ColorBlock type={props.type} changeVisibility={props.changeVisibility} color='#3386eb' />
-                    <ColorBlock type={props.type} changeVisibility={props.changeVisibility} color='#3386eb' />
-                    <ColorBlock type={props.type} changeVisibility={props.changeVisibility} color='#3386eb' />
-                    <ColorBlock type={props.type} changeVisibility={props.changeVisibility} color='#3386eb' />
                 </div>
                 <ChangeOwnColor type={props.type} changeVisibility={props.changeVisibility} />
             </div>

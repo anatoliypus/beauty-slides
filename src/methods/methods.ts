@@ -195,6 +195,29 @@ export function toggleUnderlinedText(app: AppType): AppType {
     return replaceSlide(app, newSlide);
 }
 
+export function changeAlignment(
+    app: AppType,
+    alignment: 'right' | 'center' | 'left'
+): AppType {
+    const slide: SlideType | undefined = getCurrentSlide(app);
+    if (!slide) return app;
+
+    const text: SlideNode | undefined = getSlideNode(
+        slide,
+        app.choosedObjectId
+    );
+    if (!text || text.type !== 'text') return app;
+
+    const newText: TextObject = {
+        ...text,
+        alignment: alignment,
+    };
+
+    const newSlide = replaceNode(slide, newText);
+
+    return replaceSlide(app, newSlide);
+}
+
 export function changeTextSize(app: AppType, size: string): AppType {
     const slide: SlideType | undefined = getCurrentSlide(app);
     if (!slide) return app;
@@ -308,7 +331,7 @@ export function deleteSlideObject(app: AppType): AppType {
     return {
         ...replaceSlide(app, newSlide),
         choosedObjectId: '',
-        choosedObjectType: null
+        choosedObjectType: null,
     };
 }
 
@@ -318,6 +341,9 @@ export function deleteSlide(app: AppType): AppType {
     const newSlideList = { ...app }.slides.filter(
         (obj: SlideType) => obj !== slide
     );
+    if (! newSlideList.length) {
+        newSlideList.push(constructors.createSlide());
+    }
 
     return {
         ...app,
@@ -624,36 +650,34 @@ export function getImageBase64FromDialog(): Promise<String> {
 }
 
 interface changeSlideOrderPayload {
-    offset: number;
     slideId: string;
+    slideAfterId: string;
 }
 
-export function changeSlideOrder(app: AppType, payload: changeSlideOrderPayload) {
-    const slideToMoveIndex = app.slides.findIndex(slide => slide.id === payload.slideId);
-    let newSlides: Array<SlideType> = [];
-    if (payload.offset > 0) {
-        app.slides.forEach((slide, index) => {
-            if (index < slideToMoveIndex) {
-                newSlides[index] = slide;
+export function changeSlideOrder(
+    app: AppType,
+    payload: changeSlideOrderPayload
+) {
+    console.log(payload);
+    if (payload.slideId !== payload.slideAfterId) {
+        const slideToMoveIndex = app.slides.findIndex(
+            (slide) => slide.id === payload.slideId
+        );
+        let newSlides: Array<SlideType> = [];
+        if (payload.slideAfterId === '0') {
+            newSlides.push(app.slides[slideToMoveIndex]);
+        }
+        for (let slide of app.slides) {
+            if (slide.id === payload.slideAfterId) {
+                newSlides.push(slide);
+                newSlides.push(app.slides[slideToMoveIndex]);
+            } else if (slide.id !== payload.slideId) {
+                newSlides.push(slide);
             }
-            if (index === slideToMoveIndex) {
-                newSlides[index + payload.offset] = slide;
-            }
-
-            if (index >= slideToMoveIndex && index <= slideToMoveIndex + payload.offset && index !== slideToMoveIndex) {
-                newSlides[index - 1] = slide;
-            }
-
-            if (index > slideToMoveIndex + payload.offset) {
-                newSlides[index] = slide;
-            }
-        });
-    } else if (payload.offset < 0) {
-        
-    }
-    
-    return {
-        ...app,
-        slides: newSlides.length > 0 ? newSlides: app.slides
-    };
+        }
+        return {
+            ...app,
+            slides: newSlides,
+        };
+    } else return app;
 }

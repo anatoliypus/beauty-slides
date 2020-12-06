@@ -9,11 +9,12 @@
   /* padding: 40px 0; */;
   overflow-y: scroll;
   position: relative;
+  min-width: 320px;
 }
 
 .slideMiniature {
-  width: calc(100% - 30px + 2px);
-  height: calc(100% + 2px);
+  width: 250px;
+  height: 156px;
   border: 2px solid #afafaf;
   border-radius: 10px;
   position: relative;
@@ -21,7 +22,7 @@
 }
 
 .slideCarouselItem {
-  width: 80%;
+  width: 280px;
   height: 150px;
   display: flex;
   flex-direction: row;

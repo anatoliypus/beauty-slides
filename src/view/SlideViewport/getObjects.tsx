@@ -45,8 +45,19 @@ export default function getObjects(
                 fontStyle: node.fontStyle,
                 fontWeight: node.fontWeight,
                 textDecoration: node.fontDecoration,
-                color: node.color,
+                color: node.color
             };
+            switch (node.alignment) {
+                case 'left': 
+                    style.textAlign = 'left';
+                    break;
+                case 'center':
+                    style.textAlign = 'center';
+                    break;
+                case 'right':
+                    style.textAlign = 'right';
+                    break
+            }
             return (
                 <Text
                     key={index}

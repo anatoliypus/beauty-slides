@@ -1,6 +1,4 @@
 import React from 'react';
-import { dispatch } from '../../../dispatcher';
-import { strokeResize } from '../../../methods/methods';
 import styles from './ObjectsMenu.module.css';
 
 interface SelectElementProps {

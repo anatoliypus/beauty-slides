@@ -5,7 +5,7 @@ import { changeText } from '../../../methods/methods';
 
 interface useChangeTextProps {
     id: string;
-    el: any;
+    el: React.RefObject<HTMLInputElement>;
     data: string;
 }
 

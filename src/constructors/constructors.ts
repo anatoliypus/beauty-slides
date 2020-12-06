@@ -1,6 +1,4 @@
 import { SettingsObject, SlideType, AppType, ImgObject, TextObject, ObjectsList, FigureType, FigureObject } from '../model/model';
-import FigureMenu from '../view/Instruments/components/FigureMenu';
-// import deepFreeze from 'deep-freeze';
 
 function createId(): string {
   return String(Math.floor((Number(Date.now()) * Math.random())));
@@ -11,7 +9,7 @@ function createSlide(): SlideType {
   return { 
     id: constructors.createId(),
     objects: objectsArr,
-    background: null,
+    background: null
   }
 }
 
@@ -30,7 +28,7 @@ function createApp(settings: SettingsObject): AppType {
     currSlideId: slide.id,
     settings: settings,
     choosedObjectId: '',
-    choosedObjectType: null
+    choosedObjectType: null 
   }
 }
 
@@ -73,6 +71,7 @@ function createText(): TextObject {
     color: '#000',
     data: 'Введите текст',
     fontWeight: 400,
+    alignment: 'left'
   }
 }
 

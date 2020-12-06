@@ -1,7 +1,6 @@
 import * as serviceWorker from './serviceWorker';
 import constructors from './constructors/constructors';
 import { init } from './dispatcher';
-import { addImage } from './methods/methods';
 
 const settings = constructors.createSettings('1000px', '600px');
 let app = constructors.createApp(settings);

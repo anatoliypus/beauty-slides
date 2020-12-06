@@ -36,7 +36,6 @@ export default function Text(props: TextProps) {
 
     const el = React.useRef<HTMLInputElement>(null);
     useChangeText({id: props.node.id, data: props.node.data, el: el});
-    
 
     const width = parseInt(size.current.width) / props.kWidth + 'px';
     const height = parseInt(size.current.width) / props.kHeight + 'px';
