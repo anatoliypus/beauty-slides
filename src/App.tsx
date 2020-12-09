@@ -6,10 +6,6 @@ import Instruments from './view/Instruments/Instruments';
 import Footer from './view/Footer/Footer';
 import { AppType } from './model/model';
 import styles from './App.module.css';
-import { dispatch } from './dispatcher';
-import constructors from './constructors/constructors';
-import { addSlide } from './methods/methods';
-
 interface AppProps {
     app: AppType;
 }

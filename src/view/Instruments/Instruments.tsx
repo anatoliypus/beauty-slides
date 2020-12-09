@@ -93,7 +93,7 @@ export default function Instruments(props: InstrumentsProps) {
                 <ImgButton onClick={undo} imgUrl={UndoIcon} />
                 <ImgButton onClick={redo} imgUrl={RedoIcon} />
                 {menu}
-                {props.app.choosedObjectId !== '' && <DeleteObject app={props.app} />}
+                {props.app.choosedObjectId && <DeleteObject app={props.app} />}
             </div>
             <Palette
                 visibility={isPaletteVisible}

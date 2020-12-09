@@ -37,7 +37,7 @@ export function changeSelectedObject(app: AppType, objId: string): AppType {
     if (!node || objId === '')
         return {
             ...app,
-            choosedObjectId: objId,
+            choosedObjectId: null,
             choosedObjectType: null,
         };
     return {
@@ -45,6 +45,67 @@ export function changeSelectedObject(app: AppType, objId: string): AppType {
         choosedObjectId: objId,
         choosedObjectType: node.type,
     };
+}
+
+export function copyObject(app: AppType): AppType {
+    if (app.choosedObjectId)
+        return {
+            ...app,
+            bufferedId: app.choosedObjectId
+        };
+    if (app.currSlideId)
+        return {
+            ...app,
+            bufferedId: app.currSlideId
+        };
+    else throw new Error();
+}
+
+export function pasteObject(app: AppType): AppType {
+    if (! app.bufferedId) return app;
+    const slide = app.slides.find((slide) => slide.id === app.bufferedId);
+    if (slide) {
+        const newObjects = slide.objects.map((node) => {
+            return {
+                ...node,
+                id: constructors.createId()
+            }
+        });
+        const newSlide = {
+            ...slide,
+            id: constructors.createId(),
+            objects: newObjects
+        }
+        return {
+            ...app,
+            slides: app.slides.concat([newSlide])
+        }
+    }
+    let slideToFind: SlideType | null = null;
+    let nodeToFind: SlideNode | null = null;
+    for (let slide of app.slides) {
+        const result = slide.objects.find((i) => i.id === app.bufferedId);
+        if (result) {
+            nodeToFind = result;
+            slideToFind = slide;
+        };
+    }
+    if (slideToFind && nodeToFind) {
+        const newNode = {
+            ...nodeToFind,
+            id: constructors.createId(),
+            positionTopLeft: {
+                x: 100,
+                y: 100
+            }
+        }
+        const newSlide = {
+            ...slideToFind,
+            objects: slideToFind.objects.concat([newNode])
+        }
+        return replaceSlide(app, newSlide)
+    }
+    return app;
 }
 
 export function strokeResize(app: AppType, newWidth: number): AppType {
@@ -60,6 +121,26 @@ export function strokeResize(app: AppType, newWidth: number): AppType {
     const newfigure: FigureObject = {
         ...figure,
         strokeWidth: newWidth,
+    };
+
+    const newSlide = replaceNode(slide, newfigure);
+
+    return replaceSlide(app, newSlide);
+}
+
+export function changeRectBorderRadius(app: AppType, newRadius: number): AppType {
+    const slide: SlideType | undefined = getCurrentSlide(app);
+    if (!slide) return app;
+
+    const figure: SlideNode | undefined = getSlideNode(
+        slide,
+        app.choosedObjectId
+    );
+    if (!figure || figure.type !== 'figure') return app;
+
+    const newfigure: FigureObject = {
+        ...figure,
+        borderRadius: newRadius,
     };
 
     const newSlide = replaceNode(slide, newfigure);
@@ -317,6 +398,47 @@ export function moveItem(app: AppType, payload: moveItemPayload): AppType {
     return replaceSlide(app, newSlide);
 }
 
+export function decreaseZIndex(app: AppType): AppType {
+    const slide: SlideType | undefined = getCurrentSlide(app);
+    if (!slide) return app;
+
+    const item: SlideNode | undefined = getSlideNode(
+        slide,
+        app.choosedObjectId
+    );
+    if (!item) return app;
+
+    const newItem = {
+        ...item,
+        zIndex: --item.zIndex
+    };
+
+    const newSlide = replaceNode(slide, newItem);
+
+    return replaceSlide(app, newSlide);
+}
+
+export function increaseZIndex(app: AppType): AppType {
+    console.log(1);
+    const slide: SlideType | undefined = getCurrentSlide(app);
+    if (!slide) return app;
+
+    const item: SlideNode | undefined = getSlideNode(
+        slide,
+        app.choosedObjectId
+    );
+    if (!item) return app;
+
+    const newItem = {
+        ...item,
+        zIndex: ++item.zIndex
+    };
+
+    const newSlide = replaceNode(slide, newItem);
+
+    return replaceSlide(app, newSlide);
+}
+
 export function deleteSlideObject(app: AppType): AppType {
     const slide: SlideType | undefined = getCurrentSlide(app);
     if (!slide) return app;
@@ -368,11 +490,12 @@ export function addImage(app: AppType, path: string): AppType {
     if (!slide) return app;
 
     const newObjects = slide.objects;
-    newObjects.push(constructors.createImage(path));
+    newObjects.push(constructors.createImage(path, slide.nextZIndex));
 
     const newSlide = {
         ...slide,
         objects: newObjects,
+        nextZIndex: ++slide.nextZIndex
     };
 
     return replaceSlide(app, newSlide);
@@ -383,11 +506,12 @@ export function addFigure(app: AppType, type: FigureType): AppType {
     if (!slide) return app;
 
     const newObjects = slide.objects;
-    newObjects.push(constructors.createFigure(type));
+    newObjects.push(constructors.createFigure(type, slide.nextZIndex));
 
     const newSlide = {
         ...slide,
         objects: newObjects,
+        nextZIndex: ++slide.nextZIndex
     };
 
     return replaceSlide(app, newSlide);
@@ -398,11 +522,12 @@ export function addText(app: AppType): AppType {
     if (!slide) return app;
 
     const newObjects = slide.objects;
-    newObjects.push(constructors.createText());
+    newObjects.push(constructors.createText(slide.nextZIndex));
 
     const newSlide = {
         ...slide,
         objects: newObjects,
+        nextZIndex: ++slide.nextZIndex
     };
 
     return replaceSlide(app, newSlide);
@@ -658,7 +783,6 @@ export function changeSlideOrder(
     app: AppType,
     payload: changeSlideOrderPayload
 ) {
-    console.log(payload);
     if (payload.slideId !== payload.slideAfterId) {
         const slideToMoveIndex = app.slides.findIndex(
             (slide) => slide.id === payload.slideId

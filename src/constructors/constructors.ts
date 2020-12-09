@@ -9,7 +9,8 @@ function createSlide(): SlideType {
   return { 
     id: constructors.createId(),
     objects: objectsArr,
-    background: null
+    background: null,
+    nextZIndex: 0
   }
 }
 
@@ -28,11 +29,12 @@ function createApp(settings: SettingsObject): AppType {
     currSlideId: slide.id,
     settings: settings,
     choosedObjectId: '',
-    choosedObjectType: null 
+    choosedObjectType: null,
+    bufferedId: null
   }
 }
 
-function createImage(path: string): ImgObject {
+function createImage(path: string, zIndex: number): ImgObject {
   return {
     id: constructors.createId(),
     type: 'img',
@@ -40,10 +42,11 @@ function createImage(path: string): ImgObject {
     width: '150px',
     height: '150px',
     positionTopLeft: {x: 20, y: 20},
+    zIndex: zIndex
   }
 }
 
-function createFigure(type: FigureType): FigureObject {
+function createFigure(type: FigureType, zIndex: number): FigureObject {
   return{
     id: constructors.createId(),
     type: 'figure',
@@ -53,11 +56,13 @@ function createFigure(type: FigureType): FigureObject {
     positionTopLeft: {x: 20, y: 20},
     strokeColor: '#000',
     background: null,
-    strokeWidth: 1
+    strokeWidth: 1,
+    borderRadius: 0,
+    zIndex: zIndex
   }
 }
 
-function createText(): TextObject {
+function createText(zIndex: number): TextObject {
   return {
     id: constructors.createId(),
     type: 'text',
@@ -71,7 +76,8 @@ function createText(): TextObject {
     color: '#000',
     data: 'Введите текст',
     fontWeight: 400,
-    alignment: 'left'
+    alignment: 'left',
+    zIndex: zIndex
   }
 }
 

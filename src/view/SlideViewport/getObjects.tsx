@@ -29,6 +29,7 @@ export default function getObjects(
             top: node.positionTopLeft.y / kHeight + 'px',
             left: node.positionTopLeft.x / kWidth + 'px',
             border: '3px solid transparent',
+            zIndex: node.zIndex
         } as React.CSSProperties;
         if (selectedId && node.id === selectedId) {
             style.border = '3px dashed grey';
@@ -40,7 +41,7 @@ export default function getObjects(
                 ...style,
                 top: 'unset',
                 left: 'unset',
-                position: 'unset',
+                position: 'relative',
                 fontSize: parseInt(node.fontSize) / kHeight + 'px',
                 fontStyle: node.fontStyle,
                 fontWeight: node.fontWeight,

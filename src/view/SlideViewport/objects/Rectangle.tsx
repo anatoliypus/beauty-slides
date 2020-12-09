@@ -63,6 +63,7 @@ export default function Rectangle(props: RectProps) {
                 }}
             >
                 <rect
+                    rx={props.node.borderRadius ? props.node.borderRadius / props.kWidth : 0}
                     strokeWidth={props.node.strokeWidth / props.kWidth}
                     width={parseInt(sizeRef.current.width) / props.kWidth}
                     height={parseInt(sizeRef.current.height) / props.kHeight}

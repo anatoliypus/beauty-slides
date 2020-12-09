@@ -1,5 +1,15 @@
 import { dispatch, exportAppLocally } from '../../dispatcher';
-import { addSlide, importApp, addFigure, addText, deleteSlide, getImageBase64FromDialog, setSlideBg } from '../../methods/methods';
+import {
+    addSlide,
+    importApp,
+    addFigure,
+    addText,
+    deleteSlide,
+    getImageBase64FromDialog,
+    setSlideBg,
+    increaseZIndex,
+    decreaseZIndex,
+} from '../../methods/methods';
 
 export function addSlideButtonOnClick(): void {
     dispatch(addSlide);
@@ -20,17 +30,29 @@ const editBtnContextMenuItems = [
     {
         heading: 'Удалить слайд',
         callback: () => {
-            dispatch(deleteSlide)
-        }
+            dispatch(deleteSlide);
+        },
     },
     {
-        heading: 'Поставить фоновую картинку',
+        heading: 'Поставить фоновую картинку на слайд',
         callback: async () => {
             let base64 = await getImageBase64FromDialog();
             dispatch(setSlideBg, base64);
-        }
+        },
     },
-]
+    {
+        heading: 'Разместить объект выше',
+        callback: () => {
+            dispatch(increaseZIndex);
+        },
+    },
+    {
+        heading: 'Разместить объект ниже',
+        callback: () => {
+            dispatch(decreaseZIndex);
+        },
+    },
+];
 
 export const contextBtns = [
     {

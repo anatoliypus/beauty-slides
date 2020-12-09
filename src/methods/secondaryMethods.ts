@@ -6,7 +6,7 @@ export function getCurrentSlide(app: AppType): SlideType | undefined {
   return slide;
 }
 
-export function getSlideNode(slide: SlideType, id: string): SlideNode | undefined {
+export function getSlideNode(slide: SlideType, id: string | null): SlideNode | undefined {
   const node: SlideNode | undefined = slide.objects.find(obj => obj.id === id);
   if (! node) return undefined;
   return node;

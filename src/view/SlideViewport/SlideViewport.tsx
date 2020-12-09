@@ -9,7 +9,7 @@ interface SlideViewportProps {
     slide: SlideType;
     slideWidth: string;
     slideHeight: string;
-    selectedId: string;
+    selectedId: string | null; 
 }
 
 export default function SlideViewport(props: SlideViewportProps) {

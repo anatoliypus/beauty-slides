@@ -11,6 +11,7 @@ export type SlideObject = {
    width: string;
    height: string;
    positionTopLeft: Cords;
+   zIndex: number;
 };
 
 export type TextObject = SlideObject & {
@@ -38,6 +39,7 @@ export type FigureObject = SlideObject & {
    strokeColor: string;
    background: null | string;
    strokeWidth: number;
+   borderRadius: number;
 }
 
 export type SlideNode = TextObject | ImgObject | FigureObject;
@@ -48,6 +50,7 @@ export type SlideType = {
    id: string;
    objects: ObjectsList;
    background: string | null;
+   nextZIndex: number;
 };
 
 export type SettingsObject = {
@@ -60,8 +63,9 @@ export type AppType = {
    currSlideId: string | null;
    slides: Array<SlideType>;
    settings: SettingsObject;
-   choosedObjectId: string;
+   choosedObjectId: null | string;
    choosedObjectType: NodeType | null;
+   bufferedId: string | null;
 };
 
 export type History = Array<AppType>;

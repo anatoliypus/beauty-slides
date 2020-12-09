@@ -37,11 +37,17 @@ export default function Text(props: TextProps) {
     const el = React.useRef<HTMLInputElement>(null);
     useChangeText({id: props.node.id, data: props.node.data, el: el});
 
+    React.useEffect(() => {
+        if (el.current) {
+            el.current.disabled = props.kWidth === 1 && props.kHeight === 1 ? false : true;
+        }
+    })
+
     const width = parseInt(size.current.width) / props.kWidth + 'px';
     const height = parseInt(size.current.width) / props.kHeight + 'px';
 
     return (
-        <div ref={div} className={objStyles.objectBlock} style={{width: width, height: height}}>
+        <div ref={div} className={objStyles.objectBlock} style={{width: width, height: height, zIndex: props.style.zIndex}}>
             <svg
                 ref={resizeIconRef}
                 className={objStyles.resizeIcon}

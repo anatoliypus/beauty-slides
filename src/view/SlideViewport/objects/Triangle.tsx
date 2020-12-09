@@ -31,8 +31,12 @@ export default function Triangle(props: TriangProps) {
     });
 
     const sizeRef = refs.sizeRef;
-    const width = (parseInt(sizeRef.current.width) + props.node.strokeWidth * 2) / props.kWidth;
-    const height = (parseInt(sizeRef.current.height) + props.node.strokeWidth * 2) / props.kHeight;
+    const width =
+        (parseInt(sizeRef.current.width) + props.node.strokeWidth * 2) /
+        props.kWidth;
+    const height =
+        (parseInt(sizeRef.current.height) + props.node.strokeWidth * 2) /
+        props.kHeight;
 
     return (
         <div ref={el} className={styles.paddedObjectBlock} style={props.style}>
@@ -54,7 +58,7 @@ export default function Triangle(props: TriangProps) {
                 ></circle>
             </svg>
             <svg
-                style={{overflow: 'visible'}}
+                style={{ overflow: 'visible' }}
                 key={props.node.id}
                 width={width}
                 height={height}
@@ -63,21 +67,39 @@ export default function Triangle(props: TriangProps) {
                 }}
             >
                 <polygon
-                points={
-                    parseInt(sizeRef.current.width + props.node.strokeWidth) / (2 * props.kWidth) +
-                    ',0 0,' +
-                    parseInt(sizeRef.current.height + props.node.strokeWidth) / props.kHeight +
-                    ' ' +
-                    parseInt(sizeRef.current.width + props.node.strokeWidth) / props.kWidth +
-                    ',' +
-                    parseInt(sizeRef.current.height + props.node.strokeWidth) / props.kHeight
-                }
-                width={parseInt(sizeRef.current.width) / props.kWidth}
-                height={parseInt(sizeRef.current.height) / props.kHeight}
-                stroke={props.node.strokeColor}
-                strokeWidth={props.node.strokeWidth / props.kWidth}
-                fill={props.node.background ? props.node.background : "transparent"}
-            ></polygon>
+                    strokeLinecap={'round'}
+                    points={
+                        parseInt(
+                            sizeRef.current.width + props.node.strokeWidth
+                        ) /
+                            (2 * props.kWidth) +
+                        ',0 0,' +
+                        parseInt(
+                            sizeRef.current.height + props.node.strokeWidth
+                        ) /
+                            props.kHeight +
+                        ' ' +
+                        parseInt(
+                            sizeRef.current.width + props.node.strokeWidth
+                        ) /
+                            props.kWidth +
+                        ',' +
+                        parseInt(
+                            sizeRef.current.height + props.node.strokeWidth
+                        ) /
+                            props.kHeight
+                    }
+                    strokeLinejoin={'round'}
+                    width={parseInt(sizeRef.current.width) / props.kWidth}
+                    height={parseInt(sizeRef.current.height) / props.kHeight}
+                    stroke={props.node.strokeColor}
+                    strokeWidth={props.node.strokeWidth / props.kWidth}
+                    fill={
+                        props.node.background
+                            ? props.node.background
+                            : 'transparent'
+                    }
+                ></polygon>
             </svg>
         </div>
     );

@@ -3,7 +3,7 @@ import { AppType, History } from './model/model';
 import ReactDOM from 'react-dom';
 import App from './App';
 import { cloneApp } from './methods/secondaryMethods';
-import { exportApp, exportPDF } from './methods/methods';
+import { exportApp, exportPDF, deleteSlideObject, copyObject, pasteObject } from './methods/methods';
 
 let globalState: AppType | null = null;
 const undoStack: History = [];
@@ -26,7 +26,25 @@ function init(state: AppType): void {
             if (e.shiftKey) redo();
             else undo();
         }
-    })
+    });
+    window.addEventListener('keydown', (e) => {
+        if (e.key === 'd' && (e.metaKey || e.ctrlKey)) {
+            e.preventDefault();
+            dispatch(deleteSlideObject);
+        }
+    });
+    window.addEventListener('keydown', (e) => {
+        if (e.key === 'c' && (e.metaKey || e.ctrlKey)) {
+            e.preventDefault();
+            dispatch(copyObject);
+        }
+    });
+    window.addEventListener('keydown', (e) => {
+        if (e.key === 'v' && (e.metaKey || e.ctrlKey)) {
+            e.preventDefault();
+            dispatch(pasteObject);
+        }
+    });
 }
 
 function undo(): void {

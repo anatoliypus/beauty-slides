@@ -7,7 +7,7 @@ import {
 } from '../../../methods/secondaryMethods';
 import { dispatch } from '../../../dispatcher';
 import Palette from './Palette';
-import { strokeResize } from '../../../methods/methods';
+import { strokeResize, changeRectBorderRadius } from '../../../methods/methods';
 import SelectElement from './SelectElement';
 
 interface FigureMenuProps {
@@ -23,9 +23,13 @@ export default function FigureMenu(props: FigureMenuProps) {
     } else throw new Error();
 
     let strokeWidth;
+    let figure;
+    let radius;
 
     if (node && node.type === 'figure') {
         strokeWidth = (node as FigureObject).strokeWidth;
+        figure = (node as FigureObject).figure;
+        radius = (node as FigureObject).borderRadius;
     }
 
     const [
@@ -39,11 +43,14 @@ export default function FigureMenu(props: FigureMenuProps) {
     ] = React.useState(false);
 
     const strokeValues = ['1', '2', '3', '4', '5'];
+    const radiusValues = ['0', '6', '10', '14', '18', '20', '25', '30', '35', '40', '50'];
+
+    const radiusStyle = figure === 'rectangle' ? {display: 'flex'} : {display: 'none'};
 
     return (
         <div className={styles.objectsMenu}>
             <p className={styles.label}>
-                Толщина контура:
+                Толщина к-ра:
             </p>
             <SelectElement selectedValue={strokeWidth + ''} values={strokeValues} callback={(value) => {
                 dispatch(
@@ -51,13 +58,24 @@ export default function FigureMenu(props: FigureMenuProps) {
                     parseInt(value)
                 );
             }}/>
+            <div style={radiusStyle}>
+                <p className={styles.label}>
+                    Закруг-ие к-ра:
+                </p>
+                <SelectElement selectedValue={radius + ''} values={radiusValues} callback={(value) => {
+                    dispatch(
+                        changeRectBorderRadius,
+                        parseInt(value)
+                    );
+                }}/>
+            </div>
             <button
                 className={`${styles.changeBtn} ${styles.objectsMenuNode}`}
                 onClick={() => {
                     changeFigureStrokePaletteVisibility(true);
                 }}
             >
-                Цвет контура
+                Цвет к-ра
             </button>
             <button
                 className={`${styles.changeBtn} ${styles.objectsMenuNode}`}
