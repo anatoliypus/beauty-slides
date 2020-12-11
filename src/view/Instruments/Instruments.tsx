@@ -3,40 +3,21 @@ import styles from './Instruments.module.css';
 import ContextButton from './components/ContextButton';
 import ImgButton from './components/ImgButton';
 import TextButton from './components/TextButton';
-import RectIcon from './img/rectangle.svg';
-import TriangIcon from './img/triangle.svg';
-import CircleIcon from './img/circle.svg';
-import TextIcon from './img/text.svg';
 import PlusIcon from './img/plus.svg';
-import UndoIcon from './img/undo.svg';
-import RedoIcon from './img/redo.svg';
-import ImageIcon from './img/image.svg';
-import LineIcon from './img/line.svg';
 import Palette from './components/Palette';
-import { undo, redo } from '../../dispatcher';
 import {
     addSlideButtonOnClick,
     contextBtns,
-    addRectangleToSlide,
-    addTriangleToSlide,
-    addCircleToSlide,
-    addTextToSlide,
-    addLineToSlide,
 } from './contextsButtonDeclaration';
 import { AppType } from '../../model/model';
 import TextMenu from './components/TextMenu';
 import FigureMenu from './components/FigureMenu';
 import DeleteObject from './components/DeleteObject';
-import { addImage, getImageBase64FromDialog } from '../../methods/methods';
-import { dispatch } from '../../dispatcher';
+import InstrumentsFiguresRedoUndo from './InstrumentsFiguresRedoUndo';
+import ImageMenu from './components/ImageMenu';
 
 interface InstrumentsProps {
     app: AppType;
-}
-
-async function putImage() {
-    const base64 = await getImageBase64FromDialog();
-    dispatch(addImage, base64);
 }
 
 export default function Instruments(props: InstrumentsProps) {
@@ -52,12 +33,14 @@ export default function Instruments(props: InstrumentsProps) {
     let menu;
     if (props.app.choosedObjectType === 'figure') menu = <FigureMenu app={props.app} />
     else if (props.app.choosedObjectType === 'text') menu = <TextMenu app={props.app} />
+    else if (props.app.choosedObjectType === 'img') menu = <ImageMenu />
     else menu = null;
 
     return (
         <>
             <div className={styles.instruments}>
                 <ImgButton onClick={addSlideButtonOnClick} imgUrl={PlusIcon} />
+                <span style={{width: '30px'}}></span>
                 {contextBtns.map((item, index) => {
                     return (
                         <ContextButton
@@ -84,14 +67,7 @@ export default function Instruments(props: InstrumentsProps) {
                         changePaletteVisibility(true);
                     }}
                 />
-                <ImgButton onClick={addRectangleToSlide} imgUrl={RectIcon} />
-                <ImgButton onClick={addTriangleToSlide} imgUrl={TriangIcon} />
-                <ImgButton onClick={addCircleToSlide} imgUrl={CircleIcon} />
-                <ImgButton onClick={putImage} imgUrl={ImageIcon} />
-                <ImgButton onClick={addTextToSlide} imgUrl={TextIcon} />
-                <ImgButton onClick={addLineToSlide} imgUrl={LineIcon} />
-                <ImgButton onClick={undo} imgUrl={UndoIcon} />
-                <ImgButton onClick={redo} imgUrl={RedoIcon} />
+                {! menu && <InstrumentsFiguresRedoUndo />}
                 {menu}
                 {props.app.choosedObjectId && <DeleteObject app={props.app} />}
             </div>

@@ -4,8 +4,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-left: 10px;
+  margin-left: 15px;
   cursor: pointer;
+}
+
+.instrumentsButton:first-child {
+    margin-left: 0;
 }
 
 .instrumentsButton__img {
@@ -13,6 +17,3 @@
   width: 100%;
 }
 
-.instrumentsButton:first-child {
-  margin-right: 30px;
-}

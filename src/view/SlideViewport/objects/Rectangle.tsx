@@ -14,11 +14,11 @@ interface RectProps {
 
 export default function Rectangle(props: RectProps) {
     const el = React.useRef<HTMLDivElement>(null);
-    const resizeIconRef = React.useRef<SVGSVGElement>(null);
+    const resizeIconTopRightRef = React.useRef<SVGSVGElement>(null);
 
     const refs = useDragResize({
         obj: el,
-        resizeIcon: resizeIconRef,
+        resizeIcon: resizeIconTopRightRef,
         x: props.node.positionTopLeft.x,
         y: props.node.positionTopLeft.y,
         kWidth: props.kWidth,
@@ -37,7 +37,7 @@ export default function Rectangle(props: RectProps) {
     return (
         <div ref={el} className={styles.paddedObjectBlock} style={props.style}>
             <svg
-                ref={resizeIconRef}
+                ref={resizeIconTopRightRef}
                 className={styles.resizeIcon}
                 width={11}
                 height={11}

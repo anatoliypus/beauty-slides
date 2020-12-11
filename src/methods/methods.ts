@@ -18,7 +18,7 @@ import {
 import constructors from '../constructors/constructors';
 import { init } from '../dispatcher';
 import { jsPDF } from 'jspdf';
-import { font } from './fonts/Piazzola';
+import { font } from '../fonts/Piazzola';
 import hexRgb from 'hex-rgb';
 
 export function changeSlide(app: AppType, slideId: string): AppType {
@@ -26,6 +26,8 @@ export function changeSlide(app: AppType, slideId: string): AppType {
     return {
         ...app,
         currSlideId: slideId,
+        choosedObjectId: null,
+        choosedObjectType: null,
     };
 }
 
@@ -299,6 +301,26 @@ export function changeAlignment(
     return replaceSlide(app, newSlide);
 }
 
+export function changeTextFontFamily(app: AppType, family: string): AppType {
+    const slide: SlideType | undefined = getCurrentSlide(app);
+    if (!slide) return app;
+
+    const text: SlideNode | undefined = getSlideNode(
+        slide,
+        app.choosedObjectId
+    );
+    if (!text || text.type !== 'text') return app;
+
+    const newText: TextObject = {
+        ...text,
+        fontFamily: family,
+    };
+
+    const newSlide = replaceNode(slide, newText);
+
+    return replaceSlide(app, newSlide);
+}
+
 export function changeTextSize(app: AppType, size: string): AppType {
     const slide: SlideType | undefined = getCurrentSlide(app);
     if (!slide) return app;
@@ -406,7 +428,7 @@ export function decreaseZIndex(app: AppType): AppType {
         slide,
         app.choosedObjectId
     );
-    if (!item) return app;
+    if (!item || item.zIndex === 0) return app;
 
     const newItem = {
         ...item,
@@ -414,12 +436,19 @@ export function decreaseZIndex(app: AppType): AppType {
     };
 
     const newSlide = replaceNode(slide, newItem);
-
+    newSlide.objects = newSlide.objects.map((el) => {
+        if (el.id !== item.id && el.zIndex === item.zIndex) {
+            const newEl = {...el};
+            newEl.zIndex += 1;
+            return newEl
+        }
+        return el
+    });
+    
     return replaceSlide(app, newSlide);
 }
 
 export function increaseZIndex(app: AppType): AppType {
-    console.log(1);
     const slide: SlideType | undefined = getCurrentSlide(app);
     if (!slide) return app;
 
@@ -427,7 +456,7 @@ export function increaseZIndex(app: AppType): AppType {
         slide,
         app.choosedObjectId
     );
-    if (!item) return app;
+    if (!item || slide.nextZIndex - item.zIndex === 1) return app;
 
     const newItem = {
         ...item,
@@ -435,6 +464,14 @@ export function increaseZIndex(app: AppType): AppType {
     };
 
     const newSlide = replaceNode(slide, newItem);
+    newSlide.objects = newSlide.objects.map((el) => {
+        if (el.id !== item.id && el.zIndex === item.zIndex) {
+            const newEl = {...el};
+            newEl.zIndex -= 1;
+            return newEl
+        }
+        return el
+    });
 
     return replaceSlide(app, newSlide);
 }

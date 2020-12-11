@@ -6,10 +6,10 @@
   flex-direction: column;
   align-items: center;
   box-sizing: border-box;
-  /* padding: 40px 0; */;
   overflow-y: scroll;
   position: relative;
   min-width: 320px;
+  padding-top: 25px;
 }
 
 .slideMiniature {
@@ -18,7 +18,6 @@
   border: 2px solid #afafaf;
   border-radius: 10px;
   position: relative;
-  /* box-sizing: border-box; */
 }
 
 .slideCarouselItem {
@@ -27,8 +26,10 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding-bottom: 25px;
-  margin-top: 50px;
+  padding-bottom: 30px;
+  border-top: 2px solid transparent;
+  box-sizing: content-box;
+  padding-top: 20px;
 }
 
 .activeMiniature {

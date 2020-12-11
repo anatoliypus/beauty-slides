@@ -9,6 +9,7 @@ import { dispatch } from '../../../dispatcher';
 import Palette from './Palette';
 import { strokeResize, changeRectBorderRadius } from '../../../methods/methods';
 import SelectElement from './SelectElement';
+import ManageZIndex from './ManageZIndex';
 
 interface FigureMenuProps {
     app: AppType;
@@ -95,6 +96,7 @@ export default function FigureMenu(props: FigureMenuProps) {
                 changeVisibility={changeFigureStrokePaletteVisibility}
                 type={'strokeColor'}
             />
+            <ManageZIndex />
         </div>
     );
 }

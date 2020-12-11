@@ -18,10 +18,21 @@ import {
     toggleBoldText,
     toggleItalicText,
     toggleUnderlinedText,
-    changeAlignment
+    changeAlignment,
+    changeTextFontFamily
 } from '../../../methods/methods';
 import Palette from './Palette';
 import SelectElement from './SelectElement';
+import WebFont from 'webfontloader';
+import ManageZIndex from './ManageZIndex';
+
+const fonts = ['JetBrains Mono', 'Oswald', 'Merriweather'];
+
+WebFont.load({
+    google: {
+        families: fonts,
+    },
+});
 
 interface TextMenuProps {
     app: AppType;
@@ -34,14 +45,16 @@ export default function TextMenu(props: TextMenuProps) {
     if (slide) {
         node = getSlideNode(slide, props.app.choosedObjectId);
     } else throw new Error();
-    
+
     let fontSize;
     let alignment;
     let isBold;
     let isItalic;
     let isUnderlined;
+    let fontFamily;
     if (node && node.type === 'text') {
         fontSize = (node as TextObject).fontSize;
+        fontFamily = (node as TextObject).fontFamily;
         alignment = (node as TextObject).alignment;
         isBold = (node as TextObject).fontWeight === 700;
         isItalic = (node as TextObject).fontStyle === 'italic';
@@ -77,6 +90,14 @@ export default function TextMenu(props: TextMenuProps) {
 
     return (
         <div className={styles.objectsMenu}>
+            <p className={styles.label}>Шрифт</p>
+            <SelectElement
+                selectedValue={fontFamily}
+                values={fonts}
+                callback={(value) => {
+                    dispatch(changeTextFontFamily, value);
+                }}
+            />
             <img src={fontSizeIcon} alt="font-size" className={styles.icon} />
             <SelectElement
                 selectedValue={fontSize}
@@ -86,7 +107,9 @@ export default function TextMenu(props: TextMenuProps) {
                 }}
             />
             <button
-                className={isBold ? `${styles.btn} + ${styles.activeBtn}` : styles.btn}
+                className={
+                    isBold ? `${styles.btn} + ${styles.activeBtn}` : styles.btn
+                }
                 onClick={() => {
                     dispatch(toggleBoldText);
                 }}
@@ -94,7 +117,11 @@ export default function TextMenu(props: TextMenuProps) {
                 <img src={boldIcon} alt="toggle text bold" />
             </button>
             <button
-                className={isItalic ? `${styles.btn} + ${styles.activeBtn}` : styles.btn}
+                className={
+                    isItalic
+                        ? `${styles.btn} + ${styles.activeBtn}`
+                        : styles.btn
+                }
                 onClick={() => {
                     dispatch(toggleItalicText);
                 }}
@@ -102,7 +129,11 @@ export default function TextMenu(props: TextMenuProps) {
                 <img src={italicIcon} alt="toggle text italic" />
             </button>
             <button
-                className={isUnderlined ? `${styles.btn} + ${styles.activeBtn}` : styles.btn}
+                className={
+                    isUnderlined
+                        ? `${styles.btn} + ${styles.activeBtn}`
+                        : styles.btn
+                }
                 onClick={() => {
                     dispatch(toggleUnderlinedText);
                 }}
@@ -110,7 +141,11 @@ export default function TextMenu(props: TextMenuProps) {
                 <img src={underlinedIcon} alt="toggle text underlined" />
             </button>
             <button
-                className={alignment === 'left' ? `${styles.btn} + ${styles.activeBtn}` : styles.btn}
+                className={
+                    alignment === 'left'
+                        ? `${styles.btn} + ${styles.activeBtn}`
+                        : styles.btn
+                }
                 onClick={() => {
                     dispatch(changeAlignment, 'left');
                 }}
@@ -118,7 +153,11 @@ export default function TextMenu(props: TextMenuProps) {
                 <img src={leftAlignment} alt="toggle left alignment" />
             </button>
             <button
-                className={alignment === 'center' ? `${styles.btn} + ${styles.activeBtn}` : styles.btn}
+                className={
+                    alignment === 'center'
+                        ? `${styles.btn} + ${styles.activeBtn}`
+                        : styles.btn
+                }
                 onClick={() => {
                     dispatch(changeAlignment, 'center');
                 }}
@@ -126,7 +165,11 @@ export default function TextMenu(props: TextMenuProps) {
                 <img src={centerAlignment} alt="toggle center alignment" />
             </button>
             <button
-                className={alignment === 'right' ? `${styles.btn} + ${styles.activeBtn}` : styles.btn}
+                className={
+                    alignment === 'right'
+                        ? `${styles.btn} + ${styles.activeBtn}`
+                        : styles.btn
+                }
                 onClick={() => {
                     dispatch(changeAlignment, 'right');
                 }}
@@ -146,6 +189,7 @@ export default function TextMenu(props: TextMenuProps) {
                 changeVisibility={changeTextColorPaletteVisibility}
                 type={'textColor'}
             />
+            <ManageZIndex />
         </div>
     );
 }

@@ -46,7 +46,8 @@ export default function getObjects(
                 fontStyle: node.fontStyle,
                 fontWeight: node.fontWeight,
                 textDecoration: node.fontDecoration,
-                color: node.color
+                color: node.color,
+                fontFamily: node.fontFamily
             };
             switch (node.alignment) {
                 case 'left': 

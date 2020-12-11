@@ -71,7 +71,7 @@ function createText(zIndex: number): TextObject {
     positionTopLeft: {x: 20, y: 20},
     fontStyle: 'unset',
     fontDecoration: 'unset',
-    fontFamily: 'Open Sans',
+    fontFamily: 'Oswald',
     fontSize: '35px',
     color: '#000',
     data: 'Введите текст',

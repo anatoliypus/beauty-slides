@@ -37,7 +37,7 @@ export default function Img(props: ImgProps) {
 
 
     return (
-        <div ref={el} className={styles.objectBlock} style={{width: width, height: height}}>
+        <div ref={el} className={styles.objectBlock} style={{width: width, height: height, zIndex: props.style.zIndex}}>
             <svg
                 ref={resizeIconRef}
                 className={styles.resizeIcon}
