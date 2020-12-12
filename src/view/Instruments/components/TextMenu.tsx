@@ -18,15 +18,15 @@ import {
     toggleBoldText,
     toggleItalicText,
     toggleUnderlinedText,
-    changeAlignment,
-    changeTextFontFamily
+    changeAlignment
 } from '../../../methods/methods';
 import Palette from './Palette';
 import SelectElement from './SelectElement';
 import WebFont from 'webfontloader';
 import ManageZIndex from './ManageZIndex';
+import FontSelect from './FontSelect';
 
-const fonts = ['JetBrains Mono', 'Oswald', 'Merriweather'];
+const fonts = ['JetBrains Mono', 'Oswald', 'Merriweather', 'Open Sans', 'Roboto', 'Montserrat', 'Playfair Display', 'Lora', 'PT Serif', 'Russo One', 'Lobster', 'Pacifico', 'Amatic SC', 'Caveat', 'Yeseva One'];
 
 WebFont.load({
     google: {
@@ -90,14 +90,8 @@ export default function TextMenu(props: TextMenuProps) {
 
     return (
         <div className={styles.objectsMenu}>
-            <p className={styles.label}>Шрифт</p>
-            <SelectElement
-                selectedValue={fontFamily}
-                values={fonts}
-                callback={(value) => {
-                    dispatch(changeTextFontFamily, value);
-                }}
-            />
+            <p className={styles.label}>Шрифт:</p>
+            <FontSelect selected={fontFamily} fonts={fonts} />
             <img src={fontSizeIcon} alt="font-size" className={styles.icon} />
             <SelectElement
                 selectedValue={fontSize}

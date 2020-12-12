@@ -1,7 +1,7 @@
 .menu {
     width: 350px;
     height: auto;
-    background-color: #e9e9e9e5;
+    background-color: #e9e9e9f8;
     position: absolute;
     z-index: 998;
     transition: 0.1s;
