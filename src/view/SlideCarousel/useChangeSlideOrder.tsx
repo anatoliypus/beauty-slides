@@ -5,7 +5,8 @@ import { miniatureRefObj } from './SlideCarousel';
 import slideIcon from './img/template.svg';
 
 export default function useChangeSlideOrder(
-    refs: React.RefObject<Array<miniatureRefObj>>
+    refs: React.RefObject<Array<miniatureRefObj>>,
+    carouselRef: React.RefObject<HTMLDivElement>
 ) {
     React.useEffect(() => {
         const elOnMouseDown = (
@@ -23,8 +24,38 @@ export default function useChangeSlideOrder(
             icon.style.height = '50px';
             document.body.append(icon);
             const onMouseMove = (e: MouseEvent) => {
-                e.preventDefault();
                 cursorY = e.pageY;
+                e.preventDefault();
+
+                let scrollDownPoint: number = -1;
+                let scrollUpPoint: number = -1;
+
+                if (carouselRef.current) {
+                    const rect = carouselRef.current.getBoundingClientRect();
+                    scrollDownPoint = rect.top + rect.height * 0.95;
+                    scrollUpPoint = rect.top + rect.height * 0.05;
+                }
+
+                if (cursorY >= scrollDownPoint) {
+                    const int = setInterval(() => {
+                        if (carouselRef.current)
+                            carouselRef.current.scrollTop += 3;
+                    }, 5);
+                    window.addEventListener('mousemove', () => {
+                        clearInterval(int);
+                    }, {once: true})
+                }
+
+                if (cursorY <= scrollUpPoint && carouselRef.current) {
+                    const int = setInterval(() => {
+                        if (carouselRef.current)
+                            carouselRef.current.scrollTop -= 3;
+                    }, 5);
+                    window.addEventListener('mousemove', () => {
+                        clearInterval(int);
+                    }, {once: true})
+                }
+
                 if (Math.abs(cursorY - initialCursorY) > 5) {
                     document.body.style.cursor = 'grabbing';
                     e.preventDefault();

@@ -17,11 +17,12 @@ export interface miniatureRefObj {
 export default function SlideCarousel(props: SlideCarouselProps) {
     const miniaturesRefsArr: Array<miniatureRefObj> = [];
     const miniaturesRefsArrRef = React.useRef(miniaturesRefsArr);
+    const carouselRef = React.useRef<HTMLDivElement>(null);
 
-    useChangeSlideOrder(miniaturesRefsArrRef);
+    useChangeSlideOrder(miniaturesRefsArrRef, carouselRef);
 
     return (
-        <div className={styles.slideCarousel}>
+        <div className={styles.slideCarousel} ref={carouselRef}>
             {props.slides.map((slide, index) => {
                 let miniatureStyles = {};
                 if (slide.background) {
