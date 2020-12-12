@@ -70,13 +70,14 @@ export function pasteObject(app: AppType): AppType {
         const newObjects = slide.objects.map((node) => {
             return {
                 ...node,
-                id: constructors.createId()
+                id: constructors.createId(),
             }
         });
         const newSlide = {
             ...slide,
             id: constructors.createId(),
-            objects: newObjects
+            objects: newObjects,
+            nextZIndex: ++slide.nextZIndex
         }
         return {
             ...app,
@@ -99,11 +100,13 @@ export function pasteObject(app: AppType): AppType {
             positionTopLeft: {
                 x: 100,
                 y: 100
-            }
+            },
+            zIndex: slideToFind.nextZIndex
         }
         const newSlide = {
             ...slideToFind,
-            objects: slideToFind.objects.concat([newNode])
+            objects: slideToFind.objects.concat([newNode]),
+            nextZIndex: ++slideToFind.nextZIndex
         }
         return replaceSlide(app, newSlide)
     }

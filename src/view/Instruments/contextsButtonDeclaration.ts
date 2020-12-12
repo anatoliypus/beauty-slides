@@ -9,6 +9,9 @@ import {
     setSlideBg,
     increaseZIndex,
     decreaseZIndex,
+    copyObject,
+    pasteObject,
+    deleteSlideObject
 } from '../../methods/methods';
 
 export function addSlideButtonOnClick(): void {
@@ -28,7 +31,7 @@ const fileBtnContextMenuItems = [
 
 const editBtnContextMenuItems = [
     {
-        heading: 'Удалить слайд',
+        heading: 'Удалить текущий слайд',
         callback: () => {
             dispatch(deleteSlide);
         },
@@ -41,17 +44,24 @@ const editBtnContextMenuItems = [
         },
     },
     {
-        heading: 'Разместить объект выше',
+        heading: 'Копировать слайд/объект ------ Ctrl/Cmd + C',
         callback: () => {
-            dispatch(increaseZIndex);
+            dispatch(copyObject);
         },
     },
     {
-        heading: 'Разместить объект ниже',
+        heading: 'Вставить слайд/объект ------ Ctrl/Cmd + V',
         callback: () => {
-            dispatch(decreaseZIndex);
+            dispatch(pasteObject);
         },
     },
+    {
+        heading: 'Удалить выбранный объект ------ Ctrl/Cmd + D',
+        callback: () => {
+            dispatch(deleteSlideObject);
+        },
+    },
+    
 ];
 
 export const contextBtns = [
