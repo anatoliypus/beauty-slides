@@ -1,0 +1,9 @@
+.contextBtn {
+  width: auto;
+  font-size: 22px;
+  cursor: pointer;
+  border: 0;
+  color: #fff;
+  background-color: transparent;
+  margin-left: 40px;
+}

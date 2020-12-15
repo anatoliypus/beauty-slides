@@ -1,10 +1,8 @@
 .instrumentsButton {
-  height: 75%;
-  width: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-left: 15px;
+  margin-right: 15px;
   cursor: pointer;
 }
 
@@ -13,7 +11,7 @@
 }
 
 .instrumentsButton__img {
-  height: 100%;
-  width: 100%;
+  width: 35px;
+  height: 35px;
 }
 

@@ -1,38 +1,40 @@
 .slideCarousel {
-  width: 20%;
-  height: 100%;
-  border-right: 1px solid #afafaf;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  box-sizing: border-box;
-  overflow-y: scroll;
-  position: relative;
-  min-width: 320px;
-  padding-top: 25px;
+    width: 20%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    overflow-y: scroll;
+    position: relative;
+    min-width: 320px;
+    padding-top: 25px;
+    background: #192232;
+    box-shadow: 0 6px 17px 6px rgba(0, 0, 0, 0.5);
+    border-radius: 47px;
 }
 
 .slideMiniature {
-  width: 250px;
-  height: 156px;
-  border: 2px solid #afafaf;
-  border-radius: 10px;
-  position: relative;
+    width: 100%;
+    height: 100%;
+    border: 2px solid #afafaf;
+    border-radius: 20px;
+    position: relative;
 }
 
 .slideCarouselItem {
-  width: 280px;
-  height: 150px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding-bottom: 30px;
-  border-top: 2px solid transparent;
-  box-sizing: content-box;
-  padding-top: 20px;
+    width: 85%;
+    height: 150px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-bottom: 30px;
+    border-top: 2px solid transparent;
+    box-sizing: content-box;
+    padding-top: 20px;
 }
 
 .activeMiniature {
-  border: 2px solid #fcacac;
-  overflow: hidden;
+    border: 3px solid #F02277;
+    overflow: hidden;
 }

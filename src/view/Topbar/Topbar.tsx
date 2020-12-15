@@ -1,10 +1,26 @@
 import React from 'react';
+import { AppType } from '../../model/model';
 import styles from './Topbar.module.css';
 import { dispatch, exportPDFApp } from '../../dispatcher';
 import { changePresentationName } from '../../methods/methods';
+import exportIcon from './exportIcon.svg';
+import ContextButton from './components/ContextButton';
+import TextButton from './components/TextButton';
+import {
+    addSlideButtonOnClick,
+    contextBtns,
+} from './contextsButtonDeclaration';
+import Palette from './components/Palette';
+import plus from './img/instrumentsPlus.svg';
+import minus from './img/instrumentsMinus.svg';
+import InstrumentsFiguresRedoUndo from './InstrumentsFiguresRedoUndo';
+import FigureMenu from './components/FigureMenu';
+import TextMenu from './components/TextMenu';
+import ImageMenu from './components/ImageMenu';
+import DeleteObject from './components/DeleteObject';
 
 interface TopbarProps {
-    presentationName: string;
+    app: AppType;
 }
 
 export default function Topbar(props: TopbarProps) {
@@ -31,15 +47,16 @@ export default function Topbar(props: TopbarProps) {
                 input.current.value = processName(input.current.value);
             }
         };
-        
+
         const onFocusFunc = () => {
-            if (input.current) input.current.value = props.presentationName;
+            if (input.current) input.current.value = props.app.name;
             window.addEventListener('click', returnProcessedName);
         };
 
         if (input.current) {
-            let name = props.presentationName;
+            let name = props.app.name;
             name = processName(name);
+            input.current.style.width = name.length * 20 + 'px';
             input.current.value = name;
             input.current.addEventListener('change', onChangeFunc, {
                 once: true,
@@ -48,7 +65,7 @@ export default function Topbar(props: TopbarProps) {
                 once: true,
             });
         }
-        
+
         return () => {
             if (input.current) {
                 input.current.removeEventListener('focus', onFocusFunc);
@@ -58,10 +75,77 @@ export default function Topbar(props: TopbarProps) {
         };
     });
 
+    const defaultState: any = {};
+    contextBtns.forEach((item) => {
+        defaultState[item.heading] = false;
+    });
+    const [contextMenuState, changeContextMenuState] = React.useState(
+        defaultState
+    );
+    const [isPaletteVisible, changePaletteVisibility] = React.useState(false);
+    const [areInstrumensVisible, changeInstrumentsVisibility] = React.useState(false);
+
+    let menu;
+    if (props.app.choosedObjectType === 'figure') menu = <FigureMenu app={props.app} />
+    else if (props.app.choosedObjectType === 'text') menu = <TextMenu app={props.app} />
+    else if (props.app.choosedObjectType === 'img') menu = <ImageMenu />
+    else menu = null;
+
     return (
+        <>
         <div className={`${styles.topbar}`}>
-            <input ref={input} className={styles.topbar__input} />
-            <button className={styles.exportBtn} onClick={exportPDFApp}>Экспорт PDF</button>
+            <div style={{display: 'flex'}}>
+                <input ref={input} className={styles.topbar__input} />
+                {!menu && contextBtns.map((item, index) => {
+                    return (
+                        <ContextButton
+                            key={index}
+                            menuShown={contextMenuState[item.heading]}
+                            heading={item.heading}
+                            contextMenuItems={item.menu}
+                            onclick={() => {
+                                const newState = { ...contextMenuState };
+                                for (let key in newState)
+                                    if (key !== item.heading)
+                                        newState[key] = false;
+                                newState[item.heading] = !newState[
+                                    item.heading
+                                ];
+                                changeContextMenuState(newState);
+                            }}
+                        />
+                    );
+                })}
+                {!menu && <TextButton
+                    heading="Залить слайд цветом"
+                    onClick={() => {
+                        changePaletteVisibility(true);
+                    }}
+                />}
+            </div>
+            <div style={{display: 'flex', marginRight: '100px'}}>
+                {menu}
+                {props.app.choosedObjectId && <DeleteObject app={props.app} />}
+            </div>
+            <div style={{display: 'flex'}}>
+                <div className={areInstrumensVisible ? `${styles.instruments}`: `${styles.instruments} ${styles.instruments__closed}`}>
+                    <InstrumentsFiguresRedoUndo onClick={() => {changeInstrumentsVisibility(false)}}/>
+                </div>
+                <button className={styles.openInstrumentsBtn} onClick={() => {
+                    changeInstrumentsVisibility(! areInstrumensVisible);
+                }}>
+                    <img src={areInstrumensVisible ? minus : plus} alt=""/>
+                </button>
+                <button className={styles.exportBtn} onClick={exportPDFApp}>
+                    <img src={exportIcon} alt="export" />
+                </button>
+            </div>
         </div>
+        <Palette
+                visibility={isPaletteVisible}
+                changeVisibility={changePaletteVisibility}
+                type={'slide'}
+        />
+        </>
     );
 }

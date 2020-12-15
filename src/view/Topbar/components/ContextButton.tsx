@@ -17,11 +17,11 @@ export default function ContextButton(props: ComponentButtonProps) {
 
     const setMenuCords = () => {
         if (btn.current) {
-            changeMenuX(btn.current.getBoundingClientRect().x + 'px');
+            changeMenuX(btn.current.getBoundingClientRect().x - 45 + 'px');
             changeMenuY(
                 btn.current.getBoundingClientRect().y +
                     btn.current.getBoundingClientRect().height +
-                    10 +
+                    - 20 +
                     'px'
             );
         }
@@ -45,15 +45,24 @@ export default function ContextButton(props: ComponentButtonProps) {
         window.addEventListener('resize', setMenuCords);
         return () => {
             window.removeEventListener('resize', setMenuCords);
-        }
+        };
     });
 
     return (
         <>
-            <button ref={btn} className={styles.contextBtn} onClick={props.onclick}>
+            <button
+                ref={btn}
+                className={styles.contextBtn}
+                onClick={props.onclick}
+            >
                 <p>{props.heading}</p>
             </button>
-            <ContextMenu shown={props.menuShown} data={props.contextMenuItems} x={menuX} y={menuY} />
+            <ContextMenu
+                shown={props.menuShown}
+                data={props.contextMenuItems}
+                x={menuX}
+                y={menuY}
+            />
         </>
     );
 }

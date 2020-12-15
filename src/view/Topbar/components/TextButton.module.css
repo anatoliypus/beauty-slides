@@ -1,0 +1,8 @@
+.textButton {
+    background-color: transparent;
+    font-size: 22px;
+    color: #fff;
+    border: 0;
+    margin-left: 40px;
+    cursor: pointer;
+  }

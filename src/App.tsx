@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import Topbar from './view/Topbar/Topbar';
 import SlideCarousel from './view/SlideCarousel/SlideCarousel';
 import SlideViewport from './view/SlideViewport/SlideViewport';
-import Instruments from './view/Instruments/Instruments';
 import Footer from './view/Footer/Footer';
 import { AppType } from './model/model';
 import styles from './App.module.css';
@@ -22,8 +21,7 @@ export default function App(props: AppProps) {
 
     return (
         <div className={styles.app}>
-            <Topbar presentationName={props.app.name} />
-            <Instruments app={props.app} />
+            <Topbar app={props.app} />
             <div className={styles.workingArea}>
                 <SlideCarousel
                     currSlideId={props.app.currSlideId}

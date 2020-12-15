@@ -9,7 +9,7 @@ function createSlide(): SlideType {
   return { 
     id: constructors.createId(),
     objects: objectsArr,
-    background: null,
+    background: '#ffffff',
     nextZIndex: 0
   }
 }
@@ -24,7 +24,7 @@ function createSettings(slideWidth: string, slideHeight: string): SettingsObject
 function createApp(settings: SettingsObject): AppType {
   const slide: SlideType = createSlide();
   return {
-    name: 'Название презентации',
+    name: 'presentation.',
     slides: [slide],
     currSlideId: slide.id,
     settings: settings,

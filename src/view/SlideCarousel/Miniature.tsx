@@ -48,7 +48,6 @@ export default function Miniature(props: MiniatureProps) {
 
     return (
         <div ref={slideCarouselItemRef} onClick={miniatureOnClick} className={styles.slideCarouselItem} key={props.slide.id}>
-            <p>{props.index}.</p>
             <div
                 ref={miniatureRef}
                 style={props.inlineStyle}

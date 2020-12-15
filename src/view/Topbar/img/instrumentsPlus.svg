@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="42px" height="42px" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Plus</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
+        <g id="beauty-slides----opened-context" transform="translate(-1591.000000, -92.000000)" stroke="#FFFFFF" stroke-width="4">
+            <g id="Topbar" transform="translate(74.000000, 46.000000)">
+                <g id="Instruments" transform="translate(1495.000000, 27.000000)">
+                    <g id="instruments-open-icon" transform="translate(0.500000, 0.500000)">
+                        <g id="Plus" transform="translate(23.000000, 20.500000)">
+                            <line x1="19.5" y1="0.395833333" x2="19.5" y2="37.6041667" id="Line-10"></line>
+                            <line x1="19.5" y1="-1.6479873e-17" x2="19.5" y2="38" id="Line-10" transform="translate(19.500000, 19.000000) rotate(-90.000000) translate(-19.500000, -19.000000) "></line>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
