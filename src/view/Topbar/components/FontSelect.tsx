@@ -1,6 +1,5 @@
 import React from 'react';
 import FontSelectMenu from './FontSelectMenu';
-import ContextMenu from './ContextMenu';
 
 interface FontSelectProps {
     fonts: Array<string>;
@@ -49,10 +48,11 @@ export default function FontSelect(props: FontSelectProps) {
     const changeFontBtnStyle = {
         marginRight: '20px',
         backgroundColor: 'transparent',
-        border: '1px solid #000',
+        border: '1px solid #fff',
         borderRadius: '7px',
         padding: '4px 10px',
-        cursor: 'pointer'
+        cursor: 'pointer',
+        color: '#fff'
     }
 
     return (

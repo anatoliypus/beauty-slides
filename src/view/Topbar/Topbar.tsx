@@ -25,7 +25,6 @@ interface TopbarProps {
 
 export default function Topbar(props: TopbarProps) {
     const input = React.useRef<HTMLInputElement>(null);
-    const button = React.useRef<HTMLButtonElement>(null);
 
     React.useEffect(() => {
         const processName = (name: string): string => {

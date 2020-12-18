@@ -3,8 +3,9 @@
     height: auto;
     padding: 5px;
     background-color: transparent;
-    border: 1px solid #000;
+    border: 1px solid #fff;
     border-radius: 5px;
+    color: #fff;
 }
 
 .objectsMenu {
@@ -26,7 +27,7 @@
 
 .label {
     font-size: 15px;
-    color: #000;
+    color: #fff;
     margin-right: 10px;
 }
 

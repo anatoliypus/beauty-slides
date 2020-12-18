@@ -14,10 +14,15 @@
     border-radius: 47px;
 }
 
+.slideCarouselItem p {
+    color: #fff;
+    font-size: 17px;
+}
+
 .slideMiniature {
-    width: 100%;
+    width: 90%;
     height: 100%;
-    border: 2px solid #afafaf;
+    border: 3px solid #afafaf;
     border-radius: 20px;
     position: relative;
 }

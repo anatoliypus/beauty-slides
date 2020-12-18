@@ -83,7 +83,7 @@ export default function useChangeSlideOrder(
                             }
                         }
                         if (ref && ref.current) {
-                            ref.current.style.borderBottom = '2px solid black';
+                            ref.current.style.borderBottom = '2px solid white';
                         } else {
                             if (refs.current) {
                                 let minTop: number | null = null;
@@ -97,7 +97,7 @@ export default function useChangeSlideOrder(
                                         }
                                     }
                                 }
-                                if (topElRef && topElRef.current) topElRef.current.style.borderTop = '2px solid black';
+                                if (topElRef && topElRef.current) topElRef.current.style.borderTop = '2px solid white';
                             }
                         }
                     }
