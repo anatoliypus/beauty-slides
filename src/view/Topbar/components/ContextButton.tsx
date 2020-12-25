@@ -17,11 +17,11 @@ export default function ContextButton(props: ComponentButtonProps) {
 
     const setMenuCords = () => {
         if (btn.current) {
-            changeMenuX(btn.current.getBoundingClientRect().x - 45 + 'px');
+            changeMenuX(btn.current.getBoundingClientRect().x + 'px');
             changeMenuY(
                 btn.current.getBoundingClientRect().y +
                     btn.current.getBoundingClientRect().height +
-                    - 20 +
+                    10 +
                     'px'
             );
         }
