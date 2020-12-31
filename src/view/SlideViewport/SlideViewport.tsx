@@ -4,18 +4,18 @@ import { SlideType } from '../../model/model';
 import getObjects from './getObjects';
 import { dispatch } from '../../dispatcher';
 import { changeSelectedObject } from '../../methods/methods';
+import { Context } from '../../dispatcher';
 
 interface SlideViewportProps {
     slide: SlideType;
-    slideWidth: string;
-    slideHeight: string;
     selectedId: string | null; 
 }
 
 export default function SlideViewport(props: SlideViewportProps) {
+    const settings = React.useContext(Context);
     let slideStyles = {
-        width: props.slideWidth,
-        height: props.slideHeight,
+        width: settings.slideWidth + 'px',
+        height: settings.slideHeight + 'px'
     };
     let slideStyles2;
     if (props.slide.background) {
@@ -33,7 +33,7 @@ export default function SlideViewport(props: SlideViewportProps) {
         }
     }
     return (
-        <div className={styles.slideViewport}>
+        <div className={styles.slideViewport} style={{height: settings.slideHeight + 'px'}}>
             <div
                 className={styles.slide}
                 style={slideStyles2 ? slideStyles2 : slideStyles}

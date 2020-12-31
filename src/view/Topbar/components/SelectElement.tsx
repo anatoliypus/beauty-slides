@@ -11,7 +11,7 @@ export default function SelectElement(props: SelectElementProps) {
     const changeStrokeWidth = React.useRef<HTMLSelectElement>(null);
 
     return (
-        <select className={styles.objectsMenuNode} value={props.selectedValue} ref={changeStrokeWidth} onChange={() => {
+        <select className={`${styles.objectsMenuNode} ${styles.selectElement}`} value={props.selectedValue} ref={changeStrokeWidth} onChange={() => {
             if (changeStrokeWidth.current) {
                 props.callback(changeStrokeWidth.current.value);
             }

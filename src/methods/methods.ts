@@ -53,36 +53,36 @@ export function copyObject(app: AppType): AppType {
     if (app.choosedObjectId)
         return {
             ...app,
-            bufferedId: app.choosedObjectId
+            bufferedId: app.choosedObjectId,
         };
     if (app.currSlideId)
         return {
             ...app,
-            bufferedId: app.currSlideId
+            bufferedId: app.currSlideId,
         };
     else throw new Error();
 }
 
 export function pasteObject(app: AppType): AppType {
-    if (! app.bufferedId) return app;
+    if (!app.bufferedId) return app;
     const slide = app.slides.find((slide) => slide.id === app.bufferedId);
     if (slide) {
         const newObjects = slide.objects.map((node) => {
             return {
                 ...node,
                 id: constructors.createId(),
-            }
+            };
         });
         const newSlide = {
             ...slide,
             id: constructors.createId(),
             objects: newObjects,
-            nextZIndex: ++slide.nextZIndex
-        }
+            nextZIndex: ++slide.nextZIndex,
+        };
         return {
             ...app,
-            slides: app.slides.concat([newSlide])
-        }
+            slides: app.slides.concat([newSlide]),
+        };
     }
     let slideToFind: SlideType | null = null;
     let nodeToFind: SlideNode | null = null;
@@ -91,7 +91,7 @@ export function pasteObject(app: AppType): AppType {
         if (result) {
             nodeToFind = result;
             slideToFind = slide;
-        };
+        }
     }
     if (slideToFind && nodeToFind) {
         const newNode = {
@@ -99,16 +99,16 @@ export function pasteObject(app: AppType): AppType {
             id: constructors.createId(),
             positionTopLeft: {
                 x: 100,
-                y: 100
+                y: 100,
             },
-            zIndex: slideToFind.nextZIndex
-        }
+            zIndex: slideToFind.nextZIndex,
+        };
         const newSlide = {
             ...slideToFind,
             objects: slideToFind.objects.concat([newNode]),
-            nextZIndex: ++slideToFind.nextZIndex
-        }
-        return replaceSlide(app, newSlide)
+            nextZIndex: ++slideToFind.nextZIndex,
+        };
+        return replaceSlide(app, newSlide);
     }
     return app;
 }
@@ -133,7 +133,10 @@ export function strokeResize(app: AppType, newWidth: number): AppType {
     return replaceSlide(app, newSlide);
 }
 
-export function changeRectBorderRadius(app: AppType, newRadius: number): AppType {
+export function changeRectBorderRadius(
+    app: AppType,
+    newRadius: number
+): AppType {
     const slide: SlideType | undefined = getCurrentSlide(app);
     if (!slide) return app;
 
@@ -435,19 +438,19 @@ export function decreaseZIndex(app: AppType): AppType {
 
     const newItem = {
         ...item,
-        zIndex: --item.zIndex
+        zIndex: --item.zIndex,
     };
 
     const newSlide = replaceNode(slide, newItem);
     newSlide.objects = newSlide.objects.map((el) => {
         if (el.id !== item.id && el.zIndex === item.zIndex) {
-            const newEl = {...el};
+            const newEl = { ...el };
             newEl.zIndex += 1;
-            return newEl
+            return newEl;
         }
-        return el
+        return el;
     });
-    
+
     return replaceSlide(app, newSlide);
 }
 
@@ -463,17 +466,17 @@ export function increaseZIndex(app: AppType): AppType {
 
     const newItem = {
         ...item,
-        zIndex: ++item.zIndex
+        zIndex: ++item.zIndex,
     };
 
     const newSlide = replaceNode(slide, newItem);
     newSlide.objects = newSlide.objects.map((el) => {
         if (el.id !== item.id && el.zIndex === item.zIndex) {
-            const newEl = {...el};
+            const newEl = { ...el };
             newEl.zIndex -= 1;
-            return newEl
+            return newEl;
         }
-        return el
+        return el;
     });
 
     return replaceSlide(app, newSlide);
@@ -503,7 +506,7 @@ export function deleteSlide(app: AppType): AppType {
     const newSlideList = { ...app }.slides.filter(
         (obj: SlideType) => obj !== slide
     );
-    if (! newSlideList.length) {
+    if (!newSlideList.length) {
         newSlideList.push(constructors.createSlide());
     }
 
@@ -535,7 +538,7 @@ export function addImage(app: AppType, path: string): AppType {
     const newSlide = {
         ...slide,
         objects: newObjects,
-        nextZIndex: ++slide.nextZIndex
+        nextZIndex: ++slide.nextZIndex,
     };
 
     return replaceSlide(app, newSlide);
@@ -551,7 +554,7 @@ export function addFigure(app: AppType, type: FigureType): AppType {
     const newSlide = {
         ...slide,
         objects: newObjects,
-        nextZIndex: ++slide.nextZIndex
+        nextZIndex: ++slide.nextZIndex,
     };
 
     return replaceSlide(app, newSlide);
@@ -567,7 +570,7 @@ export function addText(app: AppType): AppType {
     const newSlide = {
         ...slide,
         objects: newObjects,
-        nextZIndex: ++slide.nextZIndex
+        nextZIndex: ++slide.nextZIndex,
     };
 
     return replaceSlide(app, newSlide);
@@ -601,7 +604,7 @@ export async function exportApp(app: AppType) {
     });
 
     const promises = imgArr.map((imgObj) => {
-        return new Promise(async (resolve) => {
+        return new Promise<void>(async (resolve) => {
             imgObj.img.path = await getBase64(imgObj.img);
             resolve();
         });
@@ -669,17 +672,12 @@ export function importApp() {
 }
 
 export async function exportPDF(app: AppType) {
-    const pageSize = [
-        parseInt(app.settings.slideWidth),
-        parseInt(app.settings.slideHeight),
-    ];
+    const pageSize = [app.settings.slideWidth, app.settings.slideHeight];
     const doc = new jsPDF({
         unit: 'pt',
         orientation: 'l',
         format: pageSize,
     });
-    doc.addFileToVFS('Piazzolla.ttf', font);
-    doc.addFont('Piazzolla.ttf', '1', 'normal');
     await setDocObjects(doc, app);
     doc.save('test.pdf');
 }
@@ -706,13 +704,7 @@ async function setSlideObjects(
                 Number(rgb.green),
                 Number(rgb.blue)
             );
-            doc.rect(
-                0,
-                0,
-                parseInt(settings.slideWidth),
-                parseInt(settings.slideHeight),
-                'F'
-            );
+            doc.rect(0, 0, settings.slideWidth, settings.slideHeight, 'F');
         }
     }
     const promises = slide.objects.map(async (node) => {
@@ -723,17 +715,27 @@ async function setSlideObjects(
 }
 
 function setObject(doc: jsPDF, node: SlideNode) {
-    return new Promise(async (resolve) => {
+    return new Promise<void>(async (resolve) => {
         if (node.type === 'text') {
-            let x1: number = node.positionTopLeft.x, 
-                y1: number = node.positionTopLeft.y + (parseInt(node.height) - parseInt(node.fontSize))/parseInt(node.fontSize), 
-                x2: number = node.positionTopLeft.x + node.data.length*(parseInt(node.fontSize)) - (parseInt(node.width) - (node.data.length + 0.38)*parseInt(node.fontSize)),
-                y2: number = node.positionTopLeft.y + (parseInt(node.height) - parseInt(node.fontSize))/parseInt(node.fontSize)
-            doc.setFontSize(parseInt(node.fontSize));
-            doc.setFont(node.fontFamily, node.fontStyle);
-            doc.text(node.data, node.positionTopLeft.x, node.positionTopLeft.y, {align: node.alignment});
-            if(node.fontDecoration === 'underline'){
-                doc.line(x1, y1, x2, y2)
+            var canvas = document.createElement('canvas');
+            canvas.width = parseInt(node.width);
+            canvas.height = parseInt(node.height);
+            let ctx = canvas.getContext('2d');
+            if (ctx) {
+                ctx.font = `${node.fontStyle === 'italic' ? 'italic' : ''} ${node.fontWeight} ${node.fontSize} ${node.fontFamily}`;
+                ctx.fillStyle = node.color;
+                // ctx.textAlign = node.alignment;
+                var text = node.data;
+                ctx.fillText(text, 0, parseInt(node.fontSize));
+                let base64 = canvas.toDataURL();
+                doc.addImage(
+                    base64,
+                    'PNG',
+                    node.positionTopLeft.x,
+                    node.positionTopLeft.y,
+                    ctx.measureText(text).width,
+                    parseInt(node.fontSize)
+                );
             }
         }
         if (node.type === 'img') {
@@ -777,16 +779,15 @@ function setObject(doc: jsPDF, node: SlideNode) {
             );
         }
         if (node.type === 'figure' && node.figure === 'rectangle') {
-            if(node.borderRadius === 0) {
+            if (node.borderRadius === 0) {
                 doc.rect(
-                  node.positionTopLeft.x,
-                  node.positionTopLeft.y,
-                  parseInt(node.width),
-                  parseInt(node.height),
-                  style
+                    node.positionTopLeft.x,
+                    node.positionTopLeft.y,
+                    parseInt(node.width),
+                    parseInt(node.height),
+                    style
                 );
-            }
-            else {
+            } else {
                 doc.roundedRect(
                     node.positionTopLeft.x,
                     node.positionTopLeft.y,

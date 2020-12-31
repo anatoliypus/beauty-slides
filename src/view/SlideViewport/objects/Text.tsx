@@ -32,6 +32,14 @@ export default function Text(props: TextProps) {
         squareResize: false,
     });
 
+    let style = props.style;
+    if (props.kWidth !== 1) {
+        style = {
+            ...style,
+            border: 0
+        }
+    }
+
     const size = refs.sizeRef;
 
     const el = React.useRef<HTMLInputElement>(null);
@@ -65,7 +73,7 @@ export default function Text(props: TextProps) {
                     fill="#878787"
                 ></circle>
             </svg>
-            <input ref={el} className={textStyles.input} key={props.node.id} style={props.style} onClick={(e: React.MouseEvent<HTMLElement>) => {
+            <input ref={el} className={textStyles.input} key={props.node.id} style={style} onClick={(e: React.MouseEvent<HTMLElement>) => {
             props.onclick(e);
         }} />
         </div>

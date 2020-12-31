@@ -2,7 +2,7 @@ import * as serviceWorker from './serviceWorker';
 import constructors from './constructors/constructors';
 import { init } from './dispatcher';
 
-const settings = constructors.createSettings('1100px', '700px');
+const settings = constructors.createSettings();
 let app = constructors.createApp(settings);
 // app = addImage(app, '/background-1.jpg');
 

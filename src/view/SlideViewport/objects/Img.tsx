@@ -30,6 +30,14 @@ export default function Img(props: ImgProps) {
         squareResize: false,
     });
 
+    let style = props.style;
+    if (props.kWidth !== 1) {
+        style = {
+            ...style,
+            border: 0
+        }
+    }
+
     const size = refs.sizeRef;
 
     const width = parseInt(size.current.width) / props.kWidth + 'px';
@@ -56,7 +64,7 @@ export default function Img(props: ImgProps) {
                 ></circle>
             </svg>
             <img
-                style={props.style}
+                style={style}
                 key={props.node.id}
                 src={props.node.path}
                 onClick={(e: React.MouseEvent<HTMLElement>) => {

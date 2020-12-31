@@ -4,6 +4,8 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import { cloneApp } from './methods/secondaryMethods';
 import { exportApp, exportPDF, deleteSlideObject, copyObject, pasteObject } from './methods/methods';
+import constructors from './constructors/constructors';
+import ContextButton from './view/Topbar/components/ContextButton';
 
 let globalState: AppType | null = null;
 const undoStack: History = [];
@@ -65,10 +67,15 @@ function redo(): void {
     }
 }
 
+const settings = constructors.createSettings();
+const Context = React.createContext(settings);
+
 function renderApp(state: AppType): void {
     ReactDOM.render(
         <React.StrictMode>
-            <App app={state} />
+            <Context.Provider value={state.settings}>
+                <App app={state} />
+            </Context.Provider>
         </React.StrictMode>,
         document.getElementById('root')
     );
@@ -83,4 +90,4 @@ export function exportPDFApp() {
     if (globalState) exportPDF(globalState);
 }
 
-export { init, dispatch, undo, redo, exportAppLocally }
+export { init, dispatch, undo, redo, exportAppLocally, Context }

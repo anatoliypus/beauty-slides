@@ -54,8 +54,8 @@ export type SlideType = {
 };
 
 export type SettingsObject = {
-   slideWidth: string;
-   slideHeight: string;
+   slideWidth: number;
+   slideHeight: number;
 };
 
 export type AppType = {

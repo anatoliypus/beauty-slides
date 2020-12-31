@@ -29,8 +29,6 @@ export default function App(props: AppProps) {
                 />
                 <SlideViewport
                     slide={slide}
-                    slideWidth={props.app.settings.slideWidth}
-                    slideHeight={props.app.settings.slideHeight}
                     selectedId={props.app.choosedObjectId}
                 />
             </div>

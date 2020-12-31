@@ -4,16 +4,18 @@ import { SlideType } from '../../model/model';
 import getObjects from '../SlideViewport/getObjects';
 import { dispatch } from '../../dispatcher';
 import { changeSlide } from '../../methods/methods';
+import { Context } from '../../dispatcher';
 
 interface MiniatureProps {
     index: number;
     inlineStyle: React.CSSProperties;
-    miniatureClassName: string;
     slide: SlideType;
     refsArr: React.RefObject<Array<object>>;
+    choosed: boolean;
 }
  
 export default function Miniature(props: MiniatureProps) {
+    const settings = React.useContext(Context);
 
     const miniatureRef = React.useRef<HTMLDivElement>(null);
     const slideCarouselItemRef = React.useRef(null);
@@ -23,9 +25,11 @@ export default function Miniature(props: MiniatureProps) {
     function setProportions() {
         if (miniatureRef.current) {
             const miniatureWidth = miniatureRef.current.getBoundingClientRect().width;
-            const miniatureHeight = miniatureRef.current.getBoundingClientRect().height;
-            const kWidth = miniatureWidth / 1032;
-            const kHeight = miniatureHeight / 632;
+            console.log(miniatureWidth);
+            const miniatureHeight = miniatureWidth / (settings.slideWidth / settings.slideHeight);
+            miniatureRef.current.style.height = miniatureHeight + 'px';
+            const kWidth = miniatureWidth / settings.slideWidth;
+            const kHeight = miniatureHeight / settings.slideHeight;
             changeProportions({kWidth: 1 / kWidth, kHeight: 1 / kHeight});
         }
     }
@@ -48,11 +52,11 @@ export default function Miniature(props: MiniatureProps) {
 
     return (
         <div ref={slideCarouselItemRef} onClick={miniatureOnClick} className={styles.slideCarouselItem} key={props.slide.id}>
-            <p>{props.index}.</p>
+            <p style={props.choosed ? {color: 'red'} : {}}>{props.index}.</p>
             <div
                 ref={miniatureRef}
                 style={props.inlineStyle}
-                className={props.miniatureClassName}
+                className={styles.slideMiniature}
             >
                 {getObjects(props.slide, proportions.kWidth, proportions.kHeight, null)}
             </div>

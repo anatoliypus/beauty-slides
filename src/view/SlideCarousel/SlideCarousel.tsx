@@ -3,6 +3,7 @@ import styles from './SlideCarousel.module.css';
 import { SlideType } from '../../model/model';
 import Miniature from './Miniature';
 import useChangeSlideOrder from './useChangeSlideOrder';
+import { Context } from '../../dispatcher';
 
 interface SlideCarouselProps {
     slides: Array<SlideType>;
@@ -15,6 +16,7 @@ export interface miniatureRefObj {
 }
 
 export default function SlideCarousel(props: SlideCarouselProps) {
+    const settings = React.useContext(Context);
     const miniaturesRefsArr: Array<miniatureRefObj> = [];
     const miniaturesRefsArrRef = React.useRef(miniaturesRefsArr);
     const carouselRef = React.useRef<HTMLDivElement>(null);
@@ -22,7 +24,7 @@ export default function SlideCarousel(props: SlideCarouselProps) {
     useChangeSlideOrder(miniaturesRefsArrRef, carouselRef);
 
     return (
-        <div className={styles.slideCarousel} ref={carouselRef}>
+        <div className={styles.slideCarousel} ref={carouselRef} style={{height: settings.slideHeight}}>
             {props.slides.map((slide, index) => {
                 let miniatureStyles = {};
                 if (slide.background) {
@@ -38,18 +40,14 @@ export default function SlideCarousel(props: SlideCarouselProps) {
                         };
                     }
                 }
-                const miniatureClassName =
-                    props.currSlideId === slide.id
-                        ? `${styles.slideMiniature} ${styles.activeMiniature}`
-                        : styles.slideMiniature;
                 return (
                     <Miniature
                         refsArr={miniaturesRefsArrRef}
                         key={slide.id}
                         index={index + 1}
                         inlineStyle={miniatureStyles}
-                        miniatureClassName={miniatureClassName}
                         slide={slide}
+                        choosed={slide.id === props.currSlideId}
                     />
                 );
             })}

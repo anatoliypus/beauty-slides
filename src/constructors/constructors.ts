@@ -14,10 +14,10 @@ function createSlide(): SlideType {
   }
 }
 
-function createSettings(slideWidth: string, slideHeight: string): SettingsObject {
+function createSettings(): SettingsObject {
   return {
-    slideWidth: slideWidth,
-    slideHeight: slideHeight,
+    slideWidth: 1000,
+    slideHeight: 700,
   }
 }
 

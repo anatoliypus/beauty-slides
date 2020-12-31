@@ -30,6 +30,14 @@ export default function Triangle(props: TriangProps) {
         squareResize: false,
     });
 
+    let style = props.style;
+    if (props.kWidth !== 1) {
+        style = {
+            ...style,
+            border: 0
+        }
+    }
+
     const sizeRef = refs.sizeRef;
     const width =
         (parseInt(sizeRef.current.width) + props.node.strokeWidth * 2) /
@@ -39,7 +47,7 @@ export default function Triangle(props: TriangProps) {
         props.kHeight;
 
     return (
-        <div ref={el} className={styles.paddedObjectBlock} style={props.style}>
+        <div ref={el} className={styles.paddedObjectBlock} style={style}>
             <svg
                 ref={resizeIconRef}
                 className={styles.resizeIcon}

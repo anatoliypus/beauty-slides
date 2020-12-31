@@ -49,5 +49,13 @@
 }
 
 .activeBtn {
-    background-color: #f0ffbb;
+    background-color: #F02277;
+}
+
+.selectElement {
+    background-color: transparent;
+    border: 1px solid #fff;
+    border-radius: 5px;
+    padding: 4px 10px;
+    color: #fff;
 }

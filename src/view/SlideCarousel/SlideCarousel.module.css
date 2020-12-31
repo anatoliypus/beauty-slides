@@ -22,24 +22,22 @@
 .slideMiniature {
     width: 90%;
     height: 100%;
-    border: 3px solid #afafaf;
+    /* border: 3px solid #afafaf; */
     border-radius: 20px;
     position: relative;
+    overflow: hidden;
 }
 
 .slideCarouselItem {
     width: 85%;
-    height: 150px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     padding-bottom: 30px;
-    border-top: 2px solid transparent;
-    box-sizing: content-box;
+    border-top: 3px solid transparent;
     padding-top: 20px;
 }
 
-.activeMiniature {
+.activeItem {
     border: 3px solid #F02277;
-    overflow: hidden;
 }

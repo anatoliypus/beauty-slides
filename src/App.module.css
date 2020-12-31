@@ -31,6 +31,8 @@ body {
 }
 
 button:focus,
-button:active {
+button:active,
+select:focus,
+select:active {
     outline: none;
 }
