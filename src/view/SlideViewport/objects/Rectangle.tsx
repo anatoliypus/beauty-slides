@@ -75,9 +75,9 @@ export default function Rectangle(props: RectProps) {
                     strokeWidth={props.node.strokeWidth / props.kWidth}
                     width={parseInt(sizeRef.current.width) / props.kWidth}
                     height={parseInt(sizeRef.current.height) / props.kHeight}
-                    x={props.node.strokeWidth / 2}
+                    x={0}
                     stroke={props.node.strokeColor}
-                    y={props.node.strokeWidth / 2}
+                    y={0}
                     fill={props.node.background ? props.node.background : "transparent"}
                 ></rect>
             </svg>

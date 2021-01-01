@@ -50,7 +50,7 @@ export default function InstrumentsFiguresRedoUndo(props: InstrumentsFiguresRedo
             <ImgButton onClick={addCircleToSlide} imgUrl={CircleIcon} />
             <ImgButton onClick={putImage} imgUrl={ImageIcon} />
             <ImgButton onClick={addTextToSlide} imgUrl={TextIcon} />
-            <ImgButton onClick={addLineToSlide} imgUrl={LineIcon} />
+            {/* <ImgButton onClick={addLineToSlide} imgUrl={LineIcon} /> */}
             <ImgButton onClick={() => {
                 dispatch(addSlide)
             }} imgUrl={slide} />

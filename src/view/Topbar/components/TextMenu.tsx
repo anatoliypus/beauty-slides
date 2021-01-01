@@ -22,17 +22,9 @@ import {
 } from '../../../methods/methods';
 import Palette from './Palette';
 import SelectElement from './SelectElement';
-import WebFont from 'webfontloader';
 import ManageZIndex from './ManageZIndex';
 import FontSelect from './FontSelect';
-
-const fonts = ['JetBrains Mono', 'Oswald', 'Merriweather', 'Open Sans', 'Roboto', 'Montserrat', 'Playfair Display', 'Lora', 'PT Serif', 'Russo One', 'Lobster', 'Pacifico', 'Amatic SC', 'Caveat', 'Yeseva One'].sort();
-
-WebFont.load({
-    google: {
-        families: fonts,
-    },
-});
+import { fonts } from '../../../index';
 
 interface TextMenuProps {
     app: AppType;

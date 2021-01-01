@@ -42,7 +42,7 @@ export default function Text(props: TextProps) {
 
     const size = refs.sizeRef;
 
-    const el = React.useRef<HTMLInputElement>(null);
+    const el = React.useRef<HTMLTextAreaElement>(null);
     useChangeText({id: props.node.id, data: props.node.data, el: el});
 
     React.useEffect(() => {
@@ -73,7 +73,7 @@ export default function Text(props: TextProps) {
                     fill="#878787"
                 ></circle>
             </svg>
-            <input ref={el} className={textStyles.input} key={props.node.id} style={style} onClick={(e: React.MouseEvent<HTMLElement>) => {
+            <textarea ref={el} className={textStyles.input} key={props.node.id} style={style} onClick={(e: React.MouseEvent<HTMLElement>) => {
             props.onclick(e);
         }} />
         </div>

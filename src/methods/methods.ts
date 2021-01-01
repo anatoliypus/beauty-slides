@@ -18,8 +18,9 @@ import {
 import constructors from '../constructors/constructors';
 import { init } from '../dispatcher';
 import { jsPDF } from 'jspdf';
-import { font } from '../fonts/Piazzola';
+// import { font } from '../fonts/Piazzola';
 import hexRgb from 'hex-rgb';
+import CanvasTextWrapper from 'canvas-text-wrapper';
 
 export function changeSlide(app: AppType, slideId: string): AppType {
     if (app.currSlideId === slideId) return app;
@@ -718,25 +719,43 @@ function setObject(doc: jsPDF, node: SlideNode) {
     return new Promise<void>(async (resolve) => {
         if (node.type === 'text') {
             var canvas = document.createElement('canvas');
-            canvas.width = parseInt(node.width);
-            canvas.height = parseInt(node.height);
             let ctx = canvas.getContext('2d');
             if (ctx) {
-                ctx.font = `${node.fontStyle === 'italic' ? 'italic' : ''} ${node.fontWeight} ${node.fontSize} ${node.fontFamily}`;
+                let text = node.data;
+                const offset = node.fontDecoration === 'underline' ? 20 : 0;
+                const height = parseInt(node.height) + offset;
+                const width = parseInt(node.width);
+                canvas.width = width;
+                canvas.height = height;
                 ctx.fillStyle = node.color;
-                // ctx.textAlign = node.alignment;
-                var text = node.data;
-                ctx.fillText(text, 0, parseInt(node.fontSize));
+                ctx.strokeStyle = node.color;
+                ctx.lineWidth = 2;
+                CanvasTextWrapper.CanvasTextWrapper(canvas, text, {
+                    font: `${node.fontStyle === 'italic' ? 'italic' : ''} ${node.fontWeight} ${node.fontSize} ${node.fontFamily}`,
+                    textDecoration: node.fontDecoration === 'underline' ? 'underline' : 'none',
+                    textAlign: node.alignment,
+                    paddingY: node.fontDecoration === 'underline' ? 10 : 0
+                });
                 let base64 = canvas.toDataURL();
                 doc.addImage(
                     base64,
                     'PNG',
                     node.positionTopLeft.x,
                     node.positionTopLeft.y,
-                    ctx.measureText(text).width,
-                    parseInt(node.fontSize)
+                    width,
+                    height
                 );
             }
+            // let x1: number = node.positionTopLeft.x,
+            //     y1: number = node.positionTopLeft.y + (parseInt(node.height) - parseInt(node.fontSize))/parseInt(node.fontSize), 
+            //     x2: number = node.positionTopLeft.x + node.data.length*(parseInt(node.fontSize)) - (parseInt(node.width) - (node.data.length + 0.38)*parseInt(node.fontSize)),
+            //     y2: number = node.positionTopLeft.y + (parseInt(node.height) - parseInt(node.fontSize))/parseInt(node.fontSize)
+            // doc.setFontSize(parseInt(node.fontSize));
+            // doc.setFont(node.fontFamily, node.fontStyle);
+            // doc.text(node.data, node.positionTopLeft.x, node.positionTopLeft.y, {align: node.alignment});
+            // if(node.fontDecoration === 'underline'){
+            //     doc.line(x1, y1, x2, y2)
+            // }
         }
         if (node.type === 'img') {
             let base64 = node.path;
@@ -760,6 +779,7 @@ function setObject(doc: jsPDF, node: SlideNode) {
                 Number(rgb.green),
                 Number(rgb.blue)
             );
+            doc.setLineWidth(node.strokeWidth);
             if (node.background) {
                 const rgb = hexRgb(node.background);
                 doc.setFillColor(

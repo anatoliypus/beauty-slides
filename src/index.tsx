@@ -1,6 +1,15 @@
 import * as serviceWorker from './serviceWorker';
 import constructors from './constructors/constructors';
 import { init } from './dispatcher';
+import WebFont from 'webfontloader';
+
+export const fonts = ['JetBrains Mono', 'Oswald', 'Merriweather', 'Open Sans', 'Roboto', 'Montserrat', 'Playfair Display', 'Lora', 'PT Serif', 'Russo One', 'Lobster', 'Pacifico', 'Amatic SC', 'Caveat', 'Yeseva One'].sort();
+
+WebFont.load({
+    google: {
+        families: fonts,
+    },
+});
 
 const settings = constructors.createSettings();
 let app = constructors.createApp(settings);

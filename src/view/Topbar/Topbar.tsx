@@ -37,8 +37,10 @@ export default function Topbar(props: TopbarProps) {
         };
 
         const onChangeFunc = () => {
-            if (input.current)
-                dispatch(changePresentationName, input.current.value);
+            if (input.current) {
+                if (input.current.value !== '') dispatch(changePresentationName, input.current.value);
+                else dispatch(changePresentationName, 'presentation.');
+            }
         };
 
         const returnProcessedName = (e: Event) => {

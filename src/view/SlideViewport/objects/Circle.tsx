@@ -64,8 +64,8 @@ export default function Circle(props: CircleProps) {
             >
                 <circle
                     strokeWidth={props.node.strokeWidth / props.kWidth}
-                    cx={(parseInt(sizeRef.current.width) + props.node.strokeWidth) / (2 * props.kHeight)}
-                    cy={(parseInt(sizeRef.current.height) + props.node.strokeWidth) / (2 * props.kHeight)}
+                    cx={parseInt(sizeRef.current.width) / (2 * props.kHeight)}
+                    cy={parseInt(sizeRef.current.height) / (2 * props.kHeight)}
                     stroke={props.node.strokeColor}
                     r={parseInt(sizeRef.current.width) / (2 * props.kHeight)}
                     fill={props.node.background ? props.node.background : "transparent"}
