@@ -63,9 +63,13 @@ export type AppType = {
    currSlideId: string | null;
    slides: Array<SlideType>;
    settings: SettingsObject;
-   choosedObjectId: null | string;
-   choosedObjectType: NodeType | null;
+   choosedObject: choosedObjectType;
    bufferedId: string | null;
 };
+
+export type choosedObjectType = {
+    id: string | null;
+    type: NodeType | null;
+}
 
 export type History = Array<AppType>;

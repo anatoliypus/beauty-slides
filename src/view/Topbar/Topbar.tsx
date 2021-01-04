@@ -6,10 +6,7 @@ import { changePresentationName } from '../../methods/methods';
 import exportIcon from './exportIcon.svg';
 import ContextButton from './components/ContextButton';
 import TextButton from './components/TextButton';
-import {
-    addSlideButtonOnClick,
-    contextBtns,
-} from './contextsButtonDeclaration';
+import { contextBtns } from './contextsButtonDeclaration';
 import Palette from './components/Palette';
 import plus from './img/instrumentsPlus.svg';
 import minus from './img/instrumentsMinus.svg';
@@ -38,7 +35,8 @@ export default function Topbar(props: TopbarProps) {
 
         const onChangeFunc = () => {
             if (input.current) {
-                if (input.current.value !== '') dispatch(changePresentationName, input.current.value);
+                if (input.current.value !== '')
+                    dispatch(changePresentationName, input.current.value);
                 else dispatch(changePresentationName, 'presentation.');
             }
         };
@@ -108,8 +106,8 @@ export default function Topbar(props: TopbarProps) {
         if (instrumentsButtonRef.current && instrumentsRef.current) {
             __changeInstrumentsX(
                 instrumentsButtonRef.current.getBoundingClientRect().x -
-                instrumentsRef.current.getBoundingClientRect().width +
-                instrumentsButtonRef.current.getBoundingClientRect().width
+                    instrumentsRef.current.getBoundingClientRect().width +
+                    instrumentsButtonRef.current.getBoundingClientRect().width
             );
             __changeInstrumentsY(
                 instrumentsButtonRef.current.getBoundingClientRect().y
@@ -117,12 +115,34 @@ export default function Topbar(props: TopbarProps) {
         }
     });
 
+    React.useEffect(() => {
+        const listenForOutsideClk = (e: MouseEvent) => {
+            if (! e.defaultPrevented) {
+                let newState: any = {};
+                for (let key in contextMenuState) {
+                    newState[key] = false;
+                }
+                changeContextMenuState(newState)
+            }
+        };
+        for (let key in contextMenuState) {
+            if (contextMenuState[key]) {
+                window.addEventListener('click', listenForOutsideClk, {
+                    once: true,
+                });
+            }
+        }
+        return () => {
+            window.removeEventListener('click', listenForOutsideClk);
+        };
+    }, [contextMenuState]);
+
     let menu;
-    if (props.app.choosedObjectType === 'figure')
+    if (props.app.choosedObject.type === 'figure')
         menu = <FigureMenu app={props.app} />;
-    else if (props.app.choosedObjectType === 'text')
+    else if (props.app.choosedObject.type === 'text')
         menu = <TextMenu app={props.app} />;
-    else if (props.app.choosedObjectType === 'img') menu = <ImageMenu />;
+    else if (props.app.choosedObject.type === 'img') menu = <ImageMenu />;
     else menu = null;
 
     return (
@@ -164,7 +184,7 @@ export default function Topbar(props: TopbarProps) {
 
                     <div style={{ display: 'flex' }}>
                         {menu}
-                        {props.app.choosedObjectId && (
+                        {props.app.choosedObject.id && (
                             <DeleteObject app={props.app} />
                         )}
                     </div>

@@ -7,8 +7,6 @@ import {
     deleteSlide,
     getImageBase64FromDialog,
     setSlideBg,
-    increaseZIndex,
-    decreaseZIndex,
     copyObject,
     pasteObject,
     deleteSlideObject

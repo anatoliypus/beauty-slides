@@ -35,7 +35,7 @@ export default function TextMenu(props: TextMenuProps) {
 
     let node;
     if (slide) {
-        node = getSlideNode(slide, props.app.choosedObjectId);
+        node = getSlideNode(slide, props.app.choosedObject.id);
     } else throw new Error();
 
     let fontSize;

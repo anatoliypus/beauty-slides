@@ -53,7 +53,10 @@ export default function ContextButton(props: ComponentButtonProps) {
             <button
                 ref={btn}
                 className={styles.contextBtn}
-                onClick={props.onclick}
+                onClick={(e) => {
+                    e.preventDefault();
+                    props.onclick()
+                }}
             >
                 <p>{props.heading}</p>
             </button>

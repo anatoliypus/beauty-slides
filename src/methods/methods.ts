@@ -27,34 +27,40 @@ export function changeSlide(app: AppType, slideId: string): AppType {
     return {
         ...app,
         currSlideId: slideId,
-        choosedObjectId: null,
-        choosedObjectType: null,
+        choosedObject: {
+            id: null,
+            type: null
+        }
     };
 }
 
 export function changeSelectedObject(app: AppType, objId: string): AppType {
-    if (app.choosedObjectId === objId) return app;
+    if (app.choosedObject.id === objId) return app;
     const slide = getCurrentSlide(app);
     if (!slide) return app;
     const node = getSlideNode(slide, objId);
     if (!node || objId === '')
         return {
             ...app,
-            choosedObjectId: null,
-            choosedObjectType: null,
+            choosedObject: {
+                id: null,
+                type: null
+            }
         };
     return {
         ...app,
-        choosedObjectId: objId,
-        choosedObjectType: node.type,
+        choosedObject: {
+            id: objId,
+            type: node.type,
+        }
     };
 }
 
 export function copyObject(app: AppType): AppType {
-    if (app.choosedObjectId)
+    if (app.choosedObject.id)
         return {
             ...app,
-            bufferedId: app.choosedObjectId,
+            bufferedId: app.choosedObject.id,
         };
     if (app.currSlideId)
         return {
@@ -99,8 +105,8 @@ export function pasteObject(app: AppType): AppType {
             ...nodeToFind,
             id: constructors.createId(),
             positionTopLeft: {
-                x: 100,
-                y: 100,
+                x: nodeToFind.positionTopLeft.x - 20,
+                y: nodeToFind.positionTopLeft.y - 20,
             },
             zIndex: slideToFind.nextZIndex,
         };
@@ -120,7 +126,7 @@ export function strokeResize(app: AppType, newWidth: number): AppType {
 
     const figure: SlideNode | undefined = getSlideNode(
         slide,
-        app.choosedObjectId
+        app.choosedObject.id
     );
     if (!figure || figure.type !== 'figure') return app;
 
@@ -143,7 +149,7 @@ export function changeRectBorderRadius(
 
     const figure: SlideNode | undefined = getSlideNode(
         slide,
-        app.choosedObjectId
+        app.choosedObject.id
     );
     if (!figure || figure.type !== 'figure') return app;
 
@@ -163,7 +169,7 @@ export function strokeColorSet(app: AppType, newColor: string): AppType {
 
     const figure: SlideNode | undefined = getSlideNode(
         slide,
-        app.choosedObjectId
+        app.choosedObject.id
     );
     if (!figure || figure.type !== 'figure') return app;
 
@@ -183,7 +189,7 @@ export function figureBackgroundSet(app: AppType, newColor: string): AppType {
 
     const figure: SlideNode | undefined = getSlideNode(
         slide,
-        app.choosedObjectId
+        app.choosedObject.id
     );
     if (!figure || figure.type !== 'figure') return app;
 
@@ -208,7 +214,7 @@ export function resizeNode(app: AppType, payload: resizeNodePayload): AppType {
 
     const node: SlideNode | undefined = getSlideNode(
         slide,
-        app.choosedObjectId
+        app.choosedObject.id
     );
 
     if (!node) return app;
@@ -230,7 +236,7 @@ export function toggleBoldText(app: AppType): AppType {
 
     const text: SlideNode | undefined = getSlideNode(
         slide,
-        app.choosedObjectId
+        app.choosedObject.id
     );
     if (!text || text.type !== 'text') return app;
 
@@ -250,7 +256,7 @@ export function toggleItalicText(app: AppType): AppType {
 
     const text: SlideNode | undefined = getSlideNode(
         slide,
-        app.choosedObjectId
+        app.choosedObject.id
     );
     if (!text || text.type !== 'text') return app;
 
@@ -270,7 +276,7 @@ export function toggleUnderlinedText(app: AppType): AppType {
 
     const text: SlideNode | undefined = getSlideNode(
         slide,
-        app.choosedObjectId
+        app.choosedObject.id
     );
     if (!text || text.type !== 'text') return app;
 
@@ -294,7 +300,7 @@ export function changeAlignment(
 
     const text: SlideNode | undefined = getSlideNode(
         slide,
-        app.choosedObjectId
+        app.choosedObject.id
     );
     if (!text || text.type !== 'text') return app;
 
@@ -314,7 +320,7 @@ export function changeTextFontFamily(app: AppType, family: string): AppType {
 
     const text: SlideNode | undefined = getSlideNode(
         slide,
-        app.choosedObjectId
+        app.choosedObject.id
     );
     if (!text || text.type !== 'text') return app;
 
@@ -334,7 +340,7 @@ export function changeTextSize(app: AppType, size: string): AppType {
 
     const text: SlideNode | undefined = getSlideNode(
         slide,
-        app.choosedObjectId
+        app.choosedObject.id
     );
     if (!text || text.type !== 'text') return app;
 
@@ -354,7 +360,7 @@ export function changeTextColor(app: AppType, color: string): AppType {
 
     const text: SlideNode | undefined = getSlideNode(
         slide,
-        app.choosedObjectId
+        app.choosedObject.id
     );
     if (!text || text.type !== 'text') return app;
     const newText: TextObject = {
@@ -373,7 +379,7 @@ export function changeText(app: AppType, textData: string): AppType {
 
     const text: SlideNode | undefined = getSlideNode(
         slide,
-        app.choosedObjectId
+        app.choosedObject.id
     );
     if (!text || text.type !== 'text') return app;
 
@@ -410,7 +416,7 @@ export function moveItem(app: AppType, payload: moveItemPayload): AppType {
 
     const item: SlideNode | undefined = getSlideNode(
         slide,
-        app.choosedObjectId
+        app.choosedObject.id
     );
     if (!item) return app;
 
@@ -433,7 +439,7 @@ export function decreaseZIndex(app: AppType): AppType {
 
     const item: SlideNode | undefined = getSlideNode(
         slide,
-        app.choosedObjectId
+        app.choosedObject.id
     );
     if (!item || item.zIndex === 0) return app;
 
@@ -461,7 +467,7 @@ export function increaseZIndex(app: AppType): AppType {
 
     const item: SlideNode | undefined = getSlideNode(
         slide,
-        app.choosedObjectId
+        app.choosedObject.id
     );
     if (!item || slide.nextZIndex - item.zIndex === 1) return app;
 
@@ -490,14 +496,16 @@ export function deleteSlideObject(app: AppType): AppType {
     const newSlide: SlideType = {
         ...slide,
         objects: slide.objects.filter(
-            (obj: SlideNode) => obj.id !== app.choosedObjectId
+            (obj: SlideNode) => obj.id !== app.choosedObject.id
         ),
     };
 
     return {
         ...replaceSlide(app, newSlide),
-        choosedObjectId: '',
-        choosedObjectType: null,
+        choosedObject: {
+            id: null,
+            type: null
+        }
     };
 }
 

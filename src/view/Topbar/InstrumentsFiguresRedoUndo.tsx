@@ -3,18 +3,13 @@ import RectIcon from './img/rectangle.svg';
 import TriangIcon from './img/triangle.svg';
 import CircleIcon from './img/circle.svg';
 import TextIcon from './img/text.svg';
-import UndoIcon from './img/undo.svg';
-import RedoIcon from './img/redo.svg';
 import ImageIcon from './img/image.svg';
-import LineIcon from './img/line.svg';
-import { undo, redo } from '../../dispatcher';
 import ImgButton from './components/ImgButton';
 import {
     addRectangleToSlide,
     addTriangleToSlide,
     addCircleToSlide,
     addTextToSlide,
-    addLineToSlide,
 } from './contextsButtonDeclaration';
 import { addImage, getImageBase64FromDialog, addSlide } from '../../methods/methods';
 import { dispatch } from '../../dispatcher';

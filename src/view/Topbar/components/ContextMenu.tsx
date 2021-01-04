@@ -19,6 +19,9 @@ export default function ContextMenu(props: ContextMenuProps) {
         <div
             className={`${styles.menu} ${visibilityClass}`}
             style={{ top: props.y, left: props.x }}
+            onClick={(e) => {
+                e.preventDefault()
+            }}
         >
             {props.data.map((item, index) => {
                 return (

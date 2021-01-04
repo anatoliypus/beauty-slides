@@ -1,3 +1,5 @@
+import { NodeType } from "../model/model"
+
 export function changeSlide(id: string) {
     return {
         type: 'CHANGE_SLIDE',
@@ -5,10 +7,11 @@ export function changeSlide(id: string) {
     }
 }
 
-export function changeSelectedObject(id: string) {
+export function changeSelectedObject(id: string, objType: NodeType) {
     return {
         type: 'CHANGE_SELECTED_OBJECT',
-        id
+        id,
+        objType
     }
 }
 

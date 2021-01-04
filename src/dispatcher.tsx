@@ -3,9 +3,8 @@ import { AppType, History } from './model/model';
 import ReactDOM from 'react-dom';
 import App from './App';
 import { cloneApp } from './methods/secondaryMethods';
-import { exportApp, exportPDF, deleteSlideObject, copyObject, pasteObject } from './methods/methods';
+import { exportApp, exportPDF } from './methods/methods';
 import constructors from './constructors/constructors';
-import ContextButton from './view/Topbar/components/ContextButton';
 
 let globalState: AppType | null = null;
 const undoStack: History = [];
@@ -23,30 +22,6 @@ function dispatch(fn: Function, payload: object | string | null | number = null)
 function init(state: AppType): void {
     globalState = state;
     renderApp(state);
-    window.addEventListener('keydown', (e) => {
-        if (e.key === 'z' && (e.metaKey || e.ctrlKey)) {
-            if (e.shiftKey) redo();
-            else undo();
-        }
-    });
-    window.addEventListener('keydown', (e) => {
-        if (e.key === 'd' && (e.metaKey || e.ctrlKey)) {
-            e.preventDefault();
-            dispatch(deleteSlideObject);
-        }
-    });
-    window.addEventListener('keydown', (e) => {
-        if (e.key === 'c' && (e.metaKey || e.ctrlKey)) {
-            e.preventDefault();
-            dispatch(copyObject);
-        }
-    });
-    window.addEventListener('keydown', (e) => {
-        if (e.key === 'v' && (e.metaKey || e.ctrlKey)) {
-            e.preventDefault();
-            dispatch(pasteObject);
-        }
-    });
 }
 
 function undo(): void {
