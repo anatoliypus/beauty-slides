@@ -97,7 +97,7 @@ export function changeTextFontFamily(fontFamily: string) {
 
 export function changeTextFontSize(fontSize: string) {
     return {
-        type: 'CHANGE_TEXT_FONT_SIZE',
+        type: 'CHANGE_TEXT_FONT_FAMILY',
         fontSize
     }
 }
