@@ -25,9 +25,9 @@ export default function Topbar(props: TopbarProps) {
 
     React.useEffect(() => {
         const processName = (name: string): string => {
-            if (name.length > 20) {
+            if (name.length > 15) {
                 let splittedName = name.split('');
-                splittedName.splice(19);
+                splittedName.splice(14);
                 name = splittedName.join('') + '...';
             }
             return name;
@@ -55,7 +55,12 @@ export default function Topbar(props: TopbarProps) {
         if (input.current) {
             let name = props.app.name;
             name = processName(name);
-            input.current.style.width = name.length * 20 + 'px';
+            let canvas = document.createElement('canvas');
+            let ctx = canvas.getContext('2d');
+            if (! ctx) throw new Error();
+            ctx.font = getComputedStyle(input.current).font;
+            const width = ctx.measureText(name).width;
+            input.current.style.width = width + 'px';
             input.current.value = name;
             input.current.addEventListener('change', onChangeFunc, {
                 once: true,
@@ -71,7 +76,7 @@ export default function Topbar(props: TopbarProps) {
                 input.current.removeEventListener('change', onChangeFunc);
                 window.removeEventListener('click', returnProcessedName);
             }
-        };
+        }
     });
 
     const defaultState: any = {};

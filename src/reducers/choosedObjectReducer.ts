@@ -6,6 +6,11 @@ export default function choosedObjectReducer(state: choosedObjectType = {id: nul
             id: action.id,
             type: action.objType
         }
+    } else if (action.type === 'CHANGE_SLIDE') {
+        return {
+            id: null,
+            type: null
+        }
     }
     return state
 }

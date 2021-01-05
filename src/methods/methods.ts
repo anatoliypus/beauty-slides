@@ -688,7 +688,7 @@ export async function exportPDF(app: AppType) {
         format: pageSize,
     });
     await setDocObjects(doc, app);
-    doc.save('test.pdf');
+    doc.save(`${app.name}.pdf`);
 }
 
 async function setDocObjects(doc: jsPDF, app: AppType) {

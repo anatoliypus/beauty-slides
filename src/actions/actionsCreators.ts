@@ -1,13 +1,22 @@
-import { NodeType } from "../model/model"
+import { NodeType } from "../model/model";
 
-export function changeSlide(id: string) {
+export interface changeSlideActionType {
+    type: 'CHANGE_SLIDE';
+    id: string;
+}
+export function changeSlide(id: string): changeSlideActionType {
     return {
         type: 'CHANGE_SLIDE',
         id
     }
 }
 
-export function changeSelectedObject(id: string, objType: NodeType) {
+export interface changeSelectedObjectActionType {
+    type: 'CHANGE_SELECTED_OBJECT';
+    id: string;
+    objType: NodeType | null
+}
+export function changeSelectedObject(id: string, objType: NodeType): changeSelectedObjectActionType {
     return {
         type: 'CHANGE_SELECTED_OBJECT',
         id,
@@ -15,31 +24,48 @@ export function changeSelectedObject(id: string, objType: NodeType) {
     }
 }
 
-export function copyObject() {
+
+export interface copyObjectActionType {
+    type: 'COPY_OBJECT';
+}
+export function copyObject(): copyObjectActionType {
     return {
         type: 'COPY_OBJECT'
     }
 }
 
-export function pasteObject() {
+export interface pasteObjectActionType {
+    type: 'PASTE_OBJECT';
+}
+export function pasteObject(): pasteObjectActionType {
     return {
         type: 'PASTE_OBJECT'
     }
 }
 
-export function strokeResize(strokeWidth: number) {
+export interface strokeResizeActionType {
+    type: 'RESIZE_FIGURE_STROKE';
+    strokeWidth: number;
+}
+export function strokeResize(strokeWidth: number): strokeResizeActionType {
     return {
         type: 'RESIZE_FIGURE_STROKE',
         strokeWidth
     }
 }
 
-export function changeRectBorderRadius(newRadius: number) {
+export interface changeRectBorderRadiusActionType {
+    type: 'CHANGE_FIGURE_BORDER_RADIUS';
+    newRadius: number;
+}
+export function changeRectBorderRadius(newRadius: number): changeRectBorderRadiusActionType {
     return {
         type: 'CHANGE_FIGURE_BORDER_RADIUS',
         newRadius
     }
 }
+
+/////////////////////////////////////////////////////////////////////////////
 
 export function strokeColorSet(newColor: number) {
     return {
