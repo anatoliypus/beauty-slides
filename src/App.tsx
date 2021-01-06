@@ -25,13 +25,15 @@ export default function App(props: AppProps) {
         window.addEventListener('keydown', hotKeyMethods.pasteHotKey);
         window.addEventListener('keydown', hotKeyMethods.deleteHotKey);
         window.addEventListener('keydown', hotKeyMethods.undoHotKey);
+        window.addEventListener('keydown', hotKeyMethods.deleteSlideHotKey);
         return () => {
             window.removeEventListener('keydown', hotKeyMethods.copyHotKey);
             window.removeEventListener('keydown', hotKeyMethods.pasteHotKey);
             window.removeEventListener('keydown', hotKeyMethods.deleteHotKey);
             window.removeEventListener('keydown', hotKeyMethods.undoHotKey);
+            window.removeEventListener('keydown', hotKeyMethods.deleteSlideHotKey);
         }
-    })
+    });
 
     return (
         <div className={styles.app}>

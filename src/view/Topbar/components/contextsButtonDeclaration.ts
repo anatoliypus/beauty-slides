@@ -1,4 +1,4 @@
-import { dispatch, exportAppLocally } from '../../dispatcher';
+import { dispatch, exportAppLocally } from '../../../dispatcher';
 import {
     addSlide,
     importApp,
@@ -10,7 +10,7 @@ import {
     copyObject,
     pasteObject,
     deleteSlideObject
-} from '../../methods/methods';
+} from '../../../methods/methods';
 
 export function addSlideButtonOnClick(): void {
     dispatch(addSlide);
@@ -29,7 +29,7 @@ const fileBtnContextMenuItems = [
 
 const editBtnContextMenuItems = [
     {
-        heading: 'Удалить текущий слайд',
+        heading: 'Удалить текущий слайд ------ Ctrl/Cmd + Shift + D',
         callback: () => {
             dispatch(deleteSlide);
         },

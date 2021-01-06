@@ -1,8 +1,8 @@
 import React from 'react';
-import { changeSlideOrder } from '../../methods/methods';
-import { dispatch } from '../../dispatcher';
-import { miniatureRefObj } from './SlideCarousel';
-import slideIcon from './img/template.svg';
+import { changeSlideOrder } from '../../../methods/methods';
+import { dispatch } from '../../../dispatcher';
+import { miniatureRefObj } from '../SlideCarousel';
+import slideIcon from '../img/template.svg';
 
 export default function useChangeSlideOrder(
     refs: React.RefObject<Array<miniatureRefObj>>,

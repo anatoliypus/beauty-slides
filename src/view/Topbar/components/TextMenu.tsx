@@ -18,7 +18,7 @@ import {
     toggleBoldText,
     toggleItalicText,
     toggleUnderlinedText,
-    changeAlignment
+    changeAlignment,
 } from '../../../methods/methods';
 import Palette from './Palette';
 import SelectElement from './SelectElement';
@@ -59,25 +59,25 @@ export default function TextMenu(props: TextMenuProps) {
     ] = React.useState(false);
 
     const fontSizeValues = [
-        '5px',
-        '7px',
-        '9px',
-        '11px',
-        '13px',
-        '15px',
-        '17px',
-        '19px',
-        '21px',
-        '23px',
-        '25px',
-        '27px',
-        '30px',
-        '35px',
-        '40px',
-        '45px',
-        '50px',
-        '55px',
-        '60px',
+        5,
+        7,
+        9,
+        11,
+        13,
+        15,
+        17,
+        19,
+        21,
+        23,
+        25,
+        27,
+        30,
+        35,
+        40,
+        45,
+        50,
+        55,
+        60,
     ];
 
     return (

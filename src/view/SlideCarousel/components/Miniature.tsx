@@ -1,10 +1,10 @@
 import React from 'react';
-import styles from './SlideCarousel.module.css';
-import { SlideType } from '../../model/model';
-import getObjects from '../SlideViewport/getObjects';
-import { dispatch } from '../../dispatcher';
-import { changeSlide } from '../../methods/methods';
-import { Context } from '../../dispatcher';
+import styles from '../SlideCarousel.module.css';
+import { SlideType } from '../../../model/model';
+import getObjects from '../../slideObjects/getObjects';
+import { dispatch } from '../../../dispatcher';
+import { changeSlide } from '../../../methods/methods';
+import { Context } from '../../../dispatcher';
 
 interface MiniatureProps {
     index: number;
@@ -52,7 +52,7 @@ export default function Miniature(props: MiniatureProps) {
 
     return (
         <div ref={slideCarouselItemRef} onClick={miniatureOnClick} className={styles.slideCarouselItem} key={props.slide.id}>
-            <p style={props.choosed ? {color: 'red'} : {}}>{props.index}.</p>
+            <p style={props.choosed ? {color: '#ce458c'} : {}}>{props.index}.</p>
             <div
                 ref={miniatureRef}
                 style={props.inlineStyle}

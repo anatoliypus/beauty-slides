@@ -32,14 +32,16 @@ export default function ChangeOwnColor(props: ChangeOwnColorProps) {
     }, []);
     return (
         <div className={styles.changeColorBlock}>
-            <p>Или свой здесь:</p>
-            <input
-                ref={ref}
-                type="color"
-                className={styles.colorsInput}
-                value="#000000"
-                onChange={(e) => {if (ref.current) changeColor(ref.current.value)}}
-            />
+            <div style={{display: 'flex', alignItems: 'center'}}>
+                <p>Или свой здесь:</p>
+                <input
+                    ref={ref}
+                    type="color"
+                    className={styles.colorsInput}
+                    value="#000000"
+                    onChange={(e) => {if (ref.current) changeColor(ref.current.value)}}
+                />
+            </div>
             <button onClick={submit} className={styles.applyBtn}>Применить</button>
         </div>
     );

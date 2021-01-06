@@ -3,7 +3,7 @@ import styles from './ObjectsMenu.module.css';
 
 interface SelectElementProps {
     selectedValue: string;
-    values: Array<string>;
+    values: Array<number>;
     callback: (value: string) => void;
 }
 

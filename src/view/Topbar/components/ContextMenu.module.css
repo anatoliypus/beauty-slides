@@ -1,5 +1,5 @@
 .menu {
-    width: 350px;
+    width: 420px;
     height: auto;
     background: rgba(2,11,28,0.94);
     box-shadow: 0 12px 19px 11px rgba(0,0,0,0.50);
@@ -8,7 +8,7 @@
     z-index: 998;
     transition: 0.1s;
     box-sizing: border-box;
-    padding: 10px;
+    padding: 20px;
     padding-bottom: 20px;
 }
 
@@ -16,14 +16,18 @@
     width: 100%;
     height: auto;
     cursor: pointer;
-    margin-top: 9px;
+    margin-top: 15px;
 }
 
-.menu__item p {
-    font-size: 15px;
+.menu__item_p {
+    font-size: 16px;
     color: #fff;
-    font-weight: 300;
+    font-weight: 500;
     line-height: 16px;
+}
+
+.menu__item_p:hover {
+    color: #ce458c;
 }
 
 .menu_showed {

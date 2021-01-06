@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './SlideViewport.module.css';
 import { SlideType } from '../../model/model';
-import getObjects from './getObjects';
+import getObjects from '../slideObjects/getObjects';
 import { dispatch } from '../../dispatcher';
 import { changeSelectedObject } from '../../methods/methods';
 import { Context } from '../../dispatcher';

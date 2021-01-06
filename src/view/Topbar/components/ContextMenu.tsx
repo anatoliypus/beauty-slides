@@ -30,7 +30,7 @@ export default function ContextMenu(props: ContextMenuProps) {
                         className={styles.menu__item}
                         onClick={item.callback}
                     >
-                        <p>{item.heading}</p>
+                        <p className={styles.menu__item_p}>{item.heading}</p>
                     </div>
                 );
             })}

@@ -43,8 +43,8 @@ export default function FigureMenu(props: FigureMenuProps) {
         changeFigureStrokePaletteVisibility,
     ] = React.useState(false);
 
-    const strokeValues = ['1', '2', '3', '4', '5'];
-    const radiusValues = ['0', '6', '10', '14', '18', '20', '25', '30', '35', '40', '50'];
+    const strokeValues = [0, 1, 2, 3, 4, 5];
+    const radiusValues = [0, 6, 10, 14, 18, 20, 25, 30, 35, 40, 50];
 
     const radiusStyle = figure === 'rectangle' ? {display: 'flex', alignItems: 'center'} : {display: 'none'};
 

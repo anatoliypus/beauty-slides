@@ -57,7 +57,7 @@ function createFigure(type: FigureType, zIndex: number): FigureObject {
     height: '150px',
     positionTopLeft: {x: 20, y: 20},
     strokeColor: '#000',
-    background: null,
+    background: '#fff',
     strokeWidth: 1,
     borderRadius: 0,
     zIndex: zIndex

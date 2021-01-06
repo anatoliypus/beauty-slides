@@ -28,7 +28,7 @@ export default function FontSelectMenu(props: FontSelectItemProps) {
                             props.changeVisibility(false);
                         }}
                     >
-                        <p style={{fontFamily: item, fontSize: '17px', marginTop: '15px'}}>{item}</p>
+                        <p className={styles.menu__item_p} style={{fontFamily: item}}>{item}</p>
                     </div>
                 );
             })}

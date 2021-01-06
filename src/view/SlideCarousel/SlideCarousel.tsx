@@ -1,8 +1,8 @@
 import React from 'react';
 import styles from './SlideCarousel.module.css';
 import { SlideType } from '../../model/model';
-import Miniature from './Miniature';
-import useChangeSlideOrder from './useChangeSlideOrder';
+import Miniature from './components/Miniature';
+import useChangeSlideOrder from './components/useChangeSlideOrder';
 import { Context } from '../../dispatcher';
 
 interface SlideCarouselProps {

@@ -1,19 +1,19 @@
 import React from 'react';
-import RectIcon from './img/rectangle.svg';
-import TriangIcon from './img/triangle.svg';
-import CircleIcon from './img/circle.svg';
-import TextIcon from './img/text.svg';
-import ImageIcon from './img/image.svg';
-import ImgButton from './components/ImgButton';
+import RectIcon from '../img/rectangle.svg';
+import TriangIcon from '../img/triangle.svg';
+import CircleIcon from '../img/circle.svg';
+import TextIcon from '../img/text.svg';
+import ImageIcon from '../img/image.svg';
+import ImgButton from './ImgButton';
 import {
     addRectangleToSlide,
     addTriangleToSlide,
     addCircleToSlide,
     addTextToSlide,
 } from './contextsButtonDeclaration';
-import { addImage, getImageBase64FromDialog, addSlide } from '../../methods/methods';
-import { dispatch } from '../../dispatcher';
-import slide from './img/slide.svg';
+import { addImage, getImageBase64FromDialog, addSlide } from '../../../methods/methods';
+import { dispatch } from '../../../dispatcher';
+import slide from '../img/slide.svg';
 
 async function putImage() {
     const base64 = await getImageBase64FromDialog();

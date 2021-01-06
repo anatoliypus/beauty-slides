@@ -9,20 +9,17 @@
 }
 
 .palette {
-    width: 500px;
-    height: 350px;
+    width: 550px;
+    height: 300px;
     position: absolute;
     z-index: 1000;
-    background-color: #fff;
-    top: calc(50% - 175px);
-    left: calc(50% - 250px);
-    box-sizing: border-box;
-    padding-top: 20px;
-    padding-left: 20px;
-    padding-right: 20px;
+    background-color: #f5f8ff;
+    top: calc(50% - 165px);
+    left: calc(50% - 305px);
+    padding: 30px 60px;
     display: flex;
     flex-direction: column;
-    border-radius: 20px;
+    border-radius: 30px;
 }
 
 .palette__heading {
@@ -35,7 +32,6 @@
     width: 100%;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
 }
 
 .shadow_hidden, .palette_hidden {
@@ -71,12 +67,14 @@
     margin-top: 30px;
     display: flex;
     align-items: center;
+    justify-content: space-between;
 }
 
 .applyBtn {
     margin-left: 30px;
-    background: transparent;
-    border: 2px solid #ff66c4;
+    background: #dbdde6;
+    /* border: 2px solid #dadadb; */
+    border: 0;
     padding: 10px;
     border-radius: 10px;
 }
