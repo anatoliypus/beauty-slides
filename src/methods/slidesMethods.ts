@@ -420,6 +420,53 @@ export function deleteSlideObject(
     return replaceSlide(slides, newSlide);
 }
 
+export function pasteObject(slides: SlideCollection, bufferedId: string | null): SlideCollection {
+    if (!bufferedId) return slides;
+    const slide = slides.find((slide) => slide.id === bufferedId);
+    if (slide) {
+        const newObjects = slide.objects.map((node) => {
+            return {
+                ...node,
+                id: constructors.createId(),
+            };
+        });
+        const newSlide = {
+            ...slide,
+            id: constructors.createId(),
+            objects: newObjects,
+            nextZIndex: ++slide.nextZIndex,
+        };
+        return  slides.concat([newSlide]);
+    }
+    let slideToFind: SlideType | null = null;
+    let nodeToFind: SlideNode | null = null;
+    for (let slide of slides) {
+        const result = slide.objects.find((i) => i.id === bufferedId);
+        if (result) {
+            nodeToFind = result;
+            slideToFind = slide;
+        }
+    }
+    if (slideToFind && nodeToFind) {
+        const newNode = {
+            ...nodeToFind,
+            id: constructors.createId(),
+            positionTopLeft: {
+                x: nodeToFind.positionTopLeft.x - 20,
+                y: nodeToFind.positionTopLeft.y - 20,
+            },
+            zIndex: slideToFind.nextZIndex,
+        };
+        const newSlide = {
+            ...slideToFind,
+            objects: slideToFind.objects.concat([newNode]),
+            nextZIndex: ++slideToFind.nextZIndex,
+        };
+        return replaceSlide(slides, newSlide);
+    }
+    return slides
+}
+
 export function deleteSlide(
     slides: SlideCollection,
     currentId: string,

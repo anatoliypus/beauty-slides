@@ -1,3 +1,4 @@
+import { pasteObject } from '../methods/slidesMethods';
 import {
     addFigure,
     addImage,
@@ -29,11 +30,14 @@ export default function slidesReducer(
     state: Array<SlideType> = [],
     action: any,
     currSlideId: string | null,
-    choosedObject: choosedObjectType
+    choosedObject: choosedObjectType,
+    bufferedId: string | null
 ): Array<SlideType> {
     if (!currSlideId) throw new Error();
     if (action.type === 'SET_SLIDE_BG') {
         return setSlideBg(state, currSlideId, action.background);
+    } else if (action.type === 'PASTE_OBJECT') {
+        return pasteObject(state, bufferedId);
     } else if (action.type === 'MOVE_SLIDE_NODE') {
         return moveItem(state, currSlideId, choosedObject, action.x, action.y);
     } else if (action.type === 'ADD_SLIDE') {

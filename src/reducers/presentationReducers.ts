@@ -10,7 +10,7 @@ export const presentationReducers = (state: AppType = constructors.createApp(con
     return {
         name: titleReducer(state.name, action),
         currSlideId: currSlideIdReducer(state.currSlideId, action),
-        slides: slidesReducer(state.slides, action, state.currSlideId, state.choosedObject),
+        slides: slidesReducer(state.slides, action, state.currSlideId, state.choosedObject, state.bufferedId),
         settings: state.settings,
         choosedObject: choosedObjectReducer(state.choosedObject, action),
         bufferedId: bufferedIdReducer(state.bufferedId, action, state.choosedObject)
