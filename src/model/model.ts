@@ -67,6 +67,8 @@ export type AppType = {
    bufferedId: string | null;
 };
 
+export type SlideCollection = Array<SlideType>;
+
 export type choosedObjectType = {
     id: string | null;
     type: NodeType | null;

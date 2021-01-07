@@ -752,18 +752,8 @@ function setObject(doc: jsPDF, node: SlideNode) {
                     node.positionTopLeft.y,
                     width,
                     height
-                );
+                )
             }
-            // let x1: number = node.positionTopLeft.x,
-            //     y1: number = node.positionTopLeft.y + (parseInt(node.height) - parseInt(node.fontSize))/parseInt(node.fontSize), 
-            //     x2: number = node.positionTopLeft.x + node.data.length*(parseInt(node.fontSize)) - (parseInt(node.width) - (node.data.length + 0.38)*parseInt(node.fontSize)),
-            //     y2: number = node.positionTopLeft.y + (parseInt(node.height) - parseInt(node.fontSize))/parseInt(node.fontSize)
-            // doc.setFontSize(parseInt(node.fontSize));
-            // doc.setFont(node.fontFamily, node.fontStyle);
-            // doc.text(node.data, node.positionTopLeft.x, node.positionTopLeft.y, {align: node.alignment});
-            // if(node.fontDecoration === 'underline'){
-            //     doc.line(x1, y1, x2, y2)
-            // }
         }
         if (node.type === 'img') {
             let base64 = node.path;

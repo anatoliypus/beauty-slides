@@ -1,3 +1,28 @@
+import {
+    addFigure,
+    addImage,
+    addSlide,
+    addText,
+    changeAlignment,
+    changeRectBorderRadius,
+    changeText,
+    changeTextColor,
+    changeTextFontFamily,
+    changeTextSize,
+    decreaseZIndex,
+    deleteSlide,
+    deleteSlideObject,
+    figureBackgroundSet,
+    increaseZIndex,
+    moveItem,
+    resizeNode,
+    setSlideBg,
+    strokeColorSet,
+    strokeResize,
+    toggleBoldText,
+    toggleItalicText,
+    toggleUnderlinedText,
+} from '../methods/slidesMethods';
 import { choosedObjectType, SlideType } from '../model/model';
 
 export default function slidesReducer(
@@ -6,51 +31,88 @@ export default function slidesReducer(
     currSlideId: string | null,
     choosedObject: choosedObjectType
 ): Array<SlideType> {
+    if (!currSlideId) throw new Error();
     if (action.type === 'SET_SLIDE_BG') {
-        return action.bg;
+        return setSlideBg(state, currSlideId, action.background);
     } else if (action.type === 'MOVE_SLIDE_NODE') {
-        return action.x, action.y;
+        return moveItem(state, currSlideId, choosedObject, action.x, action.y);
     } else if (action.type === 'ADD_SLIDE') {
-        return state;
+        return addSlide(state);
     } else if (action.type === 'ADD_FIGURE') {
-        return state;
+        return addFigure(state, currSlideId, action.figureType);
     } else if (action.type === 'ADD_TEXT') {
-        return state;
+        return addText(state, currSlideId);
     } else if (action.type === 'ADD_IMAGE') {
-        return state;
+        return addImage(state, currSlideId, action.path);
     } else if (action.type === 'DELETE_SLIDE') {
-        return state;
+        return deleteSlide(state, currSlideId);
     } else if (action.type === 'DELETE_SLIDE_OBJECT') {
-        return state;
+        return deleteSlideObject(state, currSlideId, choosedObject);
     } else if (action.type === 'INCREASE_ZINDEX') {
-        return state;
+        return increaseZIndex(state, currSlideId, choosedObject);
     } else if (action.type === 'DECREASE_Z_INDEX') {
-        return state;
+        return decreaseZIndex(state, currSlideId, choosedObject);
     } else if (action.type === 'CHANGE_TEXT_DATA') {
-        return action.data;
+        return changeText(state, currSlideId, choosedObject, action.data);
     } else if (action.type === 'CHANGE_TEXT_COLOR') {
-        return action.color;
+        return changeTextColor(state, currSlideId, choosedObject, action.color);
     } else if (action.type === 'CHANGE_TEXT_FONT_SIZE') {
-        return action.fontSize;
+        return changeTextSize(state, currSlideId, choosedObject, action.size);
     } else if (action.type === 'CHANGE_TEXT_FONT_FAMILY') {
-        return action.fontFamily;
+        return changeTextFontFamily(
+            state,
+            currSlideId,
+            choosedObject,
+            action.family
+        );
     } else if (action.type === 'CHANGE_TEXT_ALIGNMENT') {
-        return action.alignment;
+        return changeAlignment(
+            state,
+            currSlideId,
+            choosedObject,
+            action.alignment
+        );
     } else if (action.type === 'TOGGLE_UNDERLINED_TEXT') {
-        return state;
+        return toggleUnderlinedText(state, currSlideId, choosedObject);
     } else if (action.type === 'TOGGLE_ITALIC_TEXT') {
-        return state;
+        return toggleItalicText(state, currSlideId, choosedObject);
     } else if (action.type === 'TOGGLE_BOLD_TEXT') {
-        return state;
+        return toggleBoldText(state, currSlideId, choosedObject);
     } else if (action.type === 'RESIZE_NODE') {
-        return state;
+        return resizeNode(
+            state,
+            currSlideId,
+            choosedObject,
+            action.width,
+            action.height
+        );
     } else if (action.type === 'CHANGE_FIGURE_BACKGROUND') {
-        return action.newColor;
+        return figureBackgroundSet(
+            state,
+            currSlideId,
+            choosedObject,
+            action.newColor
+        );
     } else if (action.type === 'CHANGE_FIGURE_STROKE_COLOR') {
-        return action.newColor;
+        return strokeColorSet(
+            state,
+            currSlideId,
+            choosedObject,
+            action.newColor
+        );
     } else if (action.type === 'CHANGE_FIGURE_BORDER_RADIUS') {
-        return action.newRadius;
+        return changeRectBorderRadius(
+            state,
+            currSlideId,
+            choosedObject,
+            action.newRadius
+        );
     } else if (action.type === 'RESIZE_FIGURE_STROKE') {
-        return action.strokeWidth;
+        return strokeResize(
+            state,
+            currSlideId,
+            choosedObject,
+            action.strokeWidth
+        );
     } else return state;
 }

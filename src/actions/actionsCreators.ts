@@ -1,4 +1,4 @@
-import { NodeType } from "../model/model";
+import { FigureType, NodeType } from "../model/model";
 
 export interface changeSlideActionType {
     type: 'CHANGE_SLIDE';
@@ -65,23 +65,34 @@ export function changeRectBorderRadius(newRadius: number): changeRectBorderRadiu
     }
 }
 
-/////////////////////////////////////////////////////////////////////////////
-
-export function strokeColorSet(newColor: number) {
+export interface strokeColorSetActionType {
+    type: 'CHANGE_FIGURE_STROKE_COLOR';
+    newColor: number;
+}
+export function strokeColorSet(newColor: number): strokeColorSetActionType {
     return {
         type: 'CHANGE_FIGURE_STROKE_COLOR',
         newColor
     }
 }
 
-export function figureBackgroundSet(newColor: number) {
+export interface figureBackgroundSetActionType {
+    type: 'CHANGE_FIGURE_BACKGROUND';
+    newColor: number;
+}
+export function figureBackgroundSet(newColor: number): figureBackgroundSetActionType {
     return {
         type: 'CHANGE_FIGURE_BACKGROUND',
         newColor
     }
 }
 
-export function resizeNode(width: number, height: number) {
+export interface resizeNodeActionType {
+    type: 'RESIZE_NODE';
+    width: string;
+    height: string;
+}
+export function resizeNode(width: string, height: string): resizeNodeActionType {
     return {
         type: 'RESIZE_NODE',
         width,
@@ -89,42 +100,57 @@ export function resizeNode(width: number, height: number) {
     }
 }
 
-export function toggleBoldText() {
+export interface toggleBoldTextActionType {
+    type: 'TOGGLE_BOLD_TEXT'
+}
+export function toggleBoldText(): toggleBoldTextActionType {
     return {
         type: 'TOGGLE_BOLD_TEXT'
     }
 }
 
-export function toggleItalicText() {
+export interface toggleItalicTextActionType {
+    type: 'TOGGLE_ITALIC_TEXT'
+}
+export function toggleItalicText(): toggleItalicTextActionType {
     return {
         type: 'TOGGLE_ITALIC_TEXT'
     }
 }
 
-export function toggleUnderlinedText() {
+export interface toggleUnderlinedTextActionType {
+    type: 'TOGGLE_UNDERLINED_TEXT'
+}
+export function toggleUnderlinedText(): toggleUnderlinedTextActionType {
     return {
         type: 'TOGGLE_UNDERLINED_TEXT'
     }
 }
 
-export function changeTextAlignment(alignment: 'right' | 'center' | 'left') {
+export interface changeTextAlignmentActionType {
+    type: 'CHANGE_TEXT_ALIGNMENT';
+    alignment: 'right' | 'center' | 'left';
+}
+export function changeTextAlignment(alignment: 'right' | 'center' | 'left'): changeTextAlignmentActionType {
     return {
         type: 'CHANGE_TEXT_ALIGNMENT',
         alignment
     }
 }
 
-export function changeTextFontFamily(fontFamily: string) {
+/////////////////////////////////////////////////////////////////////////////
+
+export function changeTextFontFamily(family: string) {
     return {
         type: 'CHANGE_TEXT_FONT_FAMILY',
-        fontFamily
+        family
     }
 }
 
-export function changeTextFontSize(fontSize: string) {
+export function changeTextFontSize(size: string) {
     return {
         type: 'CHANGE_TEXT_FONT_SIZE',
-        fontSize
+        size
     }
 }
 
@@ -175,9 +201,10 @@ export function addSlide() {
     }
 }
 
-export function addFigure() {
+export function addFigure(type: FigureType) {
     return {
         type: 'ADD_FIGURE',
+        figureType: type
     }
 }
 
@@ -187,9 +214,10 @@ export function addText() {
     }
 }
 
-export function addImage() {
+export function addImage(path: string) {
     return {
         type: 'ADD_IMAGE',
+        path
     }
 }
 
