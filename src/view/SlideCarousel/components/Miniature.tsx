@@ -44,7 +44,7 @@ function Miniature(props: MiniatureProps) {
     }, []);
 
     function miniatureOnClick() {
-        changeSlide(props.slide.id)
+        props.changeSlide(props.slide.id)
     }
 
     React.useEffect(() => {

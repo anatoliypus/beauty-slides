@@ -105,7 +105,7 @@ function TextMenu(props: TextMenuProps) {
                     isBold ? `${styles.btn} + ${styles.activeBtn}` : styles.btn
                 }
                 onClick={() => {
-                    toggleBoldText();
+                    props.toggleBoldText();
                 }}
             >
                 <img src={boldIcon} alt="toggle text bold" />

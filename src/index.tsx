@@ -25,6 +25,7 @@ export const Context = React.createContext(settings);
 export function init(state: AppType | undefined = undefined) {
     if (state) {
         store = createStore(presentationReducers, state);
+        window.localStorage.setItem('app', JSON.stringify(state));
     } else {
         let savedApp = window.localStorage.getItem('app');
         if (savedApp) store = createStore(presentationReducers, JSON.parse(savedApp));

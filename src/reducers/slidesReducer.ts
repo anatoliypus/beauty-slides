@@ -23,20 +23,21 @@ import {
     toggleBoldText,
     toggleItalicText,
     toggleUnderlinedText,
-    changeSlideOrder,
+    changeSlideOrder
 } from '../methods/slidesMethods';
 import { choosedObjectType, SlideType } from '../model/model';
+import { actionType } from '../actions/actionsCreators';
 
 export default function slidesReducer(
     state: Array<SlideType> = [],
-    action: any,
+    action: actionType,
     currSlideId: string | null,
     choosedObject: choosedObjectType,
     bufferedId: string | null
 ): Array<SlideType> {
     if (!currSlideId) throw new Error();
     if (action.type === 'SET_SLIDE_BG') {
-        return setSlideBg(state, currSlideId, action.background);
+        return setSlideBg(state, currSlideId, action.bg);
     } else if (action.type === 'PASTE_OBJECT') {
         return pasteObject(state, bufferedId);
     } else if (action.type === 'MOVE_SLIDE_NODE') {

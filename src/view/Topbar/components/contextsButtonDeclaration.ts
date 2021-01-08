@@ -8,10 +8,11 @@ import {
     setSlideBg,
     copyObject,
     pasteObject,
-    deleteSlideObject
+    deleteSlideObject,
+    exportApp
 } from '../../../actions/actionsCreators';
 import { getImageBase64FromDialog } from '../../../methods/getImageBase64';
-import { importApp, exportApp } from '../../../methods/jsonMethods';
+import { importApp } from '../../../methods/jsonMethods';
 
 export function addSlideButtonOnClick(): void {
     store.dispatch(addSlide());
@@ -22,10 +23,12 @@ const fileBtnContextMenuItems = [
         heading: 'Импорт',
         callback: importApp,
     },
-    // {
-    //     heading: 'Сохранить локально',
-    //     callback: exportApp?,
-    // },
+    {
+        heading: 'Сохранить локально',
+        callback: () => {
+            store.dispatch(exportApp())
+        },
+    },
 ];
 
 const editBtnContextMenuItems = [

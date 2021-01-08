@@ -1,4 +1,54 @@
-import { FigureType, NodeType } from "../model/model";
+import { FigureType, NodeType } from '../model/model';
+
+export type bufferedIdReducerAction = copyObjectActionType;
+export type choosedObjectReducerAction =
+    | changeSelectedObjectActionType
+    | changeSlideActionType
+    | deleteSlideObjectActionType;
+export type currSlideIdReducerAction = changeSlideActionType;
+export type titleReducerAction = changePresentationNameActionType;
+export type slideReducerAction =
+    | setSlideBgActionType
+    | pasteObjectActionType
+    | moveItemActionType
+    | addSlideActionType
+    | addFigureActionType
+    | addTextActionType
+    | addImageActionType
+    | deleteSlideActionType
+    | deleteSlideObjectActionType
+    | increaseZIndexActionType
+    | decreaseZIndexActionType
+    | changeTextDataActionType
+    | changeTextColorActionType
+    | changeTextFontSizeActionType
+    | changeTextFontFamilyActionType
+    | changeTextAlignmentActionType
+    | toggleBoldTextActionType
+    | toggleItalicTextActionType
+    | toggleUnderlinedTextActionType
+    | resizeNodeActionType
+    | figureBackgroundSetActionType
+    | strokeColorSetActionType
+    | changeRectBorderRadiusActionType
+    | strokeResizeActionType
+    | changeSlideOrderActionType;
+export type actionType =
+    | bufferedIdReducerAction
+    | choosedObjectReducerAction
+    | currSlideIdReducerAction
+    | titleReducerAction
+    | slideReducerAction
+    | exportAppActionType;
+
+interface exportAppActionType {
+    type: 'EXPORT_APP';
+}
+export function exportApp(): exportAppActionType {
+    return {
+        type: 'EXPORT_APP',
+    };
+}
 
 export interface changeSlideActionType {
     type: 'CHANGE_SLIDE';
@@ -7,31 +57,33 @@ export interface changeSlideActionType {
 export function changeSlide(id: string): changeSlideActionType {
     return {
         type: 'CHANGE_SLIDE',
-        id
-    }
+        id,
+    };
 }
 
 export interface changeSelectedObjectActionType {
     type: 'CHANGE_SELECTED_OBJECT';
     id: string | null;
-    objType: NodeType | null
+    objType: NodeType | null;
 }
-export function changeSelectedObject(id: string | null, objType: NodeType | null): changeSelectedObjectActionType {
+export function changeSelectedObject(
+    id: string | null,
+    objType: NodeType | null
+): changeSelectedObjectActionType {
     return {
         type: 'CHANGE_SELECTED_OBJECT',
         id,
-        objType
-    }
+        objType,
+    };
 }
-
 
 export interface copyObjectActionType {
     type: 'COPY_OBJECT';
 }
 export function copyObject(): copyObjectActionType {
     return {
-        type: 'COPY_OBJECT'
-    }
+        type: 'COPY_OBJECT',
+    };
 }
 
 export interface pasteObjectActionType {
@@ -39,8 +91,8 @@ export interface pasteObjectActionType {
 }
 export function pasteObject(): pasteObjectActionType {
     return {
-        type: 'PASTE_OBJECT'
-    }
+        type: 'PASTE_OBJECT',
+    };
 }
 
 export interface strokeResizeActionType {
@@ -50,19 +102,21 @@ export interface strokeResizeActionType {
 export function strokeResize(strokeWidth: number): strokeResizeActionType {
     return {
         type: 'RESIZE_FIGURE_STROKE',
-        strokeWidth
-    }
+        strokeWidth,
+    };
 }
 
 export interface changeRectBorderRadiusActionType {
     type: 'CHANGE_FIGURE_BORDER_RADIUS';
     newRadius: number;
 }
-export function changeRectBorderRadius(newRadius: number): changeRectBorderRadiusActionType {
+export function changeRectBorderRadius(
+    newRadius: number
+): changeRectBorderRadiusActionType {
     return {
         type: 'CHANGE_FIGURE_BORDER_RADIUS',
-        newRadius
-    }
+        newRadius,
+    };
 }
 
 export interface changeSlideOrderActionType {
@@ -70,12 +124,15 @@ export interface changeSlideOrderActionType {
     slideId: string;
     slideAfterId: string;
 }
-export function changeSlideOrder(slideId: string, slideAfterId: string): changeSlideOrderActionType {
+export function changeSlideOrder(
+    slideId: string,
+    slideAfterId: string
+): changeSlideOrderActionType {
     return {
         type: 'CHANGE_SLIDE_ORDER',
         slideId,
-        slideAfterId
-    }
+        slideAfterId,
+    };
 }
 
 export interface strokeColorSetActionType {
@@ -85,19 +142,21 @@ export interface strokeColorSetActionType {
 export function strokeColorSet(newColor: string): strokeColorSetActionType {
     return {
         type: 'CHANGE_FIGURE_STROKE_COLOR',
-        newColor
-    }
+        newColor,
+    };
 }
 
 export interface figureBackgroundSetActionType {
     type: 'CHANGE_FIGURE_BACKGROUND';
     newColor: string;
 }
-export function figureBackgroundSet(newColor: string): figureBackgroundSetActionType {
+export function figureBackgroundSet(
+    newColor: string
+): figureBackgroundSetActionType {
     return {
         type: 'CHANGE_FIGURE_BACKGROUND',
-        newColor
-    }
+        newColor,
+    };
 }
 
 export interface resizeNodeActionType {
@@ -105,149 +164,212 @@ export interface resizeNodeActionType {
     width: string;
     height: string;
 }
-export function resizeNode(width: string, height: string): resizeNodeActionType {
+export function resizeNode(
+    width: string,
+    height: string
+): resizeNodeActionType {
     return {
         type: 'RESIZE_NODE',
         width,
-        height
-    }
+        height,
+    };
 }
 
 export interface toggleBoldTextActionType {
-    type: 'TOGGLE_BOLD_TEXT'
+    type: 'TOGGLE_BOLD_TEXT';
 }
 export function toggleBoldText(): toggleBoldTextActionType {
     return {
-        type: 'TOGGLE_BOLD_TEXT'
-    }
+        type: 'TOGGLE_BOLD_TEXT',
+    };
 }
 
 export interface toggleItalicTextActionType {
-    type: 'TOGGLE_ITALIC_TEXT'
+    type: 'TOGGLE_ITALIC_TEXT';
 }
 export function toggleItalicText(): toggleItalicTextActionType {
     return {
-        type: 'TOGGLE_ITALIC_TEXT'
-    }
+        type: 'TOGGLE_ITALIC_TEXT',
+    };
 }
 
 export interface toggleUnderlinedTextActionType {
-    type: 'TOGGLE_UNDERLINED_TEXT'
+    type: 'TOGGLE_UNDERLINED_TEXT';
 }
 export function toggleUnderlinedText(): toggleUnderlinedTextActionType {
     return {
-        type: 'TOGGLE_UNDERLINED_TEXT'
-    }
+        type: 'TOGGLE_UNDERLINED_TEXT',
+    };
 }
 
 export interface changeTextAlignmentActionType {
     type: 'CHANGE_TEXT_ALIGNMENT';
     alignment: 'right' | 'center' | 'left';
 }
-export function changeTextAlignment(alignment: 'right' | 'center' | 'left'): changeTextAlignmentActionType {
+export function changeTextAlignment(
+    alignment: 'right' | 'center' | 'left'
+): changeTextAlignmentActionType {
     return {
         type: 'CHANGE_TEXT_ALIGNMENT',
-        alignment
-    }
+        alignment,
+    };
 }
 
-/////////////////////////////////////////////////////////////////////////////
-
-export function changeTextFontFamily(family: string) {
+export interface changeTextFontFamilyActionType {
+    type: 'CHANGE_TEXT_FONT_FAMILY';
+    family: string;
+}
+export function changeTextFontFamily(
+    family: string
+): changeTextFontFamilyActionType {
     return {
         type: 'CHANGE_TEXT_FONT_FAMILY',
-        family
-    }
+        family,
+    };
 }
 
-export function changeTextFontSize(size: string) {
+export interface changeTextFontSizeActionType {
+    type: 'CHANGE_TEXT_FONT_SIZE';
+    size: string;
+}
+export function changeTextFontSize(size: string): changeTextFontSizeActionType {
     return {
         type: 'CHANGE_TEXT_FONT_SIZE',
-        size
-    }
+        size,
+    };
 }
 
-export function changeTextColor(color: string) {
+export interface changeTextColorActionType {
+    type: 'CHANGE_TEXT_COLOR';
+    color: string;
+}
+export function changeTextColor(color: string): changeTextColorActionType {
     return {
         type: 'CHANGE_TEXT_COLOR',
-        color
-    }
+        color,
+    };
 }
 
-export function changeTextData(data: string) {
+export interface changeTextDataActionType {
+    type: 'CHANGE_TEXT_DATA';
+    data: string;
+}
+export function changeTextData(data: string): changeTextDataActionType {
     return {
         type: 'CHANGE_TEXT_DATA',
-        data
-    }
+        data,
+    };
 }
 
-export function setSlideBg(bg: string) {
+export interface setSlideBgActionType {
+    type: 'SET_SLIDE_BG';
+    bg: string;
+}
+export function setSlideBg(bg: string): setSlideBgActionType {
     return {
         type: 'SET_SLIDE_BG',
-        bg
-    }
+        bg,
+    };
 }
 
-export function moveItem(x: number, y: number) {
+export interface moveItemActionType {
+    type: 'MOVE_SLIDE_NODE';
+    x: number;
+    y: number;
+}
+export function moveItem(x: number, y: number): moveItemActionType {
     return {
         type: 'MOVE_SLIDE_NODE',
         x,
-        y
-    }
-}
-export function decreaseZIndex() {
-    return {
-        type: 'DECREASE_Z_INDEX'
-    }
+        y,
+    };
 }
 
-export function changePresentationName(name: string) {
+export interface decreaseZIndexActionType {
+    type: 'DECREASE_Z_INDEX';
+}
+export function decreaseZIndex(): decreaseZIndexActionType {
+    return {
+        type: 'DECREASE_Z_INDEX',
+    };
+}
+
+export interface changePresentationNameActionType {
+    type: 'CHANGE_PRESENTATION_NAME';
+    name: string;
+}
+export function changePresentationName(
+    name: string
+): changePresentationNameActionType {
     return {
         type: 'CHANGE_PRESENTATION_NAME',
-        name
-    }
+        name,
+    };
 }
 
-export function addSlide() {
+export interface addSlideActionType {
+    type: 'ADD_SLIDE';
+}
+export function addSlide(): addSlideActionType {
     return {
         type: 'ADD_SLIDE',
-    }
+    };
 }
 
-export function addFigure(type: FigureType) {
+export interface addFigureActionType {
+    type: 'ADD_FIGURE';
+    figureType: FigureType;
+}
+export function addFigure(type: FigureType): addFigureActionType {
     return {
         type: 'ADD_FIGURE',
-        figureType: type
-    }
+        figureType: type,
+    };
 }
 
-export function addText() {
+export interface addTextActionType {
+    type: 'ADD_TEXT';
+}
+export function addText(): addTextActionType {
     return {
         type: 'ADD_TEXT',
-    }
+    };
 }
 
-export function addImage(path: string) {
+export interface addImageActionType {
+    type: 'ADD_IMAGE';
+    path: string;
+}
+export function addImage(path: string): addImageActionType {
     return {
         type: 'ADD_IMAGE',
-        path
-    }
+        path,
+    };
 }
 
-export function deleteSlide() {
+export interface deleteSlideActionType {
+    type: 'DELETE_SLIDE';
+}
+export function deleteSlide(): deleteSlideActionType {
     return {
         type: 'DELETE_SLIDE',
-    }
+    };
 }
 
-export function deleteSlideObject() {
+export interface deleteSlideObjectActionType {
+    type: 'DELETE_SLIDE_OBJECT';
+}
+export function deleteSlideObject(): deleteSlideObjectActionType {
     return {
         type: 'DELETE_SLIDE_OBJECT',
-    }
+    };
 }
 
-export function increaseZIndex() {
+export interface increaseZIndexActionType {
+    type: 'INCREASE_ZINDEX';
+}
+export function increaseZIndex(): increaseZIndexActionType {
     return {
         type: 'INCREASE_ZINDEX',
-    }
+    };
 }

@@ -5,8 +5,13 @@ import currSlideIdReducer from './currSlideIdReducer';
 import slidesReducer from './slidesReducer';
 import choosedObjectReducer from './choosedObjectReducer';
 import bufferedIdReducer from './bufferedIdReducer';
+import { exportApp } from '../methods/jsonMethods';
+import { actionType } from '../actions/actionsCreators';
 
-export default function presentationReducers(state: AppType = constructors.createApp(constructors.createSettings()), action: object): AppType {
+export default function presentationReducers(state: AppType = constructors.createApp(constructors.createSettings()), action: actionType): AppType {
+    if (action.type === 'EXPORT_APP') {
+        exportApp(state);
+    }
     return {
         name: titleReducer(state.name, action),
         currSlideId: currSlideIdReducer(state.currSlideId, action),
