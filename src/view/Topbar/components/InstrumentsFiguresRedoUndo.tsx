@@ -11,20 +11,24 @@ import {
     addCircleToSlide,
     addTextToSlide,
 } from './contextsButtonDeclaration';
-import { addImage, getImageBase64FromDialog, addSlide } from '../../../methods/methods';
-import { dispatch } from '../../../dispatcher';
+import { addImage , addSlide } from '../../../actions/actionsCreators';
+import { getImageBase64FromDialog } from '../../../methods/getImageBase64';
 import slide from '../img/slide.svg';
+import { connect } from 'react-redux';
+import { AppType } from '../../../model/model';
 
-async function putImage() {
+async function putImage(method: (s: string) => void) {
     const base64 = await getImageBase64FromDialog();
-    dispatch(addImage, base64);
+    method(base64)
 }
 
 interface InstrumentsFiguresRedoUndoProps {
     onClick: () => void;
+    addImage: (s: string) => void;
+    addSlide: () => void;
 }
 
-export default function InstrumentsFiguresRedoUndo(props: InstrumentsFiguresRedoUndoProps) {
+function InstrumentsFiguresRedoUndo(props: InstrumentsFiguresRedoUndoProps) {
     const inlineStyle = {
         display: 'flex',
         height: '100%',
@@ -43,12 +47,34 @@ export default function InstrumentsFiguresRedoUndo(props: InstrumentsFiguresRedo
             <ImgButton onClick={addRectangleToSlide} imgUrl={RectIcon} />
             <ImgButton onClick={addTriangleToSlide} imgUrl={TriangIcon} />
             <ImgButton onClick={addCircleToSlide} imgUrl={CircleIcon} />
-            <ImgButton onClick={putImage} imgUrl={ImageIcon} />
+            <ImgButton onClick={() => {
+                putImage(addImage)
+            }} imgUrl={ImageIcon} />
             <ImgButton onClick={addTextToSlide} imgUrl={TextIcon} />
             {/* <ImgButton onClick={addLineToSlide} imgUrl={LineIcon} /> */}
             <ImgButton onClick={() => {
-                dispatch(addSlide)
+                props.addSlide();
             }} imgUrl={slide} />
         </div>
     );
 }
+
+interface InstrumentsFiguresRedoUndoOwnProps {
+    onClick: () => void;
+}
+
+interface InstrumentsFiguresRedoUndoDispatchProps {
+    addImage: (s: string) => void;
+    addSlide: () => void;
+}
+
+const mapStateToProps = (state: AppType, ownProps: InstrumentsFiguresRedoUndoOwnProps): InstrumentsFiguresRedoUndoOwnProps => {
+    return ownProps
+}
+
+const mapDispatchToProps = {
+    addImage,
+    addSlide
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(InstrumentsFiguresRedoUndo)

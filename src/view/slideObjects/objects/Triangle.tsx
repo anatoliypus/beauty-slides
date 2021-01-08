@@ -28,6 +28,7 @@ export default function Triangle(props: TriangProps) {
         width: props.node.width,
         height: props.node.height,
         squareResize: false,
+        type: 'figure'
     });
 
     let style = props.style;

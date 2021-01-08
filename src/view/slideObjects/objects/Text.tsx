@@ -30,6 +30,7 @@ export default function Text(props: TextProps) {
         width: props.node.width,
         height: props.node.height,
         squareResize: false,
+        type: 'text'
     });
 
     let style = props.style;
@@ -74,7 +75,7 @@ export default function Text(props: TextProps) {
                 ></circle>
             </svg>
             <textarea ref={el} className={textStyles.input} key={props.node.id} style={style} onClick={(e: React.MouseEvent<HTMLElement>) => {
-            props.onclick(e);
+                props.onclick(e);
         }} />
         </div>
     );

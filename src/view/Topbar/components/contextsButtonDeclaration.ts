@@ -1,19 +1,20 @@
-import { dispatch, exportAppLocally } from '../../../dispatcher';
+// import { dispatch, exportAppLocally } from '../../../dispatcher';
+import { store } from '../../../index';
 import {
     addSlide,
-    importApp,
     addFigure,
     addText,
     deleteSlide,
-    getImageBase64FromDialog,
     setSlideBg,
     copyObject,
     pasteObject,
     deleteSlideObject
-} from '../../../methods/methods';
+} from '../../../actions/actionsCreators';
+import { getImageBase64FromDialog } from '../../../methods/getImageBase64';
+import { importApp, exportApp } from '../../../methods/jsonMethods';
 
 export function addSlideButtonOnClick(): void {
-    dispatch(addSlide);
+    store.dispatch(addSlide());
 }
 
 const fileBtnContextMenuItems = [
@@ -21,42 +22,42 @@ const fileBtnContextMenuItems = [
         heading: 'Импорт',
         callback: importApp,
     },
-    {
-        heading: 'Сохранить локально',
-        callback: exportAppLocally,
-    },
+    // {
+    //     heading: 'Сохранить локально',
+    //     callback: exportApp?,
+    // },
 ];
 
 const editBtnContextMenuItems = [
     {
         heading: 'Удалить текущий слайд ------ Ctrl/Cmd + Shift + D',
         callback: () => {
-            dispatch(deleteSlide);
+            store.dispatch(deleteSlide());
         },
     },
     {
         heading: 'Поставить фоновую картинку на слайд',
         callback: async () => {
             let base64 = await getImageBase64FromDialog();
-            dispatch(setSlideBg, base64);
+            store.dispatch(setSlideBg(base64));
         },
     },
     {
         heading: 'Копировать слайд/объект ------ Ctrl/Cmd + C',
         callback: () => {
-            dispatch(copyObject);
+            store.dispatch(copyObject());
         },
     },
     {
         heading: 'Вставить слайд/объект ------ Ctrl/Cmd + V',
         callback: () => {
-            dispatch(pasteObject);
+            store.dispatch(pasteObject());
         },
     },
     {
         heading: 'Удалить выбранный объект ------ Ctrl/Cmd + D',
         callback: () => {
-            dispatch(deleteSlideObject);
+            store.dispatch(deleteSlideObject());
         },
     },
     
@@ -74,21 +75,21 @@ export const contextBtns = [
 ];
 
 export function addRectangleToSlide() {
-    dispatch(addFigure, 'rectangle');
+    store.dispatch(addFigure('rectangle'));
 }
 
 export function addTriangleToSlide() {
-    dispatch(addFigure, 'triangle');
+    store.dispatch(addFigure('triangle'));
 }
 
 export function addCircleToSlide() {
-    dispatch(addFigure, 'circle');
+    store.dispatch(addFigure('circle'));
 }
 
 export function addLineToSlide() {
-    dispatch(addFigure, 'line');
+    store.dispatch(addFigure('line'));
 }
 
 export function addTextToSlide() {
-    dispatch(addText);
+    store.dispatch(addText());
 }

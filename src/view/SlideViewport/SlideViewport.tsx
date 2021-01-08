@@ -1,33 +1,40 @@
 import React from 'react';
 import styles from './SlideViewport.module.css';
-import { SlideType } from '../../model/model';
-import getObjects from '../slideObjects/getObjects';
+import { AppType, SlideCollection } from '../../model/model';
+import getObjects from '../SlideObjects/getObjects';
 import { dispatch } from '../../dispatcher';
 import { changeSelectedObject } from '../../methods/methods';
 import { Context } from '../../dispatcher';
+import { connect } from 'react-redux';
 
 interface SlideViewportProps {
-    slide: SlideType;
-    selectedId: string | null; 
+    slides: SlideCollection;
+    selectedId: string | null;
+    currSlideId: string | null;
 }
 
-export default function SlideViewport(props: SlideViewportProps) {
+function SlideViewport(props: SlideViewportProps) {
+    let slide = props.slides.find(
+        (slide) => slide.id === props.currSlideId
+    );
+    if (! slide) throw new Error();
+
     const settings = React.useContext(Context);
     let slideStyles = {
         width: settings.slideWidth + 'px',
         height: settings.slideHeight + 'px'
     };
     let slideStyles2;
-    if (props.slide.background) {
-        if (props.slide.background.indexOf('base64') === -1) {
+    if (slide.background) {
+        if (slide.background.indexOf('base64') === -1) {
             slideStyles2 = {
                 ...slideStyles,
-                backgroundColor: props.slide.background
+                backgroundColor: slide.background
             };
         } else {
             slideStyles2 = {
                 ...slideStyles,
-                backgroundImage: 'url(' + props.slide.background + ')',
+                backgroundImage: 'url(' + slide.background + ')',
                 backgroundSize: 'cover'
             };
         }
@@ -43,8 +50,18 @@ export default function SlideViewport(props: SlideViewportProps) {
                     }
                 }}
             >
-                {getObjects(props.slide, 1, 1, props.selectedId)}
+                {getObjects(slide, 1, 1, props.selectedId)}
             </div>
         </div>
     );
 }
+
+const mapStateToProps = (state: AppType): SlideViewportProps => {
+    return {
+        slides: state.slides,
+        currSlideId: state.currSlideId,
+        selectedId: state.choosedObject.id
+    }
+}
+
+export default connect(mapStateToProps)(SlideViewport)

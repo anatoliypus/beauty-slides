@@ -28,6 +28,7 @@ export default function Rectangle(props: RectProps) {
         width: props.node.width,
         height: props.node.height,
         squareResize: false,
+        type: 'figure'
     });
 
     const sizeRef = refs.sizeRef;

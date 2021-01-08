@@ -1,12 +1,13 @@
 import React from 'react';
 import styles from './SlideCarousel.module.css';
-import { SlideType } from '../../model/model';
+import { AppType, SlideCollection, SlideType } from '../../model/model';
 import Miniature from './components/Miniature';
 import useChangeSlideOrder from './components/useChangeSlideOrder';
 import { Context } from '../../dispatcher';
+import { connect } from 'react-redux';
 
 interface SlideCarouselProps {
-    slides: Array<SlideType>;
+    slides: SlideCollection;
     currSlideId: string | null;
 }
 
@@ -15,7 +16,7 @@ export interface miniatureRefObj {
     id: string;
 }
 
-export default function SlideCarousel(props: SlideCarouselProps) {
+function SlideCarousel(props: SlideCarouselProps) {
     const settings = React.useContext(Context);
     const miniaturesRefsArr: Array<miniatureRefObj> = [];
     const miniaturesRefsArrRef = React.useRef(miniaturesRefsArr);
@@ -54,3 +55,12 @@ export default function SlideCarousel(props: SlideCarouselProps) {
         </div>
     );
 }
+
+const mapStateToProps = (state: AppType): SlideCarouselProps => {
+    return {
+        slides: state.slides,
+        currSlideId: state.currSlideId
+    }
+}
+
+export default connect(mapStateToProps)(SlideCarousel)

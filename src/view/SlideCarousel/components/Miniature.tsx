@@ -1,10 +1,10 @@
 import React from 'react';
 import styles from '../SlideCarousel.module.css';
-import { SlideType } from '../../../model/model';
-import getObjects from '../../slideObjects/getObjects';
-import { dispatch } from '../../../dispatcher';
-import { changeSlide } from '../../../methods/methods';
-import { Context } from '../../../dispatcher';
+import { AppType, SlideType } from '../../../model/model';
+import getObjects from '../../SlideObjects/getObjects';
+import { changeSlide } from '../../../actions/actionsCreators';
+import { Context } from '../../../index';
+import { connect } from 'react-redux';
 
 interface MiniatureProps {
     index: number;
@@ -12,9 +12,10 @@ interface MiniatureProps {
     slide: SlideType;
     refsArr: React.RefObject<Array<object>>;
     choosed: boolean;
+    changeSlide: () => void;
 }
  
-export default function Miniature(props: MiniatureProps) {
+function Miniature(props: MiniatureProps) {
     const settings = React.useContext(Context);
 
     const miniatureRef = React.useRef<HTMLDivElement>(null);
@@ -43,7 +44,7 @@ export default function Miniature(props: MiniatureProps) {
     }, []);
 
     function miniatureOnClick() {
-        dispatch(changeSlide, props.slide.id)
+        changeSlide(props.slide.id)
     }
 
     React.useEffect(() => {
@@ -63,3 +64,13 @@ export default function Miniature(props: MiniatureProps) {
         </div>
     );
 }
+
+const mapDispatchToProps = {
+    changeSlide
+}
+
+const mapStateToProps = (state: AppType, ownProps: MiniatureProps) => {
+    return ownProps
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Miniature)

@@ -1,6 +1,7 @@
 import React from 'react';
-import { dispatch } from '../../../dispatcher';
-import { resizeNode, changeSelectedObject, moveItem } from '../../../methods/methods';
+import { resizeNode, changeSelectedObject, moveItem } from '../../../actions/actionsCreators';
+import { store } from '../../../index';
+import { NodeType } from '../../../model/model';
 
 interface UseDraggingProps {
     obj: React.RefObject<HTMLElement>;
@@ -14,6 +15,7 @@ interface UseDraggingProps {
     width: string;
     height: string;
     squareResize: boolean;
+    type: NodeType;
 }
 
 export default function useDragResize(props: UseDraggingProps) {
@@ -101,16 +103,10 @@ export default function useDragResize(props: UseDraggingProps) {
         };
         const elOnMouseUp = (e: MouseEvent) => {
             window.removeEventListener('mousemove', elOnMouseMove);
-            dispatch(resizeNode, {
-                width: mySizeStateRef.current.width,
-                height: mySizeStateRef.current.height
-            });
-            dispatch(moveItem, {
-                x: myCordsStateRef.current.x,
-                y: myCordsStateRef.current.y,
-            });
+            store.dispatch(resizeNode(mySizeStateRef.current.width, mySizeStateRef.current.height));
+            store.dispatch(moveItem(myCordsStateRef.current.x, myCordsStateRef.current.y));
             setTimeout(() => {
-                dispatch(changeSelectedObject, props.id);
+                store.dispatch(changeSelectedObject(props.id, props.type));
             });
         };
         
@@ -157,10 +153,7 @@ export default function useDragResize(props: UseDraggingProps) {
         };
         const elOnMouseUp = (e: MouseEvent) => {
             window.removeEventListener('mousemove', elOnMouseMove);
-            dispatch(moveItem, {
-                x: myCordsStateRef.current.x,
-                y: myCordsStateRef.current.y,
-            });
+            store.dispatch(moveItem(myCordsStateRef.current.x, myCordsStateRef.current.y));
         };
         const elOnMouseDown = (e: MouseEvent) => {
             if (props.obj.current && !e.defaultPrevented) {

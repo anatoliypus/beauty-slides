@@ -1,26 +1,31 @@
 import React from 'react';
-import { AppType, FigureObject } from '../../../model/model';
+import { AppType, choosedObjectType, FigureObject, SlideCollection } from '../../../model/model';
 import styles from './ObjectsMenu.module.css';
 import {
     getSlideNode,
     getCurrentSlide,
-} from '../../../methods/secondaryMethods';
-import { dispatch } from '../../../dispatcher';
+} from '../../../methods/newSecondaryMethods';
 import Palette from './Palette';
-import { strokeResize, changeRectBorderRadius } from '../../../methods/methods';
+import { strokeResize, changeRectBorderRadius } from '../../../actions/actionsCreators';
 import SelectElement from './SelectElement';
 import ManageZIndex from './ManageZIndex';
+import { connect } from 'react-redux';
 
 interface FigureMenuProps {
-    app: AppType;
+    choosedObject: choosedObjectType;
+    slides: SlideCollection;
+    currSlideId: string | null;
+    strokeResize: (s: number) => void;
+    changeRectBorderRadius: (r: number) => void;
 }
 
 
-export default function FigureMenu(props: FigureMenuProps) {
-    const slide = getCurrentSlide(props.app);
+function FigureMenu(props: FigureMenuProps) {
+    if (! props.currSlideId) throw new Error();
+    const slide = getCurrentSlide(props.slides, props.currSlideId);
     let node;
     if (slide) {
-        node = getSlideNode(slide, props.app.choosedObject.id);
+        node = getSlideNode(slide, props.choosedObject.id);
     } else throw new Error();
 
     let strokeWidth;
@@ -54,20 +59,14 @@ export default function FigureMenu(props: FigureMenuProps) {
                 Толщина к-ра:
             </p>
             <SelectElement selectedValue={strokeWidth + ''} values={strokeValues} callback={(value) => {
-                dispatch(
-                    strokeResize,
-                    parseInt(value)
-                );
+                props.strokeResize(parseInt(value))
             }}/>
             <div style={radiusStyle}>
                 <p className={styles.label}>
                     Закруг-ие к-ра:
                 </p>
                 <SelectElement selectedValue={radius + ''} values={radiusValues} callback={(value) => {
-                    dispatch(
-                        changeRectBorderRadius,
-                        parseInt(value)
-                    );
+                    props.changeRectBorderRadius(parseInt(value));
                 }}/>
             </div>
             <button
@@ -100,3 +99,24 @@ export default function FigureMenu(props: FigureMenuProps) {
         </div>
     );
 }
+
+interface FigureMenuOwnProps {
+    choosedObject: choosedObjectType;
+    slides: SlideCollection;
+    currSlideId: string | null;
+}
+
+const mapStateToProps = (state: AppType): FigureMenuOwnProps => {
+    return {
+        choosedObject: state.choosedObject,
+        slides: state.slides,
+        currSlideId: state.currSlideId
+    }
+}
+
+const mapDispatchToProps = {
+    strokeResize, 
+    changeRectBorderRadius
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(FigureMenu);

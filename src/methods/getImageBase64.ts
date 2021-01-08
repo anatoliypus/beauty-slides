@@ -1,6 +1,6 @@
 import { ImgObject } from '../model/model';
 
-export function getImageBase64FromDialog(): Promise<String> {
+export function getImageBase64FromDialog(): Promise<string> {
     return new Promise((resolve) => {
         let input = document.createElement('input');
         input.style.display = 'none';

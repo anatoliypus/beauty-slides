@@ -1,14 +1,13 @@
 import React from 'react';
-import { AppType } from '../../../model/model';
 import icon from '../img/delete.svg';
-import { dispatch } from '../../../dispatcher';
-import { deleteSlideObject } from '../../../methods/methods';
+import { deleteSlideObject } from '../../../actions/actionsCreators';
+import { connect } from 'react-redux';
 
 interface DeleteObjectProps {
-    app: AppType;
+    deleteSlideObject: () => void;
 }
 
-export default function DeleteObject(props: DeleteObjectProps) {
+function DeleteObject(props: DeleteObjectProps) {
     const iconStyle = {
         width: '30px',
         height: '30px'
@@ -21,7 +20,13 @@ export default function DeleteObject(props: DeleteObjectProps) {
     }
     return (
         <button style={btnStyle} onClick={() => {
-            dispatch(deleteSlideObject);
+            props.deleteSlideObject();
         }}><img src={icon} alt="delete icon" style={iconStyle} /></button>
     )
 }
+
+const mapDispatchToProps = {
+    deleteSlideObject
+}
+
+export default connect(null, mapDispatchToProps)(DeleteObject)

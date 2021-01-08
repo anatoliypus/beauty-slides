@@ -1,5 +1,5 @@
 import React from 'react';
-import { AppType } from '../../model/model';
+import { AppType, choosedObjectType } from '../../model/model';
 import styles from './Topbar.module.css';
 import { dispatch, exportPDFApp } from '../../dispatcher';
 import { changePresentationName } from '../../methods/methods';
@@ -15,12 +15,14 @@ import FigureMenu from './components/FigureMenu';
 import TextMenu from './components/TextMenu';
 import ImageMenu from './components/ImageMenu';
 import DeleteObject from './components/DeleteObject';
+import { connect } from 'react-redux';
 
 interface TopbarProps {
-    app: AppType;
+    name: string;
+    choosedObject: choosedObjectType;
 }
 
-export default function Topbar(props: TopbarProps) {
+function Topbar(props: TopbarProps) {
     const input = React.useRef<HTMLInputElement>(null);
 
     React.useEffect(() => {
@@ -48,12 +50,12 @@ export default function Topbar(props: TopbarProps) {
         };
 
         const onFocusFunc = () => {
-            if (input.current) input.current.value = props.app.name;
+            if (input.current) input.current.value = props.name;
             window.addEventListener('click', returnProcessedName);
         };
 
         if (input.current) {
-            let name = props.app.name;
+            let name = props.name;
             name = processName(name);
             let canvas = document.createElement('canvas');
             let ctx = canvas.getContext('2d');
@@ -143,11 +145,11 @@ export default function Topbar(props: TopbarProps) {
     }, [contextMenuState]);
 
     let menu;
-    if (props.app.choosedObject.type === 'figure')
-        menu = <FigureMenu app={props.app} />;
-    else if (props.app.choosedObject.type === 'text')
-        menu = <TextMenu app={props.app} />;
-    else if (props.app.choosedObject.type === 'img') menu = <ImageMenu />;
+    if (props.choosedObject.type === 'figure')
+        menu = <FigureMenu />;
+    else if (props.choosedObject.type === 'text')
+        menu = <TextMenu />;
+    else if (props.choosedObject.type === 'img') menu = <ImageMenu />;
     else menu = null;
 
     return (
@@ -189,8 +191,8 @@ export default function Topbar(props: TopbarProps) {
 
                     <div style={{ display: 'flex' }}>
                         {menu}
-                        {props.app.choosedObject.id && (
-                            <DeleteObject app={props.app} />
+                        {props.choosedObject.id && (
+                            <DeleteObject />
                         )}
                     </div>
                 </div>
@@ -235,3 +237,12 @@ export default function Topbar(props: TopbarProps) {
         </>
     );
 }
+
+const mapStateToProps = (state: AppType): TopbarProps => {
+    return {
+        name: state.name,
+        choosedObject: state.choosedObject
+    }
+}
+
+export default connect(mapStateToProps)(Topbar);

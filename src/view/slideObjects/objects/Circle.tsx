@@ -28,6 +28,7 @@ export default function Circle(props: CircleProps) {
         width: props.node.width,
         height: props.node.height,
         squareResize: true,
+        type: 'figure'
     });
 
     let style = props.style;

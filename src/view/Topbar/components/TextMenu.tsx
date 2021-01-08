@@ -1,41 +1,49 @@
 import React from 'react';
-import { AppType, TextObject } from '../../../model/model';
+import { AppType, choosedObjectType, SlideCollection, TextObject } from '../../../model/model';
 import styles from './ObjectsMenu.module.css';
 import fontSizeIcon from '../img/font-size.svg';
 import {
     getSlideNode,
     getCurrentSlide,
-} from '../../../methods/secondaryMethods';
+} from '../../../methods/newSecondaryMethods';
 import boldIcon from '../img/bold.svg';
 import italicIcon from '../img/italic.svg';
 import underlinedIcon from '../img/underlined.svg';
 import rightAlignment from '../img/text-right.svg';
 import leftAlignment from '../img/text-left.svg';
 import centerAlignment from '../img/text-center.svg';
-import { dispatch } from '../../../dispatcher';
 import {
-    changeTextSize,
+    changeTextFontSize,
     toggleBoldText,
     toggleItalicText,
     toggleUnderlinedText,
-    changeAlignment,
-} from '../../../methods/methods';
+    changeTextAlignment,
+} from '../../../actions/actionsCreators';
 import Palette from './Palette';
 import SelectElement from './SelectElement';
 import ManageZIndex from './ManageZIndex';
 import FontSelect from './FontSelect';
 import { fonts } from '../../../index';
+import { connect } from 'react-redux';
 
 interface TextMenuProps {
-    app: AppType;
+    slides: SlideCollection;
+    choosedObject: choosedObjectType;
+    currSlideId: string | null;
+    changeTextFontSize: (s: string) => void;
+    toggleBoldText: () => void;
+    toggleItalicText: () => void;
+    toggleUnderlinedText: () => void;
+    changeTextAlignment: (a: 'center' | 'right' | 'left') => void;
 }
 
-export default function TextMenu(props: TextMenuProps) {
-    const slide = getCurrentSlide(props.app);
+function TextMenu(props: TextMenuProps) {
+    if (! props.currSlideId) throw new Error();
+    const slide = getCurrentSlide(props.slides, props.currSlideId);
 
     let node;
     if (slide) {
-        node = getSlideNode(slide, props.app.choosedObject.id);
+        node = getSlideNode(slide, props.choosedObject.id);
     } else throw new Error();
 
     let fontSize;
@@ -89,7 +97,7 @@ export default function TextMenu(props: TextMenuProps) {
                 selectedValue={fontSize}
                 values={fontSizeValues}
                 callback={(value) => {
-                    dispatch(changeTextSize, value);
+                    props.changeTextFontSize(value);
                 }}
             />
             <button
@@ -97,7 +105,7 @@ export default function TextMenu(props: TextMenuProps) {
                     isBold ? `${styles.btn} + ${styles.activeBtn}` : styles.btn
                 }
                 onClick={() => {
-                    dispatch(toggleBoldText);
+                    toggleBoldText();
                 }}
             >
                 <img src={boldIcon} alt="toggle text bold" />
@@ -109,7 +117,7 @@ export default function TextMenu(props: TextMenuProps) {
                         : styles.btn
                 }
                 onClick={() => {
-                    dispatch(toggleItalicText);
+                    props.toggleItalicText();
                 }}
             >
                 <img src={italicIcon} alt="toggle text italic" />
@@ -121,7 +129,7 @@ export default function TextMenu(props: TextMenuProps) {
                         : styles.btn
                 }
                 onClick={() => {
-                    dispatch(toggleUnderlinedText);
+                    props.toggleUnderlinedText();
                 }}
             >
                 <img src={underlinedIcon} alt="toggle text underlined" />
@@ -133,7 +141,7 @@ export default function TextMenu(props: TextMenuProps) {
                         : styles.btn
                 }
                 onClick={() => {
-                    dispatch(changeAlignment, 'left');
+                    props.changeTextAlignment('left');
                 }}
             >
                 <img src={leftAlignment} alt="toggle left alignment" />
@@ -145,7 +153,7 @@ export default function TextMenu(props: TextMenuProps) {
                         : styles.btn
                 }
                 onClick={() => {
-                    dispatch(changeAlignment, 'center');
+                    props.changeTextAlignment('center');
                 }}
             >
                 <img src={centerAlignment} alt="toggle center alignment" />
@@ -157,7 +165,7 @@ export default function TextMenu(props: TextMenuProps) {
                         : styles.btn
                 }
                 onClick={() => {
-                    dispatch(changeAlignment, 'right');
+                    props.changeTextAlignment('right');
                 }}
             >
                 <img src={rightAlignment} alt="toggle right alignment" />
@@ -179,3 +187,27 @@ export default function TextMenu(props: TextMenuProps) {
         </div>
     );
 }
+
+interface TextMenuOwnProps {
+    slides: SlideCollection;
+    choosedObject: choosedObjectType;
+    currSlideId: string | null;
+}
+
+const mapStateToProps = (state: AppType): TextMenuOwnProps => {
+    return {
+        choosedObject: state.choosedObject,
+        slides: state.slides,
+        currSlideId: state.currSlideId
+    }
+}
+
+const mapDispatchToProps = {
+    changeTextFontSize,
+    toggleBoldText,
+    toggleItalicText,
+    toggleUnderlinedText,
+    changeTextAlignment
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TextMenu);

@@ -1,8 +1,8 @@
 import React from 'react';
-import { changeSlideOrder } from '../../../methods/methods';
-import { dispatch } from '../../../dispatcher';
+import { changeSlideOrder } from '../../../actions/actionsCreators';
 import { miniatureRefObj } from '../SlideCarousel';
 import slideIcon from '../img/template.svg';
+import { store } from '../../../index';
 
 export default function useChangeSlideOrder(
     refs: React.RefObject<Array<miniatureRefObj>>,
@@ -125,10 +125,10 @@ export default function useChangeSlideOrder(
                         }
                     }
 
-                    dispatch(changeSlideOrder, {
-                        slideAfterId: slideAfterId,
-                        slideId: obj.id,
-                    });
+                    store.dispatch(changeSlideOrder(
+                        obj.id,
+                        slideAfterId
+                    ));
                 }
             };
             window.addEventListener('mousemove', onMouseMove);

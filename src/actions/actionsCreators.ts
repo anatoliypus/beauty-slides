@@ -65,11 +65,24 @@ export function changeRectBorderRadius(newRadius: number): changeRectBorderRadiu
     }
 }
 
+export interface changeSlideOrderActionType {
+    type: 'CHANGE_SLIDE_ORDER';
+    slideId: string;
+    slideAfterId: string;
+}
+export function changeSlideOrder(slideId: string, slideAfterId: string): changeSlideOrderActionType {
+    return {
+        type: 'CHANGE_SLIDE_ORDER',
+        slideId,
+        slideAfterId
+    }
+}
+
 export interface strokeColorSetActionType {
     type: 'CHANGE_FIGURE_STROKE_COLOR';
-    newColor: number;
+    newColor: string;
 }
-export function strokeColorSet(newColor: number): strokeColorSetActionType {
+export function strokeColorSet(newColor: string): strokeColorSetActionType {
     return {
         type: 'CHANGE_FIGURE_STROKE_COLOR',
         newColor
@@ -78,9 +91,9 @@ export function strokeColorSet(newColor: number): strokeColorSetActionType {
 
 export interface figureBackgroundSetActionType {
     type: 'CHANGE_FIGURE_BACKGROUND';
-    newColor: number;
+    newColor: string;
 }
-export function figureBackgroundSet(newColor: number): figureBackgroundSetActionType {
+export function figureBackgroundSet(newColor: string): figureBackgroundSetActionType {
     return {
         type: 'CHANGE_FIGURE_BACKGROUND',
         newColor

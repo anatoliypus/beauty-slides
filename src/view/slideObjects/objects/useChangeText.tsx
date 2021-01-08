@@ -1,7 +1,6 @@
 import React from 'react';
-import { dispatch } from '../../../dispatcher';
-import { changeText } from '../../../methods/methods';
-
+import { changeTextData } from '../../../actions/actionsCreators';
+import { store } from '../../../index';
 
 interface useChangeTextProps {
     id: string;
@@ -23,7 +22,7 @@ export default function useChangeText(props: useChangeTextProps) {
 
     React.useEffect(() => {
         const change = () => {
-            if (props.el.current) dispatch(changeText, props.el.current.value);
+            if (props.el.current) store.dispatch(changeTextData(props.el.current.value));
         };
         const secondClick = () => {
             if (props.el.current && stateRef.current) {

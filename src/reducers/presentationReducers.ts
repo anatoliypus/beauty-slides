@@ -6,7 +6,7 @@ import slidesReducer from './slidesReducer';
 import choosedObjectReducer from './choosedObjectReducer';
 import bufferedIdReducer from './bufferedIdReducer';
 
-export const presentationReducers = (state: AppType = constructors.createApp(constructors.createSettings()), action: object): AppType => {
+export default function presentationReducers(state: AppType = constructors.createApp(constructors.createSettings()), action: object): AppType {
     return {
         name: titleReducer(state.name, action),
         currSlideId: currSlideIdReducer(state.currSlideId, action),

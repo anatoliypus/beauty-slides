@@ -28,6 +28,7 @@ export default function Img(props: ImgProps) {
         width: props.node.width,
         height: props.node.height,
         squareResize: false,
+        type: 'img'
     });
 
     let style = props.style;

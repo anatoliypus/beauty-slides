@@ -23,6 +23,7 @@ import {
     toggleBoldText,
     toggleItalicText,
     toggleUnderlinedText,
+    changeSlideOrder,
 } from '../methods/slidesMethods';
 import { choosedObjectType, SlideType } from '../model/model';
 
@@ -118,5 +119,7 @@ export default function slidesReducer(
             choosedObject,
             action.strokeWidth
         );
+    } else if (action.type === 'CHANGE_SLIDE_ORDER') {
+        return changeSlideOrder(state, action.slideId, action.slideAfterId);
     } else return state;
 }

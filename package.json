@@ -8,6 +8,7 @@
     "@types/node": "^12.0.0",
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
+    "@types/react-redux": "^7.1.15",
     "@types/webfontloader": "^1.6.32",
     "arraybuffer-loader": "^1.0.8",
     "hex-rgb": "^4.2.0",
@@ -15,7 +16,9 @@
     "jspdf": "^2.1.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-redux": "^7.2.2",
     "react-scripts": "3.4.3",
+    "redux": "^4.0.5",
     "typescript": "~3.7.2",
     "webfontloader": "^1.6.28"
   },
