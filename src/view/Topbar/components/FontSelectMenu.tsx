@@ -1,7 +1,8 @@
 import React from 'react';
 import styles from './ContextMenu.module.css';
-import { dispatch } from '../../../dispatcher';
-import { changeTextFontFamily } from '../../../methods/methods';
+import { changeTextFontFamily } from '../../../actions/actionsCreators';
+import { AppType } from '../../../model/model';
+import { connect } from 'react-redux';
 
 interface FontSelectItemProps {
     data: Array<string>;
@@ -9,9 +10,10 @@ interface FontSelectItemProps {
     y: string;
     shown: boolean;
     changeVisibility: React.Dispatch<React.SetStateAction<boolean>>;
+    changeTextFontFamily: (f: string) => void;
 }
 
-export default function FontSelectMenu(props: FontSelectItemProps) {
+function FontSelectMenu(props: FontSelectItemProps) {
     const visibilityClass = props.shown ? styles.menu_showed : styles.menu_hidden;
     return (
         <div
@@ -24,7 +26,7 @@ export default function FontSelectMenu(props: FontSelectItemProps) {
                         key={index}
                         className={styles.menu__item}
                         onClick={() => {
-                            dispatch(changeTextFontFamily, item);
+                            props.changeTextFontFamily(item);
                             props.changeVisibility(false);
                         }}
                     >
@@ -35,3 +37,18 @@ export default function FontSelectMenu(props: FontSelectItemProps) {
         </div>
     );
 }
+
+interface FontSelectItemOwnProps {
+    data: Array<string>;
+    x: string;
+    y: string;
+    shown: boolean;
+    changeVisibility: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const mapStateToProps = (state: AppType, ownProps: FontSelectItemOwnProps) => ownProps;
+const mapDispatchToProps = {
+    changeTextFontFamily
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(FontSelectMenu)

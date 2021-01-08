@@ -3,7 +3,7 @@ import styles from './SlideCarousel.module.css';
 import { AppType, SlideCollection, SlideType } from '../../model/model';
 import Miniature from './components/Miniature';
 import useChangeSlideOrder from './components/useChangeSlideOrder';
-import { Context } from '../../dispatcher';
+import { Context } from '../../index';
 import { connect } from 'react-redux';
 
 interface SlideCarouselProps {

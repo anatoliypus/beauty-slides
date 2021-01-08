@@ -13,10 +13,10 @@ export function changeSlide(id: string): changeSlideActionType {
 
 export interface changeSelectedObjectActionType {
     type: 'CHANGE_SELECTED_OBJECT';
-    id: string;
+    id: string | null;
     objType: NodeType | null
 }
-export function changeSelectedObject(id: string, objType: NodeType): changeSelectedObjectActionType {
+export function changeSelectedObject(id: string | null, objType: NodeType | null): changeSelectedObjectActionType {
     return {
         type: 'CHANGE_SELECTED_OBJECT',
         id,
@@ -201,7 +201,7 @@ export function decreaseZIndex() {
     }
 }
 
-export function chengePresentationName(name: string) {
+export function changePresentationName(name: string) {
     return {
         type: 'CHANGE_PRESENTATION_NAME',
         name

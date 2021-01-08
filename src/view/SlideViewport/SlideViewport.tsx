@@ -1,16 +1,16 @@
 import React from 'react';
 import styles from './SlideViewport.module.css';
-import { AppType, SlideCollection } from '../../model/model';
+import { AppType, NodeType, SlideCollection } from '../../model/model';
 import getObjects from '../SlideObjects/getObjects';
-import { dispatch } from '../../dispatcher';
-import { changeSelectedObject } from '../../methods/methods';
-import { Context } from '../../dispatcher';
+import { changeSelectedObject } from '../../actions/actionsCreators';
+import { Context } from '../../index';
 import { connect } from 'react-redux';
 
 interface SlideViewportProps {
     slides: SlideCollection;
     selectedId: string | null;
     currSlideId: string | null;
+    changeSelectedObject: (id: string | null, type: NodeType | null) => void;
 }
 
 function SlideViewport(props: SlideViewportProps) {
@@ -46,7 +46,7 @@ function SlideViewport(props: SlideViewportProps) {
                 style={slideStyles2 ? slideStyles2 : slideStyles}
                 onClick={(event: React.MouseEvent<HTMLElement>) => {
                     if (!event.isDefaultPrevented()) {
-                        dispatch(changeSelectedObject, '');
+                        props.changeSelectedObject(null, null)
                     }
                 }}
             >
@@ -56,7 +56,13 @@ function SlideViewport(props: SlideViewportProps) {
     );
 }
 
-const mapStateToProps = (state: AppType): SlideViewportProps => {
+interface SlideViewportOwnProps {
+    slides: SlideCollection;
+    selectedId: string | null;
+    currSlideId: string | null;
+}
+
+const mapStateToProps = (state: AppType): SlideViewportOwnProps => {
     return {
         slides: state.slides,
         currSlideId: state.currSlideId,
@@ -64,4 +70,8 @@ const mapStateToProps = (state: AppType): SlideViewportProps => {
     }
 }
 
-export default connect(mapStateToProps)(SlideViewport)
+const mapDispatchToProps = {
+    changeSelectedObject
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SlideViewport)

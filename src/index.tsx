@@ -7,6 +7,7 @@ import App from './App';
 import { createStore, Store } from 'redux';
 import presentationReducers from './reducers/presentationReducers';
 import { AppType } from './model/model';
+import { Provider } from 'react-redux';
 
 export const fonts = ['JetBrains Mono', 'Oswald', 'Merriweather', 'Open Sans', 'Roboto', 'Montserrat', 'Playfair Display', 'Lora', 'PT Serif', 'Russo One', 'Lobster', 'Pacifico', 'Amatic SC', 'Caveat', 'Yeseva One'].sort();
 
@@ -18,21 +19,30 @@ WebFont.load({
 
 export let store: Store<AppType>;
 
-let savedApp = window.localStorage.getItem('app');
-if (savedApp) store = createStore(presentationReducers, JSON.parse(savedApp));
-else store = createStore(presentationReducers);
-
 const settings = constructors.createSettings();
 export const Context = React.createContext(settings);
 
-ReactDOM.render(
-    <React.StrictMode>
-        <Context.Provider value={settings}>
-            <App />
-        </Context.Provider>
-    </React.StrictMode>,
-    document.getElementById('root')
-);
+export function init(state: AppType | undefined = undefined) {
+    if (state) {
+        store = createStore(presentationReducers, state);
+    } else {
+        let savedApp = window.localStorage.getItem('app');
+        if (savedApp) store = createStore(presentationReducers, JSON.parse(savedApp));
+        else store = createStore(presentationReducers);
+    }
+    ReactDOM.render(
+        <React.StrictMode>
+            <Provider store={store}>
+                <Context.Provider value={settings}>
+                    <App />
+                </Context.Provider>
+            </Provider>
+        </React.StrictMode>,
+        document.getElementById('root')
+    );
+}
+
+init();
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

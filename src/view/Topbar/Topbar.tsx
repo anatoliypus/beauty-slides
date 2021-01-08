@@ -1,8 +1,7 @@
 import React from 'react';
 import { AppType, choosedObjectType } from '../../model/model';
 import styles from './Topbar.module.css';
-import { dispatch, exportPDFApp } from '../../dispatcher';
-import { changePresentationName } from '../../methods/methods';
+import { changePresentationName } from '../../actions/actionsCreators';
 import exportIcon from './img/exportIcon.svg';
 import ContextButton from './components/ContextButton';
 import TextButton from './components/TextButton';
@@ -20,6 +19,7 @@ import { connect } from 'react-redux';
 interface TopbarProps {
     name: string;
     choosedObject: choosedObjectType;
+    changePresentationName: (s: string) => void;
 }
 
 function Topbar(props: TopbarProps) {
@@ -38,8 +38,8 @@ function Topbar(props: TopbarProps) {
         const onChangeFunc = () => {
             if (input.current) {
                 if (input.current.value !== '')
-                    dispatch(changePresentationName, input.current.value);
-                else dispatch(changePresentationName, 'presentation.');
+                    props.changePresentationName(input.current.value);
+                else props.changePresentationName('presentation.');
             }
         };
 
@@ -224,9 +224,9 @@ function Topbar(props: TopbarProps) {
                     >
                         <img src={areInstrumensVisible ? minus : plus} alt="" />
                     </button>
-                    <button className={styles.exportBtn} onClick={exportPDFApp}>
+                    {/* <button className={styles.exportBtn} onClick={exportPDFApp}>
                         <img src={exportIcon} alt="export" />
-                    </button>
+                    </button> */}
                 </div>
             </div>
             <Palette
@@ -238,11 +238,20 @@ function Topbar(props: TopbarProps) {
     );
 }
 
-const mapStateToProps = (state: AppType): TopbarProps => {
+interface TopbarOwnProps {
+    name: string;
+    choosedObject: choosedObjectType;
+}
+
+const mapStateToProps = (state: AppType): TopbarOwnProps => {
     return {
         name: state.name,
         choosedObject: state.choosedObject
     }
 }
 
-export default connect(mapStateToProps)(Topbar);
+const mapDispatchToProps = {
+    changePresentationName
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Topbar);

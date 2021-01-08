@@ -12,7 +12,7 @@ interface MiniatureProps {
     slide: SlideType;
     refsArr: React.RefObject<Array<object>>;
     choosed: boolean;
-    changeSlide: () => void;
+    changeSlide: (id: string) => void;
 }
  
 function Miniature(props: MiniatureProps) {
@@ -69,7 +69,15 @@ const mapDispatchToProps = {
     changeSlide
 }
 
-const mapStateToProps = (state: AppType, ownProps: MiniatureProps) => {
+interface MiniatureOwnProps {
+    index: number;
+    inlineStyle: React.CSSProperties;
+    slide: SlideType;
+    refsArr: React.RefObject<Array<object>>;
+    choosed: boolean;
+}
+
+const mapStateToProps = (state: AppType, ownProps: MiniatureOwnProps) => {
     return ownProps
 }
 

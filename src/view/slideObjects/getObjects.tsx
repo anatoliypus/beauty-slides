@@ -6,8 +6,8 @@ import Rectangle from './objects/Rectangle';
 import Triangle from './objects/Triangle';
 import Img from './objects/Img';
 import Line from './objects/Line';
-import { dispatch } from '../../dispatcher';
-import { changeSelectedObject } from '../../methods/methods';
+import { changeSelectedObject } from '../../actions/actionsCreators';
+import { store } from '../../index';
 
 export default function getObjects(
     slide: SlideType,
@@ -21,7 +21,7 @@ export default function getObjects(
         ) => {
             e.preventDefault();
             if (kWidth === 1 && kHeight === 1) {
-                dispatch(changeSelectedObject, node.id);
+                store.dispatch(changeSelectedObject(node.id, node.type));
             }
         };
         let style = {

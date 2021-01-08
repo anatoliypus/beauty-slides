@@ -1,26 +1,31 @@
 import React from 'react';
 import styles from './Palette.module.css';
-import { dispatch } from '../../../dispatcher';
-import { setSlideBg, changeTextColor, figureBackgroundSet, strokeColorSet } from '../../../methods/methods';
+import { setSlideBg, changeTextColor, figureBackgroundSet, strokeColorSet } from '../../../actions/actionsCreators';
+import { connect } from 'react-redux';
+import { AppType } from '../../../model/model';
 
 interface ChangeOwnColorProps {
     type: 'slide' | 'textColor' | 'strokeColor' | 'figureBG';
     changeVisibility: React.Dispatch<React.SetStateAction<boolean>>;
+    setSlideBg: (c: string) => void;
+    changeTextColor: (c: string) => void;
+    figureBackgroundSet: (c: string) => void;
+    strokeColorSet: (c: string) => void;
 }
 
-export default function ChangeOwnColor(props: ChangeOwnColorProps) {
+function ChangeOwnColor(props: ChangeOwnColorProps) {
     const ref = React.useRef<HTMLInputElement>(null);
     const [color, changeColor] = React.useState<string>('#000000');
     const submit = () => {
         if (ref.current) {
             if (props.type === 'slide') {
-                dispatch(setSlideBg, color);
+                props.setSlideBg(color);
             } else if (props.type === 'textColor') {
-                dispatch(changeTextColor, color)
+                props.changeTextColor(color);
             } else if (props.type === 'figureBG') {
-                dispatch(figureBackgroundSet, color)
+                props.figureBackgroundSet(color);
             } else if (props.type === 'strokeColor') {
-                dispatch(strokeColorSet, color)
+                props.strokeColorSet(color);
             }
             props.changeVisibility(false);
         }
@@ -46,3 +51,18 @@ export default function ChangeOwnColor(props: ChangeOwnColorProps) {
         </div>
     );
 }
+
+interface ChangeOwnColorOwnProps {
+    type: 'slide' | 'textColor' | 'strokeColor' | 'figureBG';
+    changeVisibility: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const mapStateToProps = (state: AppType, ownProps: ChangeOwnColorOwnProps) => ownProps;
+const mapDispatchToProps = {
+    setSlideBg, 
+    changeTextColor, 
+    figureBackgroundSet, 
+    strokeColorSet
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ChangeOwnColor)

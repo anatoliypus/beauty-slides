@@ -1,7 +1,7 @@
 import { AppType, ImgObject } from '../model/model';
 import { replaceNode, replaceSlide, cloneApp } from './secondaryMethods';
 import { getBase64 } from './getImageBase64';
-import { init } from '../dispatcher';
+import { init } from '../index';
 
 export async function exportApp(app: AppType) {
     interface ImgArrObject {
