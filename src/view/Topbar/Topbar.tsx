@@ -1,7 +1,7 @@
 import React from 'react';
 import { AppType, choosedObjectType } from '../../model/model';
 import styles from './Topbar.module.css';
-import { changePresentationName } from '../../actions/actionsCreators';
+import { changePresentationName, exportPDF } from '../../actions/actionsCreators';
 import exportIcon from './img/exportIcon.svg';
 import ContextButton from './components/ContextButton';
 import TextButton from './components/TextButton';
@@ -20,6 +20,7 @@ interface TopbarProps {
     name: string;
     choosedObject: choosedObjectType;
     changePresentationName: (s: string) => void;
+    exportPDF: () => void;
 }
 
 function Topbar(props: TopbarProps) {
@@ -224,9 +225,9 @@ function Topbar(props: TopbarProps) {
                     >
                         <img src={areInstrumensVisible ? minus : plus} alt="" />
                     </button>
-                    {/* <button className={styles.exportBtn} onClick={exportPDFApp}>
+                    <button className={styles.exportBtn} onClick={props.exportPDF}>
                         <img src={exportIcon} alt="export" />
-                    </button> */}
+                    </button>
                 </div>
             </div>
             <Palette
@@ -251,7 +252,8 @@ const mapStateToProps = (state: AppType): TopbarOwnProps => {
 }
 
 const mapDispatchToProps = {
-    changePresentationName
+    changePresentationName,
+    exportPDF
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Topbar);

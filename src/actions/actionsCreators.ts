@@ -39,7 +39,28 @@ export type actionType =
     | currSlideIdReducerAction
     | titleReducerAction
     | slideReducerAction
-    | exportAppActionType;
+    | exportAppActionType
+    | exportPDFActionType
+    | redoActionType
+    | undoActionType;
+
+interface redoActionType {
+    type: 'REDO';
+}
+export function redo(): redoActionType {
+    return {
+        type: 'REDO',
+    };
+}
+
+interface undoActionType {
+    type: 'UNDO';
+}
+export function undo(): undoActionType {
+    return {
+        type: 'UNDO',
+    };
+}
 
 interface exportAppActionType {
     type: 'EXPORT_APP';
@@ -47,6 +68,15 @@ interface exportAppActionType {
 export function exportApp(): exportAppActionType {
     return {
         type: 'EXPORT_APP',
+    };
+}
+
+interface exportPDFActionType {
+    type: 'EXPORT_PDF';
+}
+export function exportPDF(): exportPDFActionType {
+    return {
+        type: 'EXPORT_PDF',
     };
 }
 

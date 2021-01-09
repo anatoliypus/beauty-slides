@@ -26,7 +26,6 @@ function Miniature(props: MiniatureProps) {
     function setProportions() {
         if (miniatureRef.current) {
             const miniatureWidth = miniatureRef.current.getBoundingClientRect().width;
-            console.log(miniatureWidth);
             const miniatureHeight = miniatureWidth / (settings.slideWidth / settings.slideHeight);
             miniatureRef.current.style.height = miniatureHeight + 'px';
             const kWidth = miniatureWidth / settings.slideWidth;

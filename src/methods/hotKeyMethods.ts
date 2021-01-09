@@ -1,12 +1,12 @@
-import { deleteSlideObject, copyObject, pasteObject, deleteSlide } from '../actions/actionsCreators';
+import { deleteSlideObject, copyObject, pasteObject, deleteSlide, redo, undo } from '../actions/actionsCreators';
 import { store } from '../index';
 
-// export function undoHotKey(e: KeyboardEvent) {
-//     if (e.key === 'z' && (e.metaKey || e.ctrlKey)) {
-//         if (e.shiftKey) redo();
-//         else undo();
-//     }
-// }
+export function undoHotKey(e: KeyboardEvent) {
+    if (e.key === 'z' && (e.metaKey || e.ctrlKey)) {
+        if (e.shiftKey) store.dispatch(redo());
+        else store.dispatch(undo());
+    }
+}
 
 export function deleteHotKey(e: KeyboardEvent) {
     if (e.key === 'd' && (e.metaKey || e.ctrlKey) && (! e.shiftKey)) {

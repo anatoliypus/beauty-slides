@@ -65,6 +65,7 @@ export default function ContextButton(props: ComponentButtonProps) {
                 data={props.contextMenuItems}
                 x={menuX}
                 y={menuY}
+                changeVisibility={props.onclick}
             />
         </>
     );

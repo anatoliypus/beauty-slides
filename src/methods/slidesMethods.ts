@@ -436,7 +436,7 @@ export function pasteObject(slides: SlideCollection, bufferedId: string | null):
             objects: newObjects,
             nextZIndex: ++slide.nextZIndex,
         };
-        return  slides.concat([newSlide]);
+        return slides.concat([newSlide]);
     }
     let slideToFind: SlideType | null = null;
     let nodeToFind: SlideNode | null = null;

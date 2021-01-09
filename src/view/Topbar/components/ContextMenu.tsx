@@ -11,6 +11,7 @@ interface ContextMenuProps {
     x: string;
     y: string;
     shown: boolean;
+    changeVisibility: () => void;
 }
 
 export default function ContextMenu(props: ContextMenuProps) {
@@ -28,7 +29,10 @@ export default function ContextMenu(props: ContextMenuProps) {
                     <div
                         key={index}
                         className={styles.menu__item}
-                        onClick={item.callback}
+                        onClick={() => {
+                            item.callback();
+                            props.changeVisibility();
+                        }}
                     >
                         <p className={styles.menu__item_p}>{item.heading}</p>
                     </div>
