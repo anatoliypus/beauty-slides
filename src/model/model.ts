@@ -65,6 +65,7 @@ export type AppType = {
    settings: SettingsObject;
    choosedObject: choosedObjectType;
    bufferedId: string | null;
+   usedColors: Array<string>;
 };
 
 export type SlideCollection = Array<SlideType>;

@@ -60,7 +60,7 @@ function SlideViewport(props: SlideViewportProps) {
                     }
                 }}
             >
-                {getObjects(slide, 1, 1, props.selectedId)}
+                {getObjects(slide, 1, 1, props.selectedId, props.changeSelectedObject)}
             </div>
         </div>
     );
@@ -82,7 +82,7 @@ const mapStateToProps = (state: AppType): SlideViewportOwnProps => {
 
 const mapDispatchToProps = {
     changeSelectedObject,
-    changeSlide,
+    changeSlide
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SlideViewport);

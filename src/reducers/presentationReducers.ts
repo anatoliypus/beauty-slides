@@ -10,6 +10,7 @@ import { actionType } from '../actions/actionsCreators';
 import { exportPDF } from '../methods/exportPdfMethods';
 import { init } from "../index";
 import { cloneApp } from '../methods/newSecondaryMethods';
+import usedColorsReducer from './usedColorsReducer';
 
 function undo(state: AppType): void {
     if (undoStack.length && state) {
@@ -39,16 +40,24 @@ export default function presentationReducers(state: AppType = constructors.creat
     } else if (action.type === 'EXPORT_PDF') {
         exportPDF(state);
     } else if (action.type === 'REDO') {
-        redo(state);
+        // redo(state);
+        // console.log('redo', redoStack);
     } else if (action.type === 'UNDO') {
-        undo(state);
-    } else undoStack.push(state);
-    return {
+        // undo(state);
+        // console.log('undo', undoStack);
+    } else {
+        // undoStack.push(state);
+        // console.log('just push in state', undoStack);
+    }
+    const newState = {
         name: titleReducer(state.name, action),
         currSlideId: currSlideIdReducer(state.currSlideId, action),
         slides: slidesReducer(state.slides, action, state.currSlideId, state.choosedObject, state.bufferedId),
         settings: state.settings,
         choosedObject: choosedObjectReducer(state.choosedObject, action),
-        bufferedId: bufferedIdReducer(state.bufferedId, action, state.choosedObject, state.currSlideId)
+        bufferedId: bufferedIdReducer(state.bufferedId, action, state.choosedObject, state.currSlideId),
+        usedColors: usedColorsReducer(state.usedColors, action)
     }
+    window.localStorage.setItem('app', JSON.stringify(newState));
+    return newState
 }

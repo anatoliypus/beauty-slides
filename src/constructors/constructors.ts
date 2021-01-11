@@ -32,7 +32,8 @@ function createApp(settings: SettingsObject): AppType {
         id: null,
         type: null
     },
-    bufferedId: null
+    bufferedId: null,
+    usedColors: []
   }
 }
 

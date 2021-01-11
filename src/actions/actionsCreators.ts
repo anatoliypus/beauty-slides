@@ -167,25 +167,25 @@ export function changeSlideOrder(
 
 export interface strokeColorSetActionType {
     type: 'CHANGE_FIGURE_STROKE_COLOR';
-    newColor: string;
+    color: string;
 }
-export function strokeColorSet(newColor: string): strokeColorSetActionType {
+export function strokeColorSet(color: string): strokeColorSetActionType {
     return {
         type: 'CHANGE_FIGURE_STROKE_COLOR',
-        newColor,
+        color,
     };
 }
 
 export interface figureBackgroundSetActionType {
     type: 'CHANGE_FIGURE_BACKGROUND';
-    newColor: string;
+    color: string;
 }
 export function figureBackgroundSet(
-    newColor: string
+    color: string
 ): figureBackgroundSetActionType {
     return {
         type: 'CHANGE_FIGURE_BACKGROUND',
-        newColor,
+        color,
     };
 }
 
@@ -293,12 +293,12 @@ export function changeTextData(data: string): changeTextDataActionType {
 
 export interface setSlideBgActionType {
     type: 'SET_SLIDE_BG';
-    bg: string;
+    color: string;
 }
-export function setSlideBg(bg: string): setSlideBgActionType {
+export function setSlideBg(color: string): setSlideBgActionType {
     return {
         type: 'SET_SLIDE_BG',
-        bg,
+        color,
     };
 }
 

@@ -3,7 +3,9 @@ import useDragResize from './useDragResize';
 import textStyles from './Text.module.css';
 import objStyles from './Object.module.css';
 import useChangeText from './useChangeText';
-import { TextObject } from '../../../model/model';
+import { AppType, NodeType, TextObject } from '../../../model/model';
+import { connect } from 'react-redux';
+import { changeTextData, resizeNode, changeSelectedObject, moveItem } from '../../../actions/actionsCreators';
 
 interface TextProps {
     node: TextObject;
@@ -12,9 +14,13 @@ interface TextProps {
     kHeight: number;
     choosed: boolean;
     onclick: (e: React.MouseEvent<HTMLElement>) => void;
+    changeTextData: (data: string) => void;
+    resizeNode: (width: string, height: string) => void;
+    changeSelectedObject: (id: string, type: NodeType) => void;
+    moveItem: (x: number, y: number) => void;
 }
 
-export default function Text(props: TextProps) {
+function Text(props: TextProps) {
     const div = React.useRef<HTMLDivElement>(null);
     const resizeIconRef = React.useRef<SVGSVGElement>(null);
 
@@ -30,7 +36,10 @@ export default function Text(props: TextProps) {
         width: props.node.width,
         height: props.node.height,
         squareResize: false,
-        type: 'text'
+        type: 'text',
+        resizeNode: props.resizeNode,
+        changeSelectedObject: props.changeSelectedObject,
+        moveItem: props.moveItem
     });
 
     let style = props.style;
@@ -44,7 +53,7 @@ export default function Text(props: TextProps) {
     const size = refs.sizeRef;
 
     const el = React.useRef<HTMLTextAreaElement>(null);
-    useChangeText({id: props.node.id, data: props.node.data, el: el});
+    useChangeText({id: props.node.id, data: props.node.data, el: el, changeTextData: props.changeTextData});
 
     React.useEffect(() => {
         if (el.current) {
@@ -80,3 +89,25 @@ export default function Text(props: TextProps) {
         </div>
     );
 }
+
+interface TextOwnProps {
+    node: TextObject;
+    style: React.CSSProperties;
+    kWidth: number;
+    kHeight: number;
+    choosed: boolean;
+    onclick: (e: React.MouseEvent<HTMLElement>) => void;
+}
+
+const mapDispatchToProps = {
+    changeTextData,
+    resizeNode,
+    changeSelectedObject,
+    moveItem
+}
+
+const mapStateToProps = (state: AppType, ownProps: TextOwnProps) => {
+    return ownProps;
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Text)

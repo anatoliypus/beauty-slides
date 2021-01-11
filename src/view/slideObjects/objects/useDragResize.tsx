@@ -1,6 +1,4 @@
 import React from 'react';
-import { resizeNode, changeSelectedObject, moveItem } from '../../../actions/actionsCreators';
-import { store } from '../../../index';
 import { NodeType } from '../../../model/model';
 
 interface UseDraggingProps {
@@ -16,6 +14,9 @@ interface UseDraggingProps {
     height: string;
     squareResize: boolean;
     type: NodeType;
+    resizeNode: (width: string, height: string) => void;
+    changeSelectedObject: (id: string, type: NodeType) => void;
+    moveItem: (x: number, y: number) => void;
 }
 
 export default function useDragResize(props: UseDraggingProps) {
@@ -103,10 +104,10 @@ export default function useDragResize(props: UseDraggingProps) {
         };
         const elOnMouseUp = (e: MouseEvent) => {
             window.removeEventListener('mousemove', elOnMouseMove);
-            store.dispatch(resizeNode(mySizeStateRef.current.width, mySizeStateRef.current.height));
-            store.dispatch(moveItem(myCordsStateRef.current.x, myCordsStateRef.current.y));
+            props.resizeNode(mySizeStateRef.current.width, mySizeStateRef.current.height);
+            props.moveItem(myCordsStateRef.current.x, myCordsStateRef.current.y);
             setTimeout(() => {
-                store.dispatch(changeSelectedObject(props.id, props.type));
+                props.changeSelectedObject(props.id, props.type);
             });
         };
         
@@ -153,7 +154,7 @@ export default function useDragResize(props: UseDraggingProps) {
         };
         const elOnMouseUp = (e: MouseEvent) => {
             window.removeEventListener('mousemove', elOnMouseMove);
-            store.dispatch(moveItem(myCordsStateRef.current.x, myCordsStateRef.current.y));
+            props.moveItem(myCordsStateRef.current.x, myCordsStateRef.current.y)
         };
         const elOnMouseDown = (e: MouseEvent) => {
             if (props.obj.current && !e.defaultPrevented) {

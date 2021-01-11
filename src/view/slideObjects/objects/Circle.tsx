@@ -1,7 +1,9 @@
 import React from 'react';
 import useDragResize from './useDragResize';
-import { FigureObject } from '../../../model/model';
+import { AppType, FigureObject, NodeType } from '../../../model/model';
 import styles from './Object.module.css';
+import { connect } from 'react-redux';
+import { resizeNode, changeSelectedObject, moveItem } from '../../../actions/actionsCreators';
 
 interface CircleProps {
     node: FigureObject;
@@ -10,9 +12,12 @@ interface CircleProps {
     kHeight: number;
     choosed: boolean;
     onclick: (e: React.MouseEvent<SVGSVGElement, MouseEvent>) => void;
+    resizeNode: (width: string, height: string) => void;
+    changeSelectedObject: (id: string, type: NodeType) => void;
+    moveItem: (x: number, y: number) => void;
 }
 
-export default function Circle(props: CircleProps) {
+function Circle(props: CircleProps) {
     const el = React.useRef<HTMLDivElement>(null);
     const resizeIconRef = React.useRef<SVGSVGElement>(null);
 
@@ -28,7 +33,10 @@ export default function Circle(props: CircleProps) {
         width: props.node.width,
         height: props.node.height,
         squareResize: true,
-        type: 'figure'
+        type: 'figure',
+        resizeNode: props.resizeNode,
+        changeSelectedObject: props.changeSelectedObject,
+        moveItem: props.moveItem
     });
 
     let style = props.style;
@@ -75,3 +83,26 @@ export default function Circle(props: CircleProps) {
         </div>
     );
 }
+
+interface CircleOwnProps {
+    node: FigureObject;
+    style: React.CSSProperties;
+    kWidth: number;
+    kHeight: number;
+    choosed: boolean;
+    onclick: (e: React.MouseEvent<SVGSVGElement, MouseEvent>) => void;
+}
+
+const mapStateToProps = (state: AppType, ownProps: CircleOwnProps) => {
+    return ownProps;
+}
+
+const mapDispatchToProps = {
+    resizeNode,
+    changeSelectedObject,
+    moveItem
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Circle);
+
+

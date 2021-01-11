@@ -6,20 +6,19 @@
     z-index: 999;
     top: 0;
     left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .palette {
-    width: 550px;
-    height: 300px;
-    position: absolute;
     z-index: 1000;
     background-color: #f5f8ff;
-    top: calc(50% - 165px);
-    left: calc(50% - 305px);
     padding: 30px 60px;
     display: flex;
     flex-direction: column;
     border-radius: 30px;
+    max-width: 50%;
 }
 
 .palette__heading {
@@ -77,4 +76,5 @@
     border: 0;
     padding: 10px;
     border-radius: 10px;
+    cursor: pointer;
 }

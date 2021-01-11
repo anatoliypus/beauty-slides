@@ -1,14 +1,16 @@
 import React from 'react';
 import styles from './SlideCarousel.module.css';
-import { AppType, SlideCollection, SlideType } from '../../model/model';
+import { AppType, SlideCollection } from '../../model/model';
 import Miniature from './components/Miniature';
 import useChangeSlideOrder from './components/useChangeSlideOrder';
 import { Context } from '../../index';
 import { connect } from 'react-redux';
+import { changeSlideOrder } from '../../actions/actionsCreators';
 
 interface SlideCarouselProps {
     slides: SlideCollection;
     currSlideId: string | null;
+    changeSlideOrder: (slideId: string, afterId: string) => void;
 }
 
 export interface miniatureRefObj {
@@ -22,7 +24,7 @@ function SlideCarousel(props: SlideCarouselProps) {
     const miniaturesRefsArrRef = React.useRef(miniaturesRefsArr);
     const carouselRef = React.useRef<HTMLDivElement>(null);
 
-    useChangeSlideOrder(miniaturesRefsArrRef, carouselRef);
+    useChangeSlideOrder(miniaturesRefsArrRef, carouselRef, props.changeSlideOrder);
 
     return (
         <div className={styles.slideCarousel} ref={carouselRef} style={{height: settings.slideHeight}}>
@@ -56,11 +58,20 @@ function SlideCarousel(props: SlideCarouselProps) {
     );
 }
 
-const mapStateToProps = (state: AppType): SlideCarouselProps => {
+interface SlideCarouselOwnProps {
+    slides: SlideCollection;
+    currSlideId: string | null;
+}
+
+const mapStateToProps = (state: AppType): SlideCarouselOwnProps => {
     return {
         slides: state.slides,
         currSlideId: state.currSlideId
     }
 }
 
-export default connect(mapStateToProps)(SlideCarousel)
+const mapDispatchToProps = {
+    changeSlideOrder
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SlideCarousel)

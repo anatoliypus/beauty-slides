@@ -1,12 +1,11 @@
 import React from 'react';
-import { changeSlideOrder } from '../../../actions/actionsCreators';
 import { miniatureRefObj } from '../SlideCarousel';
 import slideIcon from '../img/template.svg';
-import { store } from '../../../index';
 
 export default function useChangeSlideOrder(
     refs: React.RefObject<Array<miniatureRefObj>>,
-    carouselRef: React.RefObject<HTMLDivElement>
+    carouselRef: React.RefObject<HTMLDivElement>,
+    changeSlideOrder: (slideId: string, afterId: string) => void
 ) {
     React.useEffect(() => {
         const elOnMouseDown = (
@@ -124,11 +123,10 @@ export default function useChangeSlideOrder(
                             }
                         }
                     }
-
-                    store.dispatch(changeSlideOrder(
+                    changeSlideOrder(
                         obj.id,
                         slideAfterId
-                    ));
+                    )
                 }
             };
             window.addEventListener('mousemove', onMouseMove);

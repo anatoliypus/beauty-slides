@@ -1,8 +1,8 @@
 import React from 'react';
 import styles from '../SlideCarousel.module.css';
-import { AppType, SlideType } from '../../../model/model';
+import { AppType, NodeType, SlideType } from '../../../model/model';
 import getObjects from '../../SlideObjects/getObjects';
-import { changeSlide } from '../../../actions/actionsCreators';
+import { changeSlide, changeSelectedObject } from '../../../actions/actionsCreators';
 import { Context } from '../../../index';
 import { connect } from 'react-redux';
 
@@ -13,6 +13,7 @@ interface MiniatureProps {
     refsArr: React.RefObject<Array<object>>;
     choosed: boolean;
     changeSlide: (id: string) => void;
+    changeSelectedObject: (id: string, type: NodeType) => void;
 }
  
 function Miniature(props: MiniatureProps) {
@@ -58,14 +59,15 @@ function Miniature(props: MiniatureProps) {
                 style={props.inlineStyle}
                 className={styles.slideMiniature}
             >
-                {getObjects(props.slide, proportions.kWidth, proportions.kHeight, null)}
+                {getObjects(props.slide, proportions.kWidth, proportions.kHeight, null, props.changeSelectedObject)}
             </div>
         </div>
     );
 }
 
 const mapDispatchToProps = {
-    changeSlide
+    changeSlide,
+    changeSelectedObject
 }
 
 interface MiniatureOwnProps {

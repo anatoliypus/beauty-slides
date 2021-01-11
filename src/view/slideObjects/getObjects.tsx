@@ -1,19 +1,19 @@
 import React from 'react';
-import { SlideType } from '../../model/model';
+import { NodeType, SlideType } from '../../model/model';
 import Text from './objects/Text';
 import Circle from './objects/Circle';
 import Rectangle from './objects/Rectangle';
 import Triangle from './objects/Triangle';
 import Img from './objects/Img';
 import Line from './objects/Line';
-import { changeSelectedObject } from '../../actions/actionsCreators';
-import { store } from '../../index';
+
 
 export default function getObjects(
     slide: SlideType,
     kWidth: number,
     kHeight: number,
-    selectedId: string | null
+    selectedId: string | null,
+    changeSelectedObject: (id: string, type: NodeType) => void
 ) {
     return slide.objects.map((node, index) => {
         const elOnClick = (
@@ -21,7 +21,7 @@ export default function getObjects(
         ) => {
             e.preventDefault();
             if (kWidth === 1 && kHeight === 1) {
-                store.dispatch(changeSelectedObject(node.id, node.type));
+                changeSelectedObject(node.id, node.type)
             }
         };
         let style = {

@@ -1,7 +1,9 @@
 import React from 'react';
 import useDragResize from './useDragResize';
 import styles from './Object.module.css';
-import { ImgObject } from '../../../model/model';
+import { AppType, ImgObject, NodeType } from '../../../model/model';
+import { resizeNode, changeSelectedObject, moveItem } from '../../../actions/actionsCreators';
+import { connect } from 'react-redux';
 
 interface ImgProps {
     node: ImgObject;
@@ -10,9 +12,12 @@ interface ImgProps {
     kHeight: number;
     choosed: boolean;
     onclick: (e: React.MouseEvent<HTMLElement>) => void;
+    resizeNode: (width: string, height: string) => void;
+    changeSelectedObject: (id: string, type: NodeType) => void;
+    moveItem: (x: number, y: number) => void;
 }
 
-export default function Img(props: ImgProps) {
+function Img(props: ImgProps) {
     const el = React.useRef<HTMLDivElement>(null);
     const resizeIconRef = React.useRef<SVGSVGElement>(null);
 
@@ -28,7 +33,10 @@ export default function Img(props: ImgProps) {
         width: props.node.width,
         height: props.node.height,
         squareResize: false,
-        type: 'img'
+        type: 'img',
+        resizeNode: props.resizeNode,
+        changeSelectedObject: props.changeSelectedObject,
+        moveItem: props.moveItem
     });
 
     let style = props.style;
@@ -76,3 +84,24 @@ export default function Img(props: ImgProps) {
         </div>
     );
 }
+
+interface ImgOwnProps {
+    node: ImgObject;
+    style: React.CSSProperties;
+    kWidth: number;
+    kHeight: number;
+    choosed: boolean;
+    onclick: (e: React.MouseEvent<HTMLElement>) => void;
+}
+
+const mapStateToProps = (state: AppType, ownProps: ImgOwnProps) => {
+    return ownProps;
+}
+
+const mapDispatchToProps = {
+    resizeNode,
+    changeSelectedObject,
+    moveItem
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Img);

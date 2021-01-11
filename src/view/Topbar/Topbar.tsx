@@ -15,6 +15,7 @@ import TextMenu from './components/TextMenu';
 import ImageMenu from './components/ImageMenu';
 import DeleteObject from './components/DeleteObject';
 import { connect } from 'react-redux';
+import useChangePresentationName from './components/useChangePresentationName';
 
 interface TopbarProps {
     name: string;
@@ -25,62 +26,7 @@ interface TopbarProps {
 
 function Topbar(props: TopbarProps) {
     const input = React.useRef<HTMLInputElement>(null);
-
-    React.useEffect(() => {
-        const processName = (name: string): string => {
-            if (name.length > 15) {
-                let splittedName = name.split('');
-                splittedName.splice(14);
-                name = splittedName.join('') + '...';
-            }
-            return name;
-        };
-
-        const onChangeFunc = () => {
-            if (input.current) {
-                if (input.current.value !== '')
-                    props.changePresentationName(input.current.value);
-                else props.changePresentationName('presentation.');
-            }
-        };
-
-        const returnProcessedName = (e: Event) => {
-            if (input.current && e.target !== input.current) {
-                input.current.value = processName(input.current.value);
-            }
-        };
-
-        const onFocusFunc = () => {
-            if (input.current) input.current.value = props.name;
-            window.addEventListener('click', returnProcessedName);
-        };
-
-        if (input.current) {
-            let name = props.name;
-            name = processName(name);
-            let canvas = document.createElement('canvas');
-            let ctx = canvas.getContext('2d');
-            if (! ctx) throw new Error();
-            ctx.font = getComputedStyle(input.current).font;
-            const width = ctx.measureText(name).width;
-            input.current.style.width = width + 'px';
-            input.current.value = name;
-            input.current.addEventListener('change', onChangeFunc, {
-                once: true,
-            });
-            input.current.addEventListener('focus', onFocusFunc, {
-                once: true,
-            });
-        }
-
-        return () => {
-            if (input.current) {
-                input.current.removeEventListener('focus', onFocusFunc);
-                input.current.removeEventListener('change', onChangeFunc);
-                window.removeEventListener('click', returnProcessedName);
-            }
-        }
-    });
+    useChangePresentationName(input, props.name, props.changePresentationName);
 
     const defaultState: any = {};
     contextBtns.forEach((item) => {
@@ -94,18 +40,7 @@ function Topbar(props: TopbarProps) {
         false
     );
     const [instrumentsX, __changeInstrumentsX] = React.useState(0);
-    const instrXRef = React.useRef(instrumentsX);
-    const changeInstrumentsX = (data: number) => {
-        instrXRef.current = data;
-        __changeInstrumentsX(data);
-    };
-
     const [instrumentsY, __changeInstrumentsY] = React.useState(0);
-    const instrYRef = React.useRef(instrumentsX);
-    const changeInstrumentsY = (data: number) => {
-        instrYRef.current = data;
-        __changeInstrumentsY(data);
-    };
 
     const instrumentsButtonRef = React.useRef<HTMLButtonElement>(null);
     const instrumentsRef = React.useRef<HTMLDivElement>(null);

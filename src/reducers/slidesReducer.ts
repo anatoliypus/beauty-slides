@@ -37,7 +37,7 @@ export default function slidesReducer(
 ): Array<SlideType> {
     if (!currSlideId) throw new Error();
     if (action.type === 'SET_SLIDE_BG') {
-        return setSlideBg(state, currSlideId, action.bg);
+        return setSlideBg(state, currSlideId, action.color);
     } else if (action.type === 'PASTE_OBJECT') {
         return pasteObject(state, bufferedId);
     } else if (action.type === 'MOVE_SLIDE_NODE') {
@@ -97,14 +97,14 @@ export default function slidesReducer(
             state,
             currSlideId,
             choosedObject,
-            action.newColor
+            action.color
         );
     } else if (action.type === 'CHANGE_FIGURE_STROKE_COLOR') {
         return strokeColorSet(
             state,
             currSlideId,
             choosedObject,
-            action.newColor
+            action.color
         );
     } else if (action.type === 'CHANGE_FIGURE_BORDER_RADIUS') {
         return changeRectBorderRadius(

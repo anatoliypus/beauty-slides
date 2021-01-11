@@ -1,4 +1,3 @@
-// import { dispatch, exportAppLocally } from '../../../dispatcher';
 import { store } from '../../../index';
 import {
     addSlide,

@@ -1,5 +1,4 @@
 import {
-    AppType,
     SlideType,
     SlideNode,
     TextObject,
