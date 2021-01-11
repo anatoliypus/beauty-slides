@@ -419,7 +419,7 @@ export function deleteSlideObject(
     return replaceSlide(slides, newSlide);
 }
 
-export function pasteObject(slides: SlideCollection, bufferedId: string | null): SlideCollection {
+export function pasteObject(slides: SlideCollection, bufferedId: string | null, currentId: string): SlideCollection {
     if (!bufferedId) return slides;
     const slide = slides.find((slide) => slide.id === bufferedId);
     if (slide) {
@@ -437,6 +437,8 @@ export function pasteObject(slides: SlideCollection, bufferedId: string | null):
         };
         return slides.concat([newSlide]);
     }
+    let currSlide: SlideType | undefined = getCurrentSlide(slides, currentId);
+    if (! currSlide ) throw new Error();
     let slideToFind: SlideType | null = null;
     let nodeToFind: SlideNode | null = null;
     for (let slide of slides) {
@@ -447,19 +449,20 @@ export function pasteObject(slides: SlideCollection, bufferedId: string | null):
         }
     }
     if (slideToFind && nodeToFind) {
+        const offset = currSlide.id === slideToFind.id ? 20 : 0;
         const newNode = {
             ...nodeToFind,
             id: constructors.createId(),
             positionTopLeft: {
-                x: nodeToFind.positionTopLeft.x - 20,
-                y: nodeToFind.positionTopLeft.y - 20,
+                x: nodeToFind.positionTopLeft.x - offset,
+                y: nodeToFind.positionTopLeft.y - offset,
             },
             zIndex: slideToFind.nextZIndex,
         };
         const newSlide = {
-            ...slideToFind,
-            objects: slideToFind.objects.concat([newNode]),
-            nextZIndex: ++slideToFind.nextZIndex,
+            ...currSlide,
+            objects: currSlide.objects.concat([newNode]),
+            nextZIndex: ++currSlide.nextZIndex,
         };
         return replaceSlide(slides, newSlide);
     }

@@ -19,7 +19,7 @@ import { AppType } from '../../../model/model';
 
 async function putImage(method: (s: string) => void) {
     const base64 = await getImageBase64FromDialog();
-    method(base64)
+    method(base64);
 }
 
 interface InstrumentsFiguresRedoUndoProps {
@@ -48,7 +48,7 @@ function InstrumentsFiguresRedoUndo(props: InstrumentsFiguresRedoUndoProps) {
             <ImgButton onClick={addTriangleToSlide} imgUrl={TriangIcon} />
             <ImgButton onClick={addCircleToSlide} imgUrl={CircleIcon} />
             <ImgButton onClick={() => {
-                putImage(addImage)
+                putImage(props.addImage)
             }} imgUrl={ImageIcon} />
             <ImgButton onClick={addTextToSlide} imgUrl={TextIcon} />
             {/* <ImgButton onClick={addLineToSlide} imgUrl={LineIcon} /> */}

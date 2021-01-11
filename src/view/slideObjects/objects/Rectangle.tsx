@@ -65,9 +65,9 @@ function Rectangle(props: RectProps) {
                 <circle
                     cx={5.5}
                     cy={5.5}
-                    stroke="#878787"
+                    stroke="#000"
                     r={5}
-                    fill="#878787"
+                    fill="#000"
                 ></circle>
             </svg>
             <svg

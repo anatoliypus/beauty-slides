@@ -39,7 +39,7 @@ export default function slidesReducer(
     if (action.type === 'SET_SLIDE_BG') {
         return setSlideBg(state, currSlideId, action.color);
     } else if (action.type === 'PASTE_OBJECT') {
-        return pasteObject(state, bufferedId);
+        return pasteObject(state, bufferedId, currSlideId);
     } else if (action.type === 'MOVE_SLIDE_NODE') {
         return moveItem(state, currSlideId, choosedObject, action.x, action.y);
     } else if (action.type === 'ADD_SLIDE') {

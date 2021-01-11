@@ -50,11 +50,11 @@ function Img(props: ImgProps) {
     const size = refs.sizeRef;
 
     const width = parseInt(size.current.width) / props.kWidth + 'px';
-    const height = parseInt(size.current.width) / props.kHeight + 'px';
+    const height = parseInt(size.current.height) / props.kHeight + 'px';
 
 
     return (
-        <div ref={el} className={styles.objectBlock} style={{width: width, height: height, zIndex: props.style.zIndex}}>
+        <div ref={el} className={styles.paddedObjectBlock} style={style}>
             <svg
                 ref={resizeIconRef}
                 className={styles.resizeIcon}
@@ -67,13 +67,13 @@ function Img(props: ImgProps) {
                 <circle
                     cx={5.5}
                     cy={5.5}
-                    stroke="#878787"
+                    stroke="#000"
                     r={5}
-                    fill="#878787"
+                    fill="#000"
                 ></circle>
             </svg>
             <img
-                style={style}
+                style={{width: width, height: height}}
                 key={props.node.id}
                 src={props.node.path}
                 onClick={(e: React.MouseEvent<HTMLElement>) => {

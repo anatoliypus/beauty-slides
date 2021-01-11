@@ -28,11 +28,11 @@ export default function getObjects(
             position: 'absolute',
             top: node.positionTopLeft.y / kHeight + 'px',
             left: node.positionTopLeft.x / kWidth + 'px',
-            border: '3px solid transparent',
+            border: '2px solid transparent',
             zIndex: node.zIndex
         } as React.CSSProperties;
         if (selectedId && node.id === selectedId) {
-            style.border = '3px dashed grey';
+            style.border = '2px dashed #000';
             style.cursor = 'move';
         }
 
@@ -127,14 +127,6 @@ export default function getObjects(
             );
         }
         if (node.type === 'img') {
-            style = {
-                ...style,
-                top: 'unset',
-                left: 'unset',
-                position: 'unset',
-                width: '100%',
-                height: '100%',
-            };
             return (
                 <Img
                     key={index}
