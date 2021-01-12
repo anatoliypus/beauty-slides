@@ -42,7 +42,12 @@ export type actionType =
     | exportAppActionType
     | exportPDFActionType
     | redoActionType
-    | undoActionType;
+    | undoActionType
+    | initActionType;
+
+interface initActionType {
+    type: '@@redux/INIT';
+}
 
 interface redoActionType {
     type: 'REDO';

@@ -31,6 +31,7 @@ export function pasteHotKey(e: KeyboardEvent) {
 
 export function deleteSlideHotKey(e: KeyboardEvent) {
     if (e.key === 'd' && (e.metaKey || e.ctrlKey) && e.shiftKey) {
+        alert(1);
         e.preventDefault();
         store.dispatch(deleteSlide());
     }

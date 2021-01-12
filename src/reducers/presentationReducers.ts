@@ -12,22 +12,12 @@ import { init } from "../index";
 import { cloneApp } from '../methods/newSecondaryMethods';
 import usedColorsReducer from './usedColorsReducer';
 
-function undo(state: AppType): void {
-    if (undoStack.length && state) {
-        redoStack.push(cloneApp(state));
-        state = undoStack[undoStack.length - 1];
-        undoStack.splice(undoStack.length - 1);
-        init(state);
-    }
+function undo(): void {
+    // do not forget about cloneApp
 }
 
 function redo(state: AppType): void {
-    if (redoStack.length && state) {
-        undoStack.push(cloneApp(state));
-        state = redoStack[redoStack.length - 1];
-        redoStack.splice(redoStack.length - 1);
-        init(state);
-    }
+    // do not forget about cloneApp
 }
 
 
@@ -35,20 +25,7 @@ const undoStack: History = [];
 const redoStack: History = [];
 
 export default function presentationReducers(state: AppType = constructors.createApp(constructors.createSettings()), action: actionType): AppType {
-    if (action.type === 'EXPORT_APP') {
-        exportApp(state);
-    } else if (action.type === 'EXPORT_PDF') {
-        exportPDF(state);
-    } else if (action.type === 'REDO') {
-        // redo(state);
-        // console.log('redo', redoStack);
-    } else if (action.type === 'UNDO') {
-        // undo(state);
-        // console.log('undo', undoStack);
-    } else {
-        // undoStack.push(state);
-        // console.log('just push in state', undoStack);
-    }
+    // console.log('call reducers', action);
     const newState = {
         name: titleReducer(state.name, action),
         currSlideId: currSlideIdReducer(state.currSlideId, action),
@@ -58,6 +35,17 @@ export default function presentationReducers(state: AppType = constructors.creat
         bufferedId: bufferedIdReducer(state.bufferedId, action, state.choosedObject, state.currSlideId),
         usedColors: usedColorsReducer(state.usedColors, action)
     }
+    if (action.type === 'EXPORT_APP') {
+        exportApp(state);
+    } else if (action.type === 'EXPORT_PDF') {
+        exportPDF(state);
+    } else if (action.type === 'REDO') {
+        
+    } else if (action.type === 'UNDO') {
+        
+    } else if (action.type.indexOf('@@redux/INIT') === -1 || ! undoStack.length) {
+        
+    } 
     window.localStorage.setItem('app', JSON.stringify(newState));
     return newState
 }
