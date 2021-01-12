@@ -49,7 +49,7 @@ export default function slidesReducer(
     } else if (action.type === 'ADD_TEXT') {
         return addText(state, currSlideId);
     } else if (action.type === 'ADD_IMAGE') {
-        return addImage(state, currSlideId, action.path);
+        return addImage(state, currSlideId, action.path, action.k);
     } else if (action.type === 'DELETE_SLIDE') {
         return deleteSlide(state, currSlideId);
     } else if (action.type === 'DELETE_SLIDE_OBJECT') {

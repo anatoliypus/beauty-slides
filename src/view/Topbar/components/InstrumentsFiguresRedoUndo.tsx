@@ -17,14 +17,23 @@ import slide from '../img/slide.svg';
 import { connect } from 'react-redux';
 import { AppType } from '../../../model/model';
 
-async function putImage(method: (s: string) => void) {
+async function putImage(method: (s: string, k: number) => void) {
     const base64 = await getImageBase64FromDialog();
-    method(base64);
+    const img = document.createElement('img');
+    img.src = base64;
+    img.style.visibility = 'hidden';
+    document.body.append(img);
+    img.onload = () => {
+        const metrics = img.getBoundingClientRect();
+        const k = metrics.width / metrics.height;
+        method(base64, k);
+        img.remove();
+    }
 }
 
 interface InstrumentsFiguresRedoUndoProps {
     onClick: () => void;
-    addImage: (s: string) => void;
+    addImage: (s: string, k: number) => void;
     addSlide: () => void;
 }
 

@@ -77,10 +77,11 @@ function Palette(props: PaletteProps) {
                     />
                     <p className={styles.palette__heading}>Выбери цвет!</p>
                     <div className={styles.palette__colorBlocksList}>
-                        {paletteSampleColors.map((item) => {
+                        {paletteSampleColors.map((item, index) => {
                             if (item)
                                 return (
                                     <ColorBlock
+                                        key={index}
                                         type={props.type}
                                         changeVisibility={
                                             props.changeVisibility
@@ -103,10 +104,11 @@ function Palette(props: PaletteProps) {
                                 Ранее использованные:
                             </p>
                             <div className={styles.palette__colorBlocksList}>
-                                {props.usedColors.map((item) => {
+                                {props.usedColors.map((item, index) => {
                                     if (item)
                                         return (
                                             <ColorBlock
+                                                key={index}
                                                 type={props.type}
                                                 changeVisibility={
                                                     props.changeVisibility

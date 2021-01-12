@@ -32,12 +32,13 @@ function Img(props: ImgProps) {
         choosed: props.choosed,
         width: props.node.width,
         height: props.node.height,
-        squareResize: false,
+        squareResize: true,
         type: 'img',
         resizeNode: props.resizeNode,
         changeSelectedObject: props.changeSelectedObject,
         moveItem: props.moveItem
     });
+
 
     let style = props.style;
     if (props.kWidth !== 1) {

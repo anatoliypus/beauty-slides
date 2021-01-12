@@ -369,11 +369,13 @@ export function addText(): addTextActionType {
 export interface addImageActionType {
     type: 'ADD_IMAGE';
     path: string;
+    k: number;
 }
-export function addImage(path: string): addImageActionType {
+export function addImage(path: string, k: number): addImageActionType {
     return {
         type: 'ADD_IMAGE',
         path,
+        k
     };
 }
 

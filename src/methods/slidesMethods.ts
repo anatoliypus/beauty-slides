@@ -496,13 +496,14 @@ export function addSlide(
 export function addImage(
     slides: SlideCollection,
     currentId: string,
-    path: string
+    path: string,
+    k: number
 ): SlideCollection {
     const slide: SlideType | undefined = getCurrentSlide(slides, currentId);
     if (!slide) return slides;
 
     const newObjects = slide.objects;
-    newObjects.push(constructors.createImage(path, slide.nextZIndex));
+    newObjects.push(constructors.createImage(path, slide.nextZIndex, k));
 
     const newSlide = {
         ...slide,

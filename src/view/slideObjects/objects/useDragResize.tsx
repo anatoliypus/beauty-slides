@@ -91,7 +91,7 @@ export default function useDragResize(props: UseDraggingProps) {
                 if (newWidth > 20 && newHeight > 20) {
                     changeElSize({
                         width: newWidth + 'px',
-                        height: props.squareResize ? newWidth + 'px' : newHeight + 'px',
+                        height: props.squareResize ? newWidth / parseInt(elSize.width) * parseInt(elSize.height) + 'px' : newHeight + 'px',
                     });
                     if (!props.squareResize) {
                         changeElementCords({
