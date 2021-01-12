@@ -8,8 +8,8 @@ export type NodeType = 'text' | 'img' | 'figure';
 export type SlideObject = {
    type: NodeType;
    id: string;
-   width: string;
-   height: string;
+   width: number;
+   height: number;
    positionTopLeft: Cords;
    zIndex: number;
 };
@@ -18,7 +18,7 @@ export type TextObject = SlideObject & {
    type: 'text';
    data: string;
    fontFamily: string;
-   fontSize: string;
+   fontSize: number;
    color: string;
    fontStyle: 'unset' | 'italic';
    fontWeight: 700 | 400;

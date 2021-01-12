@@ -191,12 +191,12 @@ export function figureBackgroundSet(
 
 export interface resizeNodeActionType {
     type: 'RESIZE_NODE';
-    width: string;
-    height: string;
+    width: number;
+    height: number;
 }
 export function resizeNode(
-    width: string,
-    height: string
+    width: number,
+    height: number
 ): resizeNodeActionType {
     return {
         type: 'RESIZE_NODE',
@@ -260,9 +260,9 @@ export function changeTextFontFamily(
 
 export interface changeTextFontSizeActionType {
     type: 'CHANGE_TEXT_FONT_SIZE';
-    size: string;
+    size: number;
 }
-export function changeTextFontSize(size: string): changeTextFontSizeActionType {
+export function changeTextFontSize(size: number): changeTextFontSizeActionType {
     return {
         type: 'CHANGE_TEXT_FONT_SIZE',
         size,

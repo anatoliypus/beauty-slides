@@ -12,7 +12,7 @@ interface RectProps {
     kHeight: number;
     choosed: boolean;
     onclick: (e: React.MouseEvent<SVGSVGElement, MouseEvent>) => void;
-    resizeNode: (width: string, height: string) => void;
+    resizeNode: (width: number, height: number) => void;
     changeSelectedObject: (id: string, type: NodeType) => void;
     moveItem: (x: number, y: number) => void;
 }
@@ -40,8 +40,8 @@ function Rectangle(props: RectProps) {
     });
 
     const sizeRef = refs.sizeRef;
-    const width = (parseInt(sizeRef.current.width) + props.node.strokeWidth * 2) / props.kWidth;
-    const height = (parseInt(sizeRef.current.height) + props.node.strokeWidth * 2) / props.kHeight;
+    let width = (sizeRef.current.width + props.node.strokeWidth * 2) / props.kWidth;
+    let height = (sizeRef.current.height + props.node.strokeWidth * 2) / props.kHeight;
 
     let style = props.style;
     if (props.kWidth !== 1) {
@@ -82,8 +82,8 @@ function Rectangle(props: RectProps) {
                 <rect
                     rx={props.node.borderRadius ? props.node.borderRadius / props.kWidth : 0}
                     strokeWidth={props.node.strokeWidth / props.kWidth}
-                    width={parseInt(sizeRef.current.width) / props.kWidth}
-                    height={parseInt(sizeRef.current.height) / props.kHeight}
+                    width={sizeRef.current.width / props.kWidth}
+                    height={sizeRef.current.height / props.kHeight}
                     x={0}
                     stroke={props.node.strokeColor}
                     y={0}

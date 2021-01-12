@@ -60,8 +60,8 @@ function setObject(doc: jsPDF, node: SlideNode) {
             if (ctx) {
                 let text = node.data;
                 const offset = node.fontDecoration === 'underline' ? 20 : 0;
-                const height = parseInt(node.height) + offset;
-                const width = parseInt(node.width);
+                const height = node.height + offset;
+                const width = node.width;
                 canvas.width = width;
                 canvas.height = height;
                 ctx.fillStyle = node.color;
@@ -94,8 +94,8 @@ function setObject(doc: jsPDF, node: SlideNode) {
                 'PNG',
                 node.positionTopLeft.x,
                 node.positionTopLeft.y,
-                parseInt(node.width),
-                parseInt(node.height)
+                node.width,
+                node.height
             );
         }
         let style: string = 'S';
@@ -119,9 +119,9 @@ function setObject(doc: jsPDF, node: SlideNode) {
         }
         if (node.type === 'figure' && node.figure === 'circle') {
             doc.circle(
-                node.positionTopLeft.x + parseInt(node.width) / 2,
-                node.positionTopLeft.y + parseInt(node.width) / 2,
-                parseInt(node.width) / 2,
+                node.positionTopLeft.x + node.width / 2,
+                node.positionTopLeft.y + node.width / 2,
+                node.width / 2,
                 style
             );
         }
@@ -130,16 +130,16 @@ function setObject(doc: jsPDF, node: SlideNode) {
                 doc.rect(
                     node.positionTopLeft.x,
                     node.positionTopLeft.y,
-                    parseInt(node.width),
-                    parseInt(node.height),
+                    node.width,
+                    node.height,
                     style
                 );
             } else {
                 doc.roundedRect(
                     node.positionTopLeft.x,
                     node.positionTopLeft.y,
-                    parseInt(node.width),
-                    parseInt(node.height),
+                    node.width,
+                    node.height,
                     node.borderRadius,
                     node.borderRadius,
                     style
@@ -148,12 +148,12 @@ function setObject(doc: jsPDF, node: SlideNode) {
         }
         if (node.type === 'figure' && node.figure === 'triangle') {
             doc.triangle(
-                node.positionTopLeft.x + parseInt(node.width) / 2,
+                node.positionTopLeft.x + node.width / 2,
                 node.positionTopLeft.y,
                 node.positionTopLeft.x,
-                node.positionTopLeft.y + parseInt(node.height),
-                node.positionTopLeft.x + parseInt(node.width),
-                node.positionTopLeft.y + parseInt(node.height),
+                node.positionTopLeft.y + node.height,
+                node.positionTopLeft.x + node.width,
+                node.positionTopLeft.y + node.height,
                 style
             );
         }

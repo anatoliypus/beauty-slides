@@ -30,7 +30,7 @@ interface TextMenuProps {
     slides: SlideCollection;
     choosedObject: choosedObjectType;
     currSlideId: string | null;
-    changeTextFontSize: (s: string) => void;
+    changeTextFontSize: (s: number) => void;
     toggleBoldText: () => void;
     toggleItalicText: () => void;
     toggleUnderlinedText: () => void;

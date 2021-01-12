@@ -36,7 +36,7 @@ function FigureMenu(props: FigureMenuProps) {
         strokeWidth = (node as FigureObject).strokeWidth;
         figure = (node as FigureObject).figure;
         radius = (node as FigureObject).borderRadius;
-    }
+    } else throw new Error();
 
     const [
         isFigureBgPaletteVisible,
@@ -58,15 +58,15 @@ function FigureMenu(props: FigureMenuProps) {
             <p className={styles.label}>
                 Толщина к-ра:
             </p>
-            <SelectElement selectedValue={strokeWidth + ''} values={strokeValues} callback={(value) => {
-                props.strokeResize(parseInt(value))
+            <SelectElement selectedValue={strokeWidth} values={strokeValues} callback={(value) => {
+                props.strokeResize(value)
             }}/>
             <div style={radiusStyle}>
                 <p className={styles.label}>
                     Закруг-ие к-ра:
                 </p>
-                <SelectElement selectedValue={radius + ''} values={radiusValues} callback={(value) => {
-                    props.changeRectBorderRadius(parseInt(value));
+                <SelectElement selectedValue={radius} values={radiusValues} callback={(value) => {
+                    props.changeRectBorderRadius(value);
                 }}/>
             </div>
             <button

@@ -12,7 +12,7 @@ interface ImgProps {
     kHeight: number;
     choosed: boolean;
     onclick: (e: React.MouseEvent<HTMLElement>) => void;
-    resizeNode: (width: string, height: string) => void;
+    resizeNode: (width: number, height: number) => void;
     changeSelectedObject: (id: string, type: NodeType) => void;
     moveItem: (x: number, y: number) => void;
 }
@@ -50,8 +50,8 @@ function Img(props: ImgProps) {
 
     const size = refs.sizeRef;
 
-    const width = parseInt(size.current.width) / props.kWidth + 'px';
-    const height = parseInt(size.current.height) / props.kHeight + 'px';
+    const width = size.current.width / props.kWidth + 'px';
+    const height = size.current.height / props.kHeight + 'px';
 
 
     return (

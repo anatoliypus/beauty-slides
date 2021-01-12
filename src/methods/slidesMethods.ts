@@ -107,8 +107,8 @@ export function resizeNode(
     slides: SlideCollection,
     currentId: string,
     choosedObject: choosedObjectType,
-    width: string,
-    height: string
+    width: number,
+    height: number
 ): SlideCollection {
     const slide: SlideType | undefined = getCurrentSlide(slides, currentId);
     if (!slide) return slides;
@@ -240,7 +240,7 @@ export function changeTextSize(
     slides: SlideCollection,
     currentId: string,
     choosedObject: choosedObjectType,
-    size: string
+    size: number
 ): SlideCollection {
     const slide: SlideType | undefined = getCurrentSlide(slides, currentId);
     if (!slide) return slides;

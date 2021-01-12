@@ -10,11 +10,11 @@ interface UseDraggingProps {
     kHeight: number;
     id: string;
     choosed: boolean;
-    width: string;
-    height: string;
+    width: number;
+    height: number;
     squareResize: boolean;
     type: NodeType;
-    resizeNode: (width: string, height: string) => void;
+    resizeNode: (width: number, height: number) => void;
     changeSelectedObject: (id: string, type: NodeType) => void;
     moveItem: (x: number, y: number) => void;
 }
@@ -50,8 +50,8 @@ export default function useDragResize(props: UseDraggingProps) {
 
     React.useLayoutEffect(() => {
         if (props.obj.current) {
-            props.obj.current.style.width = parseInt(elSize.width) / props.kWidth + 'px';
-            props.obj.current.style.height = parseInt(elSize.height) / props.kHeight + 'px';
+            props.obj.current.style.width = elSize.width / props.kWidth + 'px';
+            props.obj.current.style.height = elSize.height / props.kHeight + 'px';
         }
     });
 
@@ -85,13 +85,13 @@ export default function useDragResize(props: UseDraggingProps) {
         let initialCursorY: number;
         const elOnMouseMove = (e: MouseEvent) => {
             if (props.resizeIcon.current) {
-                const newWidth = parseInt(elSize.width) + e.pageX - initialCursorX;
-                const newHeight = parseInt(elSize.height) - e.pageY + initialCursorY;
+                const newWidth = elSize.width + e.pageX - initialCursorX;
+                const newHeight = elSize.height - e.pageY + initialCursorY;
                 const offset = - e.pageY + initialCursorY;
                 if (newWidth > 20 && newHeight > 20) {
                     changeElSize({
-                        width: newWidth + 'px',
-                        height: props.squareResize ? newWidth / parseInt(elSize.width) * parseInt(elSize.height) + 'px' : newHeight + 'px',
+                        width: newWidth,
+                        height: props.squareResize ? newWidth / elSize.width * elSize.height : newHeight,
                     });
                     if (!props.squareResize) {
                         changeElementCords({

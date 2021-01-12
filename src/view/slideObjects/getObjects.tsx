@@ -42,7 +42,7 @@ export default function getObjects(
                 top: 'unset',
                 left: 'unset',
                 position: 'relative',
-                fontSize: parseInt(node.fontSize) / kHeight + 'px',
+                fontSize: node.fontSize / kHeight + 'px',
                 fontStyle: node.fontStyle,
                 fontWeight: node.fontWeight,
                 textDecoration: node.fontDecoration,

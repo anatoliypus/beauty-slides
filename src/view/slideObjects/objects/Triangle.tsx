@@ -12,7 +12,7 @@ interface TriangProps {
     kHeight: number;
     choosed: boolean;
     onclick: (e: React.MouseEvent<SVGSVGElement, MouseEvent>) => void;
-    resizeNode: (width: string, height: string) => void;
+    resizeNode: (width: number, height: number) => void;
     changeSelectedObject: (id: string, type: NodeType) => void;
     moveItem: (x: number, y: number) => void;
 }
@@ -49,10 +49,10 @@ function Triangle(props: TriangProps) {
 
     const sizeRef = refs.sizeRef;
     const width =
-        (parseInt(sizeRef.current.width) + props.node.strokeWidth * 2) /
+        (sizeRef.current.width + props.node.strokeWidth * 2) /
         props.kWidth;
     const height =
-        (parseInt(sizeRef.current.height) + props.node.strokeWidth * 2) /
+        (sizeRef.current.height + props.node.strokeWidth * 2) /
         props.kHeight;
 
     return (
@@ -86,29 +86,29 @@ function Triangle(props: TriangProps) {
                 <polygon
                     strokeLinecap={'round'}
                     points={
-                        parseInt(
+                    
                             sizeRef.current.width + props.node.strokeWidth
-                        ) /
+                         /
                             (2 * props.kWidth) +
                         ',0 0,' +
-                        parseInt(
+                        
                             sizeRef.current.height + props.node.strokeWidth
-                        ) /
+                         /
                             props.kHeight +
                         ' ' +
-                        parseInt(
+                        
                             sizeRef.current.width + props.node.strokeWidth
-                        ) /
+                         /
                             props.kWidth +
                         ',' +
-                        parseInt(
+                        
                             sizeRef.current.height + props.node.strokeWidth
-                        ) /
+                         /
                             props.kHeight
                     }
                     strokeLinejoin={'round'}
-                    width={parseInt(sizeRef.current.width) / props.kWidth}
-                    height={parseInt(sizeRef.current.height) / props.kHeight}
+                    width={sizeRef.current.width / props.kWidth}
+                    height={sizeRef.current.height / props.kHeight}
                     stroke={props.node.strokeColor}
                     strokeWidth={props.node.strokeWidth / props.kWidth}
                     fill={

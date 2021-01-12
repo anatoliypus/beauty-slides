@@ -12,7 +12,7 @@ interface CircleProps {
     kHeight: number;
     choosed: boolean;
     onclick: (e: React.MouseEvent<SVGSVGElement, MouseEvent>) => void;
-    resizeNode: (width: string, height: string) => void;
+    resizeNode: (width: number, height: number) => void;
     changeSelectedObject: (id: string, type: NodeType) => void;
     moveItem: (x: number, y: number) => void;
 }
@@ -48,8 +48,8 @@ function Circle(props: CircleProps) {
     }
 
     const sizeRef = refs.sizeRef;
-    const width = (parseInt(sizeRef.current.width) + props.node.strokeWidth * 2) / props.kWidth;
-    const height = (parseInt(sizeRef.current.height) + props.node.strokeWidth * 2) / props.kHeight;
+    const width = (sizeRef.current.width + props.node.strokeWidth * 2) / props.kWidth;
+    const height = (sizeRef.current.height + props.node.strokeWidth * 2) / props.kHeight;
 
     return (
         <div ref={el} className={styles.paddedObjectBlock} style={style}>
@@ -73,10 +73,10 @@ function Circle(props: CircleProps) {
             >
                 <circle
                     strokeWidth={props.node.strokeWidth / props.kWidth}
-                    cx={parseInt(sizeRef.current.width) / (2 * props.kHeight)}
-                    cy={parseInt(sizeRef.current.height) / (2 * props.kHeight)}
+                    cx={sizeRef.current.width / (2 * props.kHeight)}
+                    cy={sizeRef.current.height / (2 * props.kHeight)}
                     stroke={props.node.strokeColor}
-                    r={parseInt(sizeRef.current.width) / (2 * props.kHeight)}
+                    r={sizeRef.current.width / (2 * props.kHeight)}
                     fill={props.node.background ? props.node.background : "transparent"}
                 ></circle>
             </svg>

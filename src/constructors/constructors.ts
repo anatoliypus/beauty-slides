@@ -1,3 +1,4 @@
+import { defaultFigureImgSize, defaultFigureStrokeWidth, defaultFontFamily, defaultFontSize, defaultTextBlockHeight, defaultTextBlockWidth, defaultTextData, defaultTextWeight, objectsInitialX, objectsInitialY, slideHeight, slideWidth } from '..';
 import {
     SettingsObject,
     SlideType,
@@ -18,15 +19,15 @@ function createSlide(): SlideType {
     return {
         id: constructors.createId(),
         objects: objectsArr,
-        background: '#ffffff',
+        background: '#fff',
         nextZIndex: 0,
     };
 }
 
 function createSettings(): SettingsObject {
     return {
-        slideWidth: 1000,
-        slideHeight: 700,
+        slideWidth: slideWidth,
+        slideHeight: slideHeight,
     };
 }
 
@@ -51,9 +52,9 @@ function createImage(path: string, zIndex: number, k: number): ImgObject {
         id: constructors.createId(),
         type: 'img',
         path: path,
-        width: '200px',
-        height: 200 / k + 'px',
-        positionTopLeft: { x: 20, y: 20 },
+        width: defaultFigureImgSize,
+        height: defaultFigureImgSize / k,
+        positionTopLeft: { x: objectsInitialX, y: objectsInitialY },
         zIndex: zIndex,
     };
 }
@@ -63,12 +64,12 @@ function createFigure(type: FigureType, zIndex: number): FigureObject {
         id: constructors.createId(),
         type: 'figure',
         figure: type,
-        width: '150px',
-        height: '150px',
-        positionTopLeft: { x: 20, y: 20 },
+        width: defaultFigureImgSize,
+        height: defaultFigureImgSize,
+        positionTopLeft: { x: objectsInitialX, y: objectsInitialY },
         strokeColor: '#000',
         background: '#fff',
-        strokeWidth: 1,
+        strokeWidth: defaultFigureStrokeWidth,
         borderRadius: 0,
         zIndex: zIndex,
     };
@@ -78,18 +79,18 @@ function createText(zIndex: number): TextObject {
     return {
         id: constructors.createId(),
         type: 'text',
-        width: '300px',
-        height: '50px',
-        positionTopLeft: { x: 20, y: 20 },
+        width: defaultTextBlockWidth,
+        height: defaultTextBlockHeight,
+        positionTopLeft: { x: objectsInitialX, y: objectsInitialY },
         fontStyle: 'unset',
         fontDecoration: 'unset',
-        fontFamily: 'Oswald',
-        fontSize: '35px',
+        fontFamily: defaultFontFamily,
+        fontSize: defaultFontSize,
         color: '#000',
-        data: 'Введите текст',
-        fontWeight: 400,
+        data: defaultTextData,
+        fontWeight: defaultTextWeight,
         alignment: 'left',
-        zIndex: zIndex,
+        zIndex: zIndex
     };
 }
 

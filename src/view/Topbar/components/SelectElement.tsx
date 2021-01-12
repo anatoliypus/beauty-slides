@@ -2,9 +2,9 @@ import React from 'react';
 import styles from './ObjectsMenu.module.css';
 
 interface SelectElementProps {
-    selectedValue: string;
+    selectedValue: number;
     values: Array<number>;
-    callback: (value: string) => void;
+    callback: (value: number) => void;
 }
 
 export default function SelectElement(props: SelectElementProps) {
@@ -13,7 +13,7 @@ export default function SelectElement(props: SelectElementProps) {
     return (
         <select className={`${styles.objectsMenuNode} ${styles.selectElement}`} value={props.selectedValue} ref={changeStrokeWidth} onChange={() => {
             if (changeStrokeWidth.current) {
-                props.callback(changeStrokeWidth.current.value);
+                props.callback(parseInt(changeStrokeWidth.current.value));
             }
         }}>
             {props.values.map((item) => {

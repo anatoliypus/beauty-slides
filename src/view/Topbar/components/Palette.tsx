@@ -5,6 +5,7 @@ import ColorBlock from './ColorBlock';
 import ChangeOwnColor from './ChangeOwnColor';
 import { connect } from 'react-redux';
 import { AppType } from '../../../model/model';
+import { paletteSampleColors } from '../../../index';
 
 interface PaletteProps {
     visibility: boolean;
@@ -12,43 +13,6 @@ interface PaletteProps {
     type: 'slide' | 'textColor' | 'strokeColor' | 'figureBG';
     usedColors: Array<string>;
 }
-
-const paletteSampleColors = [
-    '#dbeb33',
-    '#3386eb',
-    '#ff4d4d',
-    '#ff4daf',
-    '#b54dff',
-    '#66d6ff',
-    '#47ffce',
-    '#47ff7b',
-    '#e0ff47',
-    '#ffbf47',
-    '#ff6947',
-    '#000000',
-    '#ffffff',
-    '#F0F8FF',
-    '#DEB887',
-    '#C71585',
-    '#B0C4DE',
-    '#90EE90',
-    '#0000CD',
-    '#40E0D0',
-    '#4B0082',
-    '#708090',
-    '#808000',
-    '#9932CC',
-    '#B22222',
-    '#ADFF2F',
-    '#B8860B',
-    '#FF0000',
-    '#FF00FF',
-    '#FF1493',
-    '#FFA07A',
-    '#FFB6C1',
-    '#FFC0CB',
-    '#FFD700',
-];
 
 function Palette(props: PaletteProps) {
     return (

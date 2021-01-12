@@ -23,7 +23,7 @@ export function getImageBase64FromDialog(): Promise<string> {
 
 export function getBase64(image: ImgObject): Promise<string> {
     return new Promise((resolve) => {
-        let img = new Image(parseInt(image.width), parseInt(image.height));
+        let img = new Image(image.width, image.height);
         img.src = image.path;
         img.crossOrigin = 'Anonymous';
 

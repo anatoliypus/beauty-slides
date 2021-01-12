@@ -15,7 +15,7 @@ interface TextProps {
     choosed: boolean;
     onclick: (e: React.MouseEvent<HTMLElement>) => void;
     changeTextData: (data: string) => void;
-    resizeNode: (width: string, height: string) => void;
+    resizeNode: (width: number, height: number) => void;
     changeSelectedObject: (id: string, type: NodeType) => void;
     moveItem: (x: number, y: number) => void;
 }
@@ -61,8 +61,8 @@ function Text(props: TextProps) {
         }
     })
 
-    const width = parseInt(size.current.width) / props.kWidth + 'px';
-    const height = parseInt(size.current.width) / props.kHeight + 'px';
+    const width = size.current.width / props.kWidth + 'px';
+    const height = size.current.width / props.kHeight + 'px';
 
     return (
         <div ref={div} className={objStyles.objectBlock} style={{width: width, height: height, zIndex: props.style.zIndex}}>

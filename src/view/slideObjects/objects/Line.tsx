@@ -13,7 +13,7 @@ interface LineProps {
     kHeight: number;
     choosed: boolean;
     onclick: (e: React.MouseEvent<SVGSVGElement, MouseEvent>) => void;
-    resizeNode: (width: string, height: string) => void;
+    resizeNode: (width: number, height: number) => void;
     changeSelectedObject: (id: string, type: NodeType) => void;
     moveItem: (x: number, y: number) => void;
 }
@@ -49,8 +49,8 @@ function Line(props: LineProps) {
     }
 
     const sizeRef = refs.sizeRef;
-    let width = (parseInt(sizeRef.current.width) + props.node.strokeWidth * 2) / props.kWidth;
-    let height = (parseInt(sizeRef.current.height) + props.node.strokeWidth * 2) / props.kHeight;
+    let width = (sizeRef.current.width + props.node.strokeWidth * 2) / props.kWidth;
+    let height = (sizeRef.current.height + props.node.strokeWidth * 2) / props.kHeight;
 
     return (
         <div ref={el} className={styles.paddedObjectBlock} style={style}>
