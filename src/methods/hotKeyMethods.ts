@@ -4,6 +4,7 @@ export default function useHotKeys(
     deleteSlideObject: () => void,
     copyObject: () => void,
     pasteObject: () => void,
+    cutObject: () => void,
     deleteSlide: () => void,
     redo: () => void,
     undo: () => void
@@ -29,6 +30,13 @@ export default function useHotKeys(
         }
     }
 
+    function cutHotKey(e: KeyboardEvent) {
+        if (e.key === 'x' && (e.metaKey || e.ctrlKey)) {
+            e.preventDefault();
+            cutObject();
+        }
+    }
+
     function pasteHotKey(e: KeyboardEvent) {
         if (e.key === 'v' && (e.metaKey || e.ctrlKey)) {
             e.preventDefault();
@@ -44,12 +52,14 @@ export default function useHotKeys(
     }
     React.useEffect(() => {
         window.addEventListener('keydown', copyHotKey);
+        window.addEventListener('keydown', cutHotKey);
         window.addEventListener('keydown', pasteHotKey);
         window.addEventListener('keydown', deleteHotKey);
         window.addEventListener('keydown', undoHotKey);
         window.addEventListener('keydown', deleteSlideHotKey);
         return () => {
             window.removeEventListener('keydown', copyHotKey);
+            window.removeEventListener('keydown', cutHotKey);
             window.removeEventListener('keydown', pasteHotKey);
             window.removeEventListener('keydown', deleteHotKey);
             window.removeEventListener('keydown', undoHotKey);

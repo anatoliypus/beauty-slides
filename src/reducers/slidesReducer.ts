@@ -62,7 +62,7 @@ export default function slidesReducer(
         return addImage(state, action.path, action.k);
     } else if (action.type === 'DELETE_SLIDE') {
         return deleteSlide(state);
-    } else if (action.type === 'DELETE_SLIDE_OBJECT') {
+    } else if (action.type === 'DELETE_SLIDE_OBJECT' || action.type === 'CUT_SLIDE_NODE') {
         return deleteSlideObject(state, choosedObject);
     } else if (action.type === 'INCREASE_ZINDEX') {
         return increaseZIndex(state, choosedObject);

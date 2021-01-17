@@ -32,7 +32,8 @@ export type slideReducerAction =
     | strokeColorSetActionType
     | changeRectBorderRadiusActionType
     | strokeResizeActionType
-    | changeSlideOrderActionType;
+    | changeSlideOrderActionType
+    | cutSlideNodeActionType;
 export type actionType =
     | bufferedIdReducerAction
     | choosedObjectReducerAction
@@ -69,6 +70,15 @@ interface undoActionType {
 export function undo(): undoActionType {
     return {
         type: 'UNDO',
+    };
+}
+
+interface cutSlideNodeActionType {
+    type: 'CUT_SLIDE_NODE';
+}
+export function cutSlideNode(): cutSlideNodeActionType {
+    return {
+        type: 'CUT_SLIDE_NODE',
     };
 }
 

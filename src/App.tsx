@@ -14,12 +14,14 @@ import {
     undo,
     copyObject,
     pasteObject,
+    cutSlideNode
 } from './actions/actionsCreators';
 
 interface AppProps {
     name: string;
     deleteSlideObject: () => void;
     deleteSlide: () => void;
+    cutSlideNode: () => void;
     redo: () => void;
     undo: () => void;
     copyObject: () => void;
@@ -31,6 +33,7 @@ function App(props: AppProps) {
         props.deleteSlideObject,
         props.copyObject,
         props.pasteObject,
+        props.cutSlideNode,
         props.deleteSlide,
         props.redo,
         props.undo
@@ -59,6 +62,7 @@ const mapDispatchToProps = {
     undo,
     copyObject,
     pasteObject,
+    cutSlideNode
 };
 
 interface AppOwnProps {
