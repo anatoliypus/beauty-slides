@@ -43,11 +43,7 @@ export type actionType =
     | exportPDFActionType
     | redoActionType
     | undoActionType
-    | initActionType;
-
-interface initActionType {
-    type: '@@redux/INIT';
-}
+    | createNewActionType;
 
 interface redoActionType {
     type: 'REDO';
@@ -55,6 +51,15 @@ interface redoActionType {
 export function redo(): redoActionType {
     return {
         type: 'REDO',
+    };
+}
+
+interface createNewActionType {
+    type: 'CREATE_NEW';
+}
+export function createNew(): createNewActionType {
+    return {
+        type: 'CREATE_NEW'
     };
 }
 

@@ -14,8 +14,11 @@ const undoStack: History = [];
 const redoStack: History = [];
 
 export default function presentationReducers(state: AppType = constructors.createApp(constructors.createSettings()), action: actionType): AppType {
-    // console.log('call reducers', action);
-    if (action.type === 'EXPORT_APP') {
+    if (action.type === 'CREATE_NEW') {
+        const newApp = constructors.createApp(constructors.createSettings());
+        window.localStorage.setItem('app', JSON.stringify(newApp));
+        return newApp;
+    } else if (action.type === 'EXPORT_APP') {
         exportApp(state);
     } else if (action.type === 'EXPORT_PDF') {
         exportPDF(state);
@@ -30,13 +33,10 @@ export default function presentationReducers(state: AppType = constructors.creat
         if (undoStack.length) {
             redoStack.push(cloneApp(state));
             const prevState = undoStack.splice(undoStack.length - 1)[0];
-            // console.log('redoStack:', redoStack);
             window.localStorage.setItem('app', JSON.stringify(prevState));
             return prevState;
         }
     } else if (action.type.indexOf('@@redux/INIT') === -1) undoStack.push(cloneApp(state));
-
-    // console.log('undo stack after call: ', undoStack);
 
     const newState = {
         name: titleReducer(state.name, action),
