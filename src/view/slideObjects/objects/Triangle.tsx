@@ -2,7 +2,11 @@ import React from 'react';
 import useDragResize from './useDragResize';
 import styles from './Object.module.css';
 import { AppType, FigureObject, NodeType } from '../../../model/model';
-import { resizeNode, changeSelectedObject, moveItem } from '../../../actions/actionsCreators';
+import {
+    resizeNode,
+    changeSelectedObject,
+    moveItem,
+} from '../../../actions/actionsCreators';
 import { connect } from 'react-redux';
 
 interface TriangProps {
@@ -36,25 +40,31 @@ function Triangle(props: TriangProps) {
         type: 'figure',
         resizeNode: props.resizeNode,
         changeSelectedObject: props.changeSelectedObject,
-        moveItem: props.moveItem
+        moveItem: props.moveItem,
     });
 
     let style = props.style;
     if (props.kWidth !== 1) {
         style = {
             ...style,
-            border: 0
-        }
+            border: 0,
+        };
     }
 
     const sizeRef = refs.sizeRef;
     const width =
-        (sizeRef.current.width + props.node.strokeWidth * 2) /
-        props.kWidth;
+        (sizeRef.current.width + props.node.strokeWidth * 2) / props.kWidth;
     const height =
-        (sizeRef.current.height + props.node.strokeWidth * 2) /
-        props.kHeight;
+        (sizeRef.current.height + props.node.strokeWidth * 2) / props.kHeight;
 
+    const points =
+        sizeRef.current.width / 2 / props.kWidth +
+        ',0 0,' +
+        sizeRef.current.height / props.kHeight +
+        ' ' +
+        sizeRef.current.width / props.kWidth +
+        ',' +
+        sizeRef.current.height / props.kHeight;
     return (
         <div ref={el} className={styles.paddedObjectBlock} style={style}>
             <svg
@@ -85,27 +95,7 @@ function Triangle(props: TriangProps) {
             >
                 <polygon
                     strokeLinecap={'round'}
-                    points={
-                    
-                            sizeRef.current.width + props.node.strokeWidth
-                         /
-                            (2 * props.kWidth) +
-                        ',0 0,' +
-                        
-                            sizeRef.current.height + props.node.strokeWidth
-                         /
-                            props.kHeight +
-                        ' ' +
-                        
-                            sizeRef.current.width + props.node.strokeWidth
-                         /
-                            props.kWidth +
-                        ',' +
-                        
-                            sizeRef.current.height + props.node.strokeWidth
-                         /
-                            props.kHeight
-                    }
+                    points={points}
                     strokeLinejoin={'round'}
                     width={sizeRef.current.width / props.kWidth}
                     height={sizeRef.current.height / props.kHeight}
@@ -133,12 +123,12 @@ interface TriangOwnProps {
 
 const mapStateToProps = (state: AppType, ownProps: TriangOwnProps) => {
     return ownProps;
-}
+};
 
 const mapDispatchToProps = {
     resizeNode,
     changeSelectedObject,
-    moveItem
-}
+    moveItem,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Triangle);
