@@ -1,7 +1,7 @@
-import { AppType, SlideType, SlideNode } from '../model/model';
+import { AppType, SlideType, SlideNode, SlidesObject } from '../model/model';
 
-export function getCurrentSlide(app: AppType): SlideType | undefined {
-  const slide: SlideType | undefined = {...app}.slides.find(slide => slide.id === app.currSlideId);
+export function getCurrentSlide(slides: SlidesObject): SlideType | undefined {
+  const slide: SlideType | undefined = slides.slides.find(slide => slide.id === slides.current);
   if (! slide) return undefined;
   return slide;
 }
@@ -22,14 +22,14 @@ export function replaceNode(slide: SlideType, node: SlideNode): SlideType {
   }
 }
 
-export function replaceSlide(app: AppType, newSlide: SlideType): AppType {
-  return Object.freeze({
-    ...app,
-    slides: app.slides.map((slideToFind: SlideType) => {
-      if (slideToFind.id === app.currSlideId) return newSlide;
-      return slideToFind;
-    }),
-  });
+export function replaceSlide(slides: SlidesObject, newSlide: SlideType): SlidesObject {
+    return {
+        ...slides,
+        slides: slides.slides.map((slideToFind: SlideType) => {
+            if (slideToFind.id === newSlide.id) return newSlide;
+            return slideToFind;
+        })
+    }
 }
 
 export function cloneApp(obj: AppType): AppType {

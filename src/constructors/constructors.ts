@@ -35,14 +35,16 @@ function createApp(settings: SettingsObject): AppType {
     const slide: SlideType = createSlide();
     return {
         name: 'presentation.',
-        slides: [slide],
-        currSlideId: slide.id,
-        settings: settings,
+        slides: {
+            current: slide.id,
+            slides: [slide],
+        },
         choosedObject: {
             id: null,
             type: null,
         },
-        bufferedId: null,
+        settings: settings,
+        bufferedObject: null,
         usedColors: [],
     };
 }

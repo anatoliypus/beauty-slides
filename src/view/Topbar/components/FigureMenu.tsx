@@ -1,10 +1,10 @@
 import React from 'react';
-import { AppType, choosedObjectType, FigureObject, SlideCollection } from '../../../model/model';
+import { AppType, choosedObjectType, FigureObject, SlidesObject } from '../../../model/model';
 import styles from './ObjectsMenu.module.css';
 import {
     getSlideNode,
     getCurrentSlide,
-} from '../../../methods/newSecondaryMethods';
+} from '../../../methods/secondaryMethods';
 import Palette from './Palette';
 import { strokeResize, changeRectBorderRadius } from '../../../actions/actionsCreators';
 import SelectElement from './SelectElement';
@@ -13,16 +13,15 @@ import { connect } from 'react-redux';
 
 interface FigureMenuProps {
     choosedObject: choosedObjectType;
-    slides: SlideCollection;
-    currSlideId: string | null;
+    slides: SlidesObject;
     strokeResize: (s: number) => void;
     changeRectBorderRadius: (r: number) => void;
 }
 
 
 function FigureMenu(props: FigureMenuProps) {
-    if (! props.currSlideId) throw new Error();
-    const slide = getCurrentSlide(props.slides, props.currSlideId);
+    if (! props.slides.current) throw new Error();
+    const slide = getCurrentSlide(props.slides);
     let node;
     if (slide) {
         node = getSlideNode(slide, props.choosedObject.id);
@@ -102,15 +101,13 @@ function FigureMenu(props: FigureMenuProps) {
 
 interface FigureMenuOwnProps {
     choosedObject: choosedObjectType;
-    slides: SlideCollection;
-    currSlideId: string | null;
+    slides: SlidesObject;
 }
 
 const mapStateToProps = (state: AppType): FigureMenuOwnProps => {
     return {
         choosedObject: state.choosedObject,
         slides: state.slides,
-        currSlideId: state.currSlideId
     }
 }
 

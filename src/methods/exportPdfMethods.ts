@@ -22,10 +22,10 @@ export async function exportPDF(app: AppType) {
 
 async function setDocObjects(doc: jsPDF, app: AppType) {
     let firstSlide = true;
-    for (let i = 0; i < app.slides.length; i++) {
+    for (let i = 0; i < app.slides.slides.length; i++) {
         if (!firstSlide) doc.addPage();
         else firstSlide = false;
-        await setSlideObjects(doc, app.slides[i], app.settings);
+        await setSlideObjects(doc, app.slides.slides[i], app.settings);
     }
 }
 

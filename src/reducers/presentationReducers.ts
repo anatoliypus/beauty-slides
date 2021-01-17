@@ -1,15 +1,14 @@
 import { AppType, History } from '../model/model';
 import constructors from '../constructors/constructors';
 import titleReducer from './titleReducer';
-import currSlideIdReducer from './currSlideIdReducer';
 import slidesReducer from './slidesReducer';
 import choosedObjectReducer from './choosedObjectReducer';
-import bufferedIdReducer from './bufferedIdReducer';
+import bufferedObjectReducer from './bufferedObjectReducer';
 import { exportApp } from '../methods/jsonMethods';
 import { actionType } from '../actions/actionsCreators';
 import { exportPDF } from '../methods/exportPdfMethods';
 import { init } from "../index";
-import { cloneApp } from '../methods/newSecondaryMethods';
+import { cloneApp } from '../methods/secondaryMethods';
 import usedColorsReducer from './usedColorsReducer';
 
 function undo(): void {
@@ -28,11 +27,10 @@ export default function presentationReducers(state: AppType = constructors.creat
     // console.log('call reducers', action);
     const newState = {
         name: titleReducer(state.name, action),
-        currSlideId: currSlideIdReducer(state.currSlideId, action),
-        slides: slidesReducer(state.slides, action, state.currSlideId, state.choosedObject, state.bufferedId),
+        slides: slidesReducer(state.slides, action, state.choosedObject, state.bufferedObject),
         settings: state.settings,
         choosedObject: choosedObjectReducer(state.choosedObject, action),
-        bufferedId: bufferedIdReducer(state.bufferedId, action, state.choosedObject, state.currSlideId),
+        bufferedObject: bufferedObjectReducer(state.bufferedObject, action, state.choosedObject, state.slides),
         usedColors: usedColorsReducer(state.usedColors, action)
     }
     if (action.type === 'EXPORT_APP') {
@@ -45,7 +43,7 @@ export default function presentationReducers(state: AppType = constructors.creat
         
     } else if (action.type.indexOf('@@redux/INIT') === -1 || ! undoStack.length) {
         
-    } 
+    }
     window.localStorage.setItem('app', JSON.stringify(newState));
     return newState
 }

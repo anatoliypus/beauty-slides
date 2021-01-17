@@ -5,31 +5,39 @@ import SlideViewport from './view/SlideViewport/SlideViewport';
 import Footer from './view/Footer/Footer';
 import { AppType } from './model/model';
 import styles from './App.module.css';
-import * as hotKeyMethods from './methods/hotKeyMethods';
+import useHotKeys from './methods/hotKeyMethods';
 import { connect } from 'react-redux';
+import {
+    deleteSlideObject,
+    deleteSlide,
+    redo,
+    undo,
+    copyObject,
+    pasteObject,
+} from './actions/actionsCreators';
 
 interface AppProps {
     name: string;
+    deleteSlideObject: () => void;
+    deleteSlide: () => void;
+    redo: () => void;
+    undo: () => void;
+    copyObject: () => void;
+    pasteObject: () => void;
 }
 
 function App(props: AppProps) {
-    React.useEffect(() => {
-        document.title = props.name;
-    });
+    useHotKeys(
+        props.deleteSlideObject,
+        props.copyObject,
+        props.pasteObject,
+        props.deleteSlide,
+        props.redo,
+        props.undo
+    );
 
     React.useEffect(() => {
-        window.addEventListener('keydown', hotKeyMethods.copyHotKey);
-        window.addEventListener('keydown', hotKeyMethods.pasteHotKey);
-        window.addEventListener('keydown', hotKeyMethods.deleteHotKey);
-        window.addEventListener('keydown', hotKeyMethods.undoHotKey);
-        window.addEventListener('keydown', hotKeyMethods.deleteSlideHotKey);
-        return () => {
-            window.removeEventListener('keydown', hotKeyMethods.copyHotKey);
-            window.removeEventListener('keydown', hotKeyMethods.pasteHotKey);
-            window.removeEventListener('keydown', hotKeyMethods.deleteHotKey);
-            window.removeEventListener('keydown', hotKeyMethods.undoHotKey);
-            window.removeEventListener('keydown', hotKeyMethods.deleteSlideHotKey);
-        }
+        document.title = props.name;
     });
 
     return (
@@ -44,10 +52,23 @@ function App(props: AppProps) {
     );
 }
 
-const mapStateToProps = (state: AppType): AppProps => {
-    return {
-        name: state.name
-    }
+const mapDispatchToProps = {
+    deleteSlideObject,
+    deleteSlide,
+    redo,
+    undo,
+    copyObject,
+    pasteObject,
+};
+
+interface AppOwnProps {
+    name: string;
 }
 
-export default connect(mapStateToProps)(App)
+const mapStateToProps = (state: AppType): AppOwnProps => {
+    return {
+        name: state.name,
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

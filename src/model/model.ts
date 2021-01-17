@@ -58,13 +58,17 @@ export type SettingsObject = {
    slideHeight: number;
 };
 
+export type SlidesObject = {
+    current: string | null;
+    slides: SlideCollection;
+}
+
 export type AppType = {
    name: string;
-   currSlideId: string | null;
-   slides: Array<SlideType>;
+   slides: SlidesObject;
    settings: SettingsObject;
    choosedObject: choosedObjectType;
-   bufferedId: string | null;
+   bufferedObject: SlideNode | SlideType | null;
    usedColors: Array<string>;
 };
 

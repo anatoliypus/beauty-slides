@@ -72,11 +72,6 @@ interface InstrumentsFiguresRedoUndoOwnProps {
     onClick: () => void;
 }
 
-interface InstrumentsFiguresRedoUndoDispatchProps {
-    addImage: (s: string) => void;
-    addSlide: () => void;
-}
-
 const mapStateToProps = (state: AppType, ownProps: InstrumentsFiguresRedoUndoOwnProps): InstrumentsFiguresRedoUndoOwnProps => {
     return ownProps
 }

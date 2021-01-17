@@ -6,22 +6,22 @@ import {
     FigureObject,
     SlideCollection,
     choosedObjectType,
+    SlidesObject,
 } from '../model/model';
 import {
     getCurrentSlide,
     getSlideNode,
     replaceNode,
     replaceSlide,
-} from './newSecondaryMethods';
+} from './secondaryMethods';
 import constructors from '../constructors/constructors';
 
 export function strokeResize(
-    slides: SlideCollection,
-    currentId: string,
+    slides: SlidesObject,
     choosedObject: choosedObjectType,
     newWidth: number
-): SlideCollection {
-    const slide: SlideType | undefined = getCurrentSlide(slides, currentId);
+): SlidesObject {
+    const slide: SlideType | undefined = getCurrentSlide(slides);
     if (!slide) return slides;
 
     const figure: SlideNode | undefined = getSlideNode(slide, choosedObject.id);
@@ -38,12 +38,11 @@ export function strokeResize(
 }
 
 export function changeRectBorderRadius(
-    slides: SlideCollection,
-    currentId: string,
+    slides: SlidesObject,
     choosedObject: choosedObjectType,
     newRadius: number
-): SlideCollection {
-    const slide: SlideType | undefined = getCurrentSlide(slides, currentId);
+): SlidesObject {
+    const slide: SlideType | undefined = getCurrentSlide(slides);
     if (!slide) return slides;
 
     const figure: SlideNode | undefined = getSlideNode(slide, choosedObject.id);
@@ -60,12 +59,11 @@ export function changeRectBorderRadius(
 }
 
 export function strokeColorSet(
-    slides: SlideCollection,
-    currentId: string,
+    slides: SlidesObject,
     choosedObject: choosedObjectType,
     newColor: string
-): SlideCollection {
-    const slide: SlideType | undefined = getCurrentSlide(slides, currentId);
+): SlidesObject {
+    const slide: SlideType | undefined = getCurrentSlide(slides);
     if (!slide) return slides;
 
     const figure: SlideNode | undefined = getSlideNode(slide, choosedObject.id);
@@ -82,12 +80,12 @@ export function strokeColorSet(
 }
 
 export function figureBackgroundSet(
-    slides: SlideCollection,
-    currentId: string,
+    slides: SlidesObject,
+   
     choosedObject: choosedObjectType,
     newColor: string
-): SlideCollection {
-    const slide: SlideType | undefined = getCurrentSlide(slides, currentId);
+): SlidesObject {
+    const slide: SlideType | undefined = getCurrentSlide(slides);
     if (!slide) return slides;
 
     const figure: SlideNode | undefined = getSlideNode(slide, choosedObject.id);
@@ -104,13 +102,13 @@ export function figureBackgroundSet(
 }
 
 export function resizeNode(
-    slides: SlideCollection,
-    currentId: string,
+    slides: SlidesObject,
+   
     choosedObject: choosedObjectType,
     width: number,
     height: number
-): SlideCollection {
-    const slide: SlideType | undefined = getCurrentSlide(slides, currentId);
+): SlidesObject {
+    const slide: SlideType | undefined = getCurrentSlide(slides);
     if (!slide) return slides;
 
     const node: SlideNode | undefined = getSlideNode(slide, choosedObject.id);
@@ -129,11 +127,11 @@ export function resizeNode(
 }
 
 export function toggleBoldText(
-    slides: SlideCollection,
-    currentId: string,
+    slides: SlidesObject,
+   
     choosedObject: choosedObjectType
-): SlideCollection {
-    const slide: SlideType | undefined = getCurrentSlide(slides, currentId);
+): SlidesObject {
+    const slide: SlideType | undefined = getCurrentSlide(slides);
     if (!slide) return slides;
 
     const text: SlideNode | undefined = getSlideNode(slide, choosedObject.id);
@@ -150,11 +148,11 @@ export function toggleBoldText(
 }
 
 export function toggleItalicText(
-    slides: SlideCollection,
-    currentId: string,
+    slides: SlidesObject,
+   
     choosedObject: choosedObjectType
-): SlideCollection {
-    const slide: SlideType | undefined = getCurrentSlide(slides, currentId);
+): SlidesObject {
+    const slide: SlideType | undefined = getCurrentSlide(slides);
     if (!slide) return slides;
 
     const text: SlideNode | undefined = getSlideNode(slide, choosedObject.id);
@@ -171,11 +169,11 @@ export function toggleItalicText(
 }
 
 export function toggleUnderlinedText(
-    slides: SlideCollection,
-    currentId: string,
+    slides: SlidesObject,
+   
     choosedObject: choosedObjectType
-): SlideCollection {
-    const slide: SlideType | undefined = getCurrentSlide(slides, currentId);
+): SlidesObject {
+    const slide: SlideType | undefined = getCurrentSlide(slides);
     if (!slide) return slides;
 
     const text: SlideNode | undefined = getSlideNode(slide, choosedObject.id);
@@ -193,12 +191,12 @@ export function toggleUnderlinedText(
 }
 
 export function changeAlignment(
-    slides: SlideCollection,
-    currentId: string,
+    slides: SlidesObject,
+   
     choosedObject: choosedObjectType,
     alignment: 'right' | 'center' | 'left'
-): SlideCollection {
-    const slide: SlideType | undefined = getCurrentSlide(slides, currentId);
+): SlidesObject {
+    const slide: SlideType | undefined = getCurrentSlide(slides);
     if (!slide) return slides;
 
     const text: SlideNode | undefined = getSlideNode(slide, choosedObject.id);
@@ -215,12 +213,12 @@ export function changeAlignment(
 }
 
 export function changeTextFontFamily(
-    slides: SlideCollection,
-    currentId: string,
+    slides: SlidesObject,
+   
     choosedObject: choosedObjectType,
     family: string
-): SlideCollection {
-    const slide: SlideType | undefined = getCurrentSlide(slides, currentId);
+): SlidesObject {
+    const slide: SlideType | undefined = getCurrentSlide(slides);
     if (!slide) return slides;
 
     const text: SlideNode | undefined = getSlideNode(slide, choosedObject.id);
@@ -237,12 +235,12 @@ export function changeTextFontFamily(
 }
 
 export function changeTextSize(
-    slides: SlideCollection,
-    currentId: string,
+    slides: SlidesObject,
+   
     choosedObject: choosedObjectType,
     size: number
-): SlideCollection {
-    const slide: SlideType | undefined = getCurrentSlide(slides, currentId);
+): SlidesObject {
+    const slide: SlideType | undefined = getCurrentSlide(slides);
     if (!slide) return slides;
 
     const text: SlideNode | undefined = getSlideNode(slide, choosedObject.id);
@@ -259,12 +257,12 @@ export function changeTextSize(
 }
 
 export function changeTextColor(
-    slides: SlideCollection,
-    currentId: string,
+    slides: SlidesObject,
+   
     choosedObject: choosedObjectType,
     color: string
-): SlideCollection {
-    const slide: SlideType | undefined = getCurrentSlide(slides, currentId);
+): SlidesObject {
+    const slide: SlideType | undefined = getCurrentSlide(slides);
     if (!slide) return slides;
 
     const text: SlideNode | undefined = getSlideNode(slide, choosedObject.id);
@@ -280,12 +278,12 @@ export function changeTextColor(
 }
 
 export function changeText(
-    slides: SlideCollection,
-    currentId: string,
+    slides: SlidesObject,
+   
     choosedObject: choosedObjectType,
     textData: string
-): SlideCollection {
-    const slide: SlideType | undefined = getCurrentSlide(slides, currentId);
+): SlidesObject {
+    const slide: SlideType | undefined = getCurrentSlide(slides);
     if (!slide) return slides;
 
     const text: SlideNode | undefined = getSlideNode(slide, choosedObject.id);
@@ -302,11 +300,11 @@ export function changeText(
 }
 
 export function setSlideBg(
-    slides: SlideCollection,
-    currentId: string,
+    slides: SlidesObject,
+   
     background: string
-): SlideCollection {
-    const slide: SlideType | undefined = getCurrentSlide(slides, currentId);
+): SlidesObject {
+    const slide: SlideType | undefined = getCurrentSlide(slides);
     if (!slide) return slides;
 
     const newSlide: SlideType = {
@@ -318,13 +316,13 @@ export function setSlideBg(
 }
 
 export function moveItem(
-    slides: SlideCollection,
-    currentId: string,
+    slides: SlidesObject,
+   
     choosedObject: choosedObjectType,
     x: number,
     y: number
-): SlideCollection {
-    const slide: SlideType | undefined = getCurrentSlide(slides, currentId);
+): SlidesObject {
+    const slide: SlideType | undefined = getCurrentSlide(slides);
     if (!slide) return slides;
 
     const item: SlideNode | undefined = getSlideNode(slide, choosedObject.id);
@@ -344,11 +342,11 @@ export function moveItem(
 }
 
 export function decreaseZIndex(
-    slides: SlideCollection,
-    currentId: string,
+    slides: SlidesObject,
+   
     choosedObject: choosedObjectType
-): SlideCollection {
-    const slide: SlideType | undefined = getCurrentSlide(slides, currentId);
+): SlidesObject {
+    const slide: SlideType | undefined = getCurrentSlide(slides);
     if (!slide) return slides;
 
     const item: SlideNode | undefined = getSlideNode(slide, choosedObject.id);
@@ -373,11 +371,11 @@ export function decreaseZIndex(
 }
 
 export function increaseZIndex(
-    slides: SlideCollection,
-    currentId: string,
+    slides: SlidesObject,
+   
     choosedObject: choosedObjectType
-): SlideCollection {
-    const slide: SlideType | undefined = getCurrentSlide(slides, currentId);
+): SlidesObject {
+    const slide: SlideType | undefined = getCurrentSlide(slides);
     if (!slide) return slides;
 
     const item: SlideNode | undefined = getSlideNode(slide, choosedObject.id);
@@ -402,11 +400,11 @@ export function increaseZIndex(
 }
 
 export function deleteSlideObject(
-    slides: SlideCollection,
-    currentId: string,
+    slides: SlidesObject,
+   
     choosedObject: choosedObjectType
-): SlideCollection {
-    const slide: SlideType | undefined = getCurrentSlide(slides, currentId);
+): SlidesObject {
+    const slide: SlideType | undefined = getCurrentSlide(slides);
     if (!slide) return slides;
 
     const newSlide: SlideType = {
@@ -419,87 +417,79 @@ export function deleteSlideObject(
     return replaceSlide(slides, newSlide);
 }
 
-export function pasteObject(slides: SlideCollection, bufferedId: string | null, currentId: string): SlideCollection {
-    if (!bufferedId) return slides;
-    const slide = slides.find((slide) => slide.id === bufferedId);
-    if (slide) {
-        const newObjects = slide.objects.map((node) => {
-            return {
-                ...node,
-                id: constructors.createId(),
-            };
-        });
-        const newSlide = {
-            ...slide,
-            id: constructors.createId(),
-            objects: newObjects,
-            nextZIndex: ++slide.nextZIndex,
-        };
-        return slides.concat([newSlide]);
-    }
-    let currSlide: SlideType | undefined = getCurrentSlide(slides, currentId);
-    if (! currSlide ) throw new Error();
-    let slideToFind: SlideType | null = null;
-    let nodeToFind: SlideNode | null = null;
-    for (let slide of slides) {
-        const result = slide.objects.find((i) => i.id === bufferedId);
-        if (result) {
-            nodeToFind = result;
-            slideToFind = slide;
+function isSlide(obj: SlideNode | SlideType): obj is SlideType {
+    return (obj as SlideType).objects !== undefined;
+}
+
+export function pasteObject(slides: SlidesObject, bufferedObject: SlideNode | SlideType | null): SlidesObject {
+    if (! bufferedObject) return slides;
+    if (isSlide(bufferedObject)) {
+        const slideToPast = {
+            ...bufferedObject,
+            id: constructors.createId()
+        }
+        return {
+            ...slides,
+            slides: slides.slides.concat([slideToPast])
         }
     }
-    if (slideToFind && nodeToFind) {
-        const offset = currSlide.id === slideToFind.id ? 20 : 0;
-        const newNode = {
-            ...nodeToFind,
-            id: constructors.createId(),
-            positionTopLeft: {
-                x: nodeToFind.positionTopLeft.x - offset,
-                y: nodeToFind.positionTopLeft.y - offset,
-            },
-            zIndex: slideToFind.nextZIndex,
-        };
-        const newSlide = {
-            ...currSlide,
-            objects: currSlide.objects.concat([newNode]),
-            nextZIndex: ++currSlide.nextZIndex,
-        };
-        return replaceSlide(slides, newSlide);
+    let slide = getCurrentSlide(slides);
+    if (! slide) throw new Error();
+    const nodeToPast = {
+        ...bufferedObject,
+        id: constructors.createId(),
+        positionTopLeft: {
+            x: bufferedObject.positionTopLeft.x - 20,
+            y: bufferedObject.positionTopLeft.y - 20,
+        },
+        zIndex: slide.nextZIndex
     }
-    return slides
+    slide = {
+        ...slide,
+        nextZIndex: ++slide.nextZIndex
+    }
+    slide.objects.push(nodeToPast);
+    return replaceSlide(slides, slide);
 }
 
 export function deleteSlide(
-    slides: SlideCollection,
-    currentId: string,
-): SlideCollection {
-    const slide: SlideType | undefined = getCurrentSlide(slides, currentId);
+    slides: SlidesObject 
+): SlidesObject {
+    const slide: SlideType | undefined = getCurrentSlide(slides);
     if (!slide) return slides;
 
-    const newSlideList = slides.filter((obj: SlideType) => obj !== slide);
+    const newSlideList = slides.slides.filter((obj: SlideType) => obj !== slide);
     if (!newSlideList.length) {
         newSlideList.push(constructors.createSlide());
     }
 
-    return newSlideList;
+    return {
+        ...slides,
+        slides: newSlideList
+    };
 }
 
 export function addSlide(
-    slides: SlideCollection,
-): SlideCollection {
-    const newCollection = slides.slice(0, slides.length);
-    newCollection.push(constructors.createSlide());
+    slides: SlidesObject,
+): SlidesObject {
+    const newCollection = slides.slides.slice(0, slides.slides.length);
+    const newSlide = constructors.createSlide();
+    newCollection.push(newSlide);
 
-    return newCollection;
+    return {
+        ...slides,
+        slides: newCollection,
+        current: newSlide.id
+    }
 }
 
 export function addImage(
-    slides: SlideCollection,
-    currentId: string,
+    slides: SlidesObject,
+   
     path: string,
     k: number
-): SlideCollection {
-    const slide: SlideType | undefined = getCurrentSlide(slides, currentId);
+): SlidesObject {
+    const slide: SlideType | undefined = getCurrentSlide(slides);
     if (!slide) return slides;
 
     const newObjects = slide.objects;
@@ -515,11 +505,11 @@ export function addImage(
 }
 
 export function addFigure(
-    slides: SlideCollection,
-    currentId: string,
+    slides: SlidesObject,
+   
     type: FigureType
-): SlideCollection {
-    const slide: SlideType | undefined = getCurrentSlide(slides, currentId);
+): SlidesObject {
+    const slide: SlideType | undefined = getCurrentSlide(slides);
     if (!slide) return slides;
 
     const newObjects = slide.objects;
@@ -535,10 +525,10 @@ export function addFigure(
 }
 
 export function addText(
-    slides: SlideCollection,
-    currentId: string,
-): SlideCollection {
-    const slide: SlideType | undefined = getCurrentSlide(slides, currentId);
+    slides: SlidesObject,
+   
+): SlidesObject {
+    const slide: SlideType | undefined = getCurrentSlide(slides);
     if (!slide) return slides;
 
     const newObjects = slide.objects;
@@ -554,26 +544,29 @@ export function addText(
 }
 
 export function changeSlideOrder(
-    slides: SlideCollection,
+    slides: SlidesObject,
     slideId: string,
     slideAfterId: string
-) {
+): SlidesObject {
     if (slideId !== slideAfterId) {
-        const slideToMoveIndex = slides.findIndex(
+        const slideToMoveIndex = slides.slides.findIndex(
             (slide) => slide.id === slideId
         );
         let newSlides: SlideCollection = [];
         if (slideAfterId === '0') {
-            newSlides.push(slides[slideToMoveIndex]);
+            newSlides.push(slides.slides[slideToMoveIndex]);
         }
-        for (let slide of slides) {
+        for (let slide of slides.slides) {
             if (slide.id === slideAfterId) {
                 newSlides.push(slide);
-                newSlides.push(slides[slideToMoveIndex]);
+                newSlides.push(slides.slides[slideToMoveIndex]);
             } else if (slide.id !== slideId) {
                 newSlides.push(slide);
             }
         }
-        return newSlides;
+        return {
+            ...slides,
+            slides: newSlides
+        };
     } else return slides;
 }

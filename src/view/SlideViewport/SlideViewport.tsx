@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './SlideViewport.module.css';
-import { AppType, NodeType, SlideCollection } from '../../model/model';
+import { AppType, NodeType, SlidesObject } from '../../model/model';
 import getObjects from '../SlideObjects/getObjects';
 import {
     changeSelectedObject,
@@ -10,19 +10,18 @@ import { Context } from '../../index';
 import { connect } from 'react-redux';
 
 interface SlideViewportProps {
-    slides: SlideCollection;
+    slides: SlidesObject;
     selectedId: string | null;
-    currSlideId: string | null;
     changeSelectedObject: (id: string | null, type: NodeType | null) => void;
     changeSlide: (id: string) => void;
 }
 
 function SlideViewport(props: SlideViewportProps) {
-    let slide = props.slides.find((slide) => slide.id === props.currSlideId);
+    let slide = props.slides.slides.find((slide) => slide.id === props.slides.current);
     if (!slide) {
-        const newId = props.slides[0].id;
+        const newId = props.slides.slides[0].id;
         props.changeSlide(newId);
-        slide = props.slides.find((slide) => slide.id === newId);
+        slide = props.slides.slides.find((slide) => slide.id === newId);
         if (!slide) throw new Error();
     }
 
@@ -67,15 +66,13 @@ function SlideViewport(props: SlideViewportProps) {
 }
 
 interface SlideViewportOwnProps {
-    slides: SlideCollection;
+    slides: SlidesObject;
     selectedId: string | null;
-    currSlideId: string | null;
 }
 
 const mapStateToProps = (state: AppType): SlideViewportOwnProps => {
     return {
         slides: state.slides,
-        currSlideId: state.currSlideId,
         selectedId: state.choosedObject.id,
     };
 };

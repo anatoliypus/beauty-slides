@@ -12,7 +12,7 @@ export async function exportApp(app: AppType) {
     let expApp = cloneApp(app);
     let imgArr: Array<ImgArrObject> = [];
 
-    expApp.slides.forEach((slide, index) => {
+    expApp.slides.slides.forEach((slide, index) => {
         slide.objects.forEach((slideNode) => {
             if (
                 slideNode.type === 'img' &&
@@ -33,9 +33,12 @@ export async function exportApp(app: AppType) {
     await Promise.all(promises);
 
     for (let imgObj of imgArr) {
-        let newSlide = expApp.slides[imgObj.slideId];
+        let newSlide = expApp.slides.slides[imgObj.slideId];
         newSlide = replaceNode(newSlide, imgObj.img);
-        expApp = replaceSlide(expApp, newSlide);
+        expApp = {
+            ...expApp,
+            slides: replaceSlide(expApp.slides, newSlide)
+        }
     }
 
     const json = JSON.stringify(expApp);

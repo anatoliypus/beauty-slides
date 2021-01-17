@@ -1,11 +1,11 @@
 import React from 'react';
-import { AppType, choosedObjectType, SlideCollection, TextObject } from '../../../model/model';
+import { AppType, choosedObjectType, SlidesObject, TextObject } from '../../../model/model';
 import styles from './ObjectsMenu.module.css';
 import fontSizeIcon from '../img/font-size.svg';
 import {
     getSlideNode,
     getCurrentSlide,
-} from '../../../methods/newSecondaryMethods';
+} from '../../../methods/secondaryMethods';
 import boldIcon from '../img/bold.svg';
 import italicIcon from '../img/italic.svg';
 import underlinedIcon from '../img/underlined.svg';
@@ -27,9 +27,8 @@ import { fonts } from '../../../index';
 import { connect } from 'react-redux';
 
 interface TextMenuProps {
-    slides: SlideCollection;
+    slides: SlidesObject;
     choosedObject: choosedObjectType;
-    currSlideId: string | null;
     changeTextFontSize: (s: number) => void;
     toggleBoldText: () => void;
     toggleItalicText: () => void;
@@ -38,8 +37,7 @@ interface TextMenuProps {
 }
 
 function TextMenu(props: TextMenuProps) {
-    if (! props.currSlideId) throw new Error();
-    const slide = getCurrentSlide(props.slides, props.currSlideId);
+    const slide = getCurrentSlide(props.slides);
 
     let node;
     if (slide) {
@@ -189,16 +187,14 @@ function TextMenu(props: TextMenuProps) {
 }
 
 interface TextMenuOwnProps {
-    slides: SlideCollection;
+    slides: SlidesObject;
     choosedObject: choosedObjectType;
-    currSlideId: string | null;
 }
 
 const mapStateToProps = (state: AppType): TextMenuOwnProps => {
     return {
         choosedObject: state.choosedObject,
         slides: state.slides,
-        currSlideId: state.currSlideId
     }
 }
 

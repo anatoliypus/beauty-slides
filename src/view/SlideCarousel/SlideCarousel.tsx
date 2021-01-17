@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './SlideCarousel.module.css';
-import { AppType, SlideCollection } from '../../model/model';
+import { AppType, SlidesObject } from '../../model/model';
 import Miniature from './components/Miniature';
 import useChangeSlideOrder from './components/useChangeSlideOrder';
 import { Context } from '../../index';
@@ -8,8 +8,7 @@ import { connect } from 'react-redux';
 import { changeSlideOrder } from '../../actions/actionsCreators';
 
 interface SlideCarouselProps {
-    slides: SlideCollection;
-    currSlideId: string | null;
+    slides: SlidesObject;
     changeSlideOrder: (slideId: string, afterId: string) => void;
 }
 
@@ -28,7 +27,7 @@ function SlideCarousel(props: SlideCarouselProps) {
 
     return (
         <div className={styles.slideCarousel} ref={carouselRef} style={{height: settings.slideHeight}}>
-            {props.slides.map((slide, index) => {
+            {props.slides.slides.map((slide, index) => {
                 let miniatureStyles = {};
                 if (slide.background) {
                     if (slide.background.indexOf('base64') === -1) {
@@ -50,7 +49,7 @@ function SlideCarousel(props: SlideCarouselProps) {
                         index={index + 1}
                         inlineStyle={miniatureStyles}
                         slide={slide}
-                        choosed={slide.id === props.currSlideId}
+                        choosed={slide.id === props.slides.current}
                     />
                 );
             })}
@@ -59,14 +58,12 @@ function SlideCarousel(props: SlideCarouselProps) {
 }
 
 interface SlideCarouselOwnProps {
-    slides: SlideCollection;
-    currSlideId: string | null;
+    slides: SlidesObject;
 }
 
 const mapStateToProps = (state: AppType): SlideCarouselOwnProps => {
     return {
         slides: state.slides,
-        currSlideId: state.currSlideId
     }
 }
 
