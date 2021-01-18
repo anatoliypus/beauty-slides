@@ -15,7 +15,6 @@ interface TriangProps {
     kWidth: number;
     kHeight: number;
     choosed: boolean;
-    onclick: (e: React.MouseEvent<SVGSVGElement, MouseEvent>) => void;
     resizeNode: (width: number, height: number) => void;
     changeSelectedObject: (id: string, type: NodeType) => void;
     moveItem: (x: number, y: number) => void;
@@ -90,7 +89,8 @@ function Triangle(props: TriangProps) {
                 width={width}
                 height={height}
                 onClick={(e: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
-                    props.onclick(e);
+                    e.preventDefault();
+                    props.changeSelectedObject(props.node.id, props.node.type);
                 }}
             >
                 <polygon
@@ -118,7 +118,6 @@ interface TriangOwnProps {
     kWidth: number;
     kHeight: number;
     choosed: boolean;
-    onclick: (e: React.MouseEvent<SVGSVGElement, MouseEvent>) => void;
 }
 
 const mapStateToProps = (state: AppType, ownProps: TriangOwnProps) => {

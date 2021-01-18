@@ -37,8 +37,7 @@ function SlideCarousel(props: SlideCarouselProps) {
                     } else {
                         miniatureStyles = {
                             backgroundImage:
-                                'url(' + slide.background + ')',
-                            backgroundSize: 'cover',
+                                'url(' + slide.background + ')'
                         };
                     }
                 }

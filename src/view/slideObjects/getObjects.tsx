@@ -16,14 +16,6 @@ export default function getObjects(
     changeSelectedObject: (id: string, type: NodeType) => void
 ) {
     return slide.objects.map((node, index) => {
-        const elOnClick = (
-            e: React.MouseEvent<HTMLElement | SVGSVGElement>
-        ) => {
-            e.preventDefault();
-            if (kWidth === 1 && kHeight === 1) {
-                changeSelectedObject(node.id, node.type)
-            }
-        };
         let style = {
             position: 'absolute',
             top: node.positionTopLeft.y / kHeight + 'px',
@@ -68,7 +60,6 @@ export default function getObjects(
                     kWidth={kWidth}
                     kHeight={kHeight}
                     choosed={node.id === selectedId}
-                    onclick={elOnClick}
                 />
             );
         }
@@ -80,7 +71,6 @@ export default function getObjects(
                     style={style}
                     kWidth={kWidth}
                     kHeight={kHeight}
-                    onclick={elOnClick}
                     choosed={node.id === selectedId}
                     key={index}
                 />
@@ -94,7 +84,6 @@ export default function getObjects(
                     style={style}
                     kWidth={kWidth}
                     kHeight={kHeight}
-                    onclick={elOnClick}
                     choosed={node.id === selectedId}
                     key={index}
                 />
@@ -107,7 +96,6 @@ export default function getObjects(
                     style={style}
                     kWidth={kWidth}
                     kHeight={kHeight}
-                    onclick={elOnClick}
                     choosed={node.id === selectedId}
                     key={index}
                 />
@@ -120,7 +108,6 @@ export default function getObjects(
                     style={style}
                     kWidth={kWidth}
                     kHeight={kHeight}
-                    onclick={elOnClick}
                     choosed={node.id === selectedId}
                     key={index}
                 />
@@ -135,7 +122,6 @@ export default function getObjects(
                     kHeight={kHeight}
                     choosed={node.id === selectedId}
                     style={style}
-                    onclick={elOnClick}
                 />
             );
         }

@@ -24,7 +24,7 @@ export default function useChangeText(props: useChangeTextProps) {
             if (props.el.current) props.changeTextData(props.el.current.value)
         };
         const secondClick = () => {
-            if (props.el.current && stateRef.current) {
+            if (props.el.current && (stateRef.current === '' || stateRef.current)) {
                 props.el.current.value = stateRef.current;
                 props.el.current.focus();
                 props.el.current.addEventListener('change', change, {once: true});

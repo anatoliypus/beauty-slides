@@ -11,7 +11,6 @@ interface ImgProps {
     kWidth: number;
     kHeight: number;
     choosed: boolean;
-    onclick: (e: React.MouseEvent<HTMLElement>) => void;
     resizeNode: (width: number, height: number) => void;
     changeSelectedObject: (id: string, type: NodeType) => void;
     moveItem: (x: number, y: number) => void;
@@ -78,7 +77,8 @@ function Img(props: ImgProps) {
                 key={props.node.id}
                 src={props.node.path}
                 onClick={(e: React.MouseEvent<HTMLElement>) => {
-                    props.onclick(e);
+                    e.preventDefault();
+                    props.changeSelectedObject(props.node.id, props.node.type);
                 }}
                 alt=''
             ></img>
@@ -92,7 +92,6 @@ interface ImgOwnProps {
     kWidth: number;
     kHeight: number;
     choosed: boolean;
-    onclick: (e: React.MouseEvent<HTMLElement>) => void;
 }
 
 const mapStateToProps = (state: AppType, ownProps: ImgOwnProps) => {

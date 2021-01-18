@@ -44,8 +44,14 @@ async function setSlideObjects(
             );
             doc.rect(0, 0, settings.slideWidth, settings.slideHeight, 'F');
         }
+        if (slide.background.indexOf('base64') !== -1) {
+            doc.addImage(slide.background, 'JPEG', 0, 0, settings.slideWidth, settings.slideHeight);
+        }
     }
-    const promises = slide.objects.map(async (node) => {
+    
+    const sortedSlideObjects = slide.objects.sort((a, b) => a.zIndex - b.zIndex);
+
+    const promises = sortedSlideObjects.map(async (node) => {
         const promise = await setObject(doc, node);
         return promise;
     });

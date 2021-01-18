@@ -9,7 +9,7 @@ import { AppType } from './model/model';
 import { Provider } from 'react-redux';
 import WebFont from 'webfontloader';
 
-export const fonts = ['JetBrains Mono', 'Oswald', 'Merriweather', 'Open Sans', 'Roboto', 'Montserrat', 'Playfair Display', 'Lora', 'PT Serif', 'Russo One', 'Lobster', 'Pacifico', 'Amatic SC', 'Caveat', 'Yeseva One'].sort();
+export const fonts = ['JetBrains Mono', 'Oswald', 'Merriweather', 'Open Sans', 'Roboto', 'Montserrat', 'Playfair Display', 'Lora', 'PT Serif', 'Russo One', 'Lobster', 'Amatic SC', 'Caveat', 'Yeseva One'].sort();
 WebFont.load({
     google: {
         families: fonts,

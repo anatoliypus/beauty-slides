@@ -13,7 +13,8 @@ export default function choosedObjectReducer(
     } else if (
         action.type === 'CHANGE_SLIDE' ||
         action.type === 'DELETE_SLIDE_OBJECT' ||
-        action.type === 'CUT_SLIDE_NODE'
+        action.type === 'CUT_SLIDE_NODE' ||
+        action.type === 'ADD_SLIDE'
     ) {
         return {
             id: null,

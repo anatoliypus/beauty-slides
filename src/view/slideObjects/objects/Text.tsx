@@ -13,7 +13,6 @@ interface TextProps {
     kWidth: number;
     kHeight: number;
     choosed: boolean;
-    onclick: (e: React.MouseEvent<HTMLElement>) => void;
     changeTextData: (data: string) => void;
     resizeNode: (width: number, height: number) => void;
     changeSelectedObject: (id: string, type: NodeType) => void;
@@ -84,7 +83,8 @@ function Text(props: TextProps) {
                 ></circle>
             </svg>
             <textarea ref={el} className={textStyles.input} key={props.node.id} style={style} onClick={(e: React.MouseEvent<HTMLElement>) => {
-                props.onclick(e);
+                e.preventDefault();
+                props.changeSelectedObject(props.node.id, props.node.type);
         }} />
         </div>
     );
@@ -96,7 +96,6 @@ interface TextOwnProps {
     kWidth: number;
     kHeight: number;
     choosed: boolean;
-    onclick: (e: React.MouseEvent<HTMLElement>) => void;
 }
 
 const mapDispatchToProps = {

@@ -41,9 +41,9 @@ export default function presentationReducers(state: AppType = constructors.creat
 
     const newState = {
         name: titleReducer(state.name, action),
+        choosedObject: choosedObjectReducer(state.choosedObject, action),
         slides: slidesReducer(state.slides, action, state.choosedObject, state.bufferedObject),
         settings: state.settings,
-        choosedObject: choosedObjectReducer(state.choosedObject, action),
         bufferedObject: bufferedObjectReducer(state.bufferedObject, action, state.choosedObject, state.slides),
         usedColors: usedColorsReducer(state.usedColors, action)
     }

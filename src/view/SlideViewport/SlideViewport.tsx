@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './SlideViewport.module.css';
-import { AppType, NodeType, SlidesObject } from '../../model/model';
+import { AppType, NodeType, SettingsObject, SlidesObject } from '../../model/model';
 import getObjects from '../SlideObjects/getObjects';
 import {
     changeSelectedObject,
@@ -10,6 +10,7 @@ import { Context } from '../../index';
 import { connect } from 'react-redux';
 
 interface SlideViewportProps {
+    settings: SettingsObject;
     slides: SlidesObject;
     selectedId: string | null;
     changeSelectedObject: (id: string | null, type: NodeType | null) => void;
@@ -18,12 +19,7 @@ interface SlideViewportProps {
 
 function SlideViewport(props: SlideViewportProps) {
     let slide = props.slides.slides.find((slide) => slide.id === props.slides.current);
-    if (!slide) {
-        const newId = props.slides.slides[0].id;
-        props.changeSlide(newId);
-        slide = props.slides.slides.find((slide) => slide.id === newId);
-        if (!slide) throw new Error();
-    }
+    if (!slide) throw new Error();
 
     const settings = React.useContext(Context);
     let slideStyles = {
@@ -41,7 +37,7 @@ function SlideViewport(props: SlideViewportProps) {
             slideStyles2 = {
                 ...slideStyles,
                 backgroundImage: 'url(' + slide.background + ')',
-                backgroundSize: 'cover',
+                backgroundSize: `${settings.slideWidth}px ${settings.slideHeight}px`
             };
         }
     }
@@ -66,12 +62,14 @@ function SlideViewport(props: SlideViewportProps) {
 }
 
 interface SlideViewportOwnProps {
+    settings: SettingsObject;
     slides: SlidesObject;
     selectedId: string | null;
 }
 
 const mapStateToProps = (state: AppType): SlideViewportOwnProps => {
     return {
+        settings: state.settings,
         slides: state.slides,
         selectedId: state.choosedObject.id,
     };

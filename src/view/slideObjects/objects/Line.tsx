@@ -12,7 +12,6 @@ interface LineProps {
     kWidth: number;
     kHeight: number;
     choosed: boolean;
-    onclick: (e: React.MouseEvent<SVGSVGElement, MouseEvent>) => void;
     resizeNode: (width: number, height: number) => void;
     changeSelectedObject: (id: string, type: NodeType) => void;
     moveItem: (x: number, y: number) => void;
@@ -77,7 +76,8 @@ function Line(props: LineProps) {
                 width={width}
                 height={height}
                 onClick={(e: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
-                    props.onclick(e);
+                    e.preventDefault();
+                    props.changeSelectedObject(props.node.id, props.node.type);
                 }}
             >
                 <line
@@ -98,7 +98,6 @@ interface LineOwnProps {
     kWidth: number;
     kHeight: number;
     choosed: boolean;
-    onclick: (e: React.MouseEvent<SVGSVGElement, MouseEvent>) => void;
 }
 
 const mapStateToProps = (state: AppType, ownProps: LineOwnProps) => {

@@ -10,11 +10,9 @@ export default function useHotKeys(
     undo: () => void
 ) {
     function undoHotKey(e: KeyboardEvent) {
-        if (e.key === 'z' && (e.metaKey || e.ctrlKey) && e.shiftKey) {
-            redo();
-        }
         if (e.key === 'z' && (e.metaKey || e.ctrlKey)) {
-            undo();
+            if (e.shiftKey) redo();
+            else undo();
         }
     }
 

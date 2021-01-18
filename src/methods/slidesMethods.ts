@@ -465,7 +465,8 @@ export function deleteSlide(
 
     return {
         ...slides,
-        slides: newSlideList
+        slides: newSlideList,
+        current: newSlideList[0].id
     };
 }
 

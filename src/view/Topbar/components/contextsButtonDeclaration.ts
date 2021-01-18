@@ -39,7 +39,7 @@ const fileBtnContextMenuItems = [
 
 const editBtnContextMenuItems = [
     {
-        heading: 'Удалить текущий слайд ------ Ctrl/Cmd + Shift + D',
+        heading: 'Удалить текущий слайд ------ Ctrl/Cmd + F',
         callback: () => {
             store.dispatch(deleteSlide());
         },
