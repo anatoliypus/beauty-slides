@@ -68,7 +68,7 @@ function setObject(doc: jsPDF, node: SlideNode) {
                 ctx.strokeStyle = node.color;
                 ctx.lineWidth = 2;
                 CanvasTextWrapper.CanvasTextWrapper(canvas, text, {
-                    font: `${node.fontStyle === 'italic' ? 'italic' : ''} ${node.fontWeight} ${node.fontSize} ${node.fontFamily}`,
+                    font: `${node.fontStyle === 'italic' ? 'italic' : ''} ${node.fontWeight} ${node.fontSize}px ${node.fontFamily}`,
                     textDecoration: node.fontDecoration === 'underline' ? 'underline' : 'none',
                     textAlign: node.alignment,
                     paddingY: node.fontDecoration === 'underline' ? 10 : 0

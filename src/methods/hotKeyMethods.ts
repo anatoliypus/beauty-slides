@@ -10,9 +10,11 @@ export default function useHotKeys(
     undo: () => void
 ) {
     function undoHotKey(e: KeyboardEvent) {
+        if (e.key === 'z' && (e.metaKey || e.ctrlKey) && e.shiftKey) {
+            redo();
+        }
         if (e.key === 'z' && (e.metaKey || e.ctrlKey)) {
-            if (e.shiftKey) redo();
-            else undo();
+            undo();
         }
     }
 
@@ -45,7 +47,7 @@ export default function useHotKeys(
     }
 
     function deleteSlideHotKey(e: KeyboardEvent) {
-        if (e.key === 'd' && (e.metaKey || e.ctrlKey) && e.shiftKey) {
+        if (e.key === 'f' && (e.metaKey || e.ctrlKey)) {
             e.preventDefault();
             deleteSlide();
         }

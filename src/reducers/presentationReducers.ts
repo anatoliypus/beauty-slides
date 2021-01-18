@@ -23,6 +23,7 @@ export default function presentationReducers(state: AppType = constructors.creat
     } else if (action.type === 'EXPORT_PDF') {
         exportPDF(state);
     } else if (action.type === 'REDO') {
+        console.log(redoStack);
         if (redoStack.length) {
             undoStack.push(cloneApp(state));
             const prevState = redoStack.splice(redoStack.length - 1)[0];
