@@ -6,6 +6,7 @@ import Rectangle from './objects/Rectangle';
 import Triangle from './objects/Triangle';
 import Img from './objects/Img';
 import Line from './objects/Line';
+import { getDefaultColor } from '../../constructors/constructors';
 
 
 export default function getObjects(
@@ -24,7 +25,9 @@ export default function getObjects(
             zIndex: node.zIndex
         } as React.CSSProperties;
         if (selectedId && node.id === selectedId) {
-            style.border = '2px dashed #000';
+            const color = getDefaultColor(slide.background);
+            style.borderColor = color;
+            style.border = `2px dashed`;
             style.cursor = 'move';
         }
 

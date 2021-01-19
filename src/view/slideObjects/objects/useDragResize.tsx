@@ -1,5 +1,6 @@
 import React from 'react';
 import { NodeType } from '../../../model/model';
+import { Context } from '../../../index';
 
 interface UseDraggingProps {
     obj: React.RefObject<HTMLElement>;
@@ -20,6 +21,8 @@ interface UseDraggingProps {
 }
 
 export default function useDragResize(props: UseDraggingProps) {
+    const settings = React.useContext(Context);
+
     // setting states
 
     const [elementCords, _changeElementCords] = React.useState({
@@ -116,6 +119,11 @@ export default function useDragResize(props: UseDraggingProps) {
                 e.preventDefault();
                 initialCursorX = e.pageX;
                 initialCursorY = e.pageY;
+                if (props.type === 'text' && props.obj.current) {
+                    const div = props.obj.current;
+                    const text = div.querySelector('textarea');
+                    if (text) text.blur();
+                }
                 window.addEventListener('mouseup', elOnMouseUp, { once: true });
                 window.addEventListener('mousemove', elOnMouseMove);
             }
@@ -139,7 +147,7 @@ export default function useDragResize(props: UseDraggingProps) {
             if (props.obj.current) {
                 const newX = elementCords.x + e.pageX - initialCursorX;
                 const newY = elementCords.y + e.pageY - initialCursorY;
-                if (newX > -100 && newY > -100 && newX < 1000 && newY < 600) {
+                if (newX > -100 && newY > -100 && newX < settings.slideWidth + 100 && newY < settings.slideHeight + 100) {
                     changeElementCords({
                         x: newX,
                         y: newY,

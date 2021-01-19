@@ -84,6 +84,9 @@ function TextMenu(props: TextMenuProps) {
         50,
         55,
         60,
+        70,
+        80,
+        90
     ];
 
     return (

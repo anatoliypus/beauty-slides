@@ -9,6 +9,17 @@ import {
     FigureType,
     FigureObject,
 } from '../model/model';
+import hexRgb from 'hex-rgb';
+
+export function getDefaultColor(background: string | null): string {
+    let color = '#000000';
+    if (background && background.indexOf('#') !== -1) {
+        const rgb = hexRgb(background);
+        const l = Math.sqrt( 0.299*rgb.red^2 + 0.587*rgb.green^2 + 0.114*rgb.blue^2 );
+        if (l <= 5) color = '#ffffff';
+    }
+    return color;
+}
 
 function createId(): string {
     return String(Math.floor(Number(Date.now()) * Math.random()));
@@ -77,7 +88,8 @@ function createFigure(type: FigureType, zIndex: number): FigureObject {
     };
 }
 
-function createText(zIndex: number): TextObject {
+function createText(zIndex: number, background: string | null): TextObject {
+    const c = getDefaultColor(background);
     return {
         id: constructors.createId(),
         type: 'text',
@@ -88,7 +100,7 @@ function createText(zIndex: number): TextObject {
         fontDecoration: 'unset',
         fontFamily: defaultFontFamily,
         fontSize: defaultFontSize,
-        color: '#000',
+        color: c,
         data: defaultTextData,
         fontWeight: defaultTextWeight,
         alignment: 'left',

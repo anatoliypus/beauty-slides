@@ -77,9 +77,9 @@ function Text(props: TextProps) {
                 <circle
                     cx={5.5}
                     cy={5.5}
-                    stroke="#000"
+                    stroke={props.style.borderColor}
                     r={5}
-                    fill="#000"
+                    fill={props.style.borderColor}
                 ></circle>
             </svg>
             <textarea ref={el} className={textStyles.input} key={props.node.id} style={style} onClick={(e: React.MouseEvent<HTMLElement>) => {

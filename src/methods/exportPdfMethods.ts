@@ -97,7 +97,7 @@ function setObject(doc: jsPDF, node: SlideNode) {
             }
             doc.addImage(
                 base64,
-                'PNG',
+                'JPEG',
                 node.positionTopLeft.x,
                 node.positionTopLeft.y,
                 node.width,

@@ -18,6 +18,7 @@ export interface miniatureRefObj {
 }
 
 function SlideCarousel(props: SlideCarouselProps) {
+
     const settings = React.useContext(Context);
     const miniaturesRefsArr: Array<miniatureRefObj> = [];
     const miniaturesRefsArrRef = React.useRef(miniaturesRefsArr);
@@ -26,7 +27,7 @@ function SlideCarousel(props: SlideCarouselProps) {
     useChangeSlideOrder(miniaturesRefsArrRef, carouselRef, props.changeSlideOrder);
 
     return (
-        <div className={styles.slideCarousel} ref={carouselRef} style={{height: settings.slideHeight}}>
+        <div id={'slide-carousel'} className={styles.slideCarousel} ref={carouselRef} style={{height: settings.slideHeight}}>
             {props.slides.slides.map((slide, index) => {
                 let miniatureStyles = {};
                 if (slide.background) {

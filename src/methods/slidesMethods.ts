@@ -533,7 +533,7 @@ export function addText(
     if (!slide) return slides;
 
     const newObjects = slide.objects;
-    newObjects.push(constructors.createText(slide.nextZIndex));
+    newObjects.push(constructors.createText(slide.nextZIndex, slide.background));
 
     const newSlide = {
         ...slide,

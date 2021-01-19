@@ -64,9 +64,9 @@ function Rectangle(props: RectProps) {
                 <circle
                     cx={5.5}
                     cy={5.5}
-                    stroke="#000"
+                    stroke={props.style.borderColor}
                     r={5}
-                    fill="#000"
+                    fill={props.style.borderColor}
                 ></circle>
             </svg>
             <svg

@@ -8,7 +8,6 @@ export default function bufferedObjectReducer(state: SlideNode | SlideType | nul
         if (! slide) return state;
         if (choosedObject.id) {
             const node = getSlideNode(slide, choosedObject.id);
-            console.log(node);
             if (! node) return state;
             return node;
         }

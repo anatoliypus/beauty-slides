@@ -23,7 +23,6 @@ export default function presentationReducers(state: AppType = constructors.creat
     } else if (action.type === 'EXPORT_PDF') {
         exportPDF(state);
     } else if (action.type === 'REDO') {
-        console.log(redoStack);
         if (redoStack.length) {
             undoStack.push(cloneApp(state));
             const prevState = redoStack.splice(redoStack.length - 1)[0];
@@ -37,7 +36,10 @@ export default function presentationReducers(state: AppType = constructors.creat
             window.localStorage.setItem('app', JSON.stringify(prevState));
             return prevState;
         }
-    } else if (action.type.indexOf('@@redux/INIT') === -1) undoStack.push(cloneApp(state));
+    } else if (action.type.indexOf('@@redux/INIT') === -1) {
+        undoStack.push(cloneApp(state));
+        redoStack.splice(0, redoStack.length);
+    }
 
     const newState = {
         name: titleReducer(state.name, action),

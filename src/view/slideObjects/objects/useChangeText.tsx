@@ -27,7 +27,7 @@ export default function useChangeText(props: useChangeTextProps) {
             if (props.el.current && (stateRef.current === '' || stateRef.current)) {
                 props.el.current.value = stateRef.current;
                 props.el.current.focus();
-                props.el.current.addEventListener('change', change, {once: true});
+                props.el.current.addEventListener('blur', change, {once: true});
             }
         }
 
