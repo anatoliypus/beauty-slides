@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from '../SlideCarousel.module.css';
 import { AppType, NodeType, SlideType } from '../../../model/model';
-import getObjects from '../../SlideObjects/getObjects';
+import getObjects from '../../slideObjects/getObjects';
 import {
     changeSlide,
     changeSelectedObject,

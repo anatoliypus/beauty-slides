@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './SlideViewport.module.css';
 import { AppType, NodeType, SettingsObject, SlidesObject } from '../../model/model';
-import getObjects from '../SlideObjects/getObjects';
+import getObjects from '../slideObjects/getObjects';
 import {
     changeSelectedObject,
     changeSlide,
